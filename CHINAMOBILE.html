@@ -85,6 +85,25 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
 .health-bar-track { flex: 1; height: 8px; background: var(--score-track); border-radius: 4px; overflow: hidden; position: relative; }
 .health-bar-fill { height: 100%; border-radius: 4px; background: var(--teal); }
 .health-value { width: 90px; text-align: right; font-size: 13px; font-weight: 700; color: var(--number); }
+.chart-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 18px; flex-wrap: wrap; }
+.chart-price { font-size: 30px; font-weight: 900; color: var(--text-1); letter-spacing: -0.03em; }
+.chart-sub { font-size: 12px; color: var(--text-3); margin-top: 4px; }
+.chart-tabs { display: flex; gap: 8px; flex-wrap: wrap; }
+.chart-tab { background: var(--surface-2); border: 1px solid var(--border); border-radius: 9px; padding: 7px 13px; font-size: 12px; font-weight: 700; color: var(--text-3); cursor: pointer; display: flex; gap: 6px; align-items: center; font-family: inherit; transition: all .15s; }
+.chart-tab:hover { color: var(--text-1); }
+.chart-tab.active { border-color: var(--teal); color: var(--text-1); background: var(--teal-dim); }
+.chart-tab span { font-size: 11px; font-weight: 600; }
+.chart-pane { display: none; }
+.chart-pane.active { display: block; }
+.chart-svg { width: 100%; height: 240px; display: block; }
+.rsi-block { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--border); }
+.rsi-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 8px; }
+.rsi-title { font-size: 13px; font-weight: 700; color: var(--text-2); letter-spacing: 0.02em; }
+.rsi-now { font-size: 14px; font-weight: 800; }
+.rsi-chartwrap { position: relative; padding-left: 26px; }
+.rsi-axis { position: absolute; left: 0; top: 0; height: 120px; width: 22px; display: flex; flex-direction: column; justify-content: space-between; }
+.rsi-axis span { font-size: 10px; color: var(--text-3); line-height: 1; }
+.rsi-svg { width: 100%; height: 120px; display: block; }
 .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .verdict-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
 .verdict-chip { background: var(--surface-2); border: 1px solid var(--border); border-radius: 14px; padding: 20px; }
@@ -138,7 +157,7 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
 </head>
 <body>
 <div class="page">
-  <nav class="sidenav"><a class="sidenav-logo" href="index.html"><div class="dot"></div><span>Smartmall</span></a><a class="nav-item nav-back" href="index.html"><span class="nav-num">&larr;</span><span class="nav-label">All Stock Cards</span></a><a class="nav-item active" href="#s1"><span class="nav-num">1</span><span class="nav-label">Overview</span></a><a class="nav-item" href="#s2"><span class="nav-num">2</span><span class="nav-label">What It Does</span></a><a class="nav-item" href="#s3"><span class="nav-num">3</span><span class="nav-label">Snowflake Score</span></a><a class="nav-item" href="#s4"><span class="nav-num">4</span><span class="nav-label">Revenue &amp; Expenses</span></a><a class="nav-item" href="#s5"><span class="nav-num">5</span><span class="nav-label">Past Performance</span></a><a class="nav-item" href="#s6"><span class="nav-num">6</span><span class="nav-label">Future Growth</span></a><a class="nav-item" href="#s7"><span class="nav-num">7</span><span class="nav-label">Financial Health</span></a><a class="nav-item" href="#s8"><span class="nav-num">8</span><span class="nav-label">Dividend</span></a><a class="nav-item" href="#s9"><span class="nav-num">9</span><span class="nav-label">Rewards &amp; Risks</span></a><a class="nav-item" href="#s10"><span class="nav-num">10</span><span class="nav-label">Council Verdict</span></a></nav>
+  <nav class="sidenav"><a class="sidenav-logo" href="index.html"><div class="dot"></div><span>Smartmall</span></a><a class="nav-item nav-back" href="index.html"><span class="nav-num">&larr;</span><span class="nav-label">All Stock Cards</span></a><a class="nav-item active" href="#s1"><span class="nav-num">1</span><span class="nav-label">Overview</span></a><a class="nav-item" href="#s2"><span class="nav-num">2</span><span class="nav-label">Price History</span></a><a class="nav-item" href="#s3"><span class="nav-num">3</span><span class="nav-label">What It Does</span></a><a class="nav-item" href="#s4"><span class="nav-num">4</span><span class="nav-label">Snowflake Score</span></a><a class="nav-item" href="#s5"><span class="nav-num">5</span><span class="nav-label">Revenue &amp; Expenses</span></a><a class="nav-item" href="#s6"><span class="nav-num">6</span><span class="nav-label">Past Performance</span></a><a class="nav-item" href="#s7"><span class="nav-num">7</span><span class="nav-label">Future Growth</span></a><a class="nav-item" href="#s8"><span class="nav-num">8</span><span class="nav-label">Financial Health</span></a><a class="nav-item" href="#s9"><span class="nav-num">9</span><span class="nav-label">Dividend</span></a><a class="nav-item" href="#s10"><span class="nav-num">10</span><span class="nav-label">Rewards &amp; Risks</span></a><a class="nav-item" href="#s11"><span class="nav-num">11</span><span class="nav-label">Council Verdict</span></a></nav>
   <main class="main">
     
     <div class="section" id="s1">
@@ -156,7 +175,7 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
           <div class="header-price">
             <div class="price-big">HK$77.40</div>
             
-            <div class="price-sub">as of 2026-06-27</div>
+            <div class="price-sub">as of 2026-06-28</div>
             <div class="hero-verdict"><span class="hv-stance" style="color:var(--green);border-color:var(--green);">BUY</span><span class="hv-score"><b>24</b>/30</span></div>
           </div>
         </div>
@@ -178,14 +197,88 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
       </div>
     </div>
     <div class="section" id="s2">
-      <div class="section-header"><div class="section-num">2</div><div class="section-title">What It Does</div></div>
+      <div class="section-header"><div class="section-num">2</div><div class="section-title">Price History</div></div>
+      <div class="card chart-section">
+        <div class="chart-head">
+          <div><div class="chart-price">HK$77.40</div><div class="chart-sub">0941.HK · HK$ · snapshot 2026-06-28</div></div>
+          <div class="chart-tabs"><button class="chart-tab" data-range="1D">1D<span style="color:#30d97b;">+0.4%</span></button><button class="chart-tab" data-range="1W">1W<span style="color:#f5736b;">-1.9%</span></button><button class="chart-tab" data-range="1M">1M<span style="color:#f5736b;">-6.8%</span></button><button class="chart-tab active" data-range="1Y">1Y<span style="color:#f5736b;">-5.3%</span></button><button class="chart-tab" data-range="5Y">5Y<span style="color:#30d97b;">+129.7%</span></button></div>
+        </div>
+        
+        <div class="chart-pane" data-range="1D">
+          <svg class="chart-svg" viewBox="0 0 900 240" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="cg21D" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#30d97b" stop-opacity="0.22"/>
+              <stop offset="1" stop-color="#30d97b" stop-opacity="0"/></linearGradient></defs>
+            <path d="M0.0 192.9 L0.0 192.9 L13.6 163.7 L27.3 222.0 L40.9 178.3 L54.5 192.9 L68.2 222.0 L81.8 207.4 L95.5 222.0 L109.1 222.0 L122.7 222.0 L136.4 178.3 L150.0 192.9 L163.6 192.9 L177.3 207.4 L190.9 149.1 L204.5 163.7 L218.2 163.7 L231.8 134.6 L245.5 149.1 L259.1 149.1 L272.7 120.0 L286.4 134.6 L300.0 105.4 L313.6 134.6 L327.3 149.1 L340.9 149.1 L354.5 134.6 L368.2 90.9 L381.8 47.1 L395.5 32.6 L409.1 76.3 L422.7 18.0 L436.4 32.6 L450.0 61.7 L463.6 76.3 L477.3 76.3 L490.9 76.3 L504.5 61.7 L518.2 105.4 L531.8 120.0 L545.5 134.6 L559.1 149.1 L572.7 120.0 L586.4 120.0 L600.0 134.6 L613.6 105.4 L627.3 90.9 L640.9 76.3 L654.5 120.0 L668.2 61.7 L681.8 90.9 L695.5 76.3 L709.1 76.3 L722.7 61.7 L736.4 47.1 L750.0 61.7 L763.6 76.3 L777.3 61.7 L790.9 76.3 L804.5 76.3 L818.2 47.1 L831.8 32.6 L845.5 47.1 L859.1 120.0 L872.7 105.4 L886.4 90.9 L900.0 105.4 L900.0 240.0 L0 240.0 Z" fill="url(#cg21D)"/>
+            <path d="M0.0 192.9 L13.6 163.7 L27.3 222.0 L40.9 178.3 L54.5 192.9 L68.2 222.0 L81.8 207.4 L95.5 222.0 L109.1 222.0 L122.7 222.0 L136.4 178.3 L150.0 192.9 L163.6 192.9 L177.3 207.4 L190.9 149.1 L204.5 163.7 L218.2 163.7 L231.8 134.6 L245.5 149.1 L259.1 149.1 L272.7 120.0 L286.4 134.6 L300.0 105.4 L313.6 134.6 L327.3 149.1 L340.9 149.1 L354.5 134.6 L368.2 90.9 L381.8 47.1 L395.5 32.6 L409.1 76.3 L422.7 18.0 L436.4 32.6 L450.0 61.7 L463.6 76.3 L477.3 76.3 L490.9 76.3 L504.5 61.7 L518.2 105.4 L531.8 120.0 L545.5 134.6 L559.1 149.1 L572.7 120.0 L586.4 120.0 L600.0 134.6 L613.6 105.4 L627.3 90.9 L640.9 76.3 L654.5 120.0 L668.2 61.7 L681.8 90.9 L695.5 76.3 L709.1 76.3 L722.7 61.7 L736.4 47.1 L750.0 61.7 L763.6 76.3 L777.3 61.7 L790.9 76.3 L804.5 76.3 L818.2 47.1 L831.8 32.6 L845.5 47.1 L859.1 120.0 L872.7 105.4 L886.4 90.9 L900.0 105.4" fill="none" stroke="#30d97b" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="chart-pane" data-range="1W">
+          <svg class="chart-svg" viewBox="0 0 900 240" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="cg21W" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#f5736b" stop-opacity="0.22"/>
+              <stop offset="1" stop-color="#f5736b" stop-opacity="0"/></linearGradient></defs>
+            <path d="M0.0 75.7 L0.0 75.7 L15.3 87.3 L30.5 83.4 L45.8 48.8 L61.0 18.0 L76.3 21.8 L91.5 52.6 L106.8 56.5 L122.0 48.8 L137.3 44.9 L152.5 52.6 L167.8 33.4 L183.1 52.6 L198.3 75.7 L213.6 98.8 L228.8 125.8 L244.1 106.5 L259.3 137.3 L274.6 145.0 L289.8 164.3 L305.1 145.0 L320.3 137.3 L335.6 137.3 L350.8 121.9 L366.1 148.9 L381.4 168.1 L396.6 164.3 L411.9 168.1 L427.1 156.6 L442.4 172.0 L457.6 172.0 L472.9 172.0 L488.1 156.6 L503.4 145.0 L518.6 141.2 L533.9 141.2 L549.2 172.0 L564.4 195.1 L579.7 191.2 L594.9 198.9 L610.2 206.6 L625.4 218.2 L640.7 214.3 L655.9 210.5 L671.2 210.5 L686.4 202.8 L701.7 168.1 L716.9 172.0 L732.2 222.0 L747.5 214.3 L762.7 198.9 L778.0 198.9 L793.2 172.0 L808.5 183.5 L823.7 202.8 L839.0 183.5 L854.2 179.7 L869.5 183.5 L884.7 187.4 L900.0 191.2 L900.0 240.0 L0 240.0 Z" fill="url(#cg21W)"/>
+            <path d="M0.0 75.7 L15.3 87.3 L30.5 83.4 L45.8 48.8 L61.0 18.0 L76.3 21.8 L91.5 52.6 L106.8 56.5 L122.0 48.8 L137.3 44.9 L152.5 52.6 L167.8 33.4 L183.1 52.6 L198.3 75.7 L213.6 98.8 L228.8 125.8 L244.1 106.5 L259.3 137.3 L274.6 145.0 L289.8 164.3 L305.1 145.0 L320.3 137.3 L335.6 137.3 L350.8 121.9 L366.1 148.9 L381.4 168.1 L396.6 164.3 L411.9 168.1 L427.1 156.6 L442.4 172.0 L457.6 172.0 L472.9 172.0 L488.1 156.6 L503.4 145.0 L518.6 141.2 L533.9 141.2 L549.2 172.0 L564.4 195.1 L579.7 191.2 L594.9 198.9 L610.2 206.6 L625.4 218.2 L640.7 214.3 L655.9 210.5 L671.2 210.5 L686.4 202.8 L701.7 168.1 L716.9 172.0 L732.2 222.0 L747.5 214.3 L762.7 198.9 L778.0 198.9 L793.2 172.0 L808.5 183.5 L823.7 202.8 L839.0 183.5 L854.2 179.7 L869.5 183.5 L884.7 187.4 L900.0 191.2" fill="none" stroke="#f5736b" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="chart-pane" data-range="1M">
+          <svg class="chart-svg" viewBox="0 0 900 240" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="cg21M" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#f5736b" stop-opacity="0.22"/>
+              <stop offset="1" stop-color="#f5736b" stop-opacity="0"/></linearGradient></defs>
+            <path d="M0.0 28.0 L0.0 28.0 L40.9 41.3 L81.8 53.0 L122.7 43.0 L163.6 43.0 L204.5 18.0 L245.5 29.7 L286.4 56.3 L327.3 50.5 L368.2 50.5 L409.1 53.9 L450.0 48.7 L490.9 69.3 L531.8 71.0 L572.7 69.3 L613.6 88.2 L654.5 105.3 L695.5 129.4 L736.4 151.7 L777.3 191.1 L818.2 199.7 L859.1 213.4 L900.0 222.0 L900.0 240.0 L0 240.0 Z" fill="url(#cg21M)"/>
+            <path d="M0.0 28.0 L40.9 41.3 L81.8 53.0 L122.7 43.0 L163.6 43.0 L204.5 18.0 L245.5 29.7 L286.4 56.3 L327.3 50.5 L368.2 50.5 L409.1 53.9 L450.0 48.7 L490.9 69.3 L531.8 71.0 L572.7 69.3 L613.6 88.2 L654.5 105.3 L695.5 129.4 L736.4 151.7 L777.3 191.1 L818.2 199.7 L859.1 213.4 L900.0 222.0" fill="none" stroke="#f5736b" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="chart-pane active" data-range="1Y">
+          <svg class="chart-svg" viewBox="0 0 900 240" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="cg21Y" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#f5736b" stop-opacity="0.22"/>
+              <stop offset="1" stop-color="#f5736b" stop-opacity="0"/></linearGradient></defs>
+            <path d="M0.0 97.2 L0.0 97.2 L9.5 93.6 L18.9 115.2 L28.4 113.4 L37.9 95.4 L47.4 90.9 L56.8 89.1 L66.3 99.0 L75.8 103.5 L85.3 95.4 L94.7 115.2 L104.2 121.5 L113.7 97.2 L123.2 63.1 L132.6 73.0 L142.1 70.3 L151.6 35.2 L161.1 56.8 L170.5 54.2 L180.0 69.9 L189.5 71.8 L198.9 44.9 L208.4 33.8 L217.9 53.2 L227.4 75.5 L236.8 81.1 L246.3 84.8 L255.8 91.3 L265.3 116.3 L274.7 84.8 L284.2 84.8 L293.7 56.9 L303.2 81.1 L312.6 79.2 L322.1 78.3 L331.6 51.4 L341.1 43.0 L350.5 18.0 L360.0 36.5 L369.5 49.5 L378.9 64.4 L388.4 39.3 L397.9 40.3 L407.4 48.6 L416.8 43.0 L426.3 70.9 L435.8 55.1 L445.3 93.1 L454.7 107.0 L464.2 123.7 L473.7 144.1 L483.2 133.0 L492.6 158.0 L502.1 154.3 L511.6 164.5 L521.1 188.6 L530.5 194.2 L540.0 203.5 L549.5 158.9 L558.9 207.2 L568.4 168.2 L577.9 205.3 L587.4 209.0 L596.8 203.5 L606.3 188.6 L615.8 188.6 L625.3 207.2 L634.7 195.1 L644.2 194.2 L653.7 176.6 L663.2 176.6 L672.6 197.9 L682.1 222.0 L691.6 206.2 L701.1 179.3 L710.5 162.7 L720.0 155.2 L729.5 146.0 L738.9 142.3 L748.4 101.5 L757.9 89.4 L767.4 90.3 L776.8 88.5 L786.3 74.6 L795.8 54.2 L805.3 60.7 L814.7 54.2 L824.2 73.6 L833.7 85.7 L843.2 66.2 L852.6 87.5 L862.1 86.2 L871.6 94.8 L881.1 105.3 L890.5 128.3 L900.0 179.9 L900.0 240.0 L0 240.0 Z" fill="url(#cg21Y)"/>
+            <path d="M0.0 97.2 L9.5 93.6 L18.9 115.2 L28.4 113.4 L37.9 95.4 L47.4 90.9 L56.8 89.1 L66.3 99.0 L75.8 103.5 L85.3 95.4 L94.7 115.2 L104.2 121.5 L113.7 97.2 L123.2 63.1 L132.6 73.0 L142.1 70.3 L151.6 35.2 L161.1 56.8 L170.5 54.2 L180.0 69.9 L189.5 71.8 L198.9 44.9 L208.4 33.8 L217.9 53.2 L227.4 75.5 L236.8 81.1 L246.3 84.8 L255.8 91.3 L265.3 116.3 L274.7 84.8 L284.2 84.8 L293.7 56.9 L303.2 81.1 L312.6 79.2 L322.1 78.3 L331.6 51.4 L341.1 43.0 L350.5 18.0 L360.0 36.5 L369.5 49.5 L378.9 64.4 L388.4 39.3 L397.9 40.3 L407.4 48.6 L416.8 43.0 L426.3 70.9 L435.8 55.1 L445.3 93.1 L454.7 107.0 L464.2 123.7 L473.7 144.1 L483.2 133.0 L492.6 158.0 L502.1 154.3 L511.6 164.5 L521.1 188.6 L530.5 194.2 L540.0 203.5 L549.5 158.9 L558.9 207.2 L568.4 168.2 L577.9 205.3 L587.4 209.0 L596.8 203.5 L606.3 188.6 L615.8 188.6 L625.3 207.2 L634.7 195.1 L644.2 194.2 L653.7 176.6 L663.2 176.6 L672.6 197.9 L682.1 222.0 L691.6 206.2 L701.1 179.3 L710.5 162.7 L720.0 155.2 L729.5 146.0 L738.9 142.3 L748.4 101.5 L757.9 89.4 L767.4 90.3 L776.8 88.5 L786.3 74.6 L795.8 54.2 L805.3 60.7 L814.7 54.2 L824.2 73.6 L833.7 85.7 L843.2 66.2 L852.6 87.5 L862.1 86.2 L871.6 94.8 L881.1 105.3 L890.5 128.3 L900.0 179.9" fill="none" stroke="#f5736b" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="chart-pane" data-range="5Y">
+          <svg class="chart-svg" viewBox="0 0 900 240" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="cg25Y" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#30d97b" stop-opacity="0.22"/>
+              <stop offset="1" stop-color="#30d97b" stop-opacity="0"/></linearGradient></defs>
+            <path d="M0.0 220.9 L0.0 220.9 L9.5 220.3 L18.9 217.1 L28.4 222.0 L37.9 213.7 L47.4 219.0 L56.8 213.3 L66.3 217.6 L75.8 219.2 L85.3 220.5 L94.7 211.1 L104.2 206.7 L113.7 191.9 L123.2 204.3 L132.6 195.7 L142.1 194.5 L151.6 203.3 L161.1 203.2 L170.5 201.5 L180.0 206.9 L189.5 206.5 L198.9 200.7 L208.4 195.5 L217.9 199.4 L227.4 196.9 L236.8 196.5 L246.3 202.8 L255.8 190.8 L265.3 191.7 L274.7 191.1 L284.2 178.0 L293.7 174.7 L303.2 158.8 L312.6 146.3 L322.1 146.3 L331.6 140.9 L341.1 146.1 L350.5 151.2 L360.0 151.1 L369.5 144.0 L378.9 142.2 L388.4 144.8 L397.9 142.2 L407.4 123.4 L416.8 135.5 L426.3 142.8 L435.8 139.8 L445.3 143.2 L454.7 134.9 L464.2 134.4 L473.7 129.1 L483.2 124.5 L492.6 130.1 L502.1 126.9 L511.6 120.6 L521.1 103.7 L530.5 100.0 L540.0 97.2 L549.5 85.5 L558.9 99.9 L568.4 94.8 L577.9 87.8 L587.4 93.2 L596.8 84.4 L606.3 95.0 L615.8 98.8 L625.3 90.9 L634.7 79.1 L644.2 83.4 L653.7 80.0 L663.2 55.6 L672.6 51.9 L682.1 54.7 L691.6 51.8 L701.1 51.8 L710.5 40.3 L720.0 26.9 L729.5 34.3 L738.9 31.9 L748.4 30.6 L757.9 21.1 L767.4 24.0 L776.8 29.3 L786.3 26.1 L795.8 18.0 L805.3 19.3 L814.7 31.8 L824.2 43.2 L833.7 47.6 L843.2 53.8 L852.6 50.9 L862.1 54.3 L871.6 41.3 L881.1 29.1 L890.5 25.7 L900.0 47.7 L900.0 240.0 L0 240.0 Z" fill="url(#cg25Y)"/>
+            <path d="M0.0 220.9 L9.5 220.3 L18.9 217.1 L28.4 222.0 L37.9 213.7 L47.4 219.0 L56.8 213.3 L66.3 217.6 L75.8 219.2 L85.3 220.5 L94.7 211.1 L104.2 206.7 L113.7 191.9 L123.2 204.3 L132.6 195.7 L142.1 194.5 L151.6 203.3 L161.1 203.2 L170.5 201.5 L180.0 206.9 L189.5 206.5 L198.9 200.7 L208.4 195.5 L217.9 199.4 L227.4 196.9 L236.8 196.5 L246.3 202.8 L255.8 190.8 L265.3 191.7 L274.7 191.1 L284.2 178.0 L293.7 174.7 L303.2 158.8 L312.6 146.3 L322.1 146.3 L331.6 140.9 L341.1 146.1 L350.5 151.2 L360.0 151.1 L369.5 144.0 L378.9 142.2 L388.4 144.8 L397.9 142.2 L407.4 123.4 L416.8 135.5 L426.3 142.8 L435.8 139.8 L445.3 143.2 L454.7 134.9 L464.2 134.4 L473.7 129.1 L483.2 124.5 L492.6 130.1 L502.1 126.9 L511.6 120.6 L521.1 103.7 L530.5 100.0 L540.0 97.2 L549.5 85.5 L558.9 99.9 L568.4 94.8 L577.9 87.8 L587.4 93.2 L596.8 84.4 L606.3 95.0 L615.8 98.8 L625.3 90.9 L634.7 79.1 L644.2 83.4 L653.7 80.0 L663.2 55.6 L672.6 51.9 L682.1 54.7 L691.6 51.8 L701.1 51.8 L710.5 40.3 L720.0 26.9 L729.5 34.3 L738.9 31.9 L748.4 30.6 L757.9 21.1 L767.4 24.0 L776.8 29.3 L786.3 26.1 L795.8 18.0 L805.3 19.3 L814.7 31.8 L824.2 43.2 L833.7 47.6 L843.2 53.8 L852.6 50.9 L862.1 54.3 L871.6 41.3 L881.1 29.1 L890.5 25.7 L900.0 47.7" fill="none" stroke="#30d97b" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        
+        <div class="rsi-block">
+          <div class="rsi-head">
+            <div class="rsi-title">RSI (14)</div>
+            <div class="rsi-now" style="color:#30d97b;">18.4 · Oversold</div>
+          </div>
+          <div class="rsi-chartwrap">
+            <div class="rsi-axis"><span>70</span><span>50</span><span>30</span></div>
+            
+          <svg class="rsi-svg" viewBox="0 0 900 200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="0" y="8.0" width="900" height="55.2" fill="#f5736b" opacity="0.07"/>
+            <rect x="0" y="136.8" width="900" height="55.2" fill="#30d97b" opacity="0.07"/>
+            <line x1="0" y1="63.2" x2="900" y2="63.2" stroke="#f5736b" stroke-width="1" stroke-dasharray="6 5" opacity="0.5"/>
+            <line x1="0" y1="100.0" x2="900" y2="100.0" stroke="#9aa4b2" stroke-width="1" stroke-dasharray="2 6" opacity="0.4"/>
+            <line x1="0" y1="136.8" x2="900" y2="136.8" stroke="#30d97b" stroke-width="1" stroke-dasharray="6 5" opacity="0.5"/>
+            <path d="M0.0 92.3 L9.5 102.0 L18.9 92.5 L28.4 103.0 L37.9 98.5 L47.4 122.0 L56.8 120.5 L66.3 93.4 L75.8 69.0 L85.3 80.0 L94.7 80.4 L104.2 64.5 L113.7 83.5 L123.2 80.3 L132.6 100.3 L142.1 96.1 L151.6 83.5 L161.1 70.6 L170.5 85.5 L180.0 100.8 L189.5 116.2 L198.9 114.6 L208.4 122.8 L217.9 119.1 L227.4 113.3 L236.8 104.7 L246.3 104.2 L255.8 83.9 L265.3 109.8 L274.7 100.3 L284.2 91.3 L293.7 88.9 L303.2 78.8 L312.6 72.0 L322.1 80.3 L331.6 96.6 L341.1 100.1 L350.5 86.4 L360.0 90.2 L369.5 85.1 L378.9 100.5 L388.4 110.9 L397.9 117.6 L407.4 102.1 L416.8 125.4 L426.3 130.8 L435.8 140.8 L445.3 142.0 L454.7 124.9 L464.2 132.3 L473.7 135.6 L483.2 135.2 L492.6 141.4 L502.1 148.3 L511.6 137.4 L521.1 146.3 L530.5 116.2 L540.0 127.0 L549.5 103.8 L558.9 119.4 L568.4 120.9 L577.9 115.8 L587.4 107.4 L596.8 102.8 L606.3 109.5 L615.8 104.0 L625.3 104.8 L634.7 101.9 L644.2 88.4 L653.7 92.2 L663.2 118.3 L672.6 124.2 L682.1 95.1 L691.6 83.1 L701.1 77.6 L710.5 68.8 L720.0 69.1 L729.5 51.3 L738.9 53.3 L748.4 51.7 L757.9 62.9 L767.4 76.6 L776.8 62.0 L786.3 54.1 L795.8 64.0 L805.3 58.4 L814.7 75.2 L824.2 92.3 L833.7 93.6 L843.2 88.9 L852.6 100.1 L862.1 102.0 L871.6 111.3 L881.1 120.1 L890.5 143.3 L900.0 158.2" fill="none" stroke="#7c83ff" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>
+          </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="section" id="s3">
+      <div class="section-header"><div class="section-num">3</div><div class="section-title">What It Does</div></div>
       <div class="card">
         <div class="biz-summary">The world&#x27;s largest mobile carrier — ~1 billion mobile subscribers and ~315M wireline-broadband homes (~50% of China&#x27;s market). State-controlled (China Mobile Communications Group owns ~70%), it sells personal mobile/data plans, home broadband bundles, and a fast-growing enterprise &#x27;DICT&#x27; stack (cloud, computing, AI, IoT). Service revenue is ~85% of the top line; the rest is low-margin handset/product sales.</div>
         <div class="biz-rev-label">How it makes money</div><div class="biz-rev"><div class="biz-row"><span class="biz-dot" style="background:#3b6fd4"></span><span class="biz-name">Personal Market</span><span class="biz-pct">~47%</span><span class="biz-desc">Mobile voice + 5G data plans for ~1B subscribers — the mature cash engine, flat-to-low growth</span></div><div class="biz-row"><span class="biz-dot" style="background:#3360c2"></span><span class="biz-name">Gov&#x27;t &amp; Enterprise (DICT)</span><span class="biz-pct">~22%</span><span class="biz-desc">Cloud, computing, AI, IoT, private 5G — the growth driver; computing services RMB89.8B (+11%)</span></div><div class="biz-row"><span class="biz-dot" style="background:#4a7ce0"></span><span class="biz-name">Home Market</span><span class="biz-pct">~14%</span><span class="biz-desc">Wireline broadband + smart-home bundles; ~315M households, +7% YoY</span></div><div class="biz-row"><span class="biz-dot" style="background:#2f57b0"></span><span class="biz-name">Product sales</span><span class="biz-pct">~17%</span><span class="biz-desc">Handset / device resale — low-margin pass-through, not a profit driver</span></div></div>
       </div>
     </div>
-    <div class="section" id="s3">
-      <div class="section-header"><div class="section-num">3</div><div class="section-title">Snowflake Score</div></div>
+    <div class="section" id="s4">
+      <div class="section-header"><div class="section-num">4</div><div class="section-title">Snowflake Score</div></div>
       <div class="card">
         <div class="snowflake-grid">
           <div style="display:flex;flex-direction:column;align-items:center;">
@@ -244,24 +337,24 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
         </div>
       </div>
     </div>
-    <div class="section" id="s4">
-      <div class="section-header"><div class="section-num">4</div><div class="section-title">Revenue &amp; Expenses Breakdown</div></div>
+    <div class="section" id="s5">
+      <div class="section-header"><div class="section-num">5</div><div class="section-title">Revenue &amp; Expenses Breakdown</div></div>
       <div class="card">
         <div style="font-size:12.5px;color:var(--text-3);margin-bottom:20px;">FY2025 ended 31 Dec 2025 (RMB billions)</div>
         <div class="sankey-wrap"><svg viewBox="0 -62.0 980 592.0" width="100%" style="font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;overflow:visible;"><defs><linearGradient id="gProfit" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#2fd6c0" stop-opacity="0.7"/><stop offset="100%" stop-color="#2fd6c0" stop-opacity="0.4"/></linearGradient><linearGradient id="gCost" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#8a7320" stop-opacity="0.85"/><stop offset="100%" stop-color="#8a7320" stop-opacity="0.55"/></linearGradient><linearGradient id="gExpense" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#d9a93a" stop-opacity="0.8"/><stop offset="100%" stop-color="#d9a93a" stop-opacity="0.5"/></linearGradient><linearGradient id="gNet" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#30d97b" stop-opacity="0.8"/><stop offset="100%" stop-color="#30d97b" stop-opacity="0.6"/></linearGradient></defs><polyline points="18.0,-51.4 205.5,-53.4 393.0,-55.1 580.5,-55.8 768.0,-56.0" fill="none" stroke="#2fd6c0" stroke-width="1.5" opacity="0.85"/><text x="18.0" y="-20.0" text-anchor="middle" font-size="9" fill="#526070">2021</text><text x="205.5" y="-20.0" text-anchor="middle" font-size="9" fill="#526070">2022</text><text x="393.0" y="-20.0" text-anchor="middle" font-size="9" fill="#526070">2023</text><text x="580.5" y="-20.0" text-anchor="middle" font-size="9" fill="#526070">2024</text><text x="768.0" y="-20.0" text-anchor="middle" font-size="9" fill="#526070">2025</text><rect x="18" y="35.00" width="14" height="214.19" fill="#3b6fd4" rx="3"/><rect x="18" y="250.19" width="14" height="103.37" fill="#3360c2" rx="3"/><rect x="18" y="354.56" width="14" height="65.70" fill="#4a7ce0" rx="3"/><rect x="18" y="421.26" width="14" height="76.74" fill="#2f57b0" rx="3"/><rect x="220" y="35.00" width="18" height="460.00" fill="#3b6fd4" rx="3"/><rect x="400" y="35.00" width="18" height="197.19" fill="#2fd6c0" rx="3"/><rect x="400" y="233.19" width="18" height="262.81" fill="#8a7320" rx="3"/><rect x="580" y="35.00" width="18" height="63.16" fill="#2fd6c0" rx="3"/><rect x="580" y="99.16" width="18" height="0.00" fill="#d9a93a" rx="3"/><rect x="580" y="100.16" width="18" height="134.03" fill="#d9a93a" rx="3"/><rect x="750" y="35.00" width="18" height="60.05" fill="#30d97b" rx="3"/><rect x="750" y="96.05" width="18" height="11.39" fill="#d9a93a" rx="3"/><path d="M32.00,35.00 C116.60,35.00 135.40,35.00 220.00,35.00 L220.00,249.19 C135.40,249.19 116.60,249.19 32.00,249.19 Z" fill="#3b6fd4" opacity="0.40"/><path d="M32.00,250.19 C116.60,250.19 135.40,249.19 220.00,249.19 L220.00,352.56 C135.40,352.56 116.60,353.56 32.00,353.56 Z" fill="#3360c2" opacity="0.40"/><path d="M32.00,354.56 C116.60,354.56 135.40,352.56 220.00,352.56 L220.00,418.26 C135.40,418.26 116.60,420.26 32.00,420.26 Z" fill="#4a7ce0" opacity="0.40"/><path d="M32.00,421.26 C116.60,421.26 135.40,418.26 220.00,418.26 L220.00,495.00 C135.40,495.00 116.60,498.00 32.00,498.00 Z" fill="#2f57b0" opacity="0.40"/><path d="M238.00,35.00 C310.90,35.00 327.10,35.00 400.00,35.00 L400.00,232.19 C327.10,232.19 310.90,232.19 238.00,232.19 Z" fill="url(#gProfit)" opacity="0.5"/><path d="M238.00,233.19 C310.90,233.19 327.10,233.19 400.00,233.19 L400.00,496.00 C327.10,496.00 310.90,496.00 238.00,496.00 Z" fill="url(#gCost)" opacity="0.55"/><path d="M418.00,35.00 C490.90,35.00 507.10,35.00 580.00,35.00 L580.00,98.16 C507.10,98.16 490.90,98.16 418.00,98.16 Z" fill="url(#gProfit)" opacity="0.5"/><path d="M418.00,98.16 C490.90,98.16 507.10,99.16 580.00,99.16 L580.00,99.16 C507.10,99.16 490.90,98.16 418.00,98.16 Z" fill="url(#gExpense)" opacity="0.55"/><path d="M418.00,98.16 C490.90,98.16 507.10,100.16 580.00,100.16 L580.00,234.19 C507.10,234.19 490.90,232.19 418.00,232.19 Z" fill="url(#gExpense)" opacity="0.5"/><path d="M598.00,35.00 C666.40,35.00 681.60,35.00 750.00,35.00 L750.00,95.05 C681.60,95.05 666.40,95.05 598.00,95.05 Z" fill="url(#gNet)" opacity="0.5"/><path d="M598.00,95.05 C666.40,95.05 681.60,96.05 750.00,96.05 L750.00,107.44 C681.60,107.44 666.40,106.44 598.00,106.44 Z" fill="url(#gExpense)" opacity="0.55"/><text x="38" y="35.0" dy="10" font-size="11" fill="#e8edf5" font-weight="600">Personal Market</text><text x="38" y="35.0" dy="23" font-size="10.5" fill="#3b6fd4">¥489B · 47%</text><text x="38" y="250.2" dy="10" font-size="11" fill="#e8edf5" font-weight="600">Gov&#x27;t &amp; Enterprise</text><text x="38" y="250.2" dy="23" font-size="10.5" fill="#3360c2">¥236B · 22%</text><text x="38" y="354.6" dy="10" font-size="11" fill="#e8edf5" font-weight="600">Home Market</text><text x="38" y="354.6" dy="23" font-size="10.5" fill="#4a7ce0">¥150B · 14%</text><text x="38" y="421.3" dy="10" font-size="11" fill="#e8edf5" font-weight="600">Product sales</text><text x="38" y="421.3" dy="23" font-size="10.5" fill="#2f57b0">¥175.2B · 17%</text><text x="229" y="8" text-anchor="middle" font-size="9.5" fill="#8fa3bf">Income</text><text x="229" y="8" dy="11" text-anchor="middle" font-size="9.5" fill="#8fa3bf">Statement</text><rect x="197.1" y="247.5" width="63.7" height="19.0" rx="9.5" fill="#3b6fd4"/><text x="229.0" y="257.0" dy="3.8" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">Revenue</text><text x="229" y="277" text-anchor="middle" font-size="11" font-weight="700" fill="#e8edf5">¥1.1T</text><text x="409" y="8" text-anchor="middle" font-size="9.5" fill="#8fa3bf">Gross</text><text x="409" y="8" dy="11" text-anchor="middle" font-size="9.5" fill="#8fa3bf">Profit</text><text x="409" y="134" text-anchor="middle" font-size="12" fill="#2fd6c0" font-weight="800" transform="rotate(-90 409 134)">¥450.2B</text><text x="589" y="8" text-anchor="middle" font-size="9.5" fill="#8fa3bf">Operating</text><text x="589" y="8" dy="11" text-anchor="middle" font-size="9.5" fill="#8fa3bf">Income</text><text x="589" y="67" text-anchor="middle" font-size="12" fill="#2fd6c0" font-weight="800" transform="rotate(-90 589 67)">¥144.2B</text><text x="759" y="8" text-anchor="middle" font-size="9.5" fill="#8fa3bf">Net</text><text x="759" y="8" dy="11" text-anchor="middle" font-size="9.5" fill="#8fa3bf">Income</text><rect x="720.0" y="48.0" width="78.0" height="18.0" rx="9.0" fill="#30d97b"/><text x="759.0" y="57.0" dy="3.5" text-anchor="middle" font-size="10" font-weight="700" fill="#0f1923">Net Income</text><text x="759" y="77" text-anchor="middle" font-size="11" font-weight="700" fill="#30d97b">¥137.1B</text><text x="409" y="369" text-anchor="middle" font-size="9.5" fill="#d9a93a" font-weight="700">CoR ¥600B</text><text x="602" y="102" font-size="10" fill="#d9a93a" font-weight="600">R&amp;D ¥0B</text><text x="602" y="178" font-size="10" fill="#d9a93a">SG&amp;A ¥306B</text><text x="772" y="105" font-size="10" fill="#d9a93a">Tax ¥26B</text><text x="602" y="93" font-size="9.5" fill="#d9a93a" font-weight="700" opacity="0.85">Expenses</text><text x="665" y="2" text-anchor="middle" font-size="9.5" fill="#d9a93a" font-style="italic">+ Non-op ¥18.9B</text><text x="665" y="2" dy="12" text-anchor="middle" font-size="9.5" fill="#8fa3bf" font-style="italic">Pre-tax ¥163.1B</text><line x1="409" y1="496.0" x2="409" y2="518.0" stroke="#8a7320" stroke-width="2" stroke-dasharray="3,2" opacity="0.6"/><polygon points="409,523.0 405,516.0 413,516.0" fill="#8a7320" opacity="0.6"/><line x1="589" y1="234.2" x2="589" y2="256.2" stroke="#d9a93a" stroke-width="2" stroke-dasharray="3,2" opacity="0.6"/><polygon points="589,261.2 585,254.2 593,254.2" fill="#d9a93a" opacity="0.6"/><line x1="759" y1="107.4" x2="759" y2="129.4" stroke="#d9a93a" stroke-width="2" stroke-dasharray="3,2" opacity="0.6"/><polygon points="759,134.4 755,127.4 763,127.4" fill="#d9a93a" opacity="0.6"/><rect x="820" y="35" width="12" height="12" fill="#3b6fd4" rx="2" opacity="0.9"/><text x="836" y="45" font-size="10.5" fill="#8fa3bf">Revenue</text><rect x="820" y="54" width="12" height="12" fill="#d9a93a" rx="2" opacity="0.9"/><text x="836" y="64" font-size="10.5" fill="#8fa3bf">Cost / Expense</text><rect x="820" y="73" width="12" height="12" fill="#30d97b" rx="2" opacity="0.9"/><text x="836" y="83" font-size="10.5" fill="#8fa3bf">Net Income</text></svg></div>
         <div class="sankey-caption">HEADER PRICE IS HK$; this Sankey is in RMB (China Mobile reports financials in RMB — HK$/RMB ≈ 0.92). FY2025 total revenue RMB1,050.2B (+0.9%); service (&#x27;principal business&#x27;) revenue RMB895.5B (+0.7%), the rest is low-margin product/handset sales. China Mobile does NOT break out a clean gross-profit or R&amp;D line, so this waterfall is RECONSTRUCTED to tie out: cost_of_revenue bundles network operation + depreciation; the SG&amp;A bar bundles all remaining opex (selling, personnel, G&amp;A, amortization) so gross − SG&amp;A = reported-style operating profit ≈ RMB144B. Non-operating (+RMB18.9B) is net interest income on the cash hoard + JV/associate income; tax RMB26B → net profit attributable RMB137.1B (−0.9% YoY), matching reported. EBITDA was RMB338.9B (32.3% margin). Segment splits are approximated by annualizing 1H25 market-segment revenue.</div>
       </div>
     </div>
-    <div class="section" id="s5">
-      <div class="section-header"><div class="section-num">5</div><div class="section-title">Past Performance</div></div>
+    <div class="section" id="s6">
+      <div class="section-header"><div class="section-num">6</div><div class="section-title">Past Performance</div></div>
       <div class="card">
         <div style="font-size:12.5px;color:var(--text-3);margin-bottom:20px;">Revenue (RMB B)</div>
         <svg viewBox="0 0 720 240" width="100%" style="font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;overflow:visible;"><line x1="0" y1="220.0" x2="720" y2="220.0" stroke="rgba(255,255,255,0.08)" stroke-width="1"/><line x1="0" y1="148.8" x2="720" y2="148.8" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="4,4"/><line x1="0" y1="77.5" x2="720" y2="77.5" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="4,4"/><rect x="20.0" y="66.5" width="120.0" height="153.5" rx="5" fill="#00c4b4" opacity="0.55"/><text x="80.0" y="61.5" font-size="11" font-weight="700" fill="#00c4b4" text-anchor="middle">¥848.3B</text><text x="80.0" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">2021</text><rect x="160.0" y="50.4" width="120.0" height="169.6" rx="5" fill="#00c4b4" opacity="0.62"/><text x="220.0" y="45.4" font-size="11" font-weight="700" fill="#00c4b4" text-anchor="middle">¥937.3B</text><text x="220.0" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">2022</text><rect x="300.0" y="37.4" width="120.0" height="182.6" rx="5" fill="#00c4b4" opacity="0.69"/><text x="360.0" y="32.4" font-size="11" font-weight="700" fill="#00c4b4" text-anchor="middle">¥1009.3B</text><text x="360.0" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">2023</text><rect x="440.0" y="31.7" width="120.0" height="188.3" rx="5" fill="#00c4b4" opacity="0.76"/><text x="500.0" y="26.7" font-size="11" font-weight="700" fill="#00c4b4" text-anchor="middle">¥1040.7B</text><text x="500.0" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">2024</text><rect x="580.0" y="30.0" width="120.0" height="190.0" rx="5" fill="#00c4b4" opacity="1.00"/><rect x="580.0" y="30.0" width="120.0" height="190.0" rx="5" fill="none" stroke="#00c4b4" stroke-width="1.5" opacity="0.5"/><text x="640.0" y="25.0" font-size="11" font-weight="700" fill="#00c4b4" text-anchor="middle">¥1050.2B</text><text x="640.0" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">2025</text></svg>
         <div class="note-box" style="margin-top:16px;">~5.5% revenue CAGR 2021→2025 — steady but clearly decelerating (growth has flattened to &lt;1% as the mobile base saturates). Net profit climbed every year to ~RMB138B in 2024 before a slight −0.9% dip to RMB137.1B in 2025. This is a mature utility-like compounder: don&#x27;t expect top-line acceleration; the case is margin stability + cash return.</div>
       </div>
     </div>
-    <div class="section" id="s6">
-      <div class="section-header"><div class="section-num">6</div><div class="section-title">Future Growth</div></div>
+    <div class="section" id="s7">
+      <div class="section-header"><div class="section-num">7</div><div class="section-title">Future Growth</div></div>
       <div class="card">
         <div style="font-size:12.5px;color:var(--text-3);margin-bottom:24px;">Growth drivers — guided &amp; estimated</div>
         
@@ -283,8 +376,8 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
         <div class="note-box" style="margin-top:20px;">The growth engine is DICT — cloud, computing power, AI and IoT for government/enterprise — lifting digital services to 20.2% of principal revenue (+1.4pts). But it&#x27;s nowhere near big enough to move a RMB1.05T top line meaningfully, and the core personal/mobile market is flat. The real &#x27;growth&#x27; for shareholders is the rising payout ratio converting a flat earnings base into a rising dividend — a cash-cow re-rating, not a growth story.</div>
       </div>
     </div>
-    <div class="section" id="s7">
-      <div class="section-header"><div class="section-num">7</div><div class="section-title">Financial Health</div></div>
+    <div class="section" id="s8">
+      <div class="section-header"><div class="section-num">8</div><div class="section-title">Financial Health</div></div>
       <div class="card">
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px;align-items:end;">
           <div style="background:var(--teal-dim);border:1px solid rgba(0,196,180,0.3);border-radius:12px;padding:20px;">
@@ -305,8 +398,8 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
         
         <div class="health-row">
           <div class="health-label">Net cash / mkt cap</div>
-          <div class="health-bar-track"><div class="health-bar-fill" style="width:18%;background:green;"></div></div>
-          <div class="health-value">~18%</div>
+          <div class="health-bar-track"><div class="health-bar-fill" style="width:19%;background:green;"></div></div>
+          <div class="health-value">+19%</div>
         </div>
         <div class="health-row">
           <div class="health-label">EBITDA margin</div>
@@ -316,8 +409,8 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
         <div class="note-box orange" style="margin-top:16px;">~RMB297B net cash with negligible interest-bearing debt — among the strongest balance sheets in global telecom. The cash funds both the ~75% dividend payout and DICT capex internally, so there&#x27;s essentially zero refinancing or solvency risk. The flip side: such a large idle cash pile on an SOE balance sheet is itself a capital-allocation question — return it faster or risk value-destructive state-directed spending.</div>
       </div>
     </div>
-    <div class="section" id="s8">
-      <div class="section-header"><div class="section-num">8</div><div class="section-title">Dividend</div></div>
+    <div class="section" id="s9">
+      <div class="section-header"><div class="section-num">9</div><div class="section-title">Dividend</div></div>
       <div class="card">
         <div class="div-row">
           <div class="div-big">~6%</div>
@@ -326,8 +419,8 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
         <div class="div-trend">rising</div>
       </div>
     </div>
-    <div class="section" id="s9">
-      <div class="section-header"><div class="section-num">9</div><div class="section-title">Rewards &amp; Risks</div></div>
+    <div class="section" id="s10">
+      <div class="section-header"><div class="section-num">10</div><div class="section-title">Rewards &amp; Risks</div></div>
       <div class="card">
         <div class="two-col">
           <div class="rr-col rewards"><h4>Rewards</h4><div class="rr-item"><div class="rr-dot"></div><div>Dirt cheap for the quality — ~11x earnings / ~1.05x book / ~6% yield on a monopoly-scale, profitable carrier</div></div><div class="rr-item"><div class="rr-dot"></div><div>Net-cash fortress (~RMB297B, negligible debt) fully funds the dividend AND DICT capex with zero solvency risk</div></div><div class="rr-item"><div class="rr-dot"></div><div>Rising-payout policy (to 75% by FY26, ~14% 3-yr div CAGR) turns a flat earnings base into a growing income stream</div></div><div class="rr-item"><div class="rr-dot"></div><div>DICT / computing / AI is a genuine bright spot — computing services +11%, digital now 20% of principal revenue</div></div><div class="rr-item"><div class="rr-dot"></div><div>Utility-like stability: ~1B mobile subs + ~315M broadband homes (~50% share); revenue barely moves through cycles</div></div></div>
@@ -335,8 +428,8 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
         </div>
       </div>
     </div>
-    <div class="section" id="s10">
-      <div class="section-header"><div class="section-num">10</div><div class="section-title">Stock Council Verdict</div></div>
+    <div class="section" id="s11">
+      <div class="section-header"><div class="section-num">11</div><div class="section-title">Stock Council Verdict</div></div>
       <div class="verdict-grid">
         <div class="verdict-chip">
           <div class="agent">🪨 Steady</div>
@@ -386,6 +479,19 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
     });
   }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
   sections.forEach(function (s) { obs.observe(s); });
+})();
+(function () {
+  document.querySelectorAll('.chart-section').forEach(function (sec) {
+    var tabs = sec.querySelectorAll('.chart-tab');
+    var panes = sec.querySelectorAll('.chart-pane');
+    tabs.forEach(function (t) {
+      t.addEventListener('click', function () {
+        var r = t.getAttribute('data-range');
+        tabs.forEach(function (x) { x.classList.toggle('active', x === t); });
+        panes.forEach(function (p) { p.classList.toggle('active', p.getAttribute('data-range') === r); });
+      });
+    });
+  });
 })();
 </script>
 </body>
