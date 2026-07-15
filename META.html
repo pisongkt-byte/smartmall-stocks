@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>META — Meta Platforms · Smartmall Stock Card</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #0f1923; --surface: #172130; --surface-2: #1c2a3d; --border: #253347;
+  --teal: #00c4b4; --teal-mid: #00a99d; --teal-dim: rgba(0,196,180,0.15); --teal-fill: rgba(0,196,180,0.22);
+  --orange: #f58b42; --orange-mid: #e07030; --orange-dim: rgba(245,139,66,0.18);
+  --green: #30d97b; --green-dim: rgba(48,217,123,0.15); --red: #e85d5d; --red-dim: rgba(232,93,93,0.15);
+  --amber: #f5c842; --text-1: #e8edf5; --text-2: #8fa3bf; --text-3: #526070;
+  --number: #c9d9ed; --tag-bg: #1a3550; --badge-teal: #0a3030; --score-track: #1e2e40;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text-1); font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Segoe UI', Arial, sans-serif; line-height: 1.5; min-height: 100vh; display: flex; justify-content: center; padding: 40px 20px 80px; }
+.page { width: 1240px; max-width: 100%; display: grid; grid-template-columns: 220px 1fr; gap: 0; align-items: start; }
+.sidenav { position: sticky; top: 40px; padding: 32px 0 32px 0; }
+.sidenav-logo { display: flex; align-items: center; gap: 8px; margin-bottom: 20px; padding-left: 8px; text-decoration: none; transition: opacity 0.15s; }
+.sidenav-logo:hover { opacity: 0.8; }
+.sidenav-logo .dot { width: 28px; height: 28px; background: var(--teal); border-radius: 50%; flex-shrink: 0; }
+.sidenav-logo span { font-size: 13px; font-weight: 700; color: var(--text-2); letter-spacing: 0.05em; text-transform: uppercase; }
+.nav-item { display: flex; align-items: center; gap: 12px; padding: 10px 16px; border-radius: 10px; cursor: pointer; margin-bottom: 2px; transition: background 0.15s; text-decoration: none; }
+.nav-item:hover { background: var(--surface); }
+.nav-item.active { background: var(--teal-dim); border-left: 3px solid var(--teal); }
+.nav-back { margin-bottom: 16px; }
+.nav-back .nav-num { color: var(--teal); font-size: 14px; }
+.nav-back .nav-label { color: var(--text-2); font-weight: 600; }
+.nav-back:hover .nav-label { color: var(--teal); }
+.nav-num { font-size: 11px; font-weight: 700; color: var(--text-3); width: 18px; flex-shrink: 0; }
+.nav-label { font-size: 13px; font-weight: 500; color: var(--text-2); }
+.nav-item.active .nav-label { color: var(--teal); }
+.hero-verdict { display: flex; justify-content: flex-end; align-items: center; gap: 12px; margin-top: 14px; }
+.hv-stance { font-size: 13px; font-weight: 800; letter-spacing: 0.04em; border: 1.5px solid; border-radius: 999px; padding: 5px 16px; text-transform: uppercase; }
+.hv-score { font-size: 13px; color: var(--text-3); font-weight: 600; }
+.hv-score b { font-size: 19px; color: var(--text-1); font-weight: 800; }
+.main { min-width: 0; padding: 0 0 0 32px; }
+.section { margin-bottom: 40px; scroll-margin-top: 20px; }
+.section-header { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
+.section-num { width: 32px; height: 32px; border-radius: 50%; background: var(--surface-2); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: var(--text-2); flex-shrink: 0; }
+.section-title { font-size: 17px; font-weight: 700; color: var(--text-1); letter-spacing: -0.01em; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px 32px; margin-bottom: 16px; }
+.header-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 24px; }
+.header-ticker { display: flex; align-items: center; gap: 14px; margin-bottom: 8px; }
+.ticker-logo { width: 48px; height: 48px; background: linear-gradient(135deg, #1a3550 0%, #2a4a70 100%); border-radius: 12px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; color: var(--teal); letter-spacing: 0.02em; }
+.ticker-name h1 { font-size: 22px; font-weight: 800; color: var(--text-1); letter-spacing: -0.02em; line-height: 1.2; }
+.ticker-name .exch { font-size: 12px; color: var(--text-3); margin-top: 2px; }
+.header-price { text-align: right; }
+.price-big { font-size: 36px; font-weight: 800; color: var(--text-1); letter-spacing: -0.03em; line-height: 1; }
+.price-secondary { font-size: 14px; font-weight: 600; color: var(--text-3); margin-top: 5px; }
+.price-sub { font-size: 13px; color: var(--text-3); margin-top: 6px; }
+.badges { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
+.badge { display: inline-flex; align-items: center; gap: 5px; padding: 5px 11px; border-radius: 100px; font-size: 11.5px; font-weight: 600; letter-spacing: 0.02em; }
+.badge-teal { background: var(--teal-dim); color: var(--teal); border: 1px solid rgba(0,196,180,0.3); }
+.badge-orange { background: var(--orange-dim); color: var(--orange); border: 1px solid rgba(245,139,66,0.3); }
+.badge-muted { background: var(--surface-2); color: var(--text-2); border: 1px solid var(--border); }
+.range-bar-wrap { margin-top: 4px; }
+.range-label { display: flex; justify-content: space-between; font-size: 11.5px; color: var(--text-3); margin-bottom: 8px; }
+.range-bar-track { height: 6px; border-radius: 4px; background: var(--surface-2); position: relative; overflow: visible; }
+.range-bar-fill { height: 100%; border-radius: 4px; background: linear-gradient(90deg, var(--teal-mid) 0%, var(--teal) 100%); }
+.range-bar-marker { position: absolute; top: 50%; transform: translate(-50%, -50%); width: 14px; height: 14px; border-radius: 50%; background: #fff; border: 2px solid var(--teal); box-shadow: 0 0 0 3px rgba(0,196,180,0.3); }
+.range-bar-label { position: absolute; bottom: -20px; transform: translateX(-50%); font-size: 11px; font-weight: 700; color: var(--text-1); white-space: nowrap; }
+.range-sublabels { margin-top: 22px; font-size: 11.5px; color: var(--text-3); display: flex; justify-content: space-between; }
+.range-sublabels span { font-weight: 600; color: var(--text-2); }
+.snowflake-grid { display: grid; grid-template-columns: 240px 1fr; gap: 32px; align-items: start; }
+.score-rows { flex: 1; }
+.score-row { display: grid; grid-template-columns: 130px 1fr 36px; gap: 12px; align-items: center; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+.score-row:last-child { border-bottom: none; }
+.score-row-label { font-size: 13px; font-weight: 600; color: var(--text-2); }
+.score-bar-track { height: 8px; background: var(--score-track); border-radius: 4px; overflow: hidden; }
+.score-bar-fill { height: 100%; border-radius: 4px; }
+.score-num { font-size: 13px; font-weight: 700; text-align: right; }
+.score-rationale { grid-column: 1 / -1; font-size: 11.5px; color: var(--text-3); padding-top: 2px; line-height: 1.5; }
+.snowflake-total { text-align: center; margin-top: 16px; }
+.snowflake-total .num { font-size: 28px; font-weight: 800; color: var(--teal); }
+.snowflake-total .denom { font-size: 14px; color: var(--text-3); }
+.snowflake-total .label { font-size: 11px; color: var(--text-3); margin-top: 4px; }
+.sankey-wrap { width: 100%; overflow-x: auto; }
+.sankey-caption { margin-top: 16px; font-size: 12.5px; color: var(--text-2); background: var(--surface-2); border-radius: 8px; padding: 10px 14px; border-left: 3px solid var(--teal); }
+.health-row { display: flex; align-items: center; gap: 16px; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+.health-row:last-child { border-bottom: none; }
+.health-label { width: 140px; font-size: 13px; color: var(--text-2); flex-shrink: 0; }
+.health-bar-track { flex: 1; height: 8px; background: var(--score-track); border-radius: 4px; overflow: hidden; position: relative; }
+.health-bar-fill { height: 100%; border-radius: 4px; background: var(--teal); }
+.health-value { width: 90px; text-align: right; font-size: 13px; font-weight: 700; color: var(--number); }
+.chart-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 18px; flex-wrap: wrap; }
+.chart-price { font-size: 30px; font-weight: 900; color: var(--text-1); letter-spacing: -0.03em; }
+.chart-sub { font-size: 12px; color: var(--text-3); margin-top: 4px; }
+.chart-tabs { display: flex; gap: 8px; flex-wrap: wrap; }
+.chart-tab { background: var(--surface-2); border: 1px solid var(--border); border-radius: 9px; padding: 7px 13px; font-size: 12px; font-weight: 700; color: var(--text-3); cursor: pointer; display: flex; gap: 6px; align-items: center; font-family: inherit; transition: all .15s; }
+.chart-tab:hover { color: var(--text-1); }
+.chart-tab.active { border-color: var(--teal); color: var(--text-1); background: var(--teal-dim); }
+.chart-tab span { font-size: 11px; font-weight: 600; }
+.chart-pane { display: none; }
+.chart-pane.active { display: block; }
+.chart-svg { width: 100%; height: 240px; display: block; }
+.rsi-block { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--border); }
+.rsi-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 8px; }
+.rsi-title { font-size: 13px; font-weight: 700; color: var(--text-2); letter-spacing: 0.02em; }
+.rsi-now { font-size: 14px; font-weight: 800; }
+.rsi-chartwrap { position: relative; padding-left: 26px; }
+.rsi-axis { position: absolute; left: 0; top: 0; height: 120px; width: 22px; display: flex; flex-direction: column; justify-content: space-between; }
+.rsi-axis span { font-size: 10px; color: var(--text-3); line-height: 1; }
+.rsi-svg { width: 100%; height: 120px; display: block; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.verdict-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
+.verdict-chip { background: var(--surface-2); border: 1px solid var(--border); border-radius: 14px; padding: 20px; }
+.verdict-chip .agent { font-size: 11px; font-weight: 700; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+.verdict-chip .stance { font-size: 15px; font-weight: 800; color: var(--text-1); margin-bottom: 6px; }
+.verdict-chip .conviction { display: inline-block; font-size: 10.5px; font-weight: 700; padding: 2px 8px; border-radius: 100px; background: var(--teal-dim); color: var(--teal); margin-bottom: 8px; border: 1px solid rgba(0,196,180,0.25); }
+.verdict-chip .rationale { font-size: 12px; color: var(--text-3); line-height: 1.5; }
+.overall-verdict { background: linear-gradient(135deg, rgba(0,196,180,0.12) 0%, rgba(0,169,157,0.06) 100%); border: 1px solid rgba(0,196,180,0.3); border-radius: 14px; padding: 24px 28px; display: flex; align-items: center; gap: 24px; }
+.ov-stance { font-size: 28px; font-weight: 900; color: var(--teal); letter-spacing: -0.02em; flex-shrink: 0; }
+.ov-detail { flex: 1; }
+.ov-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-3); margin-bottom: 4px; }
+.ov-target { font-size: 14px; color: var(--text-2); }
+.ov-target strong { color: var(--text-1); }
+.ov-add-zone { font-size: 13px; color: var(--text-3); margin-top: 4px; }
+.rr-col h4 { font-size: 13px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 14px; }
+.rr-col.rewards h4 { color: var(--green); }
+.rr-col.risks h4 { color: var(--red); }
+.rr-item { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 12px; font-size: 13px; color: var(--text-2); line-height: 1.5; }
+.rr-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; margin-top: 6px; }
+.rr-col.rewards .rr-dot { background: var(--green); }
+.rr-col.risks .rr-dot { background: var(--red); }
+.rr-item.bold-risk { color: var(--text-1); font-weight: 600; }
+.rr-item.bold-risk .rr-dot { background: var(--red); box-shadow: 0 0 0 3px rgba(232,93,93,0.2); }
+.stat-row { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 16px; }
+.stat-pill { background: var(--surface-2); border: 1px solid var(--border); border-radius: 10px; padding: 10px 16px; min-width: 130px; }
+.stat-pill-label { font-size: 11px; color: var(--text-3); margin-bottom: 3px; text-transform: uppercase; letter-spacing: 0.04em; }
+.stat-pill-value { font-size: 18px; font-weight: 800; color: var(--number); }
+.stat-pill-sub { font-size: 11px; color: var(--text-3); margin-top: 2px; }
+.div-row { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+.div-big { font-size: 52px; font-weight: 900; color: var(--amber); letter-spacing: -0.04em; line-height: 1; }
+.div-note { font-size: 13px; color: var(--text-2); max-width: 460px; line-height: 1.6; }
+.div-trend { margin-top: 20px; font-size: 12.5px; color: var(--text-3); }
+.footer { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border); font-size: 11px; color: var(--text-3); line-height: 1.7; text-align: center; }
+.growth-row { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+.growth-label { width: 170px; font-size: 13px; color: var(--text-2); flex-shrink: 0; }
+.growth-bar-track { flex: 1; height: 28px; background: var(--score-track); border-radius: 8px; overflow: hidden; position: relative; }
+.growth-bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; padding-left: 10px; font-size: 12px; font-weight: 700; color: rgba(255,255,255,0.9); white-space: nowrap; }
+.growth-value { width: 90px; text-align: right; font-size: 14px; font-weight: 700; color: var(--number); flex-shrink: 0; }
+.biz-summary { font-size: 14px; color: var(--text-1); line-height: 1.65; margin-bottom: 22px; }
+.biz-rev-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-3); font-weight: 700; margin-bottom: 6px; }
+.biz-row { display: flex; align-items: baseline; gap: 14px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+.biz-row:last-child { border-bottom: none; }
+.biz-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; align-self: center; }
+.biz-name { font-size: 13px; font-weight: 700; color: var(--text-1); width: 92px; flex-shrink: 0; }
+.biz-pct { font-size: 13px; font-weight: 800; color: var(--teal); width: 46px; flex-shrink: 0; text-align: right; }
+.biz-desc { font-size: 12.5px; color: var(--text-2); line-height: 1.5; }
+.note-box { background: var(--surface-2); border-left: 3px solid var(--teal); border-radius: 0 8px 8px 0; padding: 12px 16px; font-size: 12.5px; color: var(--text-2); margin-top: 16px; line-height: 1.6; }
+.note-box.orange { border-left-color: var(--orange); }
+.note-box.red { border-left-color: var(--red); }
+</style>
+</head>
+<body>
+<div class="page">
+  <nav class="sidenav"><a class="sidenav-logo" href="index.html"><div class="dot"></div><span>Smartmall</span></a><a class="nav-item nav-back" href="index.html"><span class="nav-num">&larr;</span><span class="nav-label">All Stock Cards</span></a><a class="nav-item active" href="#s1"><span class="nav-num">1</span><span class="nav-label">Overview</span></a><a class="nav-item" href="#s2"><span class="nav-num">2</span><span class="nav-label">Price History</span></a><a class="nav-item" href="#s3"><span class="nav-num">3</span><span class="nav-label">Snowflake Score</span></a><a class="nav-item" href="#s4"><span class="nav-num">4</span><span class="nav-label">Revenue &amp; Expenses</span></a><a class="nav-item" href="#s5"><span class="nav-num">5</span><span class="nav-label">Past Performance</span></a><a class="nav-item" href="#s6"><span class="nav-num">6</span><span class="nav-label">Future Growth</span></a><a class="nav-item" href="#s7"><span class="nav-num">7</span><span class="nav-label">Financial Health</span></a><a class="nav-item" href="#s8"><span class="nav-num">8</span><span class="nav-label">Dividend</span></a><a class="nav-item" href="#s9"><span class="nav-num">9</span><span class="nav-label">Rewards &amp; Risks</span></a><a class="nav-item" href="#s10"><span class="nav-num">10</span><span class="nav-label">Council Verdict</span></a></nav>
+  <main class="main">
+    
+    <div class="section" id="s1">
+      <div class="card">
+        <div class="header-top">
+          <div>
+            <div class="header-ticker">
+              <div class="ticker-logo">META</div>
+              <div class="ticker-name">
+                <h1>Meta Platforms</h1>
+                <div class="exch">NASDAQ: META</div>
+              </div>
+            </div>
+          </div>
+          <div class="header-price">
+            <div class="price-big">฿2.76</div>
+            <div class="price-secondary">≈ US$661.04</div>
+            <div class="price-sub">as of 2026-07-15</div>
+            <div class="hero-verdict"><span class="hv-stance" style="color:var(--green);border-color:var(--green);">WATCH</span><span class="hv-score"><b>19</b>/30</span></div>
+          </div>
+        </div>
+        <div class="badges"><span class="badge badge-teal"><svg width="10" height="10" viewBox="0 0 10 10"><circle cx="5" cy="5" r="4" fill="currentColor" opacity="0.6"/></svg> Thai DR: META80</span><span class="badge badge-teal">Buyable in THB</span><span class="badge badge-muted">Social Media / Digital Advertising</span></div>
+        
+        <div style="margin-bottom:6px;font-size:12px;font-weight:600;color:var(--text-3);text-transform:uppercase;letter-spacing:0.05em;">52-Week Range</div>
+        <div class="range-bar-wrap">
+          <div class="range-label"><span>2.2 &nbsp; 52W Low</span><span>52W High &nbsp; 3.22</span></div>
+          <div class="range-bar-track">
+            <div class="range-bar-fill" style="width:54.9%"></div>
+            <div class="range-bar-marker" style="left:54.9%"><div class="range-bar-label">2.76</div></div>
+          </div>
+          <div class="range-sublabels" style="margin-top:28px;">
+            <span>Current <span>฿2.76</span></span>
+            <span>Distance from low: <span>+25%</span></span>
+          </div>
+        </div>
+        <div class="stat-row" style="margin-top:28px;margin-bottom:0;"><div class="stat-pill"><div class="stat-pill-label">Market Cap</div><div class="stat-pill-value">~$1.68T</div></div><div class="stat-pill"><div class="stat-pill-label">P/E (normalized)</div><div class="stat-pill-value">~26x</div></div><div class="stat-pill"><div class="stat-pill-label">P/E (headline)</div><div class="stat-pill-value">~24.0x*</div></div><div class="stat-pill"><div class="stat-pill-label">Operating Margin</div><div class="stat-pill-value">41.4%</div></div><div class="stat-pill"><div class="stat-pill-label">Net Margin</div><div class="stat-pill-value">~30%</div></div><div class="stat-pill"><div class="stat-pill-label">Net Cash</div><div class="stat-pill-value">+$22B (cash $81.2B vs LT debt $58.75B)</div></div><div class="stat-pill"><div class="stat-pill-label">Div Yield</div><div class="stat-pill-value">~0.32%</div></div></div>
+      </div>
+    </div>
+    <div class="section" id="s2">
+      <div class="section-header"><div class="section-num">2</div><div class="section-title">Price History</div></div>
+      <div class="card chart-section">
+        <div class="chart-head">
+          <div><div class="chart-price">$661.04</div><div class="chart-sub">META · $ · snapshot 2026-07-15</div></div>
+          <div class="chart-tabs"><button class="chart-tab" data-range="1D">1D<span style="color:#30d97b;">+1.2%</span></button><button class="chart-tab" data-range="1W">1W<span style="color:#30d97b;">+9.7%</span></button><button class="chart-tab" data-range="1M">1M<span style="color:#30d97b;">+11.4%</span></button><button class="chart-tab active" data-range="1Y">1Y<span style="color:#f5736b;">-6.6%</span></button><button class="chart-tab" data-range="5Y">5Y<span style="color:#30d97b;">+95.5%</span></button></div>
+        </div>
+        
+        <div class="chart-pane" data-range="1D">
+          <svg class="chart-svg" viewBox="0 0 900 240" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="cg21D" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#30d97b" stop-opacity="0.22"/>
+              <stop offset="1" stop-color="#30d97b" stop-opacity="0"/></linearGradient></defs>
+            <path d="M0.0 222.0 L0.0 222.0 L11.7 110.3 L23.4 121.2 L35.1 106.9 L46.8 97.8 L58.4 85.1 L70.1 166.0 L81.8 124.5 L93.5 145.3 L105.2 134.9 L116.9 114.4 L128.6 140.4 L140.3 74.1 L151.9 65.6 L163.6 76.3 L175.3 77.1 L187.0 65.8 L198.7 61.5 L210.4 74.5 L222.1 47.1 L233.8 60.6 L245.5 75.3 L257.1 77.9 L268.8 92.5 L280.5 148.4 L292.2 148.7 L303.9 154.3 L315.6 159.4 L327.3 151.7 L339.0 159.2 L350.6 178.7 L362.3 164.1 L374.0 154.3 L385.7 153.1 L397.4 143.2 L409.1 129.9 L420.8 63.6 L432.5 41.3 L444.2 47.5 L455.8 45.6 L467.5 18.0 L479.2 28.1 L490.9 45.2 L502.6 60.5 L514.3 71.2 L526.0 79.0 L537.7 39.4 L549.4 50.9 L561.0 38.0 L572.7 38.4 L584.4 35.4 L596.1 55.3 L607.8 66.8 L619.5 79.7 L631.2 88.4 L642.9 79.6 L654.5 74.3 L666.2 104.7 L677.9 82.9 L689.6 82.4 L701.3 79.4 L713.0 100.8 L724.7 105.3 L736.4 115.1 L748.1 127.3 L759.7 126.5 L771.4 120.6 L783.1 115.2 L794.8 108.1 L806.5 138.3 L818.2 91.4 L829.9 98.1 L841.6 113.5 L853.2 123.1 L864.9 124.1 L876.6 125.7 L888.3 108.2 L900.0 85.0 L900.0 240.0 L0 240.0 Z" fill="url(#cg21D)"/>
+            <path d="M0.0 222.0 L11.7 110.3 L23.4 121.2 L35.1 106.9 L46.8 97.8 L58.4 85.1 L70.1 166.0 L81.8 124.5 L93.5 145.3 L105.2 134.9 L116.9 114.4 L128.6 140.4 L140.3 74.1 L151.9 65.6 L163.6 76.3 L175.3 77.1 L187.0 65.8 L198.7 61.5 L210.4 74.5 L222.1 47.1 L233.8 60.6 L245.5 75.3 L257.1 77.9 L268.8 92.5 L280.5 148.4 L292.2 148.7 L303.9 154.3 L315.6 159.4 L327.3 151.7 L339.0 159.2 L350.6 178.7 L362.3 164.1 L374.0 154.3 L385.7 153.1 L397.4 143.2 L409.1 129.9 L420.8 63.6 L432.5 41.3 L444.2 47.5 L455.8 45.6 L467.5 18.0 L479.2 28.1 L490.9 45.2 L502.6 60.5 L514.3 71.2 L526.0 79.0 L537.7 39.4 L549.4 50.9 L561.0 38.0 L572.7 38.4 L584.4 35.4 L596.1 55.3 L607.8 66.8 L619.5 79.7 L631.2 88.4 L642.9 79.6 L654.5 74.3 L666.2 104.7 L677.9 82.9 L689.6 82.4 L701.3 79.4 L713.0 100.8 L724.7 105.3 L736.4 115.1 L748.1 127.3 L759.7 126.5 L771.4 120.6 L783.1 115.2 L794.8 108.1 L806.5 138.3 L818.2 91.4 L829.9 98.1 L841.6 113.5 L853.2 123.1 L864.9 124.1 L876.6 125.7 L888.3 108.2 L900.0 85.0" fill="none" stroke="#30d97b" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="chart-pane" data-range="1W">
+          <svg class="chart-svg" viewBox="0 0 900 240" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="cg21W" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#30d97b" stop-opacity="0.22"/>
+              <stop offset="1" stop-color="#30d97b" stop-opacity="0"/></linearGradient></defs>
+            <path d="M0.0 192.6 L0.0 192.6 L14.1 188.4 L28.1 195.6 L42.2 194.0 L56.2 189.4 L70.3 188.5 L84.4 188.8 L98.4 185.9 L112.5 186.6 L126.6 186.6 L140.6 181.6 L154.7 199.4 L168.8 191.4 L182.8 222.0 L196.9 213.2 L210.9 200.0 L225.0 188.4 L239.1 178.9 L253.1 164.3 L267.2 167.3 L281.2 168.4 L295.3 171.5 L309.4 160.2 L323.4 161.1 L337.5 140.3 L351.6 122.7 L365.6 21.8 L379.7 36.3 L393.8 30.0 L407.8 18.0 L421.9 29.8 L435.9 32.9 L450.0 33.7 L464.1 46.4 L478.1 40.3 L492.2 32.4 L506.2 32.2 L520.3 39.0 L534.4 31.1 L548.4 43.5 L562.5 60.9 L576.6 50.3 L590.6 54.8 L604.7 53.1 L618.8 52.4 L632.8 57.0 L646.9 51.6 L660.9 52.3 L675.0 46.3 L689.1 48.8 L703.1 56.8 L717.2 61.5 L731.2 51.0 L745.3 58.9 L759.4 47.7 L773.4 52.1 L787.5 61.6 L801.6 57.4 L815.6 42.9 L829.7 46.1 L843.8 50.3 L857.8 50.6 L871.9 56.9 L885.9 52.9 L900.0 51.0 L900.0 240.0 L0 240.0 Z" fill="url(#cg21W)"/>
+            <path d="M0.0 192.6 L14.1 188.4 L28.1 195.6 L42.2 194.0 L56.2 189.4 L70.3 188.5 L84.4 188.8 L98.4 185.9 L112.5 186.6 L126.6 186.6 L140.6 181.6 L154.7 199.4 L168.8 191.4 L182.8 222.0 L196.9 213.2 L210.9 200.0 L225.0 188.4 L239.1 178.9 L253.1 164.3 L267.2 167.3 L281.2 168.4 L295.3 171.5 L309.4 160.2 L323.4 161.1 L337.5 140.3 L351.6 122.7 L365.6 21.8 L379.7 36.3 L393.8 30.0 L407.8 18.0 L421.9 29.8 L435.9 32.9 L450.0 33.7 L464.1 46.4 L478.1 40.3 L492.2 32.4 L506.2 32.2 L520.3 39.0 L534.4 31.1 L548.4 43.5 L562.5 60.9 L576.6 50.3 L590.6 54.8 L604.7 53.1 L618.8 52.4 L632.8 57.0 L646.9 51.6 L660.9 52.3 L675.0 46.3 L689.1 48.8 L703.1 56.8 L717.2 61.5 L731.2 51.0 L745.3 58.9 L759.4 47.7 L773.4 52.1 L787.5 61.6 L801.6 57.4 L815.6 42.9 L829.7 46.1 L843.8 50.3 L857.8 50.6 L871.9 56.9 L885.9 52.9 L900.0 51.0" fill="none" stroke="#30d97b" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="chart-pane" data-range="1M">
+          <svg class="chart-svg" viewBox="0 0 900 240" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="cg21M" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#30d97b" stop-opacity="0.22"/>
+              <stop offset="1" stop-color="#30d97b" stop-opacity="0"/></linearGradient></defs>
+            <path d="M0.0 140.3 L0.0 140.3 L47.4 129.4 L94.7 182.1 L142.1 166.5 L189.5 188.1 L236.8 190.8 L284.2 198.1 L331.6 222.0 L378.9 210.1 L426.3 190.1 L473.7 189.0 L521.1 108.9 L568.4 157.4 L615.8 129.3 L663.2 104.6 L710.5 124.7 L757.9 78.9 L805.3 18.0 L852.6 38.2 L900.0 31.2 L900.0 240.0 L0 240.0 Z" fill="url(#cg21M)"/>
+            <path d="M0.0 140.3 L47.4 129.4 L94.7 182.1 L142.1 166.5 L189.5 188.1 L236.8 190.8 L284.2 198.1 L331.6 222.0 L378.9 210.1 L426.3 190.1 L473.7 189.0 L521.1 108.9 L568.4 157.4 L615.8 129.3 L663.2 104.6 L710.5 124.7 L757.9 78.9 L805.3 18.0 L852.6 38.2 L900.0 31.2" fill="none" stroke="#30d97b" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="chart-pane active" data-range="1Y">
+          <svg class="chart-svg" viewBox="0 0 900 240" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="cg21Y" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#f5736b" stop-opacity="0.22"/>
+              <stop offset="1" stop-color="#f5736b" stop-opacity="0"/></linearGradient></defs>
+            <path d="M0.0 79.7 L0.0 79.7 L9.5 86.7 L18.9 84.1 L28.4 76.3 L37.9 87.8 L47.4 49.0 L56.8 38.6 L66.3 34.1 L75.8 18.0 L85.3 21.7 L94.7 50.8 L104.2 45.3 L113.7 51.1 L123.2 57.8 L132.6 50.1 L142.1 36.8 L151.6 48.3 L161.1 26.5 L170.5 27.0 L180.0 44.4 L189.5 53.5 L198.9 60.8 L208.4 79.2 L217.9 73.6 L227.4 83.3 L236.8 73.8 L246.3 74.3 L255.8 61.5 L265.3 48.0 L274.7 47.3 L284.2 135.8 L293.7 150.3 L303.2 140.4 L312.6 157.4 L322.1 163.5 L331.6 173.5 L341.1 136.9 L350.5 127.8 L360.0 134.3 L369.5 108.1 L378.9 126.1 L388.4 127.8 L397.9 126.2 L407.4 116.9 L416.8 115.5 L426.3 113.4 L435.8 119.0 L445.3 126.8 L454.7 132.1 L464.2 148.5 L473.7 161.5 L483.2 119.0 L492.6 108.0 L502.1 74.2 L511.6 111.1 L521.1 116.9 L530.5 111.3 L540.0 134.1 L549.5 129.9 L558.9 134.1 L568.4 120.4 L577.9 121.9 L587.4 129.8 L596.8 122.7 L606.3 154.0 L615.8 146.6 L625.3 169.2 L634.7 168.2 L644.2 222.0 L653.7 180.4 L663.2 183.7 L672.6 142.2 L682.1 115.7 L691.6 104.5 L701.1 110.7 L710.5 105.9 L720.0 108.8 L729.5 157.5 L738.9 160.4 L748.4 156.8 L757.9 151.3 L767.4 153.2 L776.8 160.3 L786.3 154.7 L795.8 136.8 L805.3 166.1 L814.7 142.8 L824.2 176.2 L833.7 189.9 L843.2 163.7 L852.6 192.0 L862.1 196.8 L871.6 192.9 L881.1 177.1 L890.5 151.7 L900.0 116.3 L900.0 240.0 L0 240.0 Z" fill="url(#cg21Y)"/>
+            <path d="M0.0 79.7 L9.5 86.7 L18.9 84.1 L28.4 76.3 L37.9 87.8 L47.4 49.0 L56.8 38.6 L66.3 34.1 L75.8 18.0 L85.3 21.7 L94.7 50.8 L104.2 45.3 L113.7 51.1 L123.2 57.8 L132.6 50.1 L142.1 36.8 L151.6 48.3 L161.1 26.5 L170.5 27.0 L180.0 44.4 L189.5 53.5 L198.9 60.8 L208.4 79.2 L217.9 73.6 L227.4 83.3 L236.8 73.8 L246.3 74.3 L255.8 61.5 L265.3 48.0 L274.7 47.3 L284.2 135.8 L293.7 150.3 L303.2 140.4 L312.6 157.4 L322.1 163.5 L331.6 173.5 L341.1 136.9 L350.5 127.8 L360.0 134.3 L369.5 108.1 L378.9 126.1 L388.4 127.8 L397.9 126.2 L407.4 116.9 L416.8 115.5 L426.3 113.4 L435.8 119.0 L445.3 126.8 L454.7 132.1 L464.2 148.5 L473.7 161.5 L483.2 119.0 L492.6 108.0 L502.1 74.2 L511.6 111.1 L521.1 116.9 L530.5 111.3 L540.0 134.1 L549.5 129.9 L558.9 134.1 L568.4 120.4 L577.9 121.9 L587.4 129.8 L596.8 122.7 L606.3 154.0 L615.8 146.6 L625.3 169.2 L634.7 168.2 L644.2 222.0 L653.7 180.4 L663.2 183.7 L672.6 142.2 L682.1 115.7 L691.6 104.5 L701.1 110.7 L710.5 105.9 L720.0 108.8 L729.5 157.5 L738.9 160.4 L748.4 156.8 L757.9 151.3 L767.4 153.2 L776.8 160.3 L786.3 154.7 L795.8 136.8 L805.3 166.1 L814.7 142.8 L824.2 176.2 L833.7 189.9 L843.2 163.7 L852.6 192.0 L862.1 196.8 L871.6 192.9 L881.1 177.1 L890.5 151.7 L900.0 116.3" fill="none" stroke="#f5736b" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="chart-pane" data-range="5Y">
+          <svg class="chart-svg" viewBox="0 0 900 240" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="cg25Y" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#30d97b" stop-opacity="0.22"/>
+              <stop offset="1" stop-color="#30d97b" stop-opacity="0"/></linearGradient></defs>
+            <path d="M0.0 148.2 L0.0 148.2 L9.5 143.7 L18.9 142.8 L28.4 137.1 L37.9 144.7 L47.4 153.0 L56.8 148.2 L66.3 150.5 L75.8 151.5 L85.3 149.6 L94.7 159.4 L104.2 184.0 L113.7 186.7 L123.2 184.9 L132.6 183.2 L142.1 194.5 L151.6 190.2 L161.1 192.5 L170.5 198.6 L180.0 198.4 L189.5 201.9 L198.9 199.2 L208.4 198.9 L217.9 207.4 L227.4 211.4 L236.8 222.0 L246.3 215.7 L255.8 214.6 L265.3 213.3 L274.7 207.7 L284.2 193.8 L293.7 198.5 L303.2 191.1 L312.6 185.1 L322.1 186.0 L331.6 179.8 L341.1 168.4 L350.5 165.9 L360.0 163.1 L369.5 152.8 L378.9 165.3 L388.4 161.4 L397.9 160.6 L407.4 156.0 L416.8 156.0 L426.3 150.0 L435.8 150.7 L445.3 144.4 L454.7 135.7 L464.2 108.7 L473.7 105.9 L483.2 105.9 L492.6 105.4 L502.1 106.8 L511.6 108.2 L521.1 111.0 L530.5 99.8 L540.0 89.2 L549.5 111.2 L558.9 92.9 L568.4 94.7 L577.9 82.8 L587.4 74.3 L596.8 79.2 L606.3 84.9 L615.8 64.3 L625.3 71.2 L634.7 66.5 L644.2 44.8 L653.7 46.5 L663.2 68.8 L672.6 77.9 L682.1 100.2 L691.6 73.2 L701.1 63.0 L710.5 46.5 L720.0 35.6 L729.5 37.5 L738.9 20.7 L748.4 29.8 L757.9 18.0 L767.4 39.5 L776.8 29.7 L786.3 68.0 L795.8 49.0 L805.3 53.2 L814.7 54.9 L824.2 36.0 L833.7 54.1 L843.2 57.3 L852.6 92.5 L862.1 44.2 L871.6 67.6 L881.1 67.4 L890.5 80.3 L900.0 52.1 L900.0 240.0 L0 240.0 Z" fill="url(#cg25Y)"/>
+            <path d="M0.0 148.2 L9.5 143.7 L18.9 142.8 L28.4 137.1 L37.9 144.7 L47.4 153.0 L56.8 148.2 L66.3 150.5 L75.8 151.5 L85.3 149.6 L94.7 159.4 L104.2 184.0 L113.7 186.7 L123.2 184.9 L132.6 183.2 L142.1 194.5 L151.6 190.2 L161.1 192.5 L170.5 198.6 L180.0 198.4 L189.5 201.9 L198.9 199.2 L208.4 198.9 L217.9 207.4 L227.4 211.4 L236.8 222.0 L246.3 215.7 L255.8 214.6 L265.3 213.3 L274.7 207.7 L284.2 193.8 L293.7 198.5 L303.2 191.1 L312.6 185.1 L322.1 186.0 L331.6 179.8 L341.1 168.4 L350.5 165.9 L360.0 163.1 L369.5 152.8 L378.9 165.3 L388.4 161.4 L397.9 160.6 L407.4 156.0 L416.8 156.0 L426.3 150.0 L435.8 150.7 L445.3 144.4 L454.7 135.7 L464.2 108.7 L473.7 105.9 L483.2 105.9 L492.6 105.4 L502.1 106.8 L511.6 108.2 L521.1 111.0 L530.5 99.8 L540.0 89.2 L549.5 111.2 L558.9 92.9 L568.4 94.7 L577.9 82.8 L587.4 74.3 L596.8 79.2 L606.3 84.9 L615.8 64.3 L625.3 71.2 L634.7 66.5 L644.2 44.8 L653.7 46.5 L663.2 68.8 L672.6 77.9 L682.1 100.2 L691.6 73.2 L701.1 63.0 L710.5 46.5 L720.0 35.6 L729.5 37.5 L738.9 20.7 L748.4 29.8 L757.9 18.0 L767.4 39.5 L776.8 29.7 L786.3 68.0 L795.8 49.0 L805.3 53.2 L814.7 54.9 L824.2 36.0 L833.7 54.1 L843.2 57.3 L852.6 92.5 L862.1 44.2 L871.6 67.6 L881.1 67.4 L890.5 80.3 L900.0 52.1" fill="none" stroke="#30d97b" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        
+        <div class="rsi-block">
+          <div class="rsi-head">
+            <div class="rsi-title">RSI (14)</div>
+            <div class="rsi-now" style="color:#9aa4b2;">63.5 · Neutral</div>
+          </div>
+          <div class="rsi-chartwrap">
+            <div class="rsi-axis"><span>70</span><span>50</span><span>30</span></div>
+            
+          <svg class="rsi-svg" viewBox="0 0 900 200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="0" y="8.0" width="900" height="55.2" fill="#f5736b" opacity="0.07"/>
+            <rect x="0" y="136.8" width="900" height="55.2" fill="#30d97b" opacity="0.07"/>
+            <line x1="0" y1="63.2" x2="900" y2="63.2" stroke="#f5736b" stroke-width="1" stroke-dasharray="6 5" opacity="0.5"/>
+            <line x1="0" y1="100.0" x2="900" y2="100.0" stroke="#9aa4b2" stroke-width="1" stroke-dasharray="2 6" opacity="0.4"/>
+            <line x1="0" y1="136.8" x2="900" y2="136.8" stroke="#30d97b" stroke-width="1" stroke-dasharray="6 5" opacity="0.5"/>
+            <path d="M0.0 69.1 L9.5 74.1 L18.9 77.5 L28.4 77.1 L37.9 74.9 L47.4 99.4 L56.8 95.2 L66.3 100.3 L75.8 106.3 L85.3 97.9 L94.7 95.2 L104.2 98.1 L113.7 87.3 L123.2 78.0 L132.6 93.1 L142.1 107.1 L151.6 111.4 L161.1 129.4 L170.5 123.8 L180.0 120.3 L189.5 114.4 L198.9 111.2 L208.4 98.7 L217.9 97.8 L227.4 83.8 L236.8 83.2 L246.3 145.2 L255.8 140.9 L265.3 135.3 L274.7 143.0 L284.2 145.0 L293.7 149.1 L303.2 123.9 L312.6 106.9 L322.1 101.7 L331.6 88.4 L341.1 87.0 L350.5 97.3 L360.0 100.5 L369.5 89.0 L378.9 91.7 L388.4 91.5 L397.9 89.8 L407.4 96.9 L416.8 106.3 L426.3 111.2 L435.8 129.3 L445.3 133.7 L454.7 95.3 L464.2 80.8 L473.7 56.3 L483.2 77.5 L492.6 97.3 L502.1 93.9 L511.6 108.6 L521.1 113.6 L530.5 102.2 L540.0 111.5 L549.5 105.1 L558.9 100.1 L568.4 107.9 L577.9 100.7 L587.4 126.1 L596.8 117.1 L606.3 131.9 L615.8 128.1 L625.3 144.6 L634.7 118.0 L644.2 116.0 L653.7 94.0 L663.2 86.2 L672.6 69.4 L682.1 63.5 L691.6 75.1 L701.1 78.8 L710.5 84.1 L720.0 117.1 L729.5 113.2 L738.9 114.4 L748.4 106.6 L757.9 108.1 L767.4 115.7 L776.8 108.6 L786.3 87.4 L795.8 115.4 L805.3 97.3 L814.7 119.3 L824.2 126.3 L833.7 106.4 L843.2 119.4 L852.6 120.0 L862.1 128.9 L871.6 113.1 L881.1 100.6 L890.5 92.8 L900.0 75.1" fill="none" stroke="#7c83ff" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>
+          </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="section" id="s3">
+      <div class="section-header"><div class="section-num">3</div><div class="section-title">Snowflake Score</div></div>
+      <div class="card">
+        <div class="snowflake-grid">
+          <div style="display:flex;flex-direction:column;align-items:center;">
+            <svg width="240" height="240" viewBox="-175 -125 350 250"><defs><style>.ring{fill:none;stroke:rgba(255,255,255,0.06);stroke-width:1;}.ring-bright{fill:none;stroke:rgba(255,255,255,0.12);stroke-width:1;}.axis-line{stroke:rgba(255,255,255,0.08);stroke-width:1;}.score-poly{fill:rgba(0,196,180,0.22);stroke:#00c4b4;stroke-width:2;}</style></defs><polygon class="ring" points="0.00,-15.00 14.27,-4.64 8.82,12.14 -8.82,12.14 -14.27,-4.64"/><polygon class="ring" points="0.00,-30.00 28.53,-9.27 17.63,24.27 -17.63,24.27 -28.53,-9.27"/><polygon class="ring" points="0.00,-45.00 42.80,-13.91 26.45,36.41 -26.45,36.41 -42.80,-13.91"/><polygon class="ring" points="0.00,-60.00 57.06,-18.54 35.27,48.54 -35.27,48.54 -57.06,-18.54"/><polygon class="ring ring-bright" points="0.00,-75.00 71.33,-23.18 44.08,60.68 -44.08,60.68 -71.33,-23.18"/><polygon class="ring ring-bright" points="0.00,-90.00 85.60,-27.81 52.90,72.81 -52.90,72.81 -85.60,-27.81"/><line class="axis-line" x1="0" y1="0" x2="0.00" y2="-90.00"/><line class="axis-line" x1="0" y1="0" x2="85.60" y2="-27.81"/><line class="axis-line" x1="0" y1="0" x2="52.90" y2="72.81"/><line class="axis-line" x1="0" y1="0" x2="-52.90" y2="72.81"/><line class="axis-line" x1="0" y1="0" x2="-85.60" y2="-27.81"/><polygon class="score-poly" points="0.00,-30.00 71.33,-23.18 52.90,72.81 -44.08,60.68 -14.27,-4.64"/><text x="0.0" y="-96.3" text-anchor="middle" font-size="8.5" fill="#8fa3bf">Valuation</text><text x="95.6" y="-29.8" text-anchor="start" font-size="8.5" fill="#8fa3bf">Future Growth</text><text x="60.6" y="83.9" text-anchor="start" font-size="8.5" fill="#8fa3bf">Past Perf.</text><text x="-60.6" y="83.9" text-anchor="end" font-size="8.5" fill="#8fa3bf">Fin. Health</text><text x="-95.6" y="-29.8" text-anchor="end" font-size="8.5" fill="#8fa3bf">Dividend</text><circle cx="0.00" cy="-30.00" r="4" fill="#f58b42"/><circle cx="71.33" cy="-23.18" r="4" fill="#00c4b4"/><circle cx="52.90" cy="72.81" r="4" fill="#00c4b4"/><circle cx="-44.08" cy="60.68" r="4" fill="#00c4b4"/><circle cx="-14.27" cy="-4.64" r="4" fill="#f58b42"/></svg>
+            <div class="snowflake-total">
+              <div><span class="num">19</span><span class="denom" style="font-size:18px;color:var(--text-3);"> / 30</span></div>
+              <div class="label">Smartmall Score</div>
+            </div>
+          </div>
+          <div class="score-rows">
+            
+            <div class="score-row">
+              <div class="score-row-label" style="color:var(--orange)">Valuation</div>
+              <div>
+                <div class="score-bar-track"><div class="score-bar-fill" style="width:33.3%;background:var(--orange)"></div></div>
+                <div class="score-rationale">Stock is still ~9.6% above pre-&#x27;Meta Compute&#x27; levels ($661 vs $603 on 8 Jul) even after a small pullback from the $669 pop — real P/E is ~26x on normalized TTM EPS ~$25.6 (headline ~24.0x still flattered by an ~$8.03B one-time OBBBA tax benefit). ~17% below the $796 high (was ~16%) — margin of safety barely moved</div>
+              </div>
+              <div class="score-num" style="color:var(--orange)">2/6</div>
+            </div>
+            <div class="score-row">
+              <div class="score-row-label" style="color:var(--teal)">Future Growth</div>
+              <div>
+                <div class="score-bar-track"><div class="score-bar-fill" style="width:83.3%;background:var(--teal)"></div></div>
+                <div class="score-rationale">Revenue +33% YoY (Q1 2026); Advantage+ AI ad stack lifting both impressions (+19%) and price/ad (+12%) at once. New: in-house &#x27;Iris&#x27; AI chip (MTIA, w/ Broadcom + TSMC) starts production Sep 2026 as Meta doubles compute capacity 7GW→14GW by 2027 — capex guide still $125–145B/yr but Wolfe Research flags risk toward $200B, the swing factor on 2027 FCF</div>
+              </div>
+              <div class="score-num" style="color:var(--teal)">5/6</div>
+            </div>
+            <div class="score-row">
+              <div class="score-row-label" style="color:var(--teal)">Past Performance</div>
+              <div>
+                <div class="score-bar-track"><div class="score-bar-fill" style="width:100.0%;background:var(--teal)"></div></div>
+                <div class="score-rationale">FY25 revenue $200.97B (+22% YoY), net income $60.46B; ~14% 5yr CAGR re-accelerating. Best-in-class ad engine, 3.56B daily users, ~41% operating margin — elite execution</div>
+              </div>
+              <div class="score-num" style="color:var(--teal)">6/6</div>
+            </div>
+            <div class="score-row">
+              <div class="score-row-label" style="color:var(--teal)">Financial Health</div>
+              <div>
+                <div class="score-bar-track"><div class="score-bar-fill" style="width:83.3%;background:var(--teal)"></div></div>
+                <div class="score-rationale">Cash + securities $81.2B vs LT debt $58.75B → net cash positive. Fortress balance sheet; the drag is Reality Labs burning ~$19B/yr, not leverage</div>
+              </div>
+              <div class="score-num" style="color:var(--teal)">5/6</div>
+            </div>
+            <div class="score-row">
+              <div class="score-row-label" style="color:var(--orange)">Dividend</div>
+              <div>
+                <div class="score-bar-track"><div class="score-bar-fill" style="width:16.7%;background:var(--orange)"></div></div>
+                <div class="score-rationale">Yield ~0.36% — symbolic only, initiated 2024. And buyback was $0 in Q1 2026 as capex soaked up cash flow, so no capital return cushion right now</div>
+              </div>
+              <div class="score-num" style="color:var(--orange)">1/6</div>
+            </div>
+            <div class="note-box" style="margin-top:16px;">
+              <strong>Transparent Smartmall scoring</strong> — not Simply Wall St's proprietary engine. Scores reflect our independent research and conviction framework.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="section" id="s4">
+      <div class="section-header"><div class="section-num">4</div><div class="section-title">Revenue &amp; Expenses Breakdown</div></div>
+      <div class="card">
+        <div style="font-size:12.5px;color:var(--text-3);margin-bottom:20px;">FY2025 ended 31 Dec 2025 (USD billions)</div>
+        <div class="sankey-wrap"><svg viewBox="0 -62.0 980 592.0" width="100%" style="font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;overflow:visible;"><defs><linearGradient id="gProfit" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#2fd6c0" stop-opacity="0.7"/><stop offset="100%" stop-color="#2fd6c0" stop-opacity="0.4"/></linearGradient><linearGradient id="gCost" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#8a7320" stop-opacity="0.85"/><stop offset="100%" stop-color="#8a7320" stop-opacity="0.55"/></linearGradient><linearGradient id="gExpense" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#d9a93a" stop-opacity="0.8"/><stop offset="100%" stop-color="#d9a93a" stop-opacity="0.5"/></linearGradient><linearGradient id="gNet" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#30d97b" stop-opacity="0.8"/><stop offset="100%" stop-color="#30d97b" stop-opacity="0.6"/></linearGradient></defs><polyline points="18.0,-46.1 205.5,-46.0 393.0,-48.1 580.5,-51.7 768.0,-56.0" fill="none" stroke="#2fd6c0" stroke-width="1.5" opacity="0.85"/><text x="18.0" y="-20.0" text-anchor="middle" font-size="9" fill="#526070">FY21</text><text x="205.5" y="-20.0" text-anchor="middle" font-size="9" fill="#526070">FY22</text><text x="393.0" y="-20.0" text-anchor="middle" font-size="9" fill="#526070">FY23</text><text x="580.5" y="-20.0" text-anchor="middle" font-size="9" fill="#526070">FY24</text><text x="768.0" y="-20.0" text-anchor="middle" font-size="9" fill="#526070">FY25</text><rect x="18" y="35.00" width="14" height="454.94" fill="#3b6fd4" rx="3"/><rect x="18" y="490.94" width="14" height="5.06" fill="#3360c2" rx="2"/><rect x="220" y="35.00" width="18" height="460.00" fill="#3b6fd4" rx="3"/><rect x="400" y="35.00" width="18" height="377.19" fill="#2fd6c0" rx="3"/><rect x="400" y="413.19" width="18" height="82.79" fill="#8a7320" rx="3"/><rect x="580" y="35.00" width="18" height="190.62" fill="#2fd6c0" rx="3"/><rect x="580" y="226.62" width="18" height="131.31" fill="#d9a93a" rx="3"/><rect x="580" y="358.93" width="18" height="55.25" fill="#d9a93a" rx="3"/><rect x="750" y="35.00" width="18" height="138.39" fill="#30d97b" rx="3"/><rect x="750" y="174.39" width="18" height="58.30" fill="#d9a93a" rx="3"/><path d="M32.00,35.00 C116.60,35.00 135.40,35.00 220.00,35.00 L220.00,489.94 C135.40,489.94 116.60,489.94 32.00,489.94 Z" fill="#3b6fd4" opacity="0.40"/><path d="M32.00,490.94 C116.60,490.94 135.40,489.94 220.00,489.94 L220.00,495.00 C135.40,495.00 116.60,496.00 32.00,496.00 Z" fill="#3360c2" opacity="0.40"/><path d="M238.00,35.00 C310.90,35.00 327.10,35.00 400.00,35.00 L400.00,412.19 C327.10,412.19 310.90,412.19 238.00,412.19 Z" fill="url(#gProfit)" opacity="0.5"/><path d="M238.00,413.19 C310.90,413.19 327.10,413.19 400.00,413.19 L400.00,495.98 C327.10,495.98 310.90,495.98 238.00,495.98 Z" fill="url(#gCost)" opacity="0.55"/><path d="M418.00,35.00 C490.90,35.00 507.10,35.00 580.00,35.00 L580.00,225.62 C507.10,225.62 490.90,225.62 418.00,225.62 Z" fill="url(#gProfit)" opacity="0.5"/><path d="M418.00,225.62 C490.90,225.62 507.10,226.62 580.00,226.62 L580.00,357.93 C507.10,357.93 490.90,356.93 418.00,356.93 Z" fill="url(#gExpense)" opacity="0.55"/><path d="M418.00,356.93 C490.90,356.93 507.10,358.93 580.00,358.93 L580.00,414.19 C507.10,414.19 490.90,412.19 418.00,412.19 Z" fill="url(#gExpense)" opacity="0.5"/><path d="M598.00,35.00 C666.40,35.00 681.60,35.00 750.00,35.00 L750.00,173.39 C681.60,173.39 666.40,173.39 598.00,173.39 Z" fill="url(#gNet)" opacity="0.5"/><path d="M598.00,173.39 C666.40,173.39 681.60,174.39 750.00,174.39 L750.00,232.69 C681.60,232.69 666.40,231.69 598.00,231.69 Z" fill="url(#gExpense)" opacity="0.55"/><text x="38" y="35.0" dy="10" font-size="11" fill="#e8edf5" font-weight="600">Family of Apps (ads ~97%)</text><text x="38" y="35.0" dy="23" font-size="10.5" fill="#3b6fd4">US$198.8B · 98.9%</text><text x="38" y="493.5" dy="3.5" font-size="9.5" fill="#8fa3bf">Reality Labs US$2.2B · 1.1%</text><text x="229" y="8" text-anchor="middle" font-size="9.5" fill="#8fa3bf">Income</text><text x="229" y="8" dy="11" text-anchor="middle" font-size="9.5" fill="#8fa3bf">Statement</text><rect x="197.1" y="247.5" width="63.7" height="19.0" rx="9.5" fill="#3b6fd4"/><text x="229.0" y="257.0" dy="3.8" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">Revenue</text><text x="229" y="277" text-anchor="middle" font-size="11" font-weight="700" fill="#e8edf5">US$201.0B</text><text x="409" y="8" text-anchor="middle" font-size="9.5" fill="#8fa3bf">Gross</text><text x="409" y="8" dy="11" text-anchor="middle" font-size="9.5" fill="#8fa3bf">Profit</text><text x="409" y="224" text-anchor="middle" font-size="12" fill="#2fd6c0" font-weight="800" transform="rotate(-90 409 224)">US$164.8B</text><text x="589" y="8" text-anchor="middle" font-size="9.5" fill="#8fa3bf">Operating</text><text x="589" y="8" dy="11" text-anchor="middle" font-size="9.5" fill="#8fa3bf">Income</text><text x="589" y="130" text-anchor="middle" font-size="12" fill="#2fd6c0" font-weight="800" transform="rotate(-90 589 130)">US$83.3B</text><text x="759" y="8" text-anchor="middle" font-size="9.5" fill="#8fa3bf">Net</text><text x="759" y="8" dy="11" text-anchor="middle" font-size="9.5" fill="#8fa3bf">Income</text><rect x="720.0" y="87.2" width="78.0" height="18.0" rx="9.0" fill="#30d97b"/><text x="759.0" y="96.2" dy="3.5" text-anchor="middle" font-size="10" font-weight="700" fill="#0f1923">Net Income</text><text x="759" y="116" text-anchor="middle" font-size="11" font-weight="700" fill="#30d97b">US$60.5B</text><text x="409" y="459" text-anchor="middle" font-size="9.5" fill="#d9a93a" font-weight="700">CoR US$36.2B</text><text x="602" y="295" font-size="10" fill="#d9a93a" font-weight="600">R&amp;D US$57.4B</text><text x="602" y="398" font-size="10" fill="#d9a93a">SG&amp;A US$24.1B</text><text x="772" y="207" font-size="10" fill="#d9a93a">Tax US$25.5B</text><text x="602" y="221" font-size="9.5" fill="#d9a93a" font-weight="700" opacity="0.85">Expenses</text><text x="665" y="2" text-anchor="middle" font-size="9.5" fill="#d9a93a" font-style="italic">+ Non-op US$2.6B</text><text x="665" y="2" dy="12" text-anchor="middle" font-size="9.5" fill="#8fa3bf" font-style="italic">Pre-tax US$85.9B</text><line x1="409" y1="496.0" x2="409" y2="518.0" stroke="#8a7320" stroke-width="2" stroke-dasharray="3,2" opacity="0.6"/><polygon points="409,523.0 405,516.0 413,516.0" fill="#8a7320" opacity="0.6"/><line x1="589" y1="414.2" x2="589" y2="436.2" stroke="#d9a93a" stroke-width="2" stroke-dasharray="3,2" opacity="0.6"/><polygon points="589,441.2 585,434.2 593,434.2" fill="#d9a93a" opacity="0.6"/><line x1="759" y1="232.7" x2="759" y2="254.7" stroke="#d9a93a" stroke-width="2" stroke-dasharray="3,2" opacity="0.6"/><polygon points="759,259.7 755,252.7 763,252.7" fill="#d9a93a" opacity="0.6"/><rect x="820" y="35" width="12" height="12" fill="#3b6fd4" rx="2" opacity="0.9"/><text x="836" y="45" font-size="10.5" fill="#8fa3bf">Revenue</text><rect x="820" y="54" width="12" height="12" fill="#d9a93a" rx="2" opacity="0.9"/><text x="836" y="64" font-size="10.5" fill="#8fa3bf">Cost / Expense</text><rect x="820" y="73" width="12" height="12" fill="#30d97b" rx="2" opacity="0.9"/><text x="836" y="83" font-size="10.5" fill="#8fa3bf">Net Income</text></svg></div>
+        <div class="sankey-caption">Family of Apps generates ~$102B of operating income; Reality Labs — on just $2.21B of revenue — bleeds a $19.19B operating loss, dragging total operating income down to $83.3B. Segments sum exactly to $200.97B total revenue (Meta FY2025 10-K).</div>
+      </div>
+    </div>
+    <div class="section" id="s5">
+      <div class="section-header"><div class="section-num">5</div><div class="section-title">Past Performance</div></div>
+      <div class="card">
+        <div style="font-size:12.5px;color:var(--text-3);margin-bottom:20px;">Revenue (US$B)</div>
+        <svg viewBox="0 0 720 240" width="100%" style="font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;overflow:visible;"><line x1="0" y1="220.0" x2="720" y2="220.0" stroke="rgba(255,255,255,0.08)" stroke-width="1"/><line x1="0" y1="148.8" x2="720" y2="148.8" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="4,4"/><line x1="0" y1="77.5" x2="720" y2="77.5" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="4,4"/><rect x="20.0" y="108.5" width="120.0" height="111.5" rx="5" fill="#00c4b4" opacity="0.55"/><text x="80.0" y="103.5" font-size="11" font-weight="700" fill="#00c4b4" text-anchor="middle">US$118B</text><text x="80.0" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">FY21</text><rect x="160.0" y="109.4" width="120.0" height="110.6" rx="5" fill="#f58b42" opacity="0.62"/><text x="220.0" y="104.4" font-size="11" font-weight="700" fill="#f58b42" text-anchor="middle">US$117B</text><text x="220.0" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">FY22</text><rect x="300.0" y="92.4" width="120.0" height="127.6" rx="5" fill="#00c4b4" opacity="0.69"/><text x="360.0" y="87.4" font-size="11" font-weight="700" fill="#00c4b4" text-anchor="middle">US$135B</text><text x="360.0" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">FY23</text><rect x="440.0" y="64.0" width="120.0" height="156.0" rx="5" fill="#00c4b4" opacity="0.76"/><text x="500.0" y="59.0" font-size="11" font-weight="700" fill="#00c4b4" text-anchor="middle">US$165B</text><text x="500.0" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">FY24</text><rect x="580.0" y="30.0" width="120.0" height="190.0" rx="5" fill="#00c4b4" opacity="1.00"/><rect x="580.0" y="30.0" width="120.0" height="190.0" rx="5" fill="none" stroke="#00c4b4" stroke-width="1.5" opacity="0.5"/><text x="640.0" y="25.0" font-size="11" font-weight="700" fill="#00c4b4" text-anchor="middle">US$201B</text><text x="640.0" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">FY25</text></svg>
+        <div class="note-box" style="margin-top:16px;">~14% 5yr CAGR, re-accelerating to +22% in FY25. Operating margin ~41%, net margin ~30%. FY22 was the flat &#x27;efficiency year&#x27; dip; growth resumed hard after.</div>
+      </div>
+    </div>
+    <div class="section" id="s6">
+      <div class="section-header"><div class="section-num">6</div><div class="section-title">Future Growth</div></div>
+      <div class="card">
+        <div style="font-size:12.5px;color:var(--text-3);margin-bottom:24px;">Growth drivers — guided &amp; estimated</div>
+        
+        <div class="growth-row">
+          <div class="growth-label">Revenue growth (Q1 2026)</div>
+          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:33%;background:linear-gradient(90deg,#00c4b4,#00a99d);">+33% YoY</div></div>
+          <div class="growth-value" style="color:var(--teal);">+33% YoY</div>
+        </div>
+        <div class="growth-row">
+          <div class="growth-label">Ad price / impressions</div>
+          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:15%;background:linear-gradient(90deg,#00c4b4,#00a99d);">+12% / +19% YoY</div></div>
+          <div class="growth-value" style="color:var(--teal);">+12% / +19% YoY</div>
+        </div>
+        <div class="growth-row">
+          <div class="growth-label">AI capex (2026 guide)</div>
+          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:95%;background:linear-gradient(90deg,#00c4b4,#00a99d);">$125–145B</div></div>
+          <div class="growth-value" style="color:var(--teal);">$125–145B</div>
+        </div>
+        <div class="note-box" style="margin-top:20px;">Growth driven by Advantage+ AI ad monetization + 3.56B daily users. &#x27;Meta Compute&#x27; (renting excess AI capacity, AWS Bedrock/CoreWeave-style) still has no confirmed timeline or pricing, but Wolfe Research now puts a first number on it: ~20% EPS uplift per GW monetized at a ~$25B run-rate. Meanwhile the in-house Iris chip + compute doubling (7GW→14GW by 2027) confirms capex is accelerating, not slowing. Reality Labs stays a ~$19B/yr loss; capex guide still $125–145B, Street risk case up to $200B.</div>
+      </div>
+    </div>
+    <div class="section" id="s7">
+      <div class="section-header"><div class="section-num">7</div><div class="section-title">Financial Health</div></div>
+      <div class="card">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px;align-items:end;">
+          <div style="background:var(--teal-dim);border:1px solid rgba(0,196,180,0.3);border-radius:12px;padding:20px;">
+            <div style="font-size:11px;color:var(--teal);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;font-weight:700;">Cash &amp; Equivalents</div>
+            <div style="font-size:34px;font-weight:900;color:var(--teal);letter-spacing:-0.03em;">US$81.2B</div>
+            <div class="health-bar-track" style="margin-top:12px;"><div class="health-bar-fill" style="width:100%;background:var(--teal);"></div></div>
+          </div>
+          <div style="background:rgba(245,139,66,0.08);border:1px solid rgba(245,139,66,0.2);border-radius:12px;padding:20px;">
+            <div style="font-size:11px;color:var(--orange);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;font-weight:700;">Total Debt</div>
+            <div style="font-size:34px;font-weight:900;color:var(--orange);letter-spacing:-0.03em;">US$58.8B</div>
+            <div class="health-bar-track" style="margin-top:12px;"><div class="health-bar-fill" style="width:72%;background:var(--orange);"></div></div>
+          </div>
+        </div>
+        <div style="text-align:center;padding:24px;background:var(--surface-2);border-radius:12px;border:1px solid var(--border);margin-bottom:20px;">
+          <div style="font-size:11px;color:var(--text-3);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;">Net Position</div>
+          <div style="font-size:26px;font-weight:900;color:var(--teal);letter-spacing:-0.04em;line-height:1.1;">Net cash +US$22B (cash+securities $81.2B vs LT debt $58.75B)</div>
+        </div>
+        
+        <div class="health-row">
+          <div class="health-label">Net cash / mkt cap</div>
+          <div class="health-bar-track"><div class="health-bar-fill" style="width:1%;background:green;"></div></div>
+          <div class="health-value">+1%</div>
+        </div>
+        <div class="note-box orange" style="margin-top:16px;">Fortress balance sheet — net cash positive. But FCF is shrinking fast: OCF $32.2B − capex $19.8B = ~$12.4B in Q1, with capex eating &gt;60% of operating cash flow, and the newly disclosed compute-doubling plan (7GW→14GW by 2027) points to more capex, not less. Buyback was $0 in Q1. Reality Labs burns ~$19B/yr. Q2 2026 results (with any real FCF trend) land 29 Jul 2026.</div>
+      </div>
+    </div>
+    <div class="section" id="s8">
+      <div class="section-header"><div class="section-num">8</div><div class="section-title">Dividend</div></div>
+      <div class="card">
+        <div class="div-row">
+          <div class="div-big">~0.32%</div>
+          <div class="div-note">Symbolic quarterly dividend initiated 2024 — a signaling gesture, not income. Meta&#x27;s real capital return is buybacks, but those went to $0 in Q1 2026 as AI capex absorbed cash flow.</div>
+        </div>
+        
+      </div>
+    </div>
+    <div class="section" id="s9">
+      <div class="section-header"><div class="section-num">9</div><div class="section-title">Rewards &amp; Risks</div></div>
+      <div class="card">
+        <div class="two-col">
+          <div class="rr-col rewards"><h4>Rewards</h4><div class="rr-item"><div class="rr-dot"></div><div>Best-in-class advertising machine — 3.56B daily users, Advantage+ lifting both ad price (+12%) and impressions (+19%) at once</div></div><div class="rr-item"><div class="rr-dot"></div><div>Revenue +33% YoY (Q1 2026); FY25 $200.97B (+22%), ~14% 5yr CAGR re-accelerating</div></div><div class="rr-item"><div class="rr-dot"></div><div>~41% operating margin, ~30% net margin — elite profitability at scale</div></div><div class="rr-item"><div class="rr-dot"></div><div>Net cash positive ($81.2B cash+securities vs $58.75B LT debt) — fortress balance sheet</div></div><div class="rr-item"><div class="rr-dot"></div><div>Thai DR available (META80 on SET) — buyable in baht, cap-gains-tax exempt, still actively traded</div></div><div class="rr-item"><div class="rr-dot"></div><div>New optionality: &#x27;Meta Compute&#x27; cloud-rental plans could turn AI capex into a revenue stream, not just a cost — still unconfirmed, but Wolfe Research now puts a first quantified estimate on it (~20% EPS uplift per GW at a ~$25B run-rate)</div></div><div class="rr-item"><div class="rr-dot"></div><div>In-house &#x27;Iris&#x27; AI chip (MTIA family, Broadcom design + TSMC fab) clears bug-testing and starts production Sep 2026 — long-run path to cut compute cost per unit and reduce Nvidia/AMD dependence</div></div></div>
+          <div class="rr-col risks"><h4>Risks</h4><div class="rr-item bold-risk"><div class="rr-dot"></div><div><strong>Stock is still ~9.6% above pre-&#x27;Meta Compute&#x27; levels even after pulling back from the $669 pop — &#x27;Meta Compute&#x27; remains a plan with no disclosed timeline or pricing, not a confirmed revenue line. Headline P/E ~24.0x is still flattered by an ~$8.03B one-time OBBBA tax benefit; normalized P/E is ~26x</strong></div></div><div class="rr-item bold-risk"><div class="rr-dot"></div><div><strong>Capex trajectory just got more aggressive: Meta plans to double AI compute capacity (7GW in 2026 → 14GW by 2027) via the in-house Iris chip; official guide is still $125–145B/yr but Wolfe Research now flags risk toward $200B — well above Street&#x27;s prior view</strong></div></div><div class="rr-item bold-risk"><div class="rr-dot"></div><div><strong>Two litigation/regulatory overhangs remain live: 4 US states seek $1.4T in penalties over youth-addiction design (trial starts 18 Aug 2026, Oakland — a New Mexico jury already awarded $375M in a similar case in Mar 2026); EU preliminarily found Meta breached the DSA over addictive design (infinite scroll/autoplay), risking fines up to 6% of global revenue (~$12B)</strong></div></div><div class="rr-item bold-risk"><div class="rr-dot"></div><div><strong>FCF shrinking fast — capex &gt;60% of operating cash flow and rising; buyback was $0 in Q1 2026. If AI ad ROI lags, cash burn drags for years</strong></div></div><div class="rr-item"><div class="rr-dot"></div><div>Reality Labs bleeds ~$19B/yr in operating losses on ~$2B revenue — a persistent, open-ended drag with no committed end date</div></div><div class="rr-item"><div class="rr-dot"></div><div>97% of revenue is advertising (cyclical); plus FTC antitrust (IG/WhatsApp) and TikTok competition</div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="section" id="s10">
+      <div class="section-header"><div class="section-num">10</div><div class="section-title">Stock Council Verdict</div></div>
+      <div class="verdict-grid">
+        <div class="verdict-chip">
+          <div class="agent">🪨 Steady</div>
+          <div class="stance" style="color:var(--amber);">HOLD</div>
+          
+          <div class="rationale">world-class franchise and net cash, but I add quality when it&#x27;s cheap — ~26x normalized with FCF compressing further as Meta doubles compute capacity by 2027 isn&#x27;t a margin of safety. Watch, don&#x27;t chase at $661</div>
+        </div>
+        <div class="verdict-chip">
+          <div class="agent">📉 Dippy</div>
+          <div class="stance" style="color:var(--amber);">WATCH</div>
+          
+          <div class="rationale">still only ~17% off the high — barely moved from last check. I still want the $500–530 zone (META80 ~2.05–2.20) before starting, full size near $470–500. A small pullback to $661 is not a dip</div>
+        </div>
+        <div class="verdict-chip">
+          <div class="agent">🎩 Warren</div>
+          <div class="stance" style="color:var(--amber);">HOLD</div>
+          
+          <div class="rationale">wonderful ad-toll business, but the price still bakes in optimism on an unproven cloud-rental plan while capex just got confirmed to be scaling faster (7GW→14GW), plus two live legal overhangs ($1.4T youth-safety trial, EU DSA finding). Great company, price still not attractive</div>
+        </div>
+        <div class="verdict-chip">
+          <div class="agent">🚀 Lynch</div>
+          <div class="stance" style="color:var(--green);">BUY</div>
+          
+          <div class="rationale">+33% revenue at 41% margins is a fast grower still, and now Wolfe Research put a real number on &#x27;Meta Compute&#x27; (~20% EPS/GW) — GARP still works at ~26x on 33% growth (PEG &lt;1). Keep scaling in on weakness, just don&#x27;t chase the pop</div>
+        </div></div>
+      
+      <div class="overall-verdict">
+        <div class="ov-stance">WATCH</div>
+        <div class="ov-detail">
+          <div class="ov-label">Smartmall Overall Stance</div>
+          <div class="ov-target"><strong>WATCH (lean Buy on weakness) — 🚀 HIGH GROWTH, valuation still rich after the &#x27;Meta Compute&#x27; pop, only a small pullback since</strong> · Fair value target <strong>$620 base / $750 bull (12–18mo) — unchanged, pending Q2 earnings (29 Jul) to confirm real FCF/capex trend</strong></div>
+          <div class="ov-add-zone">Add zone: <strong>$500–530 partial · $470–500 full</strong></div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">Generated by Smartmall · price as of 2026-07-14 close (US$661.04 / META80 ≈฿2.76) · income statement FY2025 to 31 Dec 2025 (Meta 10-K, SEC EDGAR CIK 1326801) · *headline P/E flattered by ~$8.03B one-time OBBBA tax benefit; normalized P/E ~26x · Q2 2026 earnings due 29 Jul 2026, not yet reported · transparent scoring, not a live feed · layout inspired by Simply Wall St · not financial advice.</div>
+  </main>
+</div>
+<script>
+(function () {
+  var links = Array.prototype.slice.call(document.querySelectorAll('.nav-item'));
+  var map = {};
+  links.forEach(function (a) { var id = (a.getAttribute('href') || '').slice(1); if (id) map[id] = a; });
+  var sections = Object.keys(map).map(function (id) { return document.getElementById(id); }).filter(Boolean);
+  if (!('IntersectionObserver' in window) || !sections.length) return;
+  var obs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        links.forEach(function (l) { l.classList.remove('active'); });
+        var active = map[e.target.id];
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+  sections.forEach(function (s) { obs.observe(s); });
+})();
+(function () {
+  document.querySelectorAll('.chart-section').forEach(function (sec) {
+    var tabs = sec.querySelectorAll('.chart-tab');
+    var panes = sec.querySelectorAll('.chart-pane');
+    tabs.forEach(function (t) {
+      t.addEventListener('click', function () {
+        var r = t.getAttribute('data-range');
+        tabs.forEach(function (x) { x.classList.toggle('active', x === t); });
+        panes.forEach(function (p) { p.classList.toggle('active', p.getAttribute('data-range') === r); });
+      });
+    });
+  });
+})();
+</script>
+</body>
+</html>

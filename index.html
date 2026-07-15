@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stock Cards · Smartmall</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0f1923;--surface:#172130;--surface2:#1c2a3d;--border:#253347;
+--teal:#00c4b4;--text1:#e8edf5;--text2:#8fa3bf;--text3:#526070}
+body{background:var(--bg);color:var(--text1);
+font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue','Segoe UI',Arial,sans-serif;
+line-height:1.5;padding:48px 24px 80px}
+.wrap{max-width:1180px;margin:0 auto}
+.head{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.dot{width:30px;height:30px;border-radius:50%;background:var(--teal);flex-shrink:0}
+.head h1{font-size:22px;font-weight:800;letter-spacing:-.01em}
+.sub{color:var(--text2);font-size:14px;margin-bottom:4px}
+.count{color:var(--text3);font-size:12px;margin-bottom:14px}
+.search-wrap{margin:0 0 30px}
+#q{width:100%;max-width:420px;background:var(--surface);border:1px solid var(--border);
+border-radius:12px;padding:10px 14px;font-size:14px;color:var(--text1);outline:none;
+transition:border-color .12s}
+#q:focus{border-color:var(--teal)}
+#q::placeholder{color:var(--text3)}
+.no-hit{color:var(--text2);font-size:14px;padding:30px 0}
+.sector-head{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:800;
+color:var(--text1);letter-spacing:.01em;margin:30px 0 14px;padding-bottom:8px;
+border-bottom:1px solid var(--border)}
+.sector-head span{font-size:11px;font-weight:700;color:var(--teal);background:rgba(0,196,180,0.12);
+border-radius:999px;padding:2px 9px}
+.sector-head:first-of-type{margin-top:0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(248px,1fr));gap:18px}
+.tile{display:block;text-decoration:none;color:inherit;background:var(--surface);
+border:1px solid var(--border);border-radius:16px;padding:18px 18px 16px;
+transition:transform .12s,border-color .12s,background .12s}
+.tile:hover{transform:translateY(-3px);border-color:var(--teal);background:var(--surface2)}
+.tile-top{display:flex;justify-content:space-between;align-items:baseline}
+.tk{font-size:18px;font-weight:800;letter-spacing:-.01em}
+.score b{font-size:20px;font-weight:800;color:var(--teal)}
+.score span{font-size:12px;color:var(--text3);margin-left:1px}
+.name{font-size:13px;color:var(--text1);margin-top:8px;font-weight:600;
+white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.exch{font-size:11px;color:var(--text3);margin-bottom:14px}
+.mini-bars{display:flex;flex-direction:column;gap:5px;margin-bottom:16px}
+.mb-row{display:flex;align-items:center;gap:8px}
+.mb-ax{font-size:9.5px;color:var(--text2);width:78px;flex-shrink:0;
+white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mb-track{flex:1;height:5px;background:#1e2e40;border-radius:3px;overflow:hidden}
+.mb-fill{display:block;height:100%;border-radius:3px}
+.stance{display:inline-block;font-size:11px;font-weight:700;border:1px solid;
+border-radius:999px;padding:3px 12px;letter-spacing:.02em}
+.foot{color:var(--text3);font-size:11px;margin-top:40px;line-height:1.7;
+border-top:1px solid var(--border);padding-top:18px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="head"><div class="dot"></div><h1>Stock Cards</h1></div>
+  <div class="sub">Transparent, Simply Wall St-style analysis — snowflake score, revenue Sankey, and a three-mind council verdict per stock.</div>
+  <div class="count">37 stocks · 22 sectors · grouped by sector, ranked by score · updated monthly</div>
+  <div class="search-wrap"><input id="q" type="search" placeholder="Search ticker, company, sector…  (press /)" autocomplete="off"></div>
+  <div id="no-hit" class="no-hit" style="display:none">No stocks match your search.</div>
+  <div class="sector-head">Consumer Discretionary — IP Toys<span>1</span></div>
+  <div class="grid">
+    <a class="tile" href="POPMART.html" data-search="popmart pop mart international group hkex: 9992 consumer discretionary — ip toys buy (add-zone reached — add now) — growth satellite, medium conviction">
+      <div class="tile-top">
+        <div class="tk">POPMART</div>
+        <div class="score"><b>25</b><span>/30</span></div>
+      </div>
+      <div class="name">Pop Mart International Group</div>
+      <div class="exch">HKEX: 9992</div>
+      <div class="mini-bars"><div class="mb-row" title="Valuation: 6/6"><span class="mb-ax">Valuation</span><span class="mb-track"><span class="mb-fill" style="width:100%;background:#00c4b4"></span></span></div><div class="mb-row" title="Future Growth: 5/6"><span class="mb-ax">Future Growth</span><span class="mb-track"><span class="mb-fill" style="width:83%;background:#00c4b4"></span></span></div><div class="mb-row" title="Past Performance: 6/6"><span class="mb-ax">Past Performance</span><span class="mb-track"><span class="mb-fill" style="width:100%;background:#00c4b4"></span></span></div><div class="mb-row" title="Financial Health: 6/6"><span class="mb-ax">Financial Health</span><span class="mb-track"><span class="mb-fill" style="width:100%;background:#00c4b4"></span></span></div><div class="mb-row" title="Dividend: 2/6"><span class="mb-ax">Dividend</span><span class="mb-track"><span class="mb-fill" style="width:33%;background:#f5c842"></span></span></div></div>
+      <div class="stance" style="color:#30d97b;border-color:#30d97b">BUY</div>
+    </a>
+  </div>
+  <div class="sector-head">Telecom<span>1</span></div>
+  <div class="grid">
+    <a class="tile" href="CHINAMOBILE.html" data-search="chinamobile china mobile hkex: 0941 (hk$-only — no thai dr) telecom buy — cash-cow income core 💰">
+      <div class="tile-top">
+        <div class="tk">CHINAMOBILE</div>
+        <div class="score"><b>24</b><span>/30</span></div>
+      </div>
+      <div class="name">China Mobile</div>
+      <div class="exch">HKEX: 0941 (HK$-only — no Thai DR)</div>
+      <div class="mini-bars"><div class="mb-row" title="Valuation: 5/6"><span class="mb-ax">Valuation</span><span class="mb-track"><span class="mb-fill" style="width:83%;background:#00c4b4"></span></span></div><div class="mb-row" title="Future Growth: 2/6"><span class="mb-ax">Future Growth</span><span class="mb-track"><span class="mb-fill" style="width:33%;background:#f5c842"></span></span></div><div class="mb-row" title="Past Performance: 5/6"><span class="mb-ax">Past Performance</span><span class="mb-track"><span class="mb-fill" style="width:83%;background:#00c4b4"></span></span></div><div class="mb-row" title="Financial Health: 6/6"><span class="mb-ax">Financial Health</span><span class="mb-track"><span class="mb-fill" style="width:100%;background:#00c4b4"></span></span></div><div class="mb-row" title="Dividend: 6/6"><span class="mb-ax">Dividend</span><span class="mb-track"><span class="mb-fill" style="width:100%;background:#00c4b4"></span></span></div></div>
+      <div class="stance" style="color:#30d97b;border-color:#30d97b">BUY</div>
+    </a>
+  </div>
+  <div class="sector-head">Education<span>1</span></div>
+  <div class="grid">
+    <a class="tile" href="SISB.html" data-search="sisb sisb pcl set: sisb education hold with add tilt &lt;฿9.50 (dca only)">
+      <div class="tile-top">
+        <div class="tk">SISB</div>
+        <div class="score"><b>23</b><span>/30</span></div>
+      </div>
+      <div class="name">SISB PCL</div>
+      <div class="exch">SET: SISB</div>
+      <div class="mini-bars"><div class="mb-row" title="Valuation: 5/6"><span class="mb-ax">Valuation</span><span class="mb-track"><span class="mb-fill" style="width:83%;background:#00c4b4"></span></span></div><div class="mb-row" title="Future Growth: 3/6"><span class="mb-ax">Future Growth</span><span class="mb-track"><span class="mb-fill" style="width:50%;background:#f5c842"></span></span></div><div class="mb-row" title="Past Performance: 5/6"><span class="mb-ax">Past Performance</span><span class="mb-track"><span class="mb-fill" style="width:83%;background:#00c4b4"></span></span></div><div class="mb-row" title="Financial Health: 5/6"><span class="mb-ax">Financial Health</span><span class="mb-track"><span class="mb-fill" style="width:83%;background:#00c4b4"></span></span></div><div class="mb-row" title="Dividend: 5/6"><span class="mb-ax">Dividend</span><span class="mb-track"><span class="mb-fill" style="width:83%;background:#00c4b4"></span></span></div></div>
+      <div class="stance" style="color:#8fa3bf;border-color:#8fa3bf">HOLD with ADD tilt &lt;฿9.50</div>
+    </a>
+  </div>
+  <div class="sector-head">Healthcare<span>7</span></div>
+  <div class="grid">
+    <a class="tile" href="ZTS.html" data-search="zts zoetis nyse: zts healthcare buy (scale-in, 5–8% starter)">
+      <div class="tile-top">
+        <div class="tk">ZTS</div>
+        <div class="score"><b>23</b><span>/30</span></div>
+      </div>
+      <div class="name">Zoetis</div>
+      <div class="exch">NYSE: ZTS</div>
+      <div class="mini-bars"><div class="mb-row" title="Valuation: 6/6"><span class="mb-ax">Valuation</span><span class="mb-track"><span class="mb-fill" style="width:100%;background:#00c4b4"></span></span></div><div class="mb-row" title="Future Growth: 3/6"><span class="mb-ax">Future Growth</span><span class="mb-track"><span class="mb-fill" style="width:50%;background:#f5c842"></span></span></div><div class="mb-row" title="Past Performance: 5/6"><span class="mb-ax">Past Performance</span><span class="mb-track"><span class="mb-fill" style="width:83%;background:#00c4b4"></span></span></div><div class="mb-row" title="Financial Health: 5/6"><span class="mb-ax">Financial Health</span><span class="mb-track"><span class="mb-fill" style="width:83%;background:#00c4b4"></span></span></div><div class="mb-row" title="Dividend: 4/6"><span class="mb-ax">Dividend</span><span class="mb-track"><span class="mb-fill" style="width:67%;background:#00c4b4"></span></span></div></div>
+      <div class="stance" style="color:#30d97b;border-color:#30d97b">BUY</div>
+    </a>
+    <a class="tile" href="BH.html" data-search="bh bumrungrad hospital set: bh healthcare hold / watch">
+      <div class="tile-top">
+        <div class="tk">BH</div>
+        <div class="score"><b>20</b><span>/30</span></div>
+      </div>
+      <div class="name">Bumrungrad Hospital</div>
+      <div class="exch">SET: BH</div>
+      <div class="mini-bars"><div class="mb-row" title="Valuation: 3/6"><span class="mb-ax">Valuation</span><span class="mb-track"><span class="mb-fill" style="width:50%;background:#f5c842"></span></span></div><div class="mb-row" title="Future Growth: 3/6"><span class="mb-ax">Future Growth</span><span class="mb-track"><span class="mb-fill" style="width:50%;background:#f5c842"></span></span></div><div class="mb-row" title="Past Performance: 6/6"><span class="mb-ax">Past Performance</span><span class="mb-track"><span class="mb-fill" style="width:100%;background:#00c4b4"></span></span></div><div class="mb-row" title="Financial Health: 6/6"><span class="mb-ax">Financial Health</span><span class="mb-track"><span class="mb-fill" style="width:100%;background:#00c4b4"></span></span></div><div class="mb-row" title="Dividend: 2/6"><span class="mb-ax">Dividend</span><span class="mb-track"><span class="mb-fill" style="width:33%;background:#f5c842"></span></span></div></div>
+      <div class="stance" style="color:#f5c842;border-color:#f5c842">HOLD / WATCH</div>
+    </a>
+    <a class="tile" href="PR9.html" data-search="pr9 praram 9 hospital set: pr9 healthcare buy">
+      <div class="tile-top">
+        <div class="tk">PR9</div>
+        <div class="score"><b>20</b><span>/30</span></div>
+      </div>
+      <div class="name">Praram 9 Hospital</div>
+      <div class="exch">SET: PR9</div>
+      <div class="mini-bars"><div class="mb-row" title="Valuation: 4/6"><span class="mb-ax">Valuation</span><span class="mb-track"><span class="mb-fill" style="width:67%;background:#00c4b4"></span></span></div><div class="mb-row" title="Future Growth: 3/6"><span class="mb-ax">Future Growth</span><span class="mb-track"><span class="mb-fill" style="width:50%;background:#f5c842"></span></span></div><div class="mb-row" title="Past Performance: 4/6"><span class="mb-ax">Past Performance</span><span class="mb-track"><span class="mb-fill" style="width:67%;background:#00c4b4"></span></span></div><div class="mb-row" title="Financial Health: 6/6"><span class="mb-ax">Financial Health</span><span class="mb-track"><span class="mb-fill" style="width:100%;background:#00c4b4"></span></span></div><div class="mb-row" title="Dividend: 3/6"><span class="mb-ax">Dividend</span><span class="mb-track"><span class="mb-fill" style="width:50%;background:#f5c842"></span></span></div></div>
+      <div class="stance" style="color:#30d97b;border-color:#30d97b">BUY</div>
+    </a>
+    <a class="tile" href="BDMS.html" data-search="bdms bangkok dusit medical set: bdms healthcare hold / watch">
+      <div class="tile-top">
+        <div class="tk">BDMS</div>
+        <div class="score"><b>19</b><span>/30</span></div>
+      </div>
+      <div class="name">Bangkok Dusit Medical</div>
+      <div class="exch">SET: BDMS</div>
+      <div class="mini-bars"><div class="mb-row" title="Valuation: 3/6"><span class="mb-ax">Valuation</span><span class="mb-track"><span class="mb-fill" style="width:50%;background:#f5c842"></span></span></div><div class="mb-row" title="Future Growth: 3/6"><span class="mb-ax">Future Growth</span><span class="mb-track"><span class="mb-fill" style="width:50%;background:#f5c842"></span></span></div><div class="mb-row" title="Past Performance: 5/6"><span class="mb-ax">Past Performance</span><span class="mb-track"><span class="mb-fill" style="width:83%;background:#00c4b4"></span></span></div><div class="mb-row" title="Financial Health: 4/6"><span class="mb-ax">Financial Health</span><span class="mb-track"><span class="mb-fill" style="width:67%;background:#00c4b4"></span></span></div><div class="mb-row" title="Dividend: 4/6"><span class="mb-ax">Dividend</span><span class="mb-track"><span class="mb-fill" style="width:67%;background:#00c4b4"></span></span></div></div>
+      <div class="stance" style="color:#f5c842;border-color:#f5c842">HOLD / WATCH</div>
+    </a>
+    <a class="tile" href="CHG.html" data-search="chg chularat hospital group set: chg healthcare watch (small starter on dip only)">
+      <div class="tile-top">
+        <div class="tk">CHG</div>
+        <div class="score"><b>19</b><span>/30</span></div>
+      </div>
+      <div class="name">Chularat Hospital Group</div>
+      <div class="exch">SET: CHG</div>
+      <div class="mini-bars"><div class="mb-row" title="Valuation: 3/6"><span class="mb-ax">Valuation</span><span class="mb-track"><span class="mb-fill" style="width:50%;background:#f5c842"></span></span></div><div class="mb-row" title="Future Growth: 2/6"><span class="mb-ax">Future Growth</span><span class="mb-track"><span class="mb-fill" style="width:33%;background:#f5c842"></span></span></div><div class="mb-row" title="Past Performance: 4/6"><span class="mb-ax">Past Performance</span><span class="mb-track"><span class="mb-fill" style="width:67%;background:#00c4b4"></span></span></div><div class="mb-row" title="Financial Health: 6/6"><span class="mb-ax">Financial Health</span><span class="mb-track"><span class="mb-fill" style="width:100%;background:#00c4b4"></span></span></div><div class="mb-row" title="Dividend: 4/6"><span class="mb-ax">Dividend</span><span class="mb-track"><span class="mb-fill" style="width:67%;background:#00c4b4"></span></span></div></div>
+      <div class="stance" style="color:#f5c842;border-color:#f5c842">WATCH</div>
+    </a>
+    <a class="tile" href="NOVOB80.html" data-search="novob80 novo nordisk set dr · nyse: nvo healthcare hold — trim into strength, don&#x27;t add">
+      <div class="tile-top">
+        <div class="tk">NOVOB80</div>
+        <div class="score"><b>19</b><span>/30</span></div>
+      </div>
+      <div class="name">Novo Nordisk</div>
+      <div class="exch">SET DR · NYSE: NVO</div>
+      <div class="mini-bars"><div class="mb-row" title="Valuation: 3/6"><span class="mb-ax">Valuation</span><span class="mb-track"><span class="mb-fill" style="width:50%;background:#f5c842"></span></span></div><div class="mb-row" title="Future Growth: 3/6"><span class="mb-ax">Future Growth</span><span class="mb-track"><span class="mb-fill" style="width:50%;background:#f5c842"></span></span></div><div class="mb-row" title="Past Performance: 5/6"><span class="mb-ax">Past Performance</span><span class="mb-track"><span class="mb-fill" style="width:83%;background:#00c4b4"></span></span></div><div class="mb-row" title="Financial Health: 5/6"><span class="mb-ax">Financial Health</span><span class="mb-track"><span class="mb-fill" style="width:83%;background:#00c4b4"></span></span></div><div class="mb-row" title="Dividend: 3/6"><span class="mb-ax">Dividend</span><span class="mb-track"><span class="mb-fill" style="width:50%;background:#f5c842"></span></span></div></div>
+      <div class="stance" style="color:#8fa3bf;border-color:#8fa3bf">HOLD</div>
+    </a>
+    <a class="tile" href="WUXIBIO.html" data-search="wuxibio wuxi biologics (cayman) inc. hkex: 2269 · adr: wxxwy healthcare watch (medium conviction)">
+      <div class="tile-top">
+        <div class="tk">WUXIBIO</div>
+        <div class="score"><b>17</b><span>/30</span></div>
+      </div>
+      <div class="name">WuXi Biologics (Cayman) Inc.</div>
+      <div class="exch">HKEX: 2269 · ADR: WXXWY</div>
+      <div class="mini-bars"><div class="mb-row" title="Valuation: 3/6"><span class="mb-ax">Valuation</span><span class="mb-track"><span class="mb-fill" style="width:50%;background:#f5c842"></span></span></div><div class="mb-row" title="Future Growth: 5/6"><span class="mb-ax">Future Growth</span><span class="mb-track"><span class="mb-fill" style="width:83%;background:#00c4b4"></span></span></div><div class="mb-row" title="Past Performance: 3/6"><span class="mb-ax">Past Performance</span><span class="mb-track"><span class="mb-fill" style="width:50%;background:#f5c842"></span></span></div><div class="mb-row" title="Financial Health: 5/6"><span class="mb-ax">Financial Health</span><span class="mb-track"><span class="mb-fill" style="width:83%;background:#00c4b4"></span></span></div><div class="mb-row" title="Dividend: 1/6"><span class="mb-ax">Dividend</span><span class="mb-track"><span class="mb-fill" style="width:17%;background:#f58b42"></span></span></div></div>
+      <div class="stance" style="color:#f5c842;border-color:#f5c842">WATCH</div>
+    </a>
+  </div>
+  <div class="sector-head">Autos &amp; EV<span>2</span></div>
+  <div class="grid">
+    <a class="tile" href="CATL01.html" data-search="catl01 catl (contemporary amperex) set dr · szse: 300750 autos &amp; ev buy (hold + add opportunistically) — medium-high">
+      <div class="tile-top">
+        <div class="tk">CATL01</div>
+        <div class="score"><b>22</b><span>/30</span></div>
+      </div>
+      <div class="name">CATL (Contemporary Amperex)</div>
+      <div class="exch">SET DR · SZSE: 300750</div>
+      <div class="mini-bars"><div class="mb-row" title="Valuation: 3/6"><span class="mb-ax">Valuation</span><span class="mb-track"><span class="mb-fill" style="width:50%;background:#f5c842"></span></span></div><div class="mb-row" title="Future Growth: 6/6"><span class="mb-ax">Future Growth</span><span class="mb-track"><span class="mb-fill" style="width:100%;background:#00c4b4"></span></span></div><div class="mb-row" title="Past Performance: 6/6"><span class="mb-ax">Past Performance</span><span class="mb-track"><span class="mb-fill" style="width:100%;background:#00c4b4"></span></span></div><div class="mb-row" title="Financial Health: 5/6"><span class="mb-ax">Financial Health</span><span class="mb-track"><span class="mb-fill" style="width:83%;background:#00c4b4"></span></span></div><div class="mb-row" title="Dividend: 2/6"><span class="mb-ax">Dividend</span><span class="mb-track"><span class="mb-fill" style="width:33%;background:#f5c842"></span></span></div></div>
+      <div class="stance" style="color:#30d97b;border-color:#30d97b">BUY</div>
+    </a>
+    <a class="tile" href="BYDCOM01.html" data-search="bydcom01 byd company set dr · hkex: 1211 autos &amp; ev hold (add on aug 29 q2 confirm; reload dr ฿0.65–0.70)">
+      <div class="tile-top">
+        <div class="tk">BYDCOM01</div>
+        <div class="score"><b>18</b><span>/30</span></div>
+      </div>
+      <div class="name">BYD Company</div>
+      <div class="exch">SET DR · HKEX: 1211</div>
+      <div class="mini-bars"><div class="mb-row" title="Valuation: 5/6"><span class="mb-ax">Valuation</span><span class="mb-track"><span class="mb-fill" style="width:83%;background:#00c4b4"></span></span></div><div class="mb-row" title="Future Growth: 4/6"><span class="mb-ax">Future Growth</span><span class="mb-track"><span class="mb-fill" style="width:67%;background:#00c4b4"></span></span></div><div class="mb-row" title="Past Performance: 4/6"><span class="mb-ax">Past Performance</span><span class="mb-track"><span class="mb-fill" style="width:67%;background:#00c4b4"></span></span></div><div class="mb-row" title="Financial Health: 4/6"><span class="mb-ax">Financial Health</span><span class="mb-track"><span class="mb-fill" style="width:67%;background:#00c4b4"></span></span></div><div class="mb-row" title="Dividend: 1/6"><span class="mb-ax">Dividend</span><span class="mb-track"><span class="mb-fill" style="width:17%;background:#f58b42"></span></span></div></div>
+      <div class="stance" style="color:#8fa3bf;border-color:#8fa3bf">HOLD</div>
+    </a>
+  </div>
+  <div class="sector-head">Software / Cloud<span>1</span></div>
+  <div class="grid">
+    <a class="tile" href="MSFT.html" data-search="msft microsoft nasdaq: msft software / cloud buy (quality at a rare discount near 52w low)">
+      <div class="tile-top">
+        <div class="tk">MSFT</div>
+        <div class="score"><b>22</b><span>/30</span></div>
+      </div>
+      <div class="name">Microsoft</div>
+      <div class="exch">NASDAQ: MSFT</div>
+      <div class="mini-bars"><div class="mb-row" title="Valuation: 4/6"><span class="mb-ax">Valuation</span><span class="mb-track"><span class="mb-fill" style="width:67%;background:#00c4b4"></span></span></div><div class="mb-row" title="Future Growth: 5/6"><span class="mb-ax">Future Growth</span><span class="mb-track"><span class="mb-fill" style="width:83%;background:#00c4b4"></span></span></div><div class="mb-row" title="Past Performance: 6/6"><span class="mb-ax">Past Performance</span><span class="mb-track"><span class="mb-fill" style="width:100%;background:#00c4b4"></span></span></div><div class="mb-row" title="Financial Health: 5/6"><span class="mb-ax">Financial Health</span><span class="mb-track"><span class="mb-fill" style="width:83%;background:#00c4b4"></span></span></div><div class="mb-row" title="Dividend: 2/6"><span class="mb-ax">Dividend</span><span class="mb-track"><span class="mb-fill" style="width:33%;background:#f5c842"></span></span></div></div>
+      <div class="stance" style="color:#30d97b;border-color:#30d97b">BUY</div>
+    </a>
+  </div>
+  <div class="sector-head">Insurance<span>2</span></div>
+  <div class="grid">
+    <a class="tile" href="PINGAN.html" data-search="pingan ping an insurance hkex: 2318 · sse: 601318 insurance buy (cash cow, scale-in)">
+      <div class="tile-top">
+        <div class="tk">PINGAN</div>
+        <div class="score"><b>22</b><span>/30</span></div>
+      </div>
+      <div class="name">Ping An Insurance</div>
+      <div class="exch">HKEX: 2318 · SSE: 601318</div>
+      <div class="mini-bars"><div class="mb-row" title="Valuation: 6/6"><span class="mb-ax">Valuation</span><span class="mb-track"><span class="mb-fill" style="width:100%;background:#00c4b4"></span></span></div><div class="mb-row" title="Future Growth: 4/6"><span class="mb-ax">Future Growth</span><span class="mb-track"><span class="mb-fill" style="width:67%;background:#00c4b4"></span></span></div><div class="mb-row" title="Past Performance: 3/6"><span class="mb-ax">Past Performance</span><span class="mb-track"><span class="mb-fill" style="width:50%;background:#f5c842"></span></span></div><div class="mb-row" title="Financial Health: 4/6"><span class="mb-ax">Financial Health</span><span class="mb-track"><span class="mb-fill" style="width:67%;background:#00c4b4"></span></span></div><div class="mb-row" title="Dividend: 5/6"><span class="mb-ax">Dividend</span><span class="mb-track"><span class="mb-fill" style="width:83%;background:#00c4b4"></span></span></div></div>
+      <div class="stance" style="color:#30d97b;border-color:#30d97b">BUY</div>
+    </a>
+    <a class="tile" href="PINGAN80.html" data-search="pingan80 ping an insurance hkex: 2318 · sse: 601318 insurance hold (pause new adds — china bucket 67.2% of book)">
+      <div class="tile-top">
+        <div class="tk">PINGAN80</div>
+        <div class="score"><b>22</b><span>/30</span></div>
+      </div>
+      <div class="name">Ping An Insurance</div>
+      <div class="exch">HKEX: 2318 · SSE: 601318</div>
+      <div class="mini-bars"><div class="mb-row" title="Valuation: 6/6"><span class="mb-ax">Valuation</span><span class="mb-track"><span class="mb-fill" style="width:100%;background:#00c4b4"></span></span></div><div class="mb-row" title="Future Growth: 4/6"><span class="mb-ax">Future Growth</span><span class="mb-track"><span class="mb-fill" style="width:67%;background:#00c4b4"></span></span></div><div class="mb-row" title="Past Performance: 3/6"><span class="mb-ax">Past Performance</span><span class="mb-track"><span class="mb-fill" style="width:50%;background:#f5c842"></span></span></div><div class="mb-row" title="Financial Health: 4/6"><span class="mb-ax">Financial Health</span><span class="mb-track"><span class="mb-fill" style="width:67%;background:#00c4b4"></span></span></div><div class="mb-row" title="Dividend: 5/6"><span class="mb-ax">Dividend</span><span class="mb-track"><span class="mb-fill" style="width:83%;background:#00c4b4"></span></span></div></div>
+      <div class="stance" style="color:#8fa3bf;border-color:#8fa3bf">HOLD</div>
+    </a>
+  </div>
+  <div class="sector-head">Semiconductors<span>2</span></div>
+  <div class="grid">
+    <a class="tile" href="TSM.html" data-search="tsm taiwan semiconductor manufacturing nyse: tsm semiconductors hold (don&#x27;t chase at highs, hard-capped)">
+      <div class="tile-top">
+        <div class="tk">TSM</div>
+        <div class="score"><b>22</b><span>/30</span></div>
+      </div>
+      <div class="name">Taiwan Semiconductor Manufacturing</div>
+      <div class="exch">NYSE: TSM</div>
+      <div class="mini-bars"><div class="mb-row" title="Valuation: 3/6"><span class="mb-ax">Valuation</span><span class="mb-track"><span class="mb-fill" style="width:50%;background:#f5c842"></span></span></div><div class="mb-row" title="Future Growth: 6/6"><span class="mb-ax">Future Growth</span><span class="mb-track"><span class="mb-fill" style="width:100%;background:#00c4b4"></span></span></div><div class="mb-row" title="Past Performance: 6/6"><span class="mb-ax">Past Performance</span><span class="mb-track"><span class="mb-fill" style="width:100%;background:#00c4b4"></span></span></div><div class="mb-row" title="Financial Health: 6/6"><span class="mb-ax">Financial Health</span><span class="mb-track"><span class="mb-fill" style="width:100%;background:#00c4b4"></span></span></div><div class="mb-row" title="Dividend: 1/6"><span class="mb-ax">Dividend</span><span class="mb-track"><span class="mb-fill" style="width:17%;background:#f58b42"></span></span></div></div>
+      <div class="stance" style="color:#8fa3bf;border-color:#8fa3bf">HOLD</div>
+    </a>
+    <a class="tile" href="ADI.html" data-search="adi analog devices nasdaq: adi semiconductors watch — great business, wrong price">
+      <div class="tile-top">
+        <div class="tk">ADI</div>
+        <div class="score"><b>18</b><span>/30</span></div>
+      </div>
+      <div class="name">Analog Devices</div>
+      <div class="exch">NASDAQ: ADI</div>
+      <div class="mini-bars"><div class="mb-row" title="Valuation: 2/6"><span class="mb-ax">Valuation</span><span class="mb-track"><span class="mb-fill" style="width:33%;background:#f5c842"></span></span></div><div class="mb-row" title="Future Growth: 3/6"><span class="mb-ax">Future Growth</span><span class="mb-track"><span class="mb-fill" style="width:50%;background:#f5c842"></span></span></div><div class="mb-row" title="Past Performance: 4/6"><span class="mb-ax">Past Performance</span><span class="mb-track"><span class="mb-fill" style="width:67%;background:#00c4b4"></span></span></div><div class="mb-row" title="Financial Health: 5/6"><span class="mb-ax">Financial Health</span><span class="mb-track"><span class="mb-fill" style="width:83%;background:#00c4b4"></span></span></div><div class="mb-row" title="Dividend: 4/6"><span class="mb-ax">Dividend</span><span class="mb-track"><span class="mb-fill" style="width:67%;background:#00c4b4"></span></span></div></div>
+      <div class="stance" style="color:#f5c842;border-color:#f5c842">WATCH</div>
+    </a>
+  </div>
+  <div class="sector-head">Financials<span>2</span></div>
+  <div class="grid">
+    <a class="tile" href="FUTU.html" data-search="futu futu holdings nasdaq: futu financials watch · med conviction (tilt buy on small scale-in)">
+      <div class="tile-top">
+        <div class="tk">FUTU</div>
+        <div class="score"><b>21</b><span>/30</span></div>
+      </div>
+      <div class="name">Futu Holdings</div>
+      <div class="exch">NASDAQ: FUTU</div>
+      <div class="mini-bars"><div class="mb-row" title="Valuation: 5/6"><span class="mb-ax">Valuation</span><span class="mb-track"><span class="mb-fill" style="width:83%;background:#00c4b4"></span></span></div><div class="mb-row" title="Future Growth: 4/6"><span class="mb-ax">Future Growth</span><span class="mb-track"><span class="mb-fill" style="width:67%;background:#00c4b4"></span></span></div><div class="mb-row" title="Past Performance: 6/6"><span class="mb-ax">Past Performance</span><span class="mb-track"><span class="mb-fill" style="width:100%;background:#00c4b4"></span></span></div><div class="mb-row" title="Financial Health: 5/6"><span class="mb-ax">Financial Health</span><span class="mb-track"><span class="mb-fill" style="width:83%;background:#00c4b4"></span></span></div><div class="mb-row" title="Dividend: 1/6"><span class="mb-ax">Dividend</span><span class="mb-track"><span class="mb-fill" style="width:17%;background:#f58b42"></span></span></div></div>
+      <div class="stance" style="color:#30d97b;border-color:#30d97b">WATCH · Med conviction</div>
+    </a>
+    <a class="tile" href="IBKR.html" data-search="ibkr interactive brokers nasdaq: ibkr financials watch (quality, but expensive)">
+      <div class="tile-top">
+        <div class="tk">IBKR</div>
+        <div class="score"><b>20</b><span>/30</span></div>
+      </div>
+      <div class="name">Interactive Brokers</div>
+      <div class="exch">NASDAQ: IBKR</div>
+      <div class="mini-bars"><div class="mb-row" title="Valuation: 2/6"><span class="mb-ax">Valuation</span><span class="mb-track"><span class="mb-fill" style="width:33%;background:#f5c842"></span></span></div><div class="mb-row" title="Future Growth: 5/6"><span class="mb-ax">Future Growth</span><span class="mb-track"><span class="mb-fill" style="width:83%;background:#00c4b4"></span></span></div><div class="mb-row" title="Past Performance: 6/6"><span class="mb-ax">Past Performance</span><span class="mb-track"><span class="mb-fill" style="width:100%;background:#00c4b4"></span></span></div><div class="mb-row" title="Financial Health: 6/6"><span class="mb-ax">Financial Health</span><span class="mb-track"><span class="mb-fill" style="width:100%;background:#00c4b4"></span></span></div><div class="mb-row" title="Dividend: 1/6"><span class="mb-ax">Dividend</span><span class="mb-track"><span class="mb-fill" style="width:17%;background:#f58b42"></span></span></div></div>
+      <div class="stance" style="color:#f5c842;border-color:#f5c842">WATCH</div>
+    </a>
+  </div>
+  <div class="sector-head">Medical Devices<span>1</span></div>
+  <div class="grid">
+    <a class="tile" href="ISRG.html" data-search="isrg intuitive surgical nasdaq: isrg medical devices watch (lean buy on weakness)">
+      <div class="tile-top">
+        <div class="tk">ISRG</div>
+        <div class="score"><b>21</b><span>/30</span></div>
+      </div>
+      <div class="name">Intuitive Surgical</div>
+      <div class="exch">NASDAQ: ISRG</div>
+      <div class="mini-bars"><div class="mb-row" title="Valuation: 3/6"><span class="mb-ax">Valuation</span><span class="mb-track"><span class="mb-fill" style="width:50%;background:#f5c842"></span></span></div><div class="mb-row" title="Future Growth: 6/6"><span class="mb-ax">Future Growth</span><span class="mb-track"><span class="mb-fill" style="width:100%;background:#00c4b4"></span></span></div><div class="mb-row" title="Past Performance: 6/6"><span class="mb-ax">Past Performance</span><span class="mb-track"><span class="mb-fill" style="width:100%;background:#00c4b4"></span></span></div><div class="mb-row" title="Financial Health: 6/6"><span class="mb-ax">Financial Health</span><span class="mb-track"><span class="mb-fill" style="width:100%;background:#00c4b4"></span></span></div><div class="mb-row" title="Dividend: 0/6"><span class="mb-ax">Dividend</span><span class="mb-track"><span class="mb-fill" style="width:0%;background:#f58b42"></span></span></div></div>
+      <div class="stance" style="color:#30d97b;border-color:#30d97b">WATCH</div>
+    </a>
+  </div>
+  <div class="sector-head">China Internet<span>5</span></div>
+  <div class="grid">
+    <a class="tile" href="TCOM.html" data-search="tcom trip.com group hkex: 9961 · nasdaq: tcom (dr: tripcom80) china internet held (250,000 tripcom80 @ ฿1.316 avg, now ฿1.43 +8.7%, ~7.4% of book). hold — do not add more, do not trim. medium conviction on hold; high conviction against adding while the samr antitrust probe is unresolved and china sleeve is already large">
+      <div class="tile-top">
+        <div class="tk">TCOM</div>
+        <div class="score"><b>20</b><span>/30</span></div>
+      </div>
+      <div class="name">Trip.com Group</div>
+      <div class="exch">HKEX: 9961 · NASDAQ: TCOM (DR: TRIPCOM80)</div>
+      <div class="mini-bars"><div class="mb-row" title="Valuation: 6/6"><span class="mb-ax">Valuation</span><span class="mb-track"><span class="mb-fill" style="width:100%;background:#00c4b4"></span></span></div><div class="mb-row" title="Future Growth: 3/6"><span class="mb-ax">Future Growth</span><span class="mb-track"><span class="mb-fill" style="width:50%;background:#f5c842"></span></span></div><div class="mb-row" title="Past Performance: 4/6"><span class="mb-ax">Past Performance</span><span class="mb-track"><span class="mb-fill" style="width:67%;background:#00c4b4"></span></span></div><div class="mb-row" title="Financial Health: 6/6"><span class="mb-ax">Financial Health</span><span class="mb-track"><span class="mb-fill" style="width:100%;background:#00c4b4"></span></span></div><div class="mb-row" title="Dividend: 1/6"><span class="mb-ax">Dividend</span><span class="mb-track"><span class="mb-fill" style="width:17%;background:#f58b42"></span></span></div></div>
+      <div class="stance" style="color:#8fa3bf;border-color:#8fa3bf">HELD</div>
+    </a>
+    <a class="tile" href="BABA80.html" data-search="baba80 alibaba group set dr · nyse: baba china internet hold (lean-add into weakness)">
+      <div class="tile-top">
+        <div class="tk">BABA80</div>
+        <div class="score"><b>19</b><span>/30</span></div>
+      </div>
+      <div class="name">Alibaba Group</div>
+      <div class="exch">SET DR · NYSE: BABA</div>
+      <div class="mini-bars"><div class="mb-row" title="Valuation: 4/6"><span class="mb-ax">Valuation</span><span class="mb-track"><span class="mb-fill" style="width:67%;background:#00c4b4"></span></span></div><div class="mb-row" title="Future Growth: 5/6"><span class="mb-ax">Future Growth</span><span class="mb-track"><span class="mb-fill" style="width:83%;background:#00c4b4"></span></span></div><div class="mb-row" title="Past Performance: 3/6"><span class="mb-ax">Past Performance</span><span class="mb-track"><span class="mb-fill" style="width:50%;background:#f5c842"></span></span></div><div class="mb-row" title="Financial Health: 6/6"><span class="mb-ax">Financial Health</span><span class="mb-track"><span class="mb-fill" style="width:100%;background:#00c4b4"></span></span></div><div class="mb-row" title="Dividend: 1/6"><span class="mb-ax">Dividend</span><span class="mb-track"><span class="mb-fill" style="width:17%;background:#f58b42"></span></span></div></div>
+      <div class="stance" style="color:#8fa3bf;border-color:#8fa3bf">HOLD</div>
+    </a>
+    <a class="tile" href="JD80.html" data-search="jd80 jd.com set dr · nasdaq: jd china internet hold (unchanged since 2026-07-11 — boci q2 profit-growth estimate + zacks strong buy upgrade firm up conviction slightly, but unconfirmed until the actual print ~mid-aug)">
+      <div class="tile-top">
+        <div class="tk">JD80</div>
+        <div class="score"><b>16</b><span>/30</span></div>
+      </div>
+      <div class="name">JD.com</div>
+      <div class="exch">SET DR · NASDAQ: JD</div>
+      <div class="mini-bars"><div class="mb-row" title="Valuation: 4/6"><span class="mb-ax">Valuation</span><span class="mb-track"><span class="mb-fill" style="width:67%;background:#00c4b4"></span></span></div><div class="mb-row" title="Future Growth: 2/6"><span class="mb-ax">Future Growth</span><span class="mb-track"><span class="mb-fill" style="width:33%;background:#f5c842"></span></span></div><div class="mb-row" title="Past Performance: 2/6"><span class="mb-ax">Past Performance</span><span class="mb-track"><span class="mb-fill" style="width:33%;background:#f5c842"></span></span></div><div class="mb-row" title="Financial Health: 5/6"><span class="mb-ax">Financial Health</span><span class="mb-track"><span class="mb-fill" style="width:83%;background:#00c4b4"></span></span></div><div class="mb-row" title="Dividend: 3/6"><span class="mb-ax">Dividend</span><span class="mb-track"><span class="mb-fill" style="width:50%;background:#f5c842"></span></span></div></div>
+      <div class="stance" style="color:#30d97b;border-color:#30d97b">HOLD</div>
+    </a>
+    <a class="tile" href="BIDU.html" data-search="bidu baidu, inc. set dr · nasdaq: bidu china internet watch">
+      <div class="tile-top">
+        <div class="tk">BIDU</div>
+        <div class="score"><b>15</b><span>/30</span></div>
+      </div>
+      <div class="name">Baidu, Inc.</div>
+      <div class="exch">SET DR · NASDAQ: BIDU</div>
+      <div class="mini-bars"><div class="mb-row" title="Valuation: 4/6"><span class="mb-ax">Valuation</span><span class="mb-track"><span class="mb-fill" style="width:67%;background:#00c4b4"></span></span></div><div class="mb-row" title="Future Growth: 4/6"><span class="mb-ax">Future Growth</span><span class="mb-track"><span class="mb-fill" style="width:67%;background:#00c4b4"></span></span></div><div class="mb-row" title="Past Performance: 2/6"><span class="mb-ax">Past Performance</span><span class="mb-track"><span class="mb-fill" style="width:33%;background:#f5c842"></span></span></div><div class="mb-row" title="Financial Health: 5/6"><span class="mb-ax">Financial Health</span><span class="mb-track"><span class="mb-fill" style="width:83%;background:#00c4b4"></span></span></div><div class="mb-row" title="Dividend: 0/6"><span class="mb-ax">Dividend</span><span class="mb-track"><span class="mb-fill" style="width:0%;background:#f58b42"></span></span></div></div>
+      <div class="stance" style="color:#f5c842;border-color:#f5c842">WATCH</div>
+    </a>
+    <a class="tile" href="MEITUAN.html" data-search="meituan meituan set dr · hkex: 3690 china internet watch (unchanged) — price ran +24% off the low, not yet confirmed by data">
+      <div class="tile-top">
+        <div class="tk">MEITUAN</div>
+        <div class="score"><b>15</b><span>/30</span></div>
+      </div>
+      <div class="name">Meituan</div>
+      <div class="exch">SET DR · HKEX: 3690</div>
+      <div class="mini-bars"><div class="mb-row" title="Valuation: 3/6"><span class="mb-ax">Valuation</span><span class="mb-track"><span class="mb-fill" style="width:50%;background:#f5c842"></span></span></div><div class="mb-row" title="Future Growth: 4/6"><span class="mb-ax">Future Growth</span><span class="mb-track"><span class="mb-fill" style="width:67%;background:#00c4b4"></span></span></div><div class="mb-row" title="Past Performance: 2/6"><span class="mb-ax">Past Performance</span><span class="mb-track"><span class="mb-fill" style="width:33%;background:#f5c842"></span></span></div><div class="mb-row" title="Financial Health: 6/6"><span class="mb-ax">Financial Health</span><span class="mb-track"><span class="mb-fill" style="width:100%;background:#00c4b4"></span></span></div><div class="mb-row" title="Dividend: 0/6"><span class="mb-ax">Dividend</span><span class="mb-track"><span class="mb-fill" style="width:0%;background:#f58b42"></span></span></div></div>
+      <div class="stance" style="color:#f5c842;border-color:#f5c842">WATCH</div>
+    </a>
+  </div>
+  <div class="sector-head">Social Media / Digital Advertising<span>1</span></div>
+  <div class="grid">
+    <a class="tile" href="META.html" data-search="meta meta platforms nasdaq: meta social media / digital advertising watch (lean buy on weakness) — 🚀 high growth, valuation still rich after the &#x27;meta compute&#x27; pop, only a small pullback since">
+      <div class="tile-top">
+        <div class="tk">META</div>
+        <div class="score"><b>19</b><span>/30</span></div>
+      </div>
+      <div class="name">Meta Platforms</div>
+      <div class="exch">NASDAQ: META</div>
+      <div class="mini-bars"><div class="mb-row" title="Valuation: 2/6"><span class="mb-ax">Valuation</span><span class="mb-track"><span class="mb-fill" style="width:33%;background:#f5c842"></span></span></div><div class="mb-row" title="Future Growth: 5/6"><span class="mb-ax">Future Growth</span><span class="mb-track"><span class="mb-fill" style="width:83%;background:#00c4b4"></span></span></div><div class="mb-row" title="Past Performance: 6/6"><span class="mb-ax">Past Performance</span><span class="mb-track"><span class="mb-fill" style="width:100%;background:#00c4b4"></span></span></div><div class="mb-row" title="Financial Health: 5/6"><span class="mb-ax">Financial Health</span><span class="mb-track"><span class="mb-fill" style="width:83%;background:#00c4b4"></span></span></div><div class="mb-row" title="Dividend: 1/6"><span class="mb-ax">Dividend</span><span class="mb-track"><span class="mb-fill" style="width:17%;background:#f58b42"></span></span></div></div>
+      <div class="stance" style="color:#30d97b;border-color:#30d97b">WATCH</div>
+    </a>
+  </div>
+  <div class="sector-head">Media &amp; Entertainment<span>2</span></div>
+  <div class="grid">
+    <a class="tile" href="NFLX.html" data-search="nflx netflix nasdaq: nflx media &amp; entertainment buy (scale-in near 52w low)">
+      <div class="tile-top">
+        <div class="tk">NFLX</div>
+        <div class="score"><b>19</b><span>/30</span></div>
+      </div>
+      <div class="name">Netflix</div>
+      <div class="exch">NASDAQ: NFLX</div>
+      <div class="mini-bars"><div class="mb-row" title="Valuation: 4/6"><span class="mb-ax">Valuation</span><span class="mb-track"><span class="mb-fill" style="width:67%;background:#00c4b4"></span></span></div><div class="mb-row" title="Future Growth: 5/6"><span class="mb-ax">Future Growth</span><span class="mb-track"><span class="mb-fill" style="width:83%;background:#00c4b4"></span></span></div><div class="mb-row" title="Past Performance: 5/6"><span class="mb-ax">Past Performance</span><span class="mb-track"><span class="mb-fill" style="width:83%;background:#00c4b4"></span></span></div><div class="mb-row" title="Financial Health: 5/6"><span class="mb-ax">Financial Health</span><span class="mb-track"><span class="mb-fill" style="width:83%;background:#00c4b4"></span></span></div><div class="mb-row" title="Dividend: 0/6"><span class="mb-ax">Dividend</span><span class="mb-track"><span class="mb-fill" style="width:0%;background:#f58b42"></span></span></div></div>
+      <div class="stance" style="color:#30d97b;border-color:#30d97b">BUY</div>
+    </a>
+    <a class="tile" href="NFLX80.html" data-search="nflx80 netflix set dr · nasdaq: nflx media &amp; entertainment buy (add) — hold into 16 jul print (~46hrs out), council split 1-1-1-1">
+      <div class="tile-top">
+        <div class="tk">NFLX80</div>
+        <div class="score"><b>19</b><span>/30</span></div>
+      </div>
+      <div class="name">Netflix</div>
+      <div class="exch">SET DR · NASDAQ: NFLX</div>
+      <div class="mini-bars"><div class="mb-row" title="Valuation: 4/6"><span class="mb-ax">Valuation</span><span class="mb-track"><span class="mb-fill" style="width:67%;background:#00c4b4"></span></span></div><div class="mb-row" title="Future Growth: 5/6"><span class="mb-ax">Future Growth</span><span class="mb-track"><span class="mb-fill" style="width:83%;background:#00c4b4"></span></span></div><div class="mb-row" title="Past Performance: 5/6"><span class="mb-ax">Past Performance</span><span class="mb-track"><span class="mb-fill" style="width:83%;background:#00c4b4"></span></span></div><div class="mb-row" title="Financial Health: 5/6"><span class="mb-ax">Financial Health</span><span class="mb-track"><span class="mb-fill" style="width:83%;background:#00c4b4"></span></span></div><div class="mb-row" title="Dividend: 0/6"><span class="mb-ax">Dividend</span><span class="mb-track"><span class="mb-fill" style="width:0%;background:#f58b42"></span></span></div></div>
+      <div class="stance" style="color:#30d97b;border-color:#30d97b">BUY</div>
+    </a>
+  </div>
+  <div class="sector-head">Consumer Internet<span>1</span></div>
+  <div class="grid">
+    <a class="tile" href="SE.html" data-search="se sea limited nyse: se consumer internet watch · medium conviction (buy on a pullback)">
+      <div class="tile-top">
+        <div class="tk">SE</div>
+        <div class="score"><b>19</b><span>/30</span></div>
+      </div>
+      <div class="name">Sea Limited</div>
+      <div class="exch">NYSE: SE</div>
+      <div class="mini-bars"><div class="mb-row" title="Valuation: 2/6"><span class="mb-ax">Valuation</span><span class="mb-track"><span class="mb-fill" style="width:33%;background:#f5c842"></span></span></div><div class="mb-row" title="Future Growth: 6/6"><span class="mb-ax">Future Growth</span><span class="mb-track"><span class="mb-fill" style="width:100%;background:#00c4b4"></span></span></div><div class="mb-row" title="Past Performance: 5/6"><span class="mb-ax">Past Performance</span><span class="mb-track"><span class="mb-fill" style="width:83%;background:#00c4b4"></span></span></div><div class="mb-row" title="Financial Health: 5/6"><span class="mb-ax">Financial Health</span><span class="mb-track"><span class="mb-fill" style="width:83%;background:#00c4b4"></span></span></div><div class="mb-row" title="Dividend: 1/6"><span class="mb-ax">Dividend</span><span class="mb-track"><span class="mb-fill" style="width:17%;background:#f58b42"></span></span></div></div>
+      <div class="stance" style="color:#30d97b;border-color:#30d97b">WATCH · Medium conviction</div>
+    </a>
+  </div>
+  <div class="sector-head">Mobility<span>1</span></div>
+  <div class="grid">
+    <a class="tile" href="UBER.html" data-search="uber uber technologies nyse: uber (usd-only — no thai dr) mobility buy — accumulate at these levels">
+      <div class="tile-top">
+        <div class="tk">UBER</div>
+        <div class="score"><b>19</b><span>/30</span></div>
+      </div>
+      <div class="name">Uber Technologies</div>
+      <div class="exch">NYSE: UBER (USD-only — no Thai DR)</div>
+      <div class="mini-bars"><div class="mb-row" title="Valuation: 5/6"><span class="mb-ax">Valuation</span><span class="mb-track"><span class="mb-fill" style="width:83%;background:#00c4b4"></span></span></div><div class="mb-row" title="Future Growth: 5/6"><span class="mb-ax">Future Growth</span><span class="mb-track"><span class="mb-fill" style="width:83%;background:#00c4b4"></span></span></div><div class="mb-row" title="Past Performance: 5/6"><span class="mb-ax">Past Performance</span><span class="mb-track"><span class="mb-fill" style="width:83%;background:#00c4b4"></span></span></div><div class="mb-row" title="Financial Health: 4/6"><span class="mb-ax">Financial Health</span><span class="mb-track"><span class="mb-fill" style="width:67%;background:#00c4b4"></span></span></div><div class="mb-row" title="Dividend: 0/6"><span class="mb-ax">Dividend</span><span class="mb-track"><span class="mb-fill" style="width:0%;background:#f58b42"></span></span></div></div>
+      <div class="stance" style="color:#30d97b;border-color:#30d97b">BUY</div>
+    </a>
+  </div>
+  <div class="sector-head">Public-Safety Tech (TASER + body-cam + SaaS)<span>1</span></div>
+  <div class="grid">
+    <a class="tile" href="AXON.html" data-search="[position details omitted on the public site]">
+      <div class="tile-top">
+        <div class="tk">AXON</div>
+        <div class="score"><b>18</b><span>/30</span></div>
+      </div>
+      <div class="name">Axon Enterprise</div>
+      <div class="exch">NASDAQ: AXON</div>
+      <div class="mini-bars"><div class="mb-row" title="Valuation: 2/6"><span class="mb-ax">Valuation</span><span class="mb-track"><span class="mb-fill" style="width:33%;background:#f5c842"></span></span></div><div class="mb-row" title="Future Growth: 6/6"><span class="mb-ax">Future Growth</span><span class="mb-track"><span class="mb-fill" style="width:100%;background:#00c4b4"></span></span></div><div class="mb-row" title="Past Performance: 6/6"><span class="mb-ax">Past Performance</span><span class="mb-track"><span class="mb-fill" style="width:100%;background:#00c4b4"></span></span></div><div class="mb-row" title="Financial Health: 4/6"><span class="mb-ax">Financial Health</span><span class="mb-track"><span class="mb-fill" style="width:67%;background:#00c4b4"></span></span></div><div class="mb-row" title="Dividends: 0/6"><span class="mb-ax">Dividends</span><span class="mb-track"><span class="mb-fill" style="width:0%;background:#f58b42"></span></span></div></div>
+      <div class="stance" style="color:#30d97b;border-color:#30d97b">WATCH</div>
+    </a>
+  </div>
+  <div class="sector-head">Software<span>1</span></div>
+  <div class="grid">
+    <a class="tile" href="PLTR.html" data-search="pltr palantir technologies set dr · nasdaq: pltr software hold">
+      <div class="tile-top">
+        <div class="tk">PLTR</div>
+        <div class="score"><b>18</b><span>/30</span></div>
+      </div>
+      <div class="name">Palantir Technologies</div>
+      <div class="exch">SET DR · NASDAQ: PLTR</div>
+      <div class="mini-bars"><div class="mb-row" title="Valuation: 1/6"><span class="mb-ax">Valuation</span><span class="mb-track"><span class="mb-fill" style="width:17%;background:#f58b42"></span></span></div><div class="mb-row" title="Future Growth: 6/6"><span class="mb-ax">Future Growth</span><span class="mb-track"><span class="mb-fill" style="width:100%;background:#00c4b4"></span></span></div><div class="mb-row" title="Past Performance: 5/6"><span class="mb-ax">Past Performance</span><span class="mb-track"><span class="mb-fill" style="width:83%;background:#00c4b4"></span></span></div><div class="mb-row" title="Financial Health: 6/6"><span class="mb-ax">Financial Health</span><span class="mb-track"><span class="mb-fill" style="width:100%;background:#00c4b4"></span></span></div><div class="mb-row" title="Dividend: 0/6"><span class="mb-ax">Dividend</span><span class="mb-track"><span class="mb-fill" style="width:0%;background:#f58b42"></span></span></div></div>
+      <div class="stance" style="color:#8fa3bf;border-color:#8fa3bf">HOLD</div>
+    </a>
+  </div>
+  <div class="sector-head">Managed Care / Health Insurance<span>1</span></div>
+  <div class="grid">
+    <a class="tile" href="UNH.html" data-search="unh unitedhealth group nyse: unh managed care / health insurance watch — cheap-ish turnaround, recovery already ~80% priced and sell-side just chased it higher, doj overhang unresolved, and q2 earnings land tomorrow (7/16) as an imminent binary catalyst">
+      <div class="tile-top">
+        <div class="tk">UNH</div>
+        <div class="score"><b>17</b><span>/30</span></div>
+      </div>
+      <div class="name">UnitedHealth Group</div>
+      <div class="exch">NYSE: UNH</div>
+      <div class="mini-bars"><div class="mb-row" title="Valuation: 4/6"><span class="mb-ax">Valuation</span><span class="mb-track"><span class="mb-fill" style="width:67%;background:#00c4b4"></span></span></div><div class="mb-row" title="Future Growth: 3/6"><span class="mb-ax">Future Growth</span><span class="mb-track"><span class="mb-fill" style="width:50%;background:#f5c842"></span></span></div><div class="mb-row" title="Past Performance: 2/6"><span class="mb-ax">Past Performance</span><span class="mb-track"><span class="mb-fill" style="width:33%;background:#f5c842"></span></span></div><div class="mb-row" title="Financial Health: 4/6"><span class="mb-ax">Financial Health</span><span class="mb-track"><span class="mb-fill" style="width:67%;background:#00c4b4"></span></span></div><div class="mb-row" title="Dividend: 4/6"><span class="mb-ax">Dividend</span><span class="mb-track"><span class="mb-fill" style="width:67%;background:#00c4b4"></span></span></div></div>
+      <div class="stance" style="color:#e85d5d;border-color:#e85d5d">WATCH — cheap-ish turnaround, recovery already ~80% priced and sell-side just chased it higher, DOJ overhang unresolved, and Q2 earnings land tomorrow</div>
+    </a>
+  </div>
+  <div class="sector-head">Industrials<span>1</span></div>
+  <div class="grid">
+    <a class="tile" href="VRT.html" data-search="vrt vertiv holdings co nyse: vrt industrials buy (high-growth) — scale in on the drop">
+      <div class="tile-top">
+        <div class="tk">VRT</div>
+        <div class="score"><b>17</b><span>/30</span></div>
+      </div>
+      <div class="name">Vertiv Holdings Co</div>
+      <div class="exch">NYSE: VRT</div>
+      <div class="mini-bars"><div class="mb-row" title="Valuation: 2/6"><span class="mb-ax">Valuation</span><span class="mb-track"><span class="mb-fill" style="width:33%;background:#f5c842"></span></span></div><div class="mb-row" title="Future Growth: 6/6"><span class="mb-ax">Future Growth</span><span class="mb-track"><span class="mb-fill" style="width:100%;background:#00c4b4"></span></span></div><div class="mb-row" title="Past Performance: 5/6"><span class="mb-ax">Past Performance</span><span class="mb-track"><span class="mb-fill" style="width:83%;background:#00c4b4"></span></span></div><div class="mb-row" title="Financial Health: 4/6"><span class="mb-ax">Financial Health</span><span class="mb-track"><span class="mb-fill" style="width:67%;background:#00c4b4"></span></span></div><div class="mb-row" title="Dividend: 0/6"><span class="mb-ax">Dividend</span><span class="mb-track"><span class="mb-fill" style="width:0%;background:#f58b42"></span></span></div></div>
+      <div class="stance" style="color:#30d97b;border-color:#30d97b">BUY</div>
+    </a>
+  </div>
+  <div class="sector-head">Consumer Electronics<span>1</span></div>
+  <div class="grid">
+    <a class="tile" href="XIAOMI.html" data-search="xiaomi xiaomi corp set dr · hkex: 1810 consumer electronics watch (no position, medium conviction)">
+      <div class="tile-top">
+        <div class="tk">XIAOMI</div>
+        <div class="score"><b>16</b><span>/30</span></div>
+      </div>
+      <div class="name">Xiaomi Corp</div>
+      <div class="exch">SET DR · HKEX: 1810</div>
+      <div class="mini-bars"><div class="mb-row" title="Valuation: 3/6"><span class="mb-ax">Valuation</span><span class="mb-track"><span class="mb-fill" style="width:50%;background:#f5c842"></span></span></div><div class="mb-row" title="Future Growth: 4/6"><span class="mb-ax">Future Growth</span><span class="mb-track"><span class="mb-fill" style="width:67%;background:#00c4b4"></span></span></div><div class="mb-row" title="Past Performance: 4/6"><span class="mb-ax">Past Performance</span><span class="mb-track"><span class="mb-fill" style="width:67%;background:#00c4b4"></span></span></div><div class="mb-row" title="Financial Health: 5/6"><span class="mb-ax">Financial Health</span><span class="mb-track"><span class="mb-fill" style="width:83%;background:#00c4b4"></span></span></div><div class="mb-row" title="Dividend: 0/6"><span class="mb-ax">Dividend</span><span class="mb-track"><span class="mb-fill" style="width:0%;background:#f58b42"></span></span></div></div>
+      <div class="stance" style="color:#f5c842;border-color:#f5c842">WATCH</div>
+    </a>
+  </div>
+  <div class="sector-head">Consumer Discretionary<span>1</span></div>
+  <div class="grid">
+    <a class="tile" href="NKE.html" data-search="nke nike, inc. nyse: nke consumer discretionary watch (not yet — wait for $36-40 entry or a china inflection)">
+      <div class="tile-top">
+        <div class="tk">NKE</div>
+        <div class="score"><b>15</b><span>/30</span></div>
+      </div>
+      <div class="name">NIKE, Inc.</div>
+      <div class="exch">NYSE: NKE</div>
+      <div class="mini-bars"><div class="mb-row" title="Valuation: 3/6"><span class="mb-ax">Valuation</span><span class="mb-track"><span class="mb-fill" style="width:50%;background:#f5c842"></span></span></div><div class="mb-row" title="Future Growth: 2/6"><span class="mb-ax">Future Growth</span><span class="mb-track"><span class="mb-fill" style="width:33%;background:#f5c842"></span></span></div><div class="mb-row" title="Past Performance: 2/6"><span class="mb-ax">Past Performance</span><span class="mb-track"><span class="mb-fill" style="width:33%;background:#f5c842"></span></span></div><div class="mb-row" title="Financial Health: 4/6"><span class="mb-ax">Financial Health</span><span class="mb-track"><span class="mb-fill" style="width:67%;background:#00c4b4"></span></span></div><div class="mb-row" title="Dividend: 4/6"><span class="mb-ax">Dividend</span><span class="mb-track"><span class="mb-fill" style="width:67%;background:#00c4b4"></span></span></div></div>
+      <div class="stance" style="color:#f5c842;border-color:#f5c842">WATCH</div>
+    </a>
+  </div>
+  <div class="sector-head">Nuclear energy / SMR<span>1</span></div>
+  <div class="grid">
+    <a class="tile" href="OKLO.html" data-search="oklo oklo inc. nyse: oklo · set dr: oklo23 nuclear energy / smr watch">
+      <div class="tile-top">
+        <div class="tk">OKLO</div>
+        <div class="score"><b>11</b><span>/30</span></div>
+      </div>
+      <div class="name">Oklo Inc.</div>
+      <div class="exch">NYSE: OKLO · SET DR: OKLO23</div>
+      <div class="mini-bars"><div class="mb-row" title="Valuation: 1/6"><span class="mb-ax">Valuation</span><span class="mb-track"><span class="mb-fill" style="width:17%;background:#f58b42"></span></span></div><div class="mb-row" title="Future Growth: 5/6"><span class="mb-ax">Future Growth</span><span class="mb-track"><span class="mb-fill" style="width:83%;background:#00c4b4"></span></span></div><div class="mb-row" title="Past Performance: 0/6"><span class="mb-ax">Past Performance</span><span class="mb-track"><span class="mb-fill" style="width:0%;background:#f58b42"></span></span></div><div class="mb-row" title="Financial Health: 5/6"><span class="mb-ax">Financial Health</span><span class="mb-track"><span class="mb-fill" style="width:83%;background:#00c4b4"></span></span></div><div class="mb-row" title="Dividend: 0/6"><span class="mb-ax">Dividend</span><span class="mb-track"><span class="mb-fill" style="width:0%;background:#f58b42"></span></span></div></div>
+      <div class="stance" style="color:#f5c842;border-color:#f5c842">WATCH</div>
+    </a>
+  </div>
+  <div class="foot">
+    Generated by Smartmall · transparent scoring (not Simply Wall St's engine) · not a live feed · <b>not financial advice</b>.<br>
+    This page shows analysis only. It does not represent a portfolio, holdings, or any buy/sell activity.
+  </div>
+</div>
+<script>
+(function(){
+  var q = document.getElementById('q');
+  var tiles = Array.prototype.slice.call(document.querySelectorAll('.tile'));
+  var heads = Array.prototype.slice.call(document.querySelectorAll('.sector-head'));
+  var noHit = document.getElementById('no-hit');
+  function filter(){
+    var s = q.value.trim().toLowerCase();
+    var hits = 0;
+    tiles.forEach(function(t){
+      var show = !s || t.dataset.search.indexOf(s) !== -1;
+      t.style.display = show ? '' : 'none';
+      if (show) hits++;
+    });
+    heads.forEach(function(h){
+      var grid = h.nextElementSibling;
+      var any = Array.prototype.some.call(grid.children, function(c){
+        return c.style.display !== 'none';
+      });
+      h.style.display = any ? '' : 'none';
+      grid.style.display = any ? '' : 'none';
+    });
+    noHit.style.display = hits ? 'none' : '';
+  }
+  q.addEventListener('input', filter);
+  document.addEventListener('keydown', function(e){
+    if (e.key === '/' && document.activeElement !== q) { e.preventDefault(); q.focus(); }
+    if (e.key === 'Escape' && document.activeElement === q) { q.value = ''; filter(); q.blur(); }
+  });
+})();
+</script>
+</body>
+</html>
