@@ -7,12 +7,12 @@
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
-  --bg: #0f1923; --surface: #172130; --surface-2: #1c2a3d; --border: #253347;
-  --teal: #00c4b4; --teal-mid: #00a99d; --teal-dim: rgba(0,196,180,0.15); --teal-fill: rgba(0,196,180,0.22);
-  --orange: #f58b42; --orange-mid: #e07030; --orange-dim: rgba(245,139,66,0.18);
-  --green: #30d97b; --green-dim: rgba(48,217,123,0.15); --red: #e85d5d; --red-dim: rgba(232,93,93,0.15);
-  --amber: #f5c842; --text-1: #e8edf5; --text-2: #8fa3bf; --text-3: #526070;
-  --number: #c9d9ed; --tag-bg: #1a3550; --badge-teal: #0a3030; --score-track: #1e2e40;
+  --bg: #19243c; --surface: #222f49; --surface-2: #2c3b58; --border: #3a4c6b;
+  --teal: #17dbc9; --teal-mid: #00c4b4; --teal-dim: rgba(23,219,201,0.15); --teal-fill: rgba(23,219,201,0.22);
+  --orange: #f0995e; --orange-mid: #dd8449; --orange-dim: rgba(240,153,94,0.18);
+  --green: #3ee08a; --green-dim: rgba(62,224,138,0.15); --red: #ef6a6a; --red-dim: rgba(239,106,106,0.15);
+  --amber: #f3d074; --text-1: #eef3fb; --text-2: #b0c1d8; --text-3: #8295ac;
+  --number: #d6e2f2; --tag-bg: #23406a; --badge-teal: #0c3a38; --score-track: #2c3b58;
 }
 html { scroll-behavior: smooth; }
 body { background: var(--bg); color: var(--text-1); font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Segoe UI', Arial, sans-serif; line-height: 1.5; min-height: 100vh; display: flex; justify-content: center; padding: 40px 20px 80px; }
@@ -53,14 +53,14 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
 .price-sub { font-size: 13px; color: var(--text-3); margin-top: 6px; }
 .badges { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
 .badge { display: inline-flex; align-items: center; gap: 5px; padding: 5px 11px; border-radius: 100px; font-size: 11.5px; font-weight: 600; letter-spacing: 0.02em; }
-.badge-teal { background: var(--teal-dim); color: var(--teal); border: 1px solid rgba(0,196,180,0.3); }
-.badge-orange { background: var(--orange-dim); color: var(--orange); border: 1px solid rgba(245,139,66,0.3); }
+.badge-teal { background: var(--teal-dim); color: var(--teal); border: 1px solid rgba(23,219,201,0.3); }
+.badge-orange { background: var(--orange-dim); color: var(--orange); border: 1px solid rgba(240,153,94,0.3); }
 .badge-muted { background: var(--surface-2); color: var(--text-2); border: 1px solid var(--border); }
 .range-bar-wrap { margin-top: 4px; }
 .range-label { display: flex; justify-content: space-between; font-size: 11.5px; color: var(--text-3); margin-bottom: 8px; }
 .range-bar-track { height: 6px; border-radius: 4px; background: var(--surface-2); position: relative; overflow: visible; }
 .range-bar-fill { height: 100%; border-radius: 4px; background: linear-gradient(90deg, var(--teal-mid) 0%, var(--teal) 100%); }
-.range-bar-marker { position: absolute; top: 50%; transform: translate(-50%, -50%); width: 14px; height: 14px; border-radius: 50%; background: #fff; border: 2px solid var(--teal); box-shadow: 0 0 0 3px rgba(0,196,180,0.3); }
+.range-bar-marker { position: absolute; top: 50%; transform: translate(-50%, -50%); width: 14px; height: 14px; border-radius: 50%; background: #fff; border: 2px solid var(--teal); box-shadow: 0 0 0 3px rgba(23,219,201,0.3); }
 .range-bar-label { position: absolute; bottom: -20px; transform: translateX(-50%); font-size: 11px; font-weight: 700; color: var(--text-1); white-space: nowrap; }
 .range-sublabels { margin-top: 22px; font-size: 11.5px; color: var(--text-3); display: flex; justify-content: space-between; }
 .range-sublabels span { font-weight: 600; color: var(--text-2); }
@@ -109,9 +109,9 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
 .verdict-chip { background: var(--surface-2); border: 1px solid var(--border); border-radius: 14px; padding: 20px; }
 .verdict-chip .agent { font-size: 11px; font-weight: 700; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
 .verdict-chip .stance { font-size: 15px; font-weight: 800; color: var(--text-1); margin-bottom: 6px; }
-.verdict-chip .conviction { display: inline-block; font-size: 10.5px; font-weight: 700; padding: 2px 8px; border-radius: 100px; background: var(--teal-dim); color: var(--teal); margin-bottom: 8px; border: 1px solid rgba(0,196,180,0.25); }
+.verdict-chip .conviction { display: inline-block; font-size: 10.5px; font-weight: 700; padding: 2px 8px; border-radius: 100px; background: var(--teal-dim); color: var(--teal); margin-bottom: 8px; border: 1px solid rgba(23,219,201,0.25); }
 .verdict-chip .rationale { font-size: 12px; color: var(--text-3); line-height: 1.5; }
-.overall-verdict { background: linear-gradient(135deg, rgba(0,196,180,0.12) 0%, rgba(0,169,157,0.06) 100%); border: 1px solid rgba(0,196,180,0.3); border-radius: 14px; padding: 24px 28px; display: flex; align-items: center; gap: 24px; }
+.overall-verdict { background: linear-gradient(135deg, rgba(23,219,201,0.12) 0%, rgba(0,169,157,0.06) 100%); border: 1px solid rgba(23,219,201,0.3); border-radius: 14px; padding: 24px 28px; display: flex; align-items: center; gap: 24px; }
 .ov-stance { font-size: 28px; font-weight: 900; color: var(--teal); letter-spacing: -0.02em; flex-shrink: 0; }
 .ov-detail { flex: 1; }
 .ov-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-3); margin-bottom: 4px; }
@@ -175,7 +175,7 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
           <div class="header-price">
             <div class="price-big">US$72.46</div>
             
-            <div class="price-sub">as of 2026-07-19</div>
+            <div class="price-sub">as of 2026-07-18 (close)</div>
             <div class="hero-verdict"><span class="hv-stance" style="color:var(--green);border-color:var(--green);">BUY</span><span class="hv-score"><b>19</b>/30</span></div>
           </div>
         </div>
@@ -193,7 +193,7 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
             <span>Distance from low: <span>+6%</span></span>
           </div>
         </div>
-        <div class="stat-row" style="margin-top:28px;margin-bottom:0;"><div class="stat-pill"><div class="stat-pill-label">Market Cap</div><div class="stat-pill-value">~$143B</div></div><div class="stat-pill"><div class="stat-pill-label">Fwd P/E</div><div class="stat-pill-value">~19x</div></div><div class="stat-pill"><div class="stat-pill-label">Trailing P/E</div><div class="stat-pill-value">~17x*</div><div class="stat-pill-sub">*TTM net still partially flattered by FY25 Dutch tax one-off; normalized ~24–27x</div></div><div class="stat-pill"><div class="stat-pill-label">P/S (TTM)</div><div class="stat-pill-value">~2.6x</div><div class="stat-pill-sub">TTM revenue ~$54B</div></div><div class="stat-pill"><div class="stat-pill-label">Net Margin</div><div class="stat-pill-value">~16%*</div><div class="stat-pill-sub">*TTM GAAP; ~10% normalized ex tax benefit</div></div><div class="stat-pill"><div class="stat-pill-label">Free Cash Flow</div><div class="stat-pill-value">~$11B</div><div class="stat-pill-sub">Q1-26 FCF $2.3B, run-rate accelerating</div></div><div class="stat-pill"><div class="stat-pill-label">Div Yield</div><div class="stat-pill-value">0%</div></div></div>
+        <div class="stat-row" style="margin-top:28px;margin-bottom:0;"><div class="stat-pill"><div class="stat-pill-label">Market Cap</div><div class="stat-pill-value">~$152B</div></div><div class="stat-pill"><div class="stat-pill-label">Fwd P/E</div><div class="stat-pill-value">~19x</div></div><div class="stat-pill"><div class="stat-pill-label">Trailing P/E</div><div class="stat-pill-value">~17x*</div><div class="stat-pill-sub">*TTM net still partially flattered by FY25 Dutch tax one-off; normalized ~24–27x</div></div><div class="stat-pill"><div class="stat-pill-label">P/S (TTM)</div><div class="stat-pill-value">~2.8x</div><div class="stat-pill-sub">TTM revenue ~$54B</div></div><div class="stat-pill"><div class="stat-pill-label">Net Margin</div><div class="stat-pill-value">~16%*</div><div class="stat-pill-sub">*TTM GAAP; ~10% normalized ex tax benefit</div></div><div class="stat-pill"><div class="stat-pill-label">Free Cash Flow</div><div class="stat-pill-value">~$11B</div><div class="stat-pill-sub">Q1-26 FCF $2.3B, run-rate accelerating</div></div><div class="stat-pill"><div class="stat-pill-label">Div Yield</div><div class="stat-pill-value">0%</div></div></div>
       </div>
     </div>
     <div class="section" id="s2">
@@ -282,7 +282,7 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
       <div class="card">
         <div class="snowflake-grid">
           <div style="display:flex;flex-direction:column;align-items:center;">
-            <svg width="240" height="240" viewBox="-175 -125 350 250"><defs><style>.ring{fill:none;stroke:rgba(255,255,255,0.06);stroke-width:1;}.ring-bright{fill:none;stroke:rgba(255,255,255,0.12);stroke-width:1;}.axis-line{stroke:rgba(255,255,255,0.08);stroke-width:1;}.score-poly{fill:rgba(0,196,180,0.22);stroke:#00c4b4;stroke-width:2;}</style></defs><polygon class="ring" points="0.00,-15.00 14.27,-4.64 8.82,12.14 -8.82,12.14 -14.27,-4.64"/><polygon class="ring" points="0.00,-30.00 28.53,-9.27 17.63,24.27 -17.63,24.27 -28.53,-9.27"/><polygon class="ring" points="0.00,-45.00 42.80,-13.91 26.45,36.41 -26.45,36.41 -42.80,-13.91"/><polygon class="ring" points="0.00,-60.00 57.06,-18.54 35.27,48.54 -35.27,48.54 -57.06,-18.54"/><polygon class="ring ring-bright" points="0.00,-75.00 71.33,-23.18 44.08,60.68 -44.08,60.68 -71.33,-23.18"/><polygon class="ring ring-bright" points="0.00,-90.00 85.60,-27.81 52.90,72.81 -52.90,72.81 -85.60,-27.81"/><line class="axis-line" x1="0" y1="0" x2="0.00" y2="-90.00"/><line class="axis-line" x1="0" y1="0" x2="85.60" y2="-27.81"/><line class="axis-line" x1="0" y1="0" x2="52.90" y2="72.81"/><line class="axis-line" x1="0" y1="0" x2="-52.90" y2="72.81"/><line class="axis-line" x1="0" y1="0" x2="-85.60" y2="-27.81"/><polygon class="score-poly" points="0.00,-75.00 71.33,-23.18 44.08,60.68 -35.27,48.54 0.00,0.00"/><text x="0.0" y="-96.3" text-anchor="middle" font-size="8.5" fill="#8fa3bf">Valuation</text><text x="95.6" y="-29.8" text-anchor="start" font-size="8.5" fill="#8fa3bf">Future Growth</text><text x="60.6" y="83.9" text-anchor="start" font-size="8.5" fill="#8fa3bf">Past Perf.</text><text x="-60.6" y="83.9" text-anchor="end" font-size="8.5" fill="#8fa3bf">Fin. Health</text><text x="-95.6" y="-29.8" text-anchor="end" font-size="8.5" fill="#8fa3bf">Dividend</text><circle cx="0.00" cy="-75.00" r="4" fill="#00c4b4"/><circle cx="71.33" cy="-23.18" r="4" fill="#00c4b4"/><circle cx="44.08" cy="60.68" r="4" fill="#00c4b4"/><circle cx="-35.27" cy="48.54" r="4" fill="#00c4b4"/><circle cx="0.00" cy="0.00" r="4" fill="#f58b42"/></svg>
+            <svg width="240" height="240" viewBox="-175 -125 350 250"><defs><style>.ring{fill:none;stroke:rgba(255,255,255,0.06);stroke-width:1;}.ring-bright{fill:none;stroke:rgba(255,255,255,0.12);stroke-width:1;}.axis-line{stroke:rgba(255,255,255,0.08);stroke-width:1;}.score-poly{fill:rgba(23,219,201,0.22);stroke:#17dbc9;stroke-width:2;}</style></defs><polygon class="ring" points="0.00,-15.00 14.27,-4.64 8.82,12.14 -8.82,12.14 -14.27,-4.64"/><polygon class="ring" points="0.00,-30.00 28.53,-9.27 17.63,24.27 -17.63,24.27 -28.53,-9.27"/><polygon class="ring" points="0.00,-45.00 42.80,-13.91 26.45,36.41 -26.45,36.41 -42.80,-13.91"/><polygon class="ring" points="0.00,-60.00 57.06,-18.54 35.27,48.54 -35.27,48.54 -57.06,-18.54"/><polygon class="ring ring-bright" points="0.00,-75.00 71.33,-23.18 44.08,60.68 -44.08,60.68 -71.33,-23.18"/><polygon class="ring ring-bright" points="0.00,-90.00 85.60,-27.81 52.90,72.81 -52.90,72.81 -85.60,-27.81"/><line class="axis-line" x1="0" y1="0" x2="0.00" y2="-90.00"/><line class="axis-line" x1="0" y1="0" x2="85.60" y2="-27.81"/><line class="axis-line" x1="0" y1="0" x2="52.90" y2="72.81"/><line class="axis-line" x1="0" y1="0" x2="-52.90" y2="72.81"/><line class="axis-line" x1="0" y1="0" x2="-85.60" y2="-27.81"/><polygon class="score-poly" points="0.00,-75.00 71.33,-23.18 44.08,60.68 -35.27,48.54 0.00,0.00"/><text x="0.0" y="-96.3" text-anchor="middle" font-size="8.5" fill="#8fa3bf">Valuation</text><text x="95.6" y="-29.8" text-anchor="start" font-size="8.5" fill="#8fa3bf">Future Growth</text><text x="60.6" y="83.9" text-anchor="start" font-size="8.5" fill="#8fa3bf">Past Perf.</text><text x="-60.6" y="83.9" text-anchor="end" font-size="8.5" fill="#8fa3bf">Fin. Health</text><text x="-95.6" y="-29.8" text-anchor="end" font-size="8.5" fill="#8fa3bf">Dividend</text><circle cx="0.00" cy="-75.00" r="4" fill="#17dbc9"/><circle cx="71.33" cy="-23.18" r="4" fill="#17dbc9"/><circle cx="44.08" cy="60.68" r="4" fill="#17dbc9"/><circle cx="-35.27" cy="48.54" r="4" fill="#17dbc9"/><circle cx="0.00" cy="0.00" r="4" fill="#f0995e"/></svg>
             <div class="snowflake-total">
               <div><span class="num">19</span><span class="denom" style="font-size:18px;color:var(--text-3);"> / 30</span></div>
               <div class="label">Smartmall Score</div>
@@ -294,7 +294,7 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
               <div class="score-row-label" style="color:var(--teal)">Valuation</div>
               <div>
                 <div class="score-bar-track"><div class="score-bar-fill" style="width:83.3%;background:var(--teal)"></div></div>
-                <div class="score-rationale">~2.6x TTM sales, ~19x fwd earnings, ~13x P/FCF, EV/FCF ~14.8x, PEG ~0.68 — now outright cheap after the further drift down to ~$70, ~32% off the $102 highs; well below peer-platform multiples even before AV optionality</div>
+                <div class="score-rationale">~2.8x TTM sales, ~19x fwd earnings, ~14x P/FCF, EV/FCF ~15x, PEG ~0.7 — still outright cheap at $72.46 (~28% off the $102 highs); well below peer-platform multiples even before AV optionality</div>
               </div>
               <div class="score-num" style="color:var(--teal)">5/6</div>
             </div>
@@ -349,7 +349,7 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
       <div class="section-header"><div class="section-num">6</div><div class="section-title">Past Performance</div></div>
       <div class="card">
         <div style="font-size:12.5px;color:var(--text-3);margin-bottom:20px;">Revenue (US$B)</div>
-        <svg viewBox="0 0 720 240" width="100%" style="font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;overflow:visible;"><line x1="0" y1="220.0" x2="720" y2="220.0" stroke="rgba(255,255,255,0.08)" stroke-width="1"/><line x1="0" y1="148.8" x2="720" y2="148.8" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="4,4"/><line x1="0" y1="77.5" x2="720" y2="77.5" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="4,4"/><rect x="20.0" y="156.2" width="120.0" height="63.8" rx="5" fill="#00c4b4" opacity="0.55"/><text x="80.0" y="151.2" font-size="11" font-weight="700" fill="#00c4b4" text-anchor="middle">$17.5B</text><text x="80.0" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">2021</text><rect x="160.0" y="103.6" width="120.0" height="116.4" rx="5" fill="#00c4b4" opacity="0.62"/><text x="220.0" y="98.6" font-size="11" font-weight="700" fill="#00c4b4" text-anchor="middle">$31.9B</text><text x="220.0" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">2022</text><rect x="300.0" y="83.8" width="120.0" height="136.2" rx="5" fill="#00c4b4" opacity="0.69"/><text x="360.0" y="78.8" font-size="11" font-weight="700" fill="#00c4b4" text-anchor="middle">$37.3B</text><text x="360.0" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">2023</text><rect x="440.0" y="59.4" width="120.0" height="160.6" rx="5" fill="#00c4b4" opacity="0.76"/><text x="500.0" y="54.4" font-size="11" font-weight="700" fill="#00c4b4" text-anchor="middle">$44.0B</text><text x="500.0" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">2024</text><rect x="580.0" y="30.0" width="120.0" height="190.0" rx="5" fill="#00c4b4" opacity="1.00"/><rect x="580.0" y="30.0" width="120.0" height="190.0" rx="5" fill="none" stroke="#00c4b4" stroke-width="1.5" opacity="0.5"/><text x="640.0" y="25.0" font-size="11" font-weight="700" fill="#00c4b4" text-anchor="middle">$52.0B</text><text x="640.0" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">2025</text></svg>
+        <svg viewBox="0 0 720 240" width="100%" style="font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;overflow:visible;"><line x1="0" y1="220.0" x2="720" y2="220.0" stroke="rgba(255,255,255,0.08)" stroke-width="1"/><line x1="0" y1="148.8" x2="720" y2="148.8" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="4,4"/><line x1="0" y1="77.5" x2="720" y2="77.5" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="4,4"/><rect x="20.0" y="156.2" width="120.0" height="63.8" rx="5" fill="#17dbc9" opacity="0.55"/><text x="80.0" y="151.2" font-size="11" font-weight="700" fill="#17dbc9" text-anchor="middle">$17.5B</text><text x="80.0" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">2021</text><rect x="160.0" y="103.6" width="120.0" height="116.4" rx="5" fill="#17dbc9" opacity="0.62"/><text x="220.0" y="98.6" font-size="11" font-weight="700" fill="#17dbc9" text-anchor="middle">$31.9B</text><text x="220.0" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">2022</text><rect x="300.0" y="83.8" width="120.0" height="136.2" rx="5" fill="#17dbc9" opacity="0.69"/><text x="360.0" y="78.8" font-size="11" font-weight="700" fill="#17dbc9" text-anchor="middle">$37.3B</text><text x="360.0" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">2023</text><rect x="440.0" y="59.4" width="120.0" height="160.6" rx="5" fill="#17dbc9" opacity="0.76"/><text x="500.0" y="54.4" font-size="11" font-weight="700" fill="#17dbc9" text-anchor="middle">$44.0B</text><text x="500.0" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">2024</text><rect x="580.0" y="30.0" width="120.0" height="190.0" rx="5" fill="#17dbc9" opacity="1.00"/><rect x="580.0" y="30.0" width="120.0" height="190.0" rx="5" fill="none" stroke="#17dbc9" stroke-width="1.5" opacity="0.5"/><text x="640.0" y="25.0" font-size="11" font-weight="700" fill="#17dbc9" text-anchor="middle">$52.0B</text><text x="640.0" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">2025</text></svg>
         <div class="note-box" style="margin-top:16px;">~31% 4yr revenue CAGR. The story isn&#x27;t top-line — it&#x27;s the profitability turn: years of GAAP losses flipped to durable operating income + $10B FCF by 2025 as the platform scaled. Growth is decelerating (82% in 2022 → 18% in 2025) as the base gets large.</div>
       </div>
     </div>
@@ -360,17 +360,17 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
         
         <div class="growth-row">
           <div class="growth-label">Q1-26 Gross Bookings</div>
-          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:25%;background:linear-gradient(90deg,#00c4b4,#00a99d);">+25% YoY to $53.7B (reaccel from FY25 +19%)</div></div>
+          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:25%;background:linear-gradient(90deg,#17dbc9,#00c4b4);">+25% YoY to $53.7B (reaccel from FY25 +19%)</div></div>
           <div class="growth-value" style="color:var(--teal);">+25% YoY to $53.7B (reaccel from FY25 +19%)</div>
         </div>
         <div class="growth-row">
           <div class="growth-label">Q1-26 Delivery bookings</div>
-          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:28%;background:linear-gradient(90deg,#00c4b4,#00a99d);">+28% YoY to $26.0B (now ≈ Mobility size); Uber One &gt;50M members</div></div>
+          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:28%;background:linear-gradient(90deg,#17dbc9,#00c4b4);">+28% YoY to $26.0B (now ≈ Mobility size); Uber One &gt;50M members</div></div>
           <div class="growth-value" style="color:var(--teal);">+28% YoY to $26.0B (now ≈ Mobility size); Uber One &gt;50M members</div>
         </div>
         <div class="growth-row">
           <div class="growth-label">Q1-26 adj EBITDA / FCF</div>
-          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:33%;background:linear-gradient(90deg,#00c4b4,#00a99d);">+33% / +66% YoY ($2.5B / $2.3B); GAAP op income +57% to $1.9B</div></div>
+          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:33%;background:linear-gradient(90deg,#17dbc9,#00c4b4);">+33% / +66% YoY ($2.5B / $2.3B); GAAP op income +57% to $1.9B</div></div>
           <div class="growth-value" style="color:var(--teal);">+33% / +66% YoY ($2.5B / $2.3B); GAAP op income +57% to $1.9B</div>
         </div>
         <div class="note-box" style="margin-top:20px;">Q1-26 (reported 6 May 2026) reaccelerated: bookings +25%, trips +20% to 3.64B, non-GAAP EPS $0.72 (+44%), GAAP income from ops $1.9B (+57%). Q2 guide $56.25–57.75B bookings clears consensus; Freight returned to growth. Drivers: Uber One membership (&gt;50M), advertising (high-margin), grocery/Delivery expansion, autonomy partnerships (Waymo, Wayve, etc.). Big wildcard remains AV — Uber is increasingly positioning as the demand aggregator across multiple AV operators rather than the disrupted incumbent.</div>
@@ -380,12 +380,12 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
       <div class="section-header"><div class="section-num">8</div><div class="section-title">Financial Health</div></div>
       <div class="card">
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px;align-items:end;">
-          <div style="background:var(--teal-dim);border:1px solid rgba(0,196,180,0.3);border-radius:12px;padding:20px;">
+          <div style="background:var(--teal-dim);border:1px solid rgba(23,219,201,0.3);border-radius:12px;padding:20px;">
             <div style="font-size:11px;color:var(--teal);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;font-weight:700;">Cash &amp; Equivalents</div>
             <div style="font-size:34px;font-weight:900;color:var(--teal);letter-spacing:-0.03em;">$6.1B</div>
             <div class="health-bar-track" style="margin-top:12px;"><div class="health-bar-fill" style="width:64%;background:var(--teal);"></div></div>
           </div>
-          <div style="background:rgba(245,139,66,0.08);border:1px solid rgba(245,139,66,0.2);border-radius:12px;padding:20px;">
+          <div style="background:rgba(240,153,94,0.08);border:1px solid rgba(240,153,94,0.2);border-radius:12px;padding:20px;">
             <div style="font-size:11px;color:var(--orange);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;font-weight:700;">Total Debt</div>
             <div style="font-size:34px;font-weight:900;color:var(--orange);letter-spacing:-0.03em;">$9.5B</div>
             <div class="health-bar-track" style="margin-top:12px;"><div class="health-bar-fill" style="width:100%;background:var(--orange);"></div></div>
@@ -401,7 +401,7 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
           <div class="health-bar-track"><div class="health-bar-fill" style="width:2%;background:var(--orange);"></div></div>
           <div class="health-value">-2%</div>
         </div>
-        <div class="note-box orange" style="margin-top:16px;">Q1-26 unrestricted cash &amp; investments $6.1B (down YoY as buybacks consume FCF) vs ~$9–10B long-term debt — modest net debt. Easily covered by ~$11B run-rate FCF; interest well-serviced. Also holds large minority equity stakes (Aurora, Didi, Grab legacy) whose mark-to-market swings distort GAAP earnings quarter to quarter.</div>
+        <div class="note-box orange" style="margin-top:16px;">Q1-26 unrestricted cash &amp; investments $6.1B (down YoY as buybacks consume FCF) vs ~$9–10B long-term debt — modest net debt. Easily covered by ~$11B run-rate FCF; interest well-serviced. Also holds large minority equity stakes (Aurora, Didi, Grab legacy) whose mark-to-market swings distort GAAP earnings quarter to quarter. Q2-26 earnings due 4 Aug 2026 — next data point.</div>
       </div>
     </div>
     <div class="section" id="s9">
@@ -418,8 +418,8 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
       <div class="section-header"><div class="section-num">10</div><div class="section-title">Rewards &amp; Risks</div></div>
       <div class="card">
         <div class="two-col">
-          <div class="rr-col rewards"><h4>Rewards</h4><div class="rr-item"><div class="rr-dot"></div><div>Q1-26 reaccelerated, not decelerated — bookings +25%, Delivery +28%, GAAP op income +57%, adj EBITDA +33%, FCF +66% YoY; Q2 guide ahead of consensus and Freight back to growth</div></div><div class="rr-item"><div class="rr-dot"></div><div>Cheap now — ~19x fwd / ~17x trailing / ~2.6x sales / ~13x P/FCF / PEG ~0.68 after the further slide to ~$70, ~32% off $102 highs</div></div><div class="rr-item"><div class="rr-dot"></div><div>Profitability inflection is real and durable — $5.6B FY25 GAAP operating income (~2x YoY) + ~$11B run-rate free cash flow</div></div><div class="rr-item"><div class="rr-dot"></div><div>Dominant two-sided network: Mobility 57% of FY25 rev + Delivery bookings now ≈ Mobility size; Uber One &gt;50M members + advertising add high-margin layers</div></div><div class="rr-item"><div class="rr-dot"></div><div>$20B buyback authorization (first-ever) funded by the FCF engine — share-count return story already shrinking the float as price keeps drifting</div></div></div>
-          <div class="rr-col risks"><h4>Risks</h4><div class="rr-item bold-risk"><div class="rr-dot"></div><div><strong>AUTONOMOUS VEHICLES are an existential two-sided bet — if Waymo/Tesla robotaxis disintermediate the driver network, Uber&#x27;s core Mobility economics could be hollowed out; if Uber becomes the demand aggregator across AV operators, it&#x27;s a moat. The market can&#x27;t price this, and it&#x27;s the single biggest swing factor — and the source of the ~32% drawdown from $102 to ~$70 even as fundamentals reaccelerated</strong></div></div><div class="rr-item"><div class="rr-dot"></div><div>TTM net income (~$8.5B / ~16% margin) is still partially flattered by the FY25 ~$5B one-off Dutch deferred-tax benefit — run-rate earnings closer to $6–7B; don&#x27;t anchor to the 17x trailing P/E</div></div><div class="rr-item"><div class="rr-dot"></div><div>Pricing-practice investigations (&#x27;dramatically different&#x27; prices for same rides) + persistent gig-economy driver-classification / regulatory risk across US/EU; reported revenue growth (+14% in Q1) ran ~9pp behind bookings due to business-model accounting shifts</div></div></div>
+          <div class="rr-col rewards"><h4>Rewards</h4><div class="rr-item"><div class="rr-dot"></div><div>Q1-26 reaccelerated, not decelerated — bookings +25%, Delivery +28%, GAAP op income +57%, adj EBITDA +33%, FCF +66% YoY; Q2 guide ahead of consensus and Freight back to growth</div></div><div class="rr-item"><div class="rr-dot"></div><div>Still cheap at $72.46 — ~19x fwd / ~17x trailing / ~2.8x sales / ~14x P/FCF / PEG ~0.7, ~28% off the $102 highs; Q2-26 print due 4 Aug is the next catalyst</div></div><div class="rr-item"><div class="rr-dot"></div><div>Profitability inflection is real and durable — $5.6B FY25 GAAP operating income (~2x YoY) + ~$11B run-rate free cash flow</div></div><div class="rr-item"><div class="rr-dot"></div><div>Dominant two-sided network: Mobility 57% of FY25 rev + Delivery bookings now ≈ Mobility size; Uber One &gt;50M members + advertising add high-margin layers</div></div><div class="rr-item"><div class="rr-dot"></div><div>$20B buyback authorization (first-ever) funded by the FCF engine — share-count return story already shrinking the float as price keeps drifting</div></div></div>
+          <div class="rr-col risks"><h4>Risks</h4><div class="rr-item bold-risk"><div class="rr-dot"></div><div><strong>AUTONOMOUS VEHICLES are an existential two-sided bet — if Waymo/Tesla robotaxis disintermediate the driver network, Uber&#x27;s core Mobility economics could be hollowed out; if Uber becomes the demand aggregator across AV operators, it&#x27;s a moat. The market can&#x27;t price this, and it&#x27;s the single biggest swing factor — and the source of the ~28% drawdown from $102 to ~$72 even as fundamentals reaccelerated</strong></div></div><div class="rr-item"><div class="rr-dot"></div><div>TTM net income (~$8.5B / ~16% margin) is still partially flattered by the FY25 ~$5B one-off Dutch deferred-tax benefit — run-rate earnings closer to $6–7B; don&#x27;t anchor to the 17x trailing P/E</div></div><div class="rr-item"><div class="rr-dot"></div><div>Pricing-practice investigations (&#x27;dramatically different&#x27; prices for same rides) + persistent gig-economy driver-classification / regulatory risk across US/EU; reported revenue growth (+14% in Q1) ran ~9pp behind bookings due to business-model accounting shifts</div></div></div>
         </div>
       </div>
     </div>
@@ -430,13 +430,13 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
           <div class="agent">🪨 Steady</div>
           <div class="stance" style="color:var(--green);">BUY</div>
           
-          <div class="rationale">Q1-26 bookings +25% on a base this size — that&#x27;s reacceleration, not decel; category-leader network, $11B FCF, ~19x fwd, $20B buyback shrinking float into weakness. Sized for a long-term core position, AV optionality is now lean-in not lean-out</div>
+          <div class="rationale">Q1-26 bookings +25% on a base this size — that&#x27;s reacceleration, not decel; category-leader network, $11B FCF, ~19x fwd, $20B buyback shrinking float into weakness. Sized for a long-term core position, AV optionality is now lean-in not lean-out. Q2-26 print due 4 Aug is the next tell</div>
         </div>
         <div class="verdict-chip">
           <div class="agent">📉 Dippy</div>
           <div class="stance" style="color:var(--green);">BUY</div>
           
-          <div class="rationale">right at 52w low ($67) ~32% off highs while fundamentals reaccelerated — that&#x27;s the textbook divergence I hunt for; no yield is the one knock, but ~13x P/FCF on a growing FCF base with PEG ~0.68 is fear-priced enough to act</div>
+          <div class="rationale">still ~28% off highs at $72.46 while fundamentals reaccelerated — the textbook divergence I hunt for; no yield is the one knock, but ~14x P/FCF on a growing FCF base with PEG ~0.7 is fear-priced enough to act ahead of the 4 Aug print</div>
         </div>
         <div class="verdict-chip">
           <div class="agent">🎩 Warren</div>
@@ -450,11 +450,11 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
         <div class="ov-detail">
           <div class="ov-label">Smartmall Overall Stance</div>
           <div class="ov-target"><strong>BUY — accumulate at these levels</strong> · Fair value target <strong>$95–105 (12–18mo, ~22x normalized FCF/earnings on continued FCF growth + buyback support)</strong></div>
-          <div class="ov-add-zone">Add zone: <strong>$67–72 — current zone right at 52w lows is the most attractive entry since the drawdown started; Q1-26 reaccel + cheaper price justify bumping from starter to core size. Steady &amp; Dippy both green; Warren warming. Sub-$65 would warrant aggressive accumulation</strong></div>
+          <div class="ov-add-zone">Add zone: <strong>$68–74 — $72.46 still inside the accumulation zone with the 52w low ($68.61) close below; Q1-26 reaccel + cheap multiples justify core-size buys, though holding a tranche back for the 4 Aug Q2-26 print is prudent. Steady &amp; Dippy both green; Warren warming. Sub-$68 would warrant aggressive accumulation</strong></div>
         </div>
       </div>
     </div>
-    <div class="footer">Generated by Smartmall · FY2025 Sankey from Uber Q4/Full-Year 2025 release &amp; FY2025 10-K; Q1-26 figures from 6 May 2026 earnings release (revenue $13.2B, bookings $53.7B, FCF $2.3B, GAAP op income $1.9B, cash $6.1B, Uber One &gt;50M); price $69.75 / market cap ~$143B / trailing P/E ~17x / fwd P/E ~19x / EV/FCF ~14.8x / PEG ~0.68 as of 2026-06-20 (stockanalysis/CNBC/Yahoo). APPROXIMATE/flagged: cash &amp; debt rounded; FY25 Sankey non-operating &amp; tax derived to reconcile $5.57B op income to $10.05B net (incl. ~$5B Dutch deferred-tax benefit); normalized P/E ~24–27x is an estimate. DR AVAILABILITY: no Thai DR for UBER on the SET (not in Bualuang/BLS DR list) — USD-only, requires offshore brokerage (IBKR / Tiger / Webull). Refresh before acting. Transparent independent scoring, not a live feed · layout inspired by Simply Wall St · not financial advice.</div>
+    <div class="footer">Generated by Smartmall · FY2025 Sankey from Uber Q4/Full-Year 2025 release &amp; FY2025 10-K; Q1-26 figures from 6 May 2026 earnings release (revenue $13.2B, bookings $53.7B, FCF $2.3B, GAAP op income $1.9B, cash $6.1B, Uber One &gt;50M); price $72.46 (2026-07-18 close) / market cap ~$152B / trailing P/E ~17.3x / fwd P/E ~19.1x / EV/FCF ~15x / PEG ~0.7 (stockanalysis/CNBC/Yahoo/companiesmarketcap). Next data point: Q2-26 earnings due 4 Aug 2026. APPROXIMATE/flagged: cash &amp; debt rounded; FY25 Sankey non-operating &amp; tax derived to reconcile $5.57B op income to $10.05B net (incl. ~$5B Dutch deferred-tax benefit); normalized P/E ~24–27x is an estimate. DR AVAILABILITY: no Thai DR for UBER on the SET (not in Bualuang/BLS DR list) — USD-only, requires offshore brokerage (IBKR / Tiger / Webull). Refresh before acting. Transparent independent scoring, not a live feed · layout inspired by Simply Wall St · not financial advice.</div>
   </main>
 </div>
 <script>

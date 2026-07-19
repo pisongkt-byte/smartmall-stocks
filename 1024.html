@@ -7,12 +7,12 @@
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
-  --bg: #0f1923; --surface: #172130; --surface-2: #1c2a3d; --border: #253347;
-  --teal: #00c4b4; --teal-mid: #00a99d; --teal-dim: rgba(0,196,180,0.15); --teal-fill: rgba(0,196,180,0.22);
-  --orange: #f58b42; --orange-mid: #e07030; --orange-dim: rgba(245,139,66,0.18);
-  --green: #30d97b; --green-dim: rgba(48,217,123,0.15); --red: #e85d5d; --red-dim: rgba(232,93,93,0.15);
-  --amber: #f5c842; --text-1: #e8edf5; --text-2: #8fa3bf; --text-3: #526070;
-  --number: #c9d9ed; --tag-bg: #1a3550; --badge-teal: #0a3030; --score-track: #1e2e40;
+  --bg: #19243c; --surface: #222f49; --surface-2: #2c3b58; --border: #3a4c6b;
+  --teal: #17dbc9; --teal-mid: #00c4b4; --teal-dim: rgba(23,219,201,0.15); --teal-fill: rgba(23,219,201,0.22);
+  --orange: #f0995e; --orange-mid: #dd8449; --orange-dim: rgba(240,153,94,0.18);
+  --green: #3ee08a; --green-dim: rgba(62,224,138,0.15); --red: #ef6a6a; --red-dim: rgba(239,106,106,0.15);
+  --amber: #f3d074; --text-1: #eef3fb; --text-2: #b0c1d8; --text-3: #8295ac;
+  --number: #d6e2f2; --tag-bg: #23406a; --badge-teal: #0c3a38; --score-track: #2c3b58;
 }
 html { scroll-behavior: smooth; }
 body { background: var(--bg); color: var(--text-1); font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Segoe UI', Arial, sans-serif; line-height: 1.5; min-height: 100vh; display: flex; justify-content: center; padding: 40px 20px 80px; }
@@ -53,14 +53,14 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
 .price-sub { font-size: 13px; color: var(--text-3); margin-top: 6px; }
 .badges { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
 .badge { display: inline-flex; align-items: center; gap: 5px; padding: 5px 11px; border-radius: 100px; font-size: 11.5px; font-weight: 600; letter-spacing: 0.02em; }
-.badge-teal { background: var(--teal-dim); color: var(--teal); border: 1px solid rgba(0,196,180,0.3); }
-.badge-orange { background: var(--orange-dim); color: var(--orange); border: 1px solid rgba(245,139,66,0.3); }
+.badge-teal { background: var(--teal-dim); color: var(--teal); border: 1px solid rgba(23,219,201,0.3); }
+.badge-orange { background: var(--orange-dim); color: var(--orange); border: 1px solid rgba(240,153,94,0.3); }
 .badge-muted { background: var(--surface-2); color: var(--text-2); border: 1px solid var(--border); }
 .range-bar-wrap { margin-top: 4px; }
 .range-label { display: flex; justify-content: space-between; font-size: 11.5px; color: var(--text-3); margin-bottom: 8px; }
 .range-bar-track { height: 6px; border-radius: 4px; background: var(--surface-2); position: relative; overflow: visible; }
 .range-bar-fill { height: 100%; border-radius: 4px; background: linear-gradient(90deg, var(--teal-mid) 0%, var(--teal) 100%); }
-.range-bar-marker { position: absolute; top: 50%; transform: translate(-50%, -50%); width: 14px; height: 14px; border-radius: 50%; background: #fff; border: 2px solid var(--teal); box-shadow: 0 0 0 3px rgba(0,196,180,0.3); }
+.range-bar-marker { position: absolute; top: 50%; transform: translate(-50%, -50%); width: 14px; height: 14px; border-radius: 50%; background: #fff; border: 2px solid var(--teal); box-shadow: 0 0 0 3px rgba(23,219,201,0.3); }
 .range-bar-label { position: absolute; bottom: -20px; transform: translateX(-50%); font-size: 11px; font-weight: 700; color: var(--text-1); white-space: nowrap; }
 .range-sublabels { margin-top: 22px; font-size: 11.5px; color: var(--text-3); display: flex; justify-content: space-between; }
 .range-sublabels span { font-weight: 600; color: var(--text-2); }
@@ -109,9 +109,9 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
 .verdict-chip { background: var(--surface-2); border: 1px solid var(--border); border-radius: 14px; padding: 20px; }
 .verdict-chip .agent { font-size: 11px; font-weight: 700; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
 .verdict-chip .stance { font-size: 15px; font-weight: 800; color: var(--text-1); margin-bottom: 6px; }
-.verdict-chip .conviction { display: inline-block; font-size: 10.5px; font-weight: 700; padding: 2px 8px; border-radius: 100px; background: var(--teal-dim); color: var(--teal); margin-bottom: 8px; border: 1px solid rgba(0,196,180,0.25); }
+.verdict-chip .conviction { display: inline-block; font-size: 10.5px; font-weight: 700; padding: 2px 8px; border-radius: 100px; background: var(--teal-dim); color: var(--teal); margin-bottom: 8px; border: 1px solid rgba(23,219,201,0.25); }
 .verdict-chip .rationale { font-size: 12px; color: var(--text-3); line-height: 1.5; }
-.overall-verdict { background: linear-gradient(135deg, rgba(0,196,180,0.12) 0%, rgba(0,169,157,0.06) 100%); border: 1px solid rgba(0,196,180,0.3); border-radius: 14px; padding: 24px 28px; display: flex; align-items: center; gap: 24px; }
+.overall-verdict { background: linear-gradient(135deg, rgba(23,219,201,0.12) 0%, rgba(0,169,157,0.06) 100%); border: 1px solid rgba(23,219,201,0.3); border-radius: 14px; padding: 24px 28px; display: flex; align-items: center; gap: 24px; }
 .ov-stance { font-size: 28px; font-weight: 900; color: var(--teal); letter-spacing: -0.02em; flex-shrink: 0; }
 .ov-detail { flex: 1; }
 .ov-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-3); margin-bottom: 4px; }
@@ -175,7 +175,7 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
           <div class="header-price">
             <div class="price-big">฿2.38</div>
             <div class="price-secondary">≈ HK$43.28</div>
-            <div class="price-sub">as of 2026-07-19</div>
+            <div class="price-sub">as of 2026-07-19 (last close 2026-07-17)</div>
             <div class="hero-verdict"><span class="hv-stance" style="color:var(--green);border-color:var(--green);">WATCH</span><span class="hv-score"><b>16</b>/30</span></div>
           </div>
         </div>
@@ -193,7 +193,7 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
             <span>Distance from low: <span>+9%</span></span>
           </div>
         </div>
-        <div class="stat-row" style="margin-top:28px;margin-bottom:0;"><div class="stat-pill"><div class="stat-pill-label">Market Cap</div><div class="stat-pill-value">~HK$189B (~$24B)</div></div><div class="stat-pill"><div class="stat-pill-label">Trailing P/E</div><div class="stat-pill-value">~9.0x</div></div><div class="stat-pill"><div class="stat-pill-label">Fwd P/E</div><div class="stat-pill-value">~9.0x</div></div><div class="stat-pill"><div class="stat-pill-label">P/S</div><div class="stat-pill-value">~1.4x</div></div><div class="stat-pill"><div class="stat-pill-label">EV/earnings (ex-cash)</div><div class="stat-pill-value">~3x</div><div class="stat-pill-sub">net cash = 65% of cap</div></div><div class="stat-pill"><div class="stat-pill-label">DAU / MAU (Q1&#x27;26)</div><div class="stat-pill-value">413M / 772M</div></div></div>
+        <div class="stat-row" style="margin-top:28px;margin-bottom:0;"><div class="stat-pill"><div class="stat-pill-label">Market Cap</div><div class="stat-pill-value">~HK$186B (~$23.8B)</div></div><div class="stat-pill"><div class="stat-pill-label">Trailing P/E</div><div class="stat-pill-value">~9.3x</div></div><div class="stat-pill"><div class="stat-pill-label">Fwd P/E</div><div class="stat-pill-value">~9.0x</div></div><div class="stat-pill"><div class="stat-pill-label">P/S</div><div class="stat-pill-value">~1.4x</div></div><div class="stat-pill"><div class="stat-pill-label">EV/earnings (ex-cash)</div><div class="stat-pill-value">~3x</div><div class="stat-pill-sub">net cash = 65% of cap</div></div><div class="stat-pill"><div class="stat-pill-label">DAU / MAU (Q1&#x27;26)</div><div class="stat-pill-value">413M / 772M</div></div></div>
       </div>
     </div>
     <div class="section" id="s2">
@@ -275,7 +275,7 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
       <div class="card">
         <div class="snowflake-grid">
           <div style="display:flex;flex-direction:column;align-items:center;">
-            <svg width="240" height="240" viewBox="-175 -125 350 250"><defs><style>.ring{fill:none;stroke:rgba(255,255,255,0.06);stroke-width:1;}.ring-bright{fill:none;stroke:rgba(255,255,255,0.12);stroke-width:1;}.axis-line{stroke:rgba(255,255,255,0.08);stroke-width:1;}.score-poly{fill:rgba(0,196,180,0.22);stroke:#00c4b4;stroke-width:2;}</style></defs><polygon class="ring" points="0.00,-15.00 14.27,-4.64 8.82,12.14 -8.82,12.14 -14.27,-4.64"/><polygon class="ring" points="0.00,-30.00 28.53,-9.27 17.63,24.27 -17.63,24.27 -28.53,-9.27"/><polygon class="ring" points="0.00,-45.00 42.80,-13.91 26.45,36.41 -26.45,36.41 -42.80,-13.91"/><polygon class="ring" points="0.00,-60.00 57.06,-18.54 35.27,48.54 -35.27,48.54 -57.06,-18.54"/><polygon class="ring ring-bright" points="0.00,-75.00 71.33,-23.18 44.08,60.68 -44.08,60.68 -71.33,-23.18"/><polygon class="ring ring-bright" points="0.00,-90.00 85.60,-27.81 52.90,72.81 -52.90,72.81 -85.60,-27.81"/><line class="axis-line" x1="0" y1="0" x2="0.00" y2="-90.00"/><line class="axis-line" x1="0" y1="0" x2="85.60" y2="-27.81"/><line class="axis-line" x1="0" y1="0" x2="52.90" y2="72.81"/><line class="axis-line" x1="0" y1="0" x2="-52.90" y2="72.81"/><line class="axis-line" x1="0" y1="0" x2="-85.60" y2="-27.81"/><polygon class="score-poly" points="0.00,-75.00 28.53,-9.27 26.45,36.41 -52.90,72.81 0.00,0.00"/><text x="0.0" y="-96.3" text-anchor="middle" font-size="8.5" fill="#8fa3bf">Value</text><text x="95.6" y="-29.8" text-anchor="start" font-size="8.5" fill="#8fa3bf">Future</text><text x="60.6" y="83.9" text-anchor="start" font-size="8.5" fill="#8fa3bf">Past</text><text x="-60.6" y="83.9" text-anchor="end" font-size="8.5" fill="#8fa3bf">Health</text><text x="-95.6" y="-29.8" text-anchor="end" font-size="8.5" fill="#8fa3bf">Dividend</text><circle cx="0.00" cy="-75.00" r="4" fill="#00c4b4"/><circle cx="28.53" cy="-9.27" r="4" fill="#f58b42"/><circle cx="26.45" cy="36.41" r="4" fill="#00c4b4"/><circle cx="-52.90" cy="72.81" r="4" fill="#00c4b4"/><circle cx="0.00" cy="0.00" r="4" fill="#f58b42"/></svg>
+            <svg width="240" height="240" viewBox="-175 -125 350 250"><defs><style>.ring{fill:none;stroke:rgba(255,255,255,0.06);stroke-width:1;}.ring-bright{fill:none;stroke:rgba(255,255,255,0.12);stroke-width:1;}.axis-line{stroke:rgba(255,255,255,0.08);stroke-width:1;}.score-poly{fill:rgba(23,219,201,0.22);stroke:#17dbc9;stroke-width:2;}</style></defs><polygon class="ring" points="0.00,-15.00 14.27,-4.64 8.82,12.14 -8.82,12.14 -14.27,-4.64"/><polygon class="ring" points="0.00,-30.00 28.53,-9.27 17.63,24.27 -17.63,24.27 -28.53,-9.27"/><polygon class="ring" points="0.00,-45.00 42.80,-13.91 26.45,36.41 -26.45,36.41 -42.80,-13.91"/><polygon class="ring" points="0.00,-60.00 57.06,-18.54 35.27,48.54 -35.27,48.54 -57.06,-18.54"/><polygon class="ring ring-bright" points="0.00,-75.00 71.33,-23.18 44.08,60.68 -44.08,60.68 -71.33,-23.18"/><polygon class="ring ring-bright" points="0.00,-90.00 85.60,-27.81 52.90,72.81 -52.90,72.81 -85.60,-27.81"/><line class="axis-line" x1="0" y1="0" x2="0.00" y2="-90.00"/><line class="axis-line" x1="0" y1="0" x2="85.60" y2="-27.81"/><line class="axis-line" x1="0" y1="0" x2="52.90" y2="72.81"/><line class="axis-line" x1="0" y1="0" x2="-52.90" y2="72.81"/><line class="axis-line" x1="0" y1="0" x2="-85.60" y2="-27.81"/><polygon class="score-poly" points="0.00,-75.00 28.53,-9.27 26.45,36.41 -52.90,72.81 0.00,0.00"/><text x="0.0" y="-96.3" text-anchor="middle" font-size="8.5" fill="#8fa3bf">Value</text><text x="95.6" y="-29.8" text-anchor="start" font-size="8.5" fill="#8fa3bf">Future</text><text x="60.6" y="83.9" text-anchor="start" font-size="8.5" fill="#8fa3bf">Past</text><text x="-60.6" y="83.9" text-anchor="end" font-size="8.5" fill="#8fa3bf">Health</text><text x="-95.6" y="-29.8" text-anchor="end" font-size="8.5" fill="#8fa3bf">Dividend</text><circle cx="0.00" cy="-75.00" r="4" fill="#17dbc9"/><circle cx="28.53" cy="-9.27" r="4" fill="#f0995e"/><circle cx="26.45" cy="36.41" r="4" fill="#17dbc9"/><circle cx="-52.90" cy="72.81" r="4" fill="#17dbc9"/><circle cx="0.00" cy="0.00" r="4" fill="#f0995e"/></svg>
             <div class="snowflake-total">
               <div><span class="num">16</span><span class="denom" style="font-size:18px;color:var(--text-3);"> / 30</span></div>
               <div class="label">Smartmall Score</div>
@@ -287,7 +287,7 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
               <div class="score-row-label" style="color:var(--teal)">Value</div>
               <div>
                 <div class="score-bar-track"><div class="score-bar-fill" style="width:83.3%;background:var(--teal)"></div></div>
-                <div class="score-rationale">~9x P/E; strip RMB 117.7B net cash and the operating business is ~3x EV/earnings — priced for terminal decline</div>
+                <div class="score-rationale">9.3x trailing P/E at HK$43.28; strip RMB 117.7B net cash and operating business trades ~3x EV/earnings — priced as if terminal</div>
               </div>
               <div class="score-num" style="color:var(--teal)">5/6</div>
             </div>
@@ -295,7 +295,7 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
               <div class="score-row-label" style="color:var(--orange)">Future</div>
               <div>
                 <div class="score-bar-track"><div class="score-bar-fill" style="width:33.3%;background:var(--orange)"></div></div>
-                <div class="score-rationale">group rev +3.4% only; ads +9.3%, Kling +300% but ~2% of rev; no near-term profit growth (adj net −26%)</div>
+                <div class="score-rationale">group rev +3.4% only; ads +9.3%; Kling AI 3.0 (Feb&#x27;26) hit RMB 650M/qtr (+3x YoY) but still ~2% of group; profit shrinking near-term</div>
               </div>
               <div class="score-num" style="color:var(--orange)">2/6</div>
             </div>
@@ -311,7 +311,7 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
               <div class="score-row-label" style="color:var(--teal)">Health</div>
               <div>
                 <div class="score-bar-track"><div class="score-bar-fill" style="width:100.0%;background:var(--teal)"></div></div>
-                <div class="score-rationale">fortress: RMB 117.7B net cash (~65% of mkt cap), minimal debt, active buyback</div>
+                <div class="score-rationale">fortress: RMB 117.7B net cash (~65% of mkt cap), minimal debt, active buyback executing (RMB ~854M YTD)</div>
               </div>
               <div class="score-num" style="color:var(--teal)">6/6</div>
             </div>
@@ -319,7 +319,7 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
               <div class="score-row-label" style="color:var(--orange)">Dividend</div>
               <div>
                 <div class="score-bar-track"><div class="score-bar-fill" style="width:0.0%;background:var(--orange)"></div></div>
-                <div class="score-rationale">no dividend — fails the cash-cow thesis</div>
+                <div class="score-rationale">no dividend — fails the cash-cow thesis; buyback is partial substitute only</div>
               </div>
               <div class="score-num" style="color:var(--orange)">0/6</div>
             </div>
@@ -342,7 +342,7 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
       <div class="section-header"><div class="section-num">5</div><div class="section-title">Past Performance</div></div>
       <div class="card">
         <div style="font-size:12.5px;color:var(--text-3);margin-bottom:20px;">Revenue (RMB B)</div>
-        <svg viewBox="0 0 720 240" width="100%" style="font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;overflow:visible;"><line x1="0" y1="220.0" x2="720" y2="220.0" stroke="rgba(255,255,255,0.08)" stroke-width="1"/><line x1="0" y1="148.8" x2="720" y2="148.8" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="4,4"/><line x1="0" y1="77.5" x2="720" y2="77.5" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="4,4"/><rect x="20.0" y="112.4" width="120.0" height="107.6" rx="5" fill="#00c4b4" opacity="0.55"/><text x="80.0" y="107.4" font-size="11" font-weight="700" fill="#00c4b4" text-anchor="middle">HKD81B</text><text x="80.0" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">2021</text><rect x="160.0" y="95.1" width="120.0" height="124.9" rx="5" fill="#00c4b4" opacity="0.62"/><text x="220.0" y="90.1" font-size="11" font-weight="700" fill="#00c4b4" text-anchor="middle">HKD94B</text><text x="220.0" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">2022</text><rect x="300.0" y="69.9" width="120.0" height="150.1" rx="5" fill="#00c4b4" opacity="0.69"/><text x="360.0" y="64.9" font-size="11" font-weight="700" fill="#00c4b4" text-anchor="middle">HKD113B</text><text x="360.0" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">2023</text><rect x="440.0" y="51.3" width="120.0" height="168.7" rx="5" fill="#00c4b4" opacity="0.76"/><text x="500.0" y="46.3" font-size="11" font-weight="700" fill="#00c4b4" text-anchor="middle">HKD127B</text><text x="500.0" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">2024</text><rect x="580.0" y="30.0" width="120.0" height="190.0" rx="5" fill="#00c4b4" opacity="1.00"/><rect x="580.0" y="30.0" width="120.0" height="190.0" rx="5" fill="none" stroke="#00c4b4" stroke-width="1.5" opacity="0.5"/><text x="640.0" y="25.0" font-size="11" font-weight="700" fill="#00c4b4" text-anchor="middle">HKD143B</text><text x="640.0" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">2025</text></svg>
+        <svg viewBox="0 0 720 240" width="100%" style="font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;overflow:visible;"><line x1="0" y1="220.0" x2="720" y2="220.0" stroke="rgba(255,255,255,0.08)" stroke-width="1"/><line x1="0" y1="148.8" x2="720" y2="148.8" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="4,4"/><line x1="0" y1="77.5" x2="720" y2="77.5" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="4,4"/><rect x="20.0" y="112.4" width="120.0" height="107.6" rx="5" fill="#17dbc9" opacity="0.55"/><text x="80.0" y="107.4" font-size="11" font-weight="700" fill="#17dbc9" text-anchor="middle">HKD81B</text><text x="80.0" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">2021</text><rect x="160.0" y="95.1" width="120.0" height="124.9" rx="5" fill="#17dbc9" opacity="0.62"/><text x="220.0" y="90.1" font-size="11" font-weight="700" fill="#17dbc9" text-anchor="middle">HKD94B</text><text x="220.0" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">2022</text><rect x="300.0" y="69.9" width="120.0" height="150.1" rx="5" fill="#17dbc9" opacity="0.69"/><text x="360.0" y="64.9" font-size="11" font-weight="700" fill="#17dbc9" text-anchor="middle">HKD113B</text><text x="360.0" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">2023</text><rect x="440.0" y="51.3" width="120.0" height="168.7" rx="5" fill="#17dbc9" opacity="0.76"/><text x="500.0" y="46.3" font-size="11" font-weight="700" fill="#17dbc9" text-anchor="middle">HKD127B</text><text x="500.0" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">2024</text><rect x="580.0" y="30.0" width="120.0" height="190.0" rx="5" fill="#17dbc9" opacity="1.00"/><rect x="580.0" y="30.0" width="120.0" height="190.0" rx="5" fill="none" stroke="#17dbc9" stroke-width="1.5" opacity="0.5"/><text x="640.0" y="25.0" font-size="11" font-weight="700" fill="#17dbc9" text-anchor="middle">HKD143B</text><text x="640.0" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">2025</text></svg>
         <div class="note-box" style="margin-top:16px;">2021–2024 reported actuals; 2025 ≈ estimate (+12.5% FY25 per company). Revenue keeps growing but profit inflected down in early 2026.</div>
       </div>
     </div>
@@ -353,27 +353,27 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
         
         <div class="growth-row">
           <div class="growth-label">Group revenue (Q1&#x27;26)</div>
-          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:0%;background:linear-gradient(90deg,#00c4b4,#00a99d);">+3.4% YoY</div></div>
+          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:0%;background:linear-gradient(90deg,#17dbc9,#00c4b4);">+3.4% YoY</div></div>
           <div class="growth-value" style="color:var(--teal);">+3.4% YoY</div>
         </div>
         <div class="growth-row">
           <div class="growth-label">Online marketing / ads</div>
-          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:15%;background:linear-gradient(90deg,#00c4b4,#00a99d);">+9.3% YoY</div></div>
+          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:15%;background:linear-gradient(90deg,#17dbc9,#00c4b4);">+9.3% YoY</div></div>
           <div class="growth-value" style="color:var(--teal);">+9.3% YoY</div>
         </div>
         <div class="growth-row">
           <div class="growth-label">E-commerce GMV (FY25)</div>
-          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:15%;background:linear-gradient(90deg,#00c4b4,#00a99d);">RMB 1,598B</div></div>
+          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:15%;background:linear-gradient(90deg,#17dbc9,#00c4b4);">RMB 1,598B</div></div>
           <div class="growth-value" style="color:var(--teal);">RMB 1,598B</div>
         </div>
         <div class="growth-row">
           <div class="growth-label">Kling AI revenue</div>
-          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:0%;background:linear-gradient(90deg,#00c4b4,#00a99d);">~$500M ARR</div></div>
+          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:0%;background:linear-gradient(90deg,#17dbc9,#00c4b4);">~$500M ARR</div></div>
           <div class="growth-value" style="color:var(--teal);">~$500M ARR</div>
         </div>
         <div class="growth-row">
           <div class="growth-label">Adjusted net profit (Q1&#x27;26)</div>
-          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:0%;background:linear-gradient(90deg,#00c4b4,#00a99d);">−26% YoY</div></div>
+          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:0%;background:linear-gradient(90deg,#17dbc9,#00c4b4);">−26% YoY</div></div>
           <div class="growth-value" style="color:var(--teal);">−26% YoY</div>
         </div>
         <div class="note-box" style="margin-top:20px;">The bull leg is Kling + ad recovery + live-streaming runoff annualizing out; the bear leg is a permanent margin reset. Group growth has collapsed to low-single-digits for now.</div>
@@ -383,12 +383,12 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
       <div class="section-header"><div class="section-num">7</div><div class="section-title">Financial Health</div></div>
       <div class="card">
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px;align-items:end;">
-          <div style="background:var(--teal-dim);border:1px solid rgba(0,196,180,0.3);border-radius:12px;padding:20px;">
+          <div style="background:var(--teal-dim);border:1px solid rgba(23,219,201,0.3);border-radius:12px;padding:20px;">
             <div style="font-size:11px;color:var(--teal);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;font-weight:700;">Cash &amp; Equivalents</div>
             <div style="font-size:34px;font-weight:900;color:var(--teal);letter-spacing:-0.03em;">HKD117.7B</div>
             <div class="health-bar-track" style="margin-top:12px;"><div class="health-bar-fill" style="width:100%;background:var(--teal);"></div></div>
           </div>
-          <div style="background:rgba(245,139,66,0.08);border:1px solid rgba(245,139,66,0.2);border-radius:12px;padding:20px;">
+          <div style="background:rgba(240,153,94,0.08);border:1px solid rgba(240,153,94,0.2);border-radius:12px;padding:20px;">
             <div style="font-size:11px;color:var(--orange);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;font-weight:700;">Total Debt</div>
             <div style="font-size:34px;font-weight:900;color:var(--orange);letter-spacing:-0.03em;">HKD5B</div>
             <div class="health-bar-track" style="margin-top:12px;"><div class="health-bar-fill" style="width:4%;background:var(--orange);"></div></div>
@@ -414,7 +414,7 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
           <div class="health-bar-track"><div class="health-bar-fill" style="width:0%;background:amber;"></div></div>
           <div class="health-value">10.0%</div>
         </div>
-        <div class="note-box orange" style="margin-top:16px;">Fortress balance sheet — ~USD 16B net cash against a ~USD 24B market cap. Active buyback (RMB ~854M executed YTD; total authorization not disclosed). This net-cash floor is what limits downside and substitutes for the missing dividend.</div>
+        <div class="note-box orange" style="margin-top:16px;">Fortress balance sheet — ~USD 16B net cash against a ~USD 23.8B market cap at HK$43.28. Active buyback (RMB ~854M executed YTD; total authorization not disclosed). This net-cash floor is what limits downside and substitutes for the missing dividend.</div>
       </div>
     </div>
     <div class="section" id="s8">
@@ -469,7 +469,7 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
         <div class="ov-detail">
           <div class="ov-label">Smartmall Overall Stance</div>
           <div class="ov-target"><strong>WATCH (Medium conviction) — council 1 Buy-Dip / 2 Pass / 1 Too-Hard. Genuinely cheap + fortress balance sheet, but off-thesis (neither cash-cow nor high-growth) and the book is already concentrated in China-internet.</strong> · Fair value target <strong>Fair value ~HK$48–58 (DR ~฿2.7–3.2) on margin stabilization; bull HK$65+ if Kling inflects; bear HK$30–35 if the margin reset proves structural.</strong></div>
-          <div class="ov-add-zone">Add zone: <strong>⚡ SUGGEST BUY (starter ≤3%, China-bucket swap only — do NOT add net China-internet beta) when ANY of: (1) PRICE — DR KUAISH01 ≤ ฿2.20–2.30 (underlying HK$38–40), Dippy&#x27;s washout add-zone [now ฿2.38, just above trigger; 52w low ฿2.12]; (2) PROFIT — adjusted net profit growth turns POSITIVE YoY (margins stop bleeding + ads reaccelerate to double-digits); (3) KLING — reaches ≥8–10% of revenue while still growing triple-digits near breakeven. WALK / avoid if ad growth stalls toward zero WHILE margins stay at 10% (= Douyin taking share + structural reset at once). Verify DR conversion ratio + liquidity before sizing.</strong></div>
+          <div class="ov-add-zone">Add zone: <strong>⚡ SUGGEST BUY (starter ≤3%, China-bucket swap only — do NOT add net China-internet beta) when ANY of: (1) PRICE — DR KUAISH01 ≤ ฿2.20–2.30 (underlying HK$38–40), Dippy&#x27;s washout add-zone [now ฿2.38 / HK$43.28, ~8% above trigger; 52w low ฿2.18/HK$39.72]; (2) PROFIT — adjusted net profit growth turns POSITIVE YoY (margins stop bleeding + ads reaccelerate to double-digits); (3) KLING — reaches ≥8–10% of revenue while still growing triple-digits near breakeven. WALK / avoid if ad growth stalls toward zero WHILE margins stay at 10% (= Douyin taking share + structural reset at once). Verify DR conversion ratio + liquidity before sizing.</strong></div>
         </div>
       </div>
     </div>

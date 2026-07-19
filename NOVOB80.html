@@ -7,12 +7,12 @@
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
-  --bg: #0f1923; --surface: #172130; --surface-2: #1c2a3d; --border: #253347;
-  --teal: #00c4b4; --teal-mid: #00a99d; --teal-dim: rgba(0,196,180,0.15); --teal-fill: rgba(0,196,180,0.22);
-  --orange: #f58b42; --orange-mid: #e07030; --orange-dim: rgba(245,139,66,0.18);
-  --green: #30d97b; --green-dim: rgba(48,217,123,0.15); --red: #e85d5d; --red-dim: rgba(232,93,93,0.15);
-  --amber: #f5c842; --text-1: #e8edf5; --text-2: #8fa3bf; --text-3: #526070;
-  --number: #c9d9ed; --tag-bg: #1a3550; --badge-teal: #0a3030; --score-track: #1e2e40;
+  --bg: #19243c; --surface: #222f49; --surface-2: #2c3b58; --border: #3a4c6b;
+  --teal: #17dbc9; --teal-mid: #00c4b4; --teal-dim: rgba(23,219,201,0.15); --teal-fill: rgba(23,219,201,0.22);
+  --orange: #f0995e; --orange-mid: #dd8449; --orange-dim: rgba(240,153,94,0.18);
+  --green: #3ee08a; --green-dim: rgba(62,224,138,0.15); --red: #ef6a6a; --red-dim: rgba(239,106,106,0.15);
+  --amber: #f3d074; --text-1: #eef3fb; --text-2: #b0c1d8; --text-3: #8295ac;
+  --number: #d6e2f2; --tag-bg: #23406a; --badge-teal: #0c3a38; --score-track: #2c3b58;
 }
 html { scroll-behavior: smooth; }
 body { background: var(--bg); color: var(--text-1); font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Segoe UI', Arial, sans-serif; line-height: 1.5; min-height: 100vh; display: flex; justify-content: center; padding: 40px 20px 80px; }
@@ -53,14 +53,14 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
 .price-sub { font-size: 13px; color: var(--text-3); margin-top: 6px; }
 .badges { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
 .badge { display: inline-flex; align-items: center; gap: 5px; padding: 5px 11px; border-radius: 100px; font-size: 11.5px; font-weight: 600; letter-spacing: 0.02em; }
-.badge-teal { background: var(--teal-dim); color: var(--teal); border: 1px solid rgba(0,196,180,0.3); }
-.badge-orange { background: var(--orange-dim); color: var(--orange); border: 1px solid rgba(245,139,66,0.3); }
+.badge-teal { background: var(--teal-dim); color: var(--teal); border: 1px solid rgba(23,219,201,0.3); }
+.badge-orange { background: var(--orange-dim); color: var(--orange); border: 1px solid rgba(240,153,94,0.3); }
 .badge-muted { background: var(--surface-2); color: var(--text-2); border: 1px solid var(--border); }
 .range-bar-wrap { margin-top: 4px; }
 .range-label { display: flex; justify-content: space-between; font-size: 11.5px; color: var(--text-3); margin-bottom: 8px; }
 .range-bar-track { height: 6px; border-radius: 4px; background: var(--surface-2); position: relative; overflow: visible; }
 .range-bar-fill { height: 100%; border-radius: 4px; background: linear-gradient(90deg, var(--teal-mid) 0%, var(--teal) 100%); }
-.range-bar-marker { position: absolute; top: 50%; transform: translate(-50%, -50%); width: 14px; height: 14px; border-radius: 50%; background: #fff; border: 2px solid var(--teal); box-shadow: 0 0 0 3px rgba(0,196,180,0.3); }
+.range-bar-marker { position: absolute; top: 50%; transform: translate(-50%, -50%); width: 14px; height: 14px; border-radius: 50%; background: #fff; border: 2px solid var(--teal); box-shadow: 0 0 0 3px rgba(23,219,201,0.3); }
 .range-bar-label { position: absolute; bottom: -20px; transform: translateX(-50%); font-size: 11px; font-weight: 700; color: var(--text-1); white-space: nowrap; }
 .range-sublabels { margin-top: 22px; font-size: 11.5px; color: var(--text-3); display: flex; justify-content: space-between; }
 .range-sublabels span { font-weight: 600; color: var(--text-2); }
@@ -109,9 +109,9 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
 .verdict-chip { background: var(--surface-2); border: 1px solid var(--border); border-radius: 14px; padding: 20px; }
 .verdict-chip .agent { font-size: 11px; font-weight: 700; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
 .verdict-chip .stance { font-size: 15px; font-weight: 800; color: var(--text-1); margin-bottom: 6px; }
-.verdict-chip .conviction { display: inline-block; font-size: 10.5px; font-weight: 700; padding: 2px 8px; border-radius: 100px; background: var(--teal-dim); color: var(--teal); margin-bottom: 8px; border: 1px solid rgba(0,196,180,0.25); }
+.verdict-chip .conviction { display: inline-block; font-size: 10.5px; font-weight: 700; padding: 2px 8px; border-radius: 100px; background: var(--teal-dim); color: var(--teal); margin-bottom: 8px; border: 1px solid rgba(23,219,201,0.25); }
 .verdict-chip .rationale { font-size: 12px; color: var(--text-3); line-height: 1.5; }
-.overall-verdict { background: linear-gradient(135deg, rgba(0,196,180,0.12) 0%, rgba(0,169,157,0.06) 100%); border: 1px solid rgba(0,196,180,0.3); border-radius: 14px; padding: 24px 28px; display: flex; align-items: center; gap: 24px; }
+.overall-verdict { background: linear-gradient(135deg, rgba(23,219,201,0.12) 0%, rgba(0,169,157,0.06) 100%); border: 1px solid rgba(23,219,201,0.3); border-radius: 14px; padding: 24px 28px; display: flex; align-items: center; gap: 24px; }
 .ov-stance { font-size: 28px; font-weight: 900; color: var(--teal); letter-spacing: -0.02em; flex-shrink: 0; }
 .ov-detail { flex: 1; }
 .ov-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-3); margin-bottom: 4px; }
@@ -175,7 +175,7 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
           <div class="header-price">
             <div class="price-big">฿1.70</div>
             <div class="price-secondary">≈ US$50.32</div>
-            <div class="price-sub">as of 2026-07-19</div>
+            <div class="price-sub">as of 2026-07-17</div>
             <div class="hero-verdict"><span class="hv-stance" style="color:var(--text-2);border-color:var(--text-2);">HOLD</span><span class="hv-score"><b>19</b>/30</span></div>
           </div>
         </div>
@@ -183,17 +183,17 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
         
         <div style="margin-bottom:6px;font-size:12px;font-weight:600;color:var(--text-3);text-transform:uppercase;letter-spacing:0.05em;">52-Week Range</div>
         <div class="range-bar-wrap">
-          <div class="range-label"><span>1.18 &nbsp; 52W Low</span><span>52W High &nbsp; 2.34</span></div>
+          <div class="range-label"><span>1.12 &nbsp; 52W Low</span><span>52W High &nbsp; 2.36</span></div>
           <div class="range-bar-track">
-            <div class="range-bar-fill" style="width:44.8%"></div>
-            <div class="range-bar-marker" style="left:44.8%"><div class="range-bar-label">1.7</div></div>
+            <div class="range-bar-fill" style="width:46.8%"></div>
+            <div class="range-bar-marker" style="left:46.8%"><div class="range-bar-label">1.7</div></div>
           </div>
           <div class="range-sublabels" style="margin-top:28px;">
             <span>Current <span>฿1.70</span></span>
-            <span>Distance from low: <span>+44%</span></span>
+            <span>Distance from low: <span>+52%</span></span>
           </div>
         </div>
-        <div class="stat-row" style="margin-top:28px;margin-bottom:0;"><div class="stat-pill"><div class="stat-pill-label">Market Cap</div><div class="stat-pill-value">~$215.9B</div></div><div class="stat-pill"><div class="stat-pill-label">Fwd P/E</div><div class="stat-pill-value">~16.0x</div></div><div class="stat-pill"><div class="stat-pill-label">Trailing P/E</div><div class="stat-pill-value">~11.5x</div></div><div class="stat-pill"><div class="stat-pill-label">Gross Margin</div><div class="stat-pill-value">~81%</div></div><div class="stat-pill"><div class="stat-pill-label">Net Margin</div><div class="stat-pill-value">~33%</div></div><div class="stat-pill"><div class="stat-pill-label">FCF</div><div class="stat-pill-value">Positive</div></div><div class="stat-pill"><div class="stat-pill-label">Div Yield</div><div class="stat-pill-value">~2.62%</div></div></div>
+        <div class="stat-row" style="margin-top:28px;margin-bottom:0;"><div class="stat-pill"><div class="stat-pill-label">Market Cap</div><div class="stat-pill-value">~$223.5B</div></div><div class="stat-pill"><div class="stat-pill-label">Fwd P/E</div><div class="stat-pill-value">~16.6x</div></div><div class="stat-pill"><div class="stat-pill-label">Trailing P/E</div><div class="stat-pill-value">~11.9x</div></div><div class="stat-pill"><div class="stat-pill-label">Gross Margin</div><div class="stat-pill-value">~81%</div></div><div class="stat-pill"><div class="stat-pill-label">Net Margin</div><div class="stat-pill-value">~33%</div></div><div class="stat-pill"><div class="stat-pill-label">FCF</div><div class="stat-pill-value">Positive</div></div><div class="stat-pill"><div class="stat-pill-label">Div Yield</div><div class="stat-pill-value">~2.55%</div></div></div>
       </div>
     </div>
     <div class="section" id="s2">
@@ -275,7 +275,7 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
       <div class="card">
         <div class="snowflake-grid">
           <div style="display:flex;flex-direction:column;align-items:center;">
-            <svg width="240" height="240" viewBox="-175 -125 350 250"><defs><style>.ring{fill:none;stroke:rgba(255,255,255,0.06);stroke-width:1;}.ring-bright{fill:none;stroke:rgba(255,255,255,0.12);stroke-width:1;}.axis-line{stroke:rgba(255,255,255,0.08);stroke-width:1;}.score-poly{fill:rgba(0,196,180,0.22);stroke:#00c4b4;stroke-width:2;}</style></defs><polygon class="ring" points="0.00,-15.00 14.27,-4.64 8.82,12.14 -8.82,12.14 -14.27,-4.64"/><polygon class="ring" points="0.00,-30.00 28.53,-9.27 17.63,24.27 -17.63,24.27 -28.53,-9.27"/><polygon class="ring" points="0.00,-45.00 42.80,-13.91 26.45,36.41 -26.45,36.41 -42.80,-13.91"/><polygon class="ring" points="0.00,-60.00 57.06,-18.54 35.27,48.54 -35.27,48.54 -57.06,-18.54"/><polygon class="ring ring-bright" points="0.00,-75.00 71.33,-23.18 44.08,60.68 -44.08,60.68 -71.33,-23.18"/><polygon class="ring ring-bright" points="0.00,-90.00 85.60,-27.81 52.90,72.81 -52.90,72.81 -85.60,-27.81"/><line class="axis-line" x1="0" y1="0" x2="0.00" y2="-90.00"/><line class="axis-line" x1="0" y1="0" x2="85.60" y2="-27.81"/><line class="axis-line" x1="0" y1="0" x2="52.90" y2="72.81"/><line class="axis-line" x1="0" y1="0" x2="-52.90" y2="72.81"/><line class="axis-line" x1="0" y1="0" x2="-85.60" y2="-27.81"/><polygon class="score-poly" points="0.00,-45.00 42.80,-13.91 44.08,60.68 -44.08,60.68 -42.80,-13.91"/><text x="0.0" y="-96.3" text-anchor="middle" font-size="8.5" fill="#8fa3bf">Valuation</text><text x="95.6" y="-29.8" text-anchor="start" font-size="8.5" fill="#8fa3bf">Future Growth</text><text x="60.6" y="83.9" text-anchor="start" font-size="8.5" fill="#8fa3bf">Past Perf.</text><text x="-60.6" y="83.9" text-anchor="end" font-size="8.5" fill="#8fa3bf">Fin. Health</text><text x="-95.6" y="-29.8" text-anchor="end" font-size="8.5" fill="#8fa3bf">Dividend</text><circle cx="0.00" cy="-45.00" r="4" fill="#00c4b4"/><circle cx="42.80" cy="-13.91" r="4" fill="#00c4b4"/><circle cx="44.08" cy="60.68" r="4" fill="#00c4b4"/><circle cx="-44.08" cy="60.68" r="4" fill="#00c4b4"/><circle cx="-42.80" cy="-13.91" r="4" fill="#00c4b4"/></svg>
+            <svg width="240" height="240" viewBox="-175 -125 350 250"><defs><style>.ring{fill:none;stroke:rgba(255,255,255,0.06);stroke-width:1;}.ring-bright{fill:none;stroke:rgba(255,255,255,0.12);stroke-width:1;}.axis-line{stroke:rgba(255,255,255,0.08);stroke-width:1;}.score-poly{fill:rgba(23,219,201,0.22);stroke:#17dbc9;stroke-width:2;}</style></defs><polygon class="ring" points="0.00,-15.00 14.27,-4.64 8.82,12.14 -8.82,12.14 -14.27,-4.64"/><polygon class="ring" points="0.00,-30.00 28.53,-9.27 17.63,24.27 -17.63,24.27 -28.53,-9.27"/><polygon class="ring" points="0.00,-45.00 42.80,-13.91 26.45,36.41 -26.45,36.41 -42.80,-13.91"/><polygon class="ring" points="0.00,-60.00 57.06,-18.54 35.27,48.54 -35.27,48.54 -57.06,-18.54"/><polygon class="ring ring-bright" points="0.00,-75.00 71.33,-23.18 44.08,60.68 -44.08,60.68 -71.33,-23.18"/><polygon class="ring ring-bright" points="0.00,-90.00 85.60,-27.81 52.90,72.81 -52.90,72.81 -85.60,-27.81"/><line class="axis-line" x1="0" y1="0" x2="0.00" y2="-90.00"/><line class="axis-line" x1="0" y1="0" x2="85.60" y2="-27.81"/><line class="axis-line" x1="0" y1="0" x2="52.90" y2="72.81"/><line class="axis-line" x1="0" y1="0" x2="-52.90" y2="72.81"/><line class="axis-line" x1="0" y1="0" x2="-85.60" y2="-27.81"/><polygon class="score-poly" points="0.00,-45.00 42.80,-13.91 44.08,60.68 -44.08,60.68 -42.80,-13.91"/><text x="0.0" y="-96.3" text-anchor="middle" font-size="8.5" fill="#8fa3bf">Valuation</text><text x="95.6" y="-29.8" text-anchor="start" font-size="8.5" fill="#8fa3bf">Future Growth</text><text x="60.6" y="83.9" text-anchor="start" font-size="8.5" fill="#8fa3bf">Past Perf.</text><text x="-60.6" y="83.9" text-anchor="end" font-size="8.5" fill="#8fa3bf">Fin. Health</text><text x="-95.6" y="-29.8" text-anchor="end" font-size="8.5" fill="#8fa3bf">Dividend</text><circle cx="0.00" cy="-45.00" r="4" fill="#17dbc9"/><circle cx="42.80" cy="-13.91" r="4" fill="#17dbc9"/><circle cx="44.08" cy="60.68" r="4" fill="#17dbc9"/><circle cx="-44.08" cy="60.68" r="4" fill="#17dbc9"/><circle cx="-42.80" cy="-13.91" r="4" fill="#17dbc9"/></svg>
             <div class="snowflake-total">
               <div><span class="num">19</span><span class="denom" style="font-size:18px;color:var(--text-3);"> / 30</span></div>
               <div class="label">Smartmall Score</div>
@@ -287,7 +287,7 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
               <div class="score-row-label" style="color:var(--teal)">Valuation</div>
               <div>
                 <div class="score-bar-track"><div class="score-bar-fill" style="width:50.0%;background:var(--teal)"></div></div>
-                <div class="score-rationale">Trailing P/E ~11.5x and Fwd P/E ~16.0x vs Lilly ~26x — still cheaper, but price ($49.1) now sits ~2.4% ABOVE the average sell-side target ($47.88, stockanalysis.com 2026-07-15) for the first time in this thesis&#x27;s tracking history; the deep-value setup from the $35 low is fully gone</div>
+                <div class="score-rationale">Trailing P/E ~11.9x and Fwd P/E ~16.6x vs Lilly ~26x — still cheaper, but price ($50.32, close 2026-07-17) now sits ~5.1% ABOVE the average sell-side target ($47.88, stockanalysis.com); the deep-value setup from the $35 low is fully gone and the rally has run ahead of Street fair value</div>
               </div>
               <div class="score-num" style="color:var(--teal)">3/6</div>
             </div>
@@ -295,7 +295,7 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
               <div class="score-row-label" style="color:var(--teal)">Future Growth</div>
               <div>
                 <div class="score-bar-track"><div class="score-bar-fill" style="width:50.0%;background:var(--teal)"></div></div>
-                <div class="score-rationale">Q1 2026 revenue +32% YoY (DKK 96.8B, flattered by a one-time 340B provision reversal) on Wegovy pill blowing past expectations (DKK 2.26B vs DKK 1.16B est); FY26 op-profit still guided to decline -4 to -12% CER; CagriSema missed its head-to-head non-inferiority vs tirzepatide (REDEFINE 4, Feb 2026)</div>
+                <div class="score-rationale">EU approved oral Wegovy (semaglutide 25mg pill) this cycle and pill formulations captured ~89% of US oral GLP-1 scripts; Q1 2026 rev +32% YoY (DKK 96.8B, boosted by a one-time 340B provision reversal); FY26 op-profit still guided -4 to -12% CER; CagriSema missed head-to-head non-inferiority vs tirzepatide (REDEFINE 4, Feb 2026)</div>
               </div>
               <div class="score-num" style="color:var(--teal)">3/6</div>
             </div>
@@ -311,7 +311,7 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
               <div class="score-row-label" style="color:var(--teal)">Financial Health</div>
               <div>
                 <div class="score-bar-track"><div class="score-bar-fill" style="width:83.3%;background:var(--teal)"></div></div>
-                <div class="score-rationale">FCF positive, manageable net debt post-Catalent, strong operating leverage — comfortably covers dividend and pipeline spend</div>
+                <div class="score-rationale">FCF positive, manageable net debt post-Catalent, strong operating leverage — comfortably covers the dividend and an active DKK 15B buyback</div>
               </div>
               <div class="score-num" style="color:var(--teal)">5/6</div>
             </div>
@@ -319,7 +319,7 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
               <div class="score-row-label" style="color:var(--teal)">Dividend</div>
               <div>
                 <div class="score-bar-track"><div class="score-bar-fill" style="width:50.0%;background:var(--teal)"></div></div>
-                <div class="score-rationale">Yield flat at ~2.62% (payout itself hasn&#x27;t been cut) — DKK 11.70/share for 2025, paid 2x/yr, still sits just under this workspace&#x27;s 3% cash-cow bar; no new payout news this cycle</div>
+                <div class="score-rationale">Yield slipped to ~2.55% as price recovered (payout itself hasn&#x27;t been cut) — DKK 11.70/share for 2025, paid 2x/yr, still sits just under this workspace&#x27;s 3% cash-cow bar</div>
               </div>
               <div class="score-num" style="color:var(--teal)">3/6</div>
             </div>
@@ -342,7 +342,7 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
       <div class="section-header"><div class="section-num">5</div><div class="section-title">Past Performance</div></div>
       <div class="card">
         <div style="font-size:12.5px;color:var(--text-3);margin-bottom:20px;">Revenue (US$B, DKK÷6.55)</div>
-        <svg viewBox="0 0 720 240" width="100%" style="font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;overflow:visible;"><line x1="0" y1="220.0" x2="720" y2="220.0" stroke="rgba(255,255,255,0.08)" stroke-width="1"/><line x1="0" y1="148.8" x2="720" y2="148.8" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="4,4"/><line x1="0" y1="77.5" x2="720" y2="77.5" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="4,4"/><rect x="20.0" y="136.9" width="96.7" height="83.1" rx="5" fill="#00c4b4" opacity="0.55"/><text x="68.3" y="131.9" font-size="11" font-weight="700" fill="#00c4b4" text-anchor="middle">USD21B</text><text x="68.3" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">2021</text><rect x="136.7" y="113.1" width="96.7" height="106.9" rx="5" fill="#00c4b4" opacity="0.62"/><text x="185.0" y="108.1" font-size="11" font-weight="700" fill="#00c4b4" text-anchor="middle">USD27B</text><text x="185.0" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">2022</text><rect x="253.3" y="77.5" width="96.7" height="142.5" rx="5" fill="#00c4b4" opacity="0.69"/><text x="301.7" y="72.5" font-size="11" font-weight="700" fill="#00c4b4" text-anchor="middle">USD36B</text><text x="301.7" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">2023</text><rect x="370.0" y="45.8" width="96.7" height="174.2" rx="5" fill="#00c4b4" opacity="0.76"/><text x="418.3" y="40.8" font-size="11" font-weight="700" fill="#00c4b4" text-anchor="middle">USD44B</text><text x="418.3" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">2024</text><rect x="486.7" y="34.0" width="96.7" height="186.0" rx="5" fill="#00c4b4" opacity="0.83"/><text x="535.0" y="29.0" font-size="11" font-weight="700" fill="#00c4b4" text-anchor="middle">USD47B</text><text x="535.0" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">2025</text><rect x="603.3" y="30.0" width="96.7" height="190.0" rx="5" fill="#00c4b4" opacity="1.00"/><rect x="603.3" y="30.0" width="96.7" height="190.0" rx="5" fill="none" stroke="#00c4b4" stroke-width="1.5" opacity="0.5"/><text x="651.7" y="25.0" font-size="11" font-weight="700" fill="#00c4b4" text-anchor="middle">USD48B</text><text x="651.7" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">2026E</text></svg>
+        <svg viewBox="0 0 720 240" width="100%" style="font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;overflow:visible;"><line x1="0" y1="220.0" x2="720" y2="220.0" stroke="rgba(255,255,255,0.08)" stroke-width="1"/><line x1="0" y1="148.8" x2="720" y2="148.8" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="4,4"/><line x1="0" y1="77.5" x2="720" y2="77.5" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="4,4"/><rect x="20.0" y="136.9" width="96.7" height="83.1" rx="5" fill="#17dbc9" opacity="0.55"/><text x="68.3" y="131.9" font-size="11" font-weight="700" fill="#17dbc9" text-anchor="middle">USD21B</text><text x="68.3" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">2021</text><rect x="136.7" y="113.1" width="96.7" height="106.9" rx="5" fill="#17dbc9" opacity="0.62"/><text x="185.0" y="108.1" font-size="11" font-weight="700" fill="#17dbc9" text-anchor="middle">USD27B</text><text x="185.0" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">2022</text><rect x="253.3" y="77.5" width="96.7" height="142.5" rx="5" fill="#17dbc9" opacity="0.69"/><text x="301.7" y="72.5" font-size="11" font-weight="700" fill="#17dbc9" text-anchor="middle">USD36B</text><text x="301.7" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">2023</text><rect x="370.0" y="45.8" width="96.7" height="174.2" rx="5" fill="#17dbc9" opacity="0.76"/><text x="418.3" y="40.8" font-size="11" font-weight="700" fill="#17dbc9" text-anchor="middle">USD44B</text><text x="418.3" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">2024</text><rect x="486.7" y="34.0" width="96.7" height="186.0" rx="5" fill="#17dbc9" opacity="0.83"/><text x="535.0" y="29.0" font-size="11" font-weight="700" fill="#17dbc9" text-anchor="middle">USD47B</text><text x="535.0" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">2025</text><rect x="603.3" y="30.0" width="96.7" height="190.0" rx="5" fill="#17dbc9" opacity="1.00"/><rect x="603.3" y="30.0" width="96.7" height="190.0" rx="5" fill="none" stroke="#17dbc9" stroke-width="1.5" opacity="0.5"/><text x="651.7" y="25.0" font-size="11" font-weight="700" fill="#17dbc9" text-anchor="middle">USD48B</text><text x="651.7" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">2026E</text></svg>
         <div class="note-box" style="margin-top:16px;">~20%+ 5yr CAGR through 2024, +6% DKK / +10% CER in 2025. Q1 2026 surprised with +32% YoY on Wegovy pill launch; FY26 still guided to op-profit decline -4 to -12% as Ozempic pricing resets.</div>
       </div>
     </div>
@@ -352,33 +352,33 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
         <div style="font-size:12.5px;color:var(--text-3);margin-bottom:24px;">Growth drivers — guided &amp; estimated</div>
         
         <div class="growth-row">
-          <div class="growth-label">FY26 op profit (CER, updated)</div>
-          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:15%;background:linear-gradient(90deg,#00c4b4,#00a99d);">-4% to -12%</div></div>
+          <div class="growth-label">FY26 op profit (CER, guided)</div>
+          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:15%;background:linear-gradient(90deg,#17dbc9,#00c4b4);">-4% to -12%</div></div>
           <div class="growth-value" style="color:var(--teal);">-4% to -12%</div>
         </div>
         <div class="growth-row">
           <div class="growth-label">Ozempic 2026 growth (guided)</div>
-          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:15%;background:linear-gradient(90deg,#00c4b4,#00a99d);">+3% vs Lilly Zepbound +80% / Mounjaro +125%</div></div>
+          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:15%;background:linear-gradient(90deg,#17dbc9,#00c4b4);">+3% vs Lilly Zepbound +80% / Mounjaro +125%</div></div>
           <div class="growth-value" style="color:var(--teal);">+3% vs Lilly Zepbound +80% / Mounjaro +125%</div>
         </div>
         <div class="growth-row">
-          <div class="growth-label">Wegovy oral pill Q1 sales</div>
-          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:15%;background:linear-gradient(90deg,#00c4b4,#00a99d);">DKK 2.26B (~2x est)</div></div>
-          <div class="growth-value" style="color:var(--teal);">DKK 2.26B (~2x est)</div>
+          <div class="growth-label">Oral Wegovy — EU approval + US share</div>
+          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:89%;background:linear-gradient(90deg,#17dbc9,#00c4b4);">EU approved this cycle; ~89% of US oral GLP-1 scripts</div></div>
+          <div class="growth-value" style="color:var(--teal);">EU approved this cycle; ~89% of US oral GLP-1 scripts</div>
         </div>
-        <div class="note-box" style="margin-top:20px;">Mixed: Q1 2026 beat showed Wegovy oral pill (~1.3M US scripts) is a genuine catalyst, but FY guide still calls for a down year. Mid-2026 coverage (S&amp;P Global/CNBC) now states Lilly has OVERTAKEN Novo in the key US injectable market, not just gaining share. Value-with-optionality, not high-growth. Next data point: Q2/H1 2026 results confirmed 2026-08-05.</div>
+        <div class="note-box" style="margin-top:20px;">Mixed: EU approval for the oral Wegovy pill and ~89% share of US oral GLP-1 scripts are real second-engine catalysts, but FY guide still calls for a down year on op-profit. Mid-2026 coverage (S&amp;P Global/CNBC) still frames Lilly as having OVERTAKEN Novo in the key US injectable market. Value-with-optionality, not high-growth. Next data point: Q2/H1 2026 results 2026-08-05 (~2.5 weeks out).</div>
       </div>
     </div>
     <div class="section" id="s7">
       <div class="section-header"><div class="section-num">7</div><div class="section-title">Financial Health</div></div>
       <div class="card">
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px;align-items:end;">
-          <div style="background:var(--teal-dim);border:1px solid rgba(0,196,180,0.3);border-radius:12px;padding:20px;">
+          <div style="background:var(--teal-dim);border:1px solid rgba(23,219,201,0.3);border-radius:12px;padding:20px;">
             <div style="font-size:11px;color:var(--teal);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;font-weight:700;">Cash &amp; Equivalents</div>
             <div style="font-size:34px;font-weight:900;color:var(--teal);letter-spacing:-0.03em;">USD9B</div>
             <div class="health-bar-track" style="margin-top:12px;"><div class="health-bar-fill" style="width:60%;background:var(--teal);"></div></div>
           </div>
-          <div style="background:rgba(245,139,66,0.08);border:1px solid rgba(245,139,66,0.2);border-radius:12px;padding:20px;">
+          <div style="background:rgba(240,153,94,0.08);border:1px solid rgba(240,153,94,0.2);border-radius:12px;padding:20px;">
             <div style="font-size:11px;color:var(--orange);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;font-weight:700;">Total Debt</div>
             <div style="font-size:34px;font-weight:900;color:var(--orange);letter-spacing:-0.03em;">USD15B</div>
             <div class="health-bar-track" style="margin-top:12px;"><div class="health-bar-fill" style="width:100%;background:var(--orange);"></div></div>
@@ -394,15 +394,15 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
           <div class="health-bar-track"><div class="health-bar-fill" style="width:3%;background:var(--orange);"></div></div>
           <div class="health-value">-3%</div>
         </div>
-        <div class="note-box orange" style="margin-top:16px;">Net debt elevated after the Catalent fill-finish capacity buy, but pharma operating leverage and FCF generation stay strong — funding an active DKK 15B buyback (treasury stake 0.9% as of early July 2026) on top of the dividend.</div>
+        <div class="note-box orange" style="margin-top:16px;">Net debt elevated after the Catalent fill-finish capacity buy, but pharma operating leverage and FCF generation stay strong — funding an active DKK 15B buyback on top of the dividend.</div>
       </div>
     </div>
     <div class="section" id="s8">
       <div class="section-header"><div class="section-num">8</div><div class="section-title">Dividend</div></div>
       <div class="card">
         <div class="div-row">
-          <div class="div-big">~2.6%</div>
-          <div class="div-note">Paid twice yearly (interim Aug, final Mar); DKK 11.70/share total 2025 (~$1.29/ADR TTM). Payout itself hasn&#x27;t been cut — yield fell purely because the price recovered from the $35 low, and now sits just under the 3% cash-cow bar.</div>
+          <div class="div-big">~2.55%</div>
+          <div class="div-note">Paid twice yearly (interim Aug, final Mar); DKK 11.70/share total 2025 (~$1.29/ADR TTM). Payout itself hasn&#x27;t been cut — yield slipped as the price recovered from the $35 low, and now sits just under the 3% cash-cow bar.</div>
         </div>
         
       </div>
@@ -411,8 +411,8 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
       <div class="section-header"><div class="section-num">9</div><div class="section-title">Rewards &amp; Risks</div></div>
       <div class="card">
         <div class="two-col">
-          <div class="rr-col rewards"><h4>Rewards</h4><div class="rr-item"><div class="rr-dot"></div><div>Trailing P/E ~11.5x — under half of Lilly&#x27;s ~26x, still cheap by Novo&#x27;s own history</div></div><div class="rr-item"><div class="rr-dot"></div><div>Wegovy oral pill blew through Q1 2026 estimates (~1.3M US scripts, DKK 2.26B vs DKK 1.16B est) — needle-averse TAM is real</div></div><div class="rr-item"><div class="rr-dot"></div><div>~81% gross / ~33% net margin — pharma economics intact through the crater</div></div><div class="rr-item"><div class="rr-dot"></div><div>Medicare began covering GLP-1s for obesity (not just diabetes) from 2026-07-01 — expands the addressable US patient pool</div></div><div class="rr-item"><div class="rr-dot"></div><div>Active DKK 15B buyback + Amycretin (GLP-1/amylin dual) 2028+ catalyst; Thai DR (NOVOB80) buyable in baht</div></div></div>
-          <div class="rr-col risks"><h4>Risks</h4><div class="rr-item bold-risk"><div class="rr-dot"></div><div><strong>Lilly has now OVERTAKEN Novo in the key US injectable market (hardened this cycle, S&amp;P Global/CNBC) — Ozempic 2026 growth guided to just +3% vs Zepbound +80% / Mounjaro +125% YoY; no longer framed as &quot;gap widening,&quot; but as already lost</strong></div></div><div class="rr-item bold-risk"><div class="rr-dot"></div><div><strong>CagriSema missed its head-to-head non-inferiority endpoint vs tirzepatide (REDEFINE 4, Feb 2026: 23.0% vs 25.5% weight loss) — doesn&#x27;t block the FDA filing (rests on REDEFINE 1/2) but kills the &quot;matches Lilly&#x27;s best drug&quot; narrative ahead of the end-2026 decision (no update this cycle)</strong></div></div><div class="rr-item"><div class="rr-dot"></div><div>Valuation has fully caught up — price ($49.1) now sits ~2.4% ABOVE the average sell-side target ($47.88); FY26 op-profit is still guided to DECLINE -4 to -12% CER, so further upside now needs earnings delivery on the Aug 5 print, not just multiple recovery</div></div></div>
+          <div class="rr-col rewards"><h4>Rewards</h4><div class="rr-item"><div class="rr-dot"></div><div>Trailing P/E ~11.9x — under half of Lilly&#x27;s ~26x, still cheap by Novo&#x27;s own history</div></div><div class="rr-item"><div class="rr-dot"></div><div>EU approved oral Wegovy (semaglutide 25mg pill) this cycle — pill formulations already ~89% of US oral GLP-1 scripts; needle-averse TAM is real</div></div><div class="rr-item"><div class="rr-dot"></div><div>~81% gross / ~33% net margin — pharma economics intact through the crater</div></div><div class="rr-item"><div class="rr-dot"></div><div>Medicare began covering GLP-1s for obesity (not just diabetes) from 2026-07-01 — expands the addressable US patient pool</div></div><div class="rr-item"><div class="rr-dot"></div><div>Active DKK 15B buyback + Amycretin (GLP-1/amylin dual) 2028+ catalyst; Thai DR (NOVOB80) buyable in baht</div></div></div>
+          <div class="rr-col risks"><h4>Risks</h4><div class="rr-item bold-risk"><div class="rr-dot"></div><div><strong>Lilly has now OVERTAKEN Novo in the key US injectable market (S&amp;P Global/CNBC) — Ozempic 2026 growth guided to just +3% vs Zepbound +80% / Mounjaro +125% YoY; no longer framed as &quot;gap widening,&quot; but as already lost</strong></div></div><div class="rr-item bold-risk"><div class="rr-dot"></div><div><strong>Valuation has fully caught up — price ($50.32) now sits ~5.1% ABOVE the average sell-side target ($47.88); FY26 op-profit is still guided to DECLINE -4 to -12% CER, so further upside now needs earnings delivery on the Aug 5 print (~2.5 weeks out), not just multiple recovery</strong></div></div><div class="rr-item"><div class="rr-dot"></div><div>CagriSema missed its head-to-head non-inferiority endpoint vs tirzepatide (REDEFINE 4, Feb 2026: 23.0% vs 25.5% weight loss) — doesn&#x27;t block the FDA filing (rests on REDEFINE 1/2) but kills the &quot;matches Lilly&#x27;s best drug&quot; narrative ahead of the end-2026 decision</div></div></div>
         </div>
       </div>
     </div>
@@ -423,19 +423,19 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
           <div class="agent">🪨 Steady</div>
           <div class="stance" style="color:var(--amber);">HOLD</div>
           
-          <div class="rationale">franchise economics intact and the pill is a real second engine, but Lilly has now overtaken Novo in the US injectable market and the price sits above consensus fair value — own it, don&#x27;t add</div>
+          <div class="rationale">franchise economics intact and EU pill approval is a real second-engine tailwind, but Lilly has overtaken Novo in the US injectable market and the price now sits ~5% above consensus fair value — own the core for optionality, don&#x27;t add here</div>
         </div>
         <div class="verdict-chip">
           <div class="agent">📉 Dippy</div>
-          <div class="stance" style="color:var(--amber);">HOLD</div>
+          <div class="stance" style="color:var(--text-2);">WATCH</div>
           
-          <div class="rationale">the dip that made this a buy in March is gone — flat around $49 for a month with yield under 3% and now above the average analyst target, this is no longer a dip-buyer setup; would re-engage on a pullback toward $38-40</div>
+          <div class="rationale">the dip that made this a buy in March is fully gone — $50.32 print sits above the average analyst target with yield under 3%, so this is no longer a dip-buyer setup; would re-engage on a pullback toward $38-40 or a clean Q2 beat that widens the yield story</div>
         </div>
         <div class="verdict-chip">
           <div class="agent">🎩 Warren</div>
           <div class="stance" style="color:var(--text-2);">WATCH</div>
           
-          <div class="rationale">wonderful franchise, no longer at a bargain price — CagriSema&#x27;s REDEFINE 4 miss, Lilly&#x27;s confirmed US overtake, and a still-declining FY26 op-profit guide keep the moat question open; wait for Q2 (Aug 5) to show Ozempic stabilizing</div>
+          <div class="rationale">wonderful franchise, no longer at a bargain price — CagriSema&#x27;s REDEFINE 4 miss, Lilly&#x27;s confirmed US overtake, and a still-declining FY26 op-profit guide keep the moat question open; wait for Q2 (Aug 5) to show Ozempic stabilizing before revisiting</div>
         </div></div>
       
       <div class="overall-verdict">
@@ -443,11 +443,11 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
         <div class="ov-detail">
           <div class="ov-label">Smartmall Overall Stance</div>
           <div class="ov-target"><strong>HOLD — trim into strength, don&#x27;t add</strong> · Fair value target <strong>$48-54</strong></div>
-          <div class="ov-add-zone">Add zone: <strong>n/a — trim toward ฿1.78-1.82 ($53-54); add only on a pullback to ฿1.28-1.35 ($38-40)</strong></div>
+          <div class="ov-add-zone">Add zone: <strong>n/a at ฿1.70 ($50.32, ~5% above avg PT); trim into ฿1.78-1.82 ($53-54); add only on a pullback to ฿1.28-1.35 ($38-40) or a clean Aug 5 Q2 beat</strong></div>
         </div>
       </div>
     </div>
-    <div class="footer">Generated by Smartmall · price $49.07 as of 2026-07-14 (stockanalysis.com last close) · income statement FY2025 converted DKK→USD at ~6.55 · Q1 2026 figures from Novo Nordisk interim report (2026-05-06) · CagriSema REDEFINE 4 data from GlobeNewswire (2026-02-23) · segment mix approximate · transparent scoring, not a live feed · layout inspired by Simply Wall St · not financial advice. · ⚠ Position closed 2026-07-18 — position notes are historical</div>
+    <div class="footer">Generated by Smartmall · price $50.32 as of 2026-07-17 (stockanalysis.com last close) · NOVOB80 ฿1.70 (SET, close 2026-07-17) · income statement FY2025 converted DKK→USD at ~6.55 · Q1 2026 figures from Novo Nordisk interim report (2026-05-06) · CagriSema REDEFINE 4 data from GlobeNewswire (2026-02-23) · Q2/H1 2026 print due 2026-08-05 · segment mix approximate · transparent scoring, not a live feed · layout inspired by Simply Wall St · not financial advice. · ⚠ Position closed 2026-07-17 — public analysis only</div>
   </main>
 </div>
 <script>

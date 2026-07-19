@@ -7,12 +7,12 @@
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
-  --bg: #0f1923; --surface: #172130; --surface-2: #1c2a3d; --border: #253347;
-  --teal: #00c4b4; --teal-mid: #00a99d; --teal-dim: rgba(0,196,180,0.15); --teal-fill: rgba(0,196,180,0.22);
-  --orange: #f58b42; --orange-mid: #e07030; --orange-dim: rgba(245,139,66,0.18);
-  --green: #30d97b; --green-dim: rgba(48,217,123,0.15); --red: #e85d5d; --red-dim: rgba(232,93,93,0.15);
-  --amber: #f5c842; --text-1: #e8edf5; --text-2: #8fa3bf; --text-3: #526070;
-  --number: #c9d9ed; --tag-bg: #1a3550; --badge-teal: #0a3030; --score-track: #1e2e40;
+  --bg: #19243c; --surface: #222f49; --surface-2: #2c3b58; --border: #3a4c6b;
+  --teal: #17dbc9; --teal-mid: #00c4b4; --teal-dim: rgba(23,219,201,0.15); --teal-fill: rgba(23,219,201,0.22);
+  --orange: #f0995e; --orange-mid: #dd8449; --orange-dim: rgba(240,153,94,0.18);
+  --green: #3ee08a; --green-dim: rgba(62,224,138,0.15); --red: #ef6a6a; --red-dim: rgba(239,106,106,0.15);
+  --amber: #f3d074; --text-1: #eef3fb; --text-2: #b0c1d8; --text-3: #8295ac;
+  --number: #d6e2f2; --tag-bg: #23406a; --badge-teal: #0c3a38; --score-track: #2c3b58;
 }
 html { scroll-behavior: smooth; }
 body { background: var(--bg); color: var(--text-1); font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Segoe UI', Arial, sans-serif; line-height: 1.5; min-height: 100vh; display: flex; justify-content: center; padding: 40px 20px 80px; }
@@ -53,14 +53,14 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
 .price-sub { font-size: 13px; color: var(--text-3); margin-top: 6px; }
 .badges { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
 .badge { display: inline-flex; align-items: center; gap: 5px; padding: 5px 11px; border-radius: 100px; font-size: 11.5px; font-weight: 600; letter-spacing: 0.02em; }
-.badge-teal { background: var(--teal-dim); color: var(--teal); border: 1px solid rgba(0,196,180,0.3); }
-.badge-orange { background: var(--orange-dim); color: var(--orange); border: 1px solid rgba(245,139,66,0.3); }
+.badge-teal { background: var(--teal-dim); color: var(--teal); border: 1px solid rgba(23,219,201,0.3); }
+.badge-orange { background: var(--orange-dim); color: var(--orange); border: 1px solid rgba(240,153,94,0.3); }
 .badge-muted { background: var(--surface-2); color: var(--text-2); border: 1px solid var(--border); }
 .range-bar-wrap { margin-top: 4px; }
 .range-label { display: flex; justify-content: space-between; font-size: 11.5px; color: var(--text-3); margin-bottom: 8px; }
 .range-bar-track { height: 6px; border-radius: 4px; background: var(--surface-2); position: relative; overflow: visible; }
 .range-bar-fill { height: 100%; border-radius: 4px; background: linear-gradient(90deg, var(--teal-mid) 0%, var(--teal) 100%); }
-.range-bar-marker { position: absolute; top: 50%; transform: translate(-50%, -50%); width: 14px; height: 14px; border-radius: 50%; background: #fff; border: 2px solid var(--teal); box-shadow: 0 0 0 3px rgba(0,196,180,0.3); }
+.range-bar-marker { position: absolute; top: 50%; transform: translate(-50%, -50%); width: 14px; height: 14px; border-radius: 50%; background: #fff; border: 2px solid var(--teal); box-shadow: 0 0 0 3px rgba(23,219,201,0.3); }
 .range-bar-label { position: absolute; bottom: -20px; transform: translateX(-50%); font-size: 11px; font-weight: 700; color: var(--text-1); white-space: nowrap; }
 .range-sublabels { margin-top: 22px; font-size: 11.5px; color: var(--text-3); display: flex; justify-content: space-between; }
 .range-sublabels span { font-weight: 600; color: var(--text-2); }
@@ -109,9 +109,9 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
 .verdict-chip { background: var(--surface-2); border: 1px solid var(--border); border-radius: 14px; padding: 20px; }
 .verdict-chip .agent { font-size: 11px; font-weight: 700; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
 .verdict-chip .stance { font-size: 15px; font-weight: 800; color: var(--text-1); margin-bottom: 6px; }
-.verdict-chip .conviction { display: inline-block; font-size: 10.5px; font-weight: 700; padding: 2px 8px; border-radius: 100px; background: var(--teal-dim); color: var(--teal); margin-bottom: 8px; border: 1px solid rgba(0,196,180,0.25); }
+.verdict-chip .conviction { display: inline-block; font-size: 10.5px; font-weight: 700; padding: 2px 8px; border-radius: 100px; background: var(--teal-dim); color: var(--teal); margin-bottom: 8px; border: 1px solid rgba(23,219,201,0.25); }
 .verdict-chip .rationale { font-size: 12px; color: var(--text-3); line-height: 1.5; }
-.overall-verdict { background: linear-gradient(135deg, rgba(0,196,180,0.12) 0%, rgba(0,169,157,0.06) 100%); border: 1px solid rgba(0,196,180,0.3); border-radius: 14px; padding: 24px 28px; display: flex; align-items: center; gap: 24px; }
+.overall-verdict { background: linear-gradient(135deg, rgba(23,219,201,0.12) 0%, rgba(0,169,157,0.06) 100%); border: 1px solid rgba(23,219,201,0.3); border-radius: 14px; padding: 24px 28px; display: flex; align-items: center; gap: 24px; }
 .ov-stance { font-size: 28px; font-weight: 900; color: var(--teal); letter-spacing: -0.02em; flex-shrink: 0; }
 .ov-detail { flex: 1; }
 .ov-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-3); margin-bottom: 4px; }
@@ -176,24 +176,24 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
             <div class="price-big">฿4.83</div>
             <div class="price-secondary">≈ US$114.97</div>
             <div class="price-sub">as of 2026-07-19</div>
-            <div class="hero-verdict"><span class="hv-stance" style="color:var(--text-2);border-color:var(--text-2);">HOLD</span><span class="hv-score"><b>19</b>/30</span></div>
+            <div class="hero-verdict"><span class="hv-stance" style="color:var(--text-2);border-color:var(--text-2);">HOLD</span><span class="hv-score"><b>18</b>/30</span></div>
           </div>
         </div>
         <div class="badges"><span class="badge badge-teal"><svg width="10" height="10" viewBox="0 0 10 10"><circle cx="5" cy="5" r="4" fill="currentColor" opacity="0.6"/></svg> Thai DR: BABA80</span><span class="badge badge-teal">Buyable in THB</span><span class="badge badge-muted">China Internet</span></div>
         
         <div style="margin-bottom:6px;font-size:12px;font-weight:600;color:var(--text-3);text-transform:uppercase;letter-spacing:0.05em;">52-Week Range</div>
         <div class="range-bar-wrap">
-          <div class="range-label"><span>3.82 &nbsp; 52W Low</span><span>52W High &nbsp; 7.75</span></div>
+          <div class="range-label"><span>3.82 &nbsp; 52W Low</span><span>52W High &nbsp; 8.08</span></div>
           <div class="range-bar-track">
-            <div class="range-bar-fill" style="width:25.7%"></div>
-            <div class="range-bar-marker" style="left:25.7%"><div class="range-bar-label">4.83</div></div>
+            <div class="range-bar-fill" style="width:23.7%"></div>
+            <div class="range-bar-marker" style="left:23.7%"><div class="range-bar-label">4.83</div></div>
           </div>
           <div class="range-sublabels" style="margin-top:28px;">
             <span>Current <span>฿4.83</span></span>
             <span>Distance from low: <span>+26%</span></span>
           </div>
         </div>
-        <div class="stat-row" style="margin-top:28px;margin-bottom:0;"><div class="stat-pill"><div class="stat-pill-label">Market Cap</div><div class="stat-pill-value">~$275B</div></div><div class="stat-pill"><div class="stat-pill-label">Fwd P/E</div><div class="stat-pill-value">~12.7x</div></div><div class="stat-pill"><div class="stat-pill-label">Trailing P/E</div><div class="stat-pill-value">~17.4x</div></div><div class="stat-pill"><div class="stat-pill-label">Gross Margin</div><div class="stat-pill-value">~40%</div></div><div class="stat-pill"><div class="stat-pill-label">Net Margin</div><div class="stat-pill-value">~10%</div></div><div class="stat-pill"><div class="stat-pill-label">Net Cash</div><div class="stat-pill-value">~$85B</div></div><div class="stat-pill"><div class="stat-pill-label">Div Yield</div><div class="stat-pill-value">~0.93%</div></div></div>
+        <div class="stat-row" style="margin-top:28px;margin-bottom:0;"><div class="stat-pill"><div class="stat-pill-label">Market Cap</div><div class="stat-pill-value">~$262B</div></div><div class="stat-pill"><div class="stat-pill-label">Fwd P/E</div><div class="stat-pill-value">~17.2x</div></div><div class="stat-pill"><div class="stat-pill-label">Trailing P/E</div><div class="stat-pill-value">~18.0x</div></div><div class="stat-pill"><div class="stat-pill-label">Gross Margin</div><div class="stat-pill-value">~40%</div></div><div class="stat-pill"><div class="stat-pill-label">Net Margin</div><div class="stat-pill-value">~10%</div></div><div class="stat-pill"><div class="stat-pill-label">Net Cash</div><div class="stat-pill-value">~$85B</div></div><div class="stat-pill"><div class="stat-pill-label">Div Yield</div><div class="stat-pill-value">~0.91%</div></div></div>
       </div>
     </div>
     <div class="section" id="s2">
@@ -275,9 +275,9 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
       <div class="card">
         <div class="snowflake-grid">
           <div style="display:flex;flex-direction:column;align-items:center;">
-            <svg width="240" height="240" viewBox="-175 -125 350 250"><defs><style>.ring{fill:none;stroke:rgba(255,255,255,0.06);stroke-width:1;}.ring-bright{fill:none;stroke:rgba(255,255,255,0.12);stroke-width:1;}.axis-line{stroke:rgba(255,255,255,0.08);stroke-width:1;}.score-poly{fill:rgba(0,196,180,0.22);stroke:#00c4b4;stroke-width:2;}</style></defs><polygon class="ring" points="0.00,-15.00 14.27,-4.64 8.82,12.14 -8.82,12.14 -14.27,-4.64"/><polygon class="ring" points="0.00,-30.00 28.53,-9.27 17.63,24.27 -17.63,24.27 -28.53,-9.27"/><polygon class="ring" points="0.00,-45.00 42.80,-13.91 26.45,36.41 -26.45,36.41 -42.80,-13.91"/><polygon class="ring" points="0.00,-60.00 57.06,-18.54 35.27,48.54 -35.27,48.54 -57.06,-18.54"/><polygon class="ring ring-bright" points="0.00,-75.00 71.33,-23.18 44.08,60.68 -44.08,60.68 -71.33,-23.18"/><polygon class="ring ring-bright" points="0.00,-90.00 85.60,-27.81 52.90,72.81 -52.90,72.81 -85.60,-27.81"/><line class="axis-line" x1="0" y1="0" x2="0.00" y2="-90.00"/><line class="axis-line" x1="0" y1="0" x2="85.60" y2="-27.81"/><line class="axis-line" x1="0" y1="0" x2="52.90" y2="72.81"/><line class="axis-line" x1="0" y1="0" x2="-52.90" y2="72.81"/><line class="axis-line" x1="0" y1="0" x2="-85.60" y2="-27.81"/><polygon class="score-poly" points="0.00,-60.00 71.33,-23.18 26.45,36.41 -52.90,72.81 -14.27,-4.64"/><text x="0.0" y="-96.3" text-anchor="middle" font-size="8.5" fill="#8fa3bf">Valuation</text><text x="95.6" y="-29.8" text-anchor="start" font-size="8.5" fill="#8fa3bf">Future Growth</text><text x="60.6" y="83.9" text-anchor="start" font-size="8.5" fill="#8fa3bf">Past Perf.</text><text x="-60.6" y="83.9" text-anchor="end" font-size="8.5" fill="#8fa3bf">Fin. Health</text><text x="-95.6" y="-29.8" text-anchor="end" font-size="8.5" fill="#8fa3bf">Dividend</text><circle cx="0.00" cy="-60.00" r="4" fill="#00c4b4"/><circle cx="71.33" cy="-23.18" r="4" fill="#00c4b4"/><circle cx="26.45" cy="36.41" r="4" fill="#00c4b4"/><circle cx="-52.90" cy="72.81" r="4" fill="#00c4b4"/><circle cx="-14.27" cy="-4.64" r="4" fill="#f58b42"/></svg>
+            <svg width="240" height="240" viewBox="-175 -125 350 250"><defs><style>.ring{fill:none;stroke:rgba(255,255,255,0.06);stroke-width:1;}.ring-bright{fill:none;stroke:rgba(255,255,255,0.12);stroke-width:1;}.axis-line{stroke:rgba(255,255,255,0.08);stroke-width:1;}.score-poly{fill:rgba(23,219,201,0.22);stroke:#17dbc9;stroke-width:2;}</style></defs><polygon class="ring" points="0.00,-15.00 14.27,-4.64 8.82,12.14 -8.82,12.14 -14.27,-4.64"/><polygon class="ring" points="0.00,-30.00 28.53,-9.27 17.63,24.27 -17.63,24.27 -28.53,-9.27"/><polygon class="ring" points="0.00,-45.00 42.80,-13.91 26.45,36.41 -26.45,36.41 -42.80,-13.91"/><polygon class="ring" points="0.00,-60.00 57.06,-18.54 35.27,48.54 -35.27,48.54 -57.06,-18.54"/><polygon class="ring ring-bright" points="0.00,-75.00 71.33,-23.18 44.08,60.68 -44.08,60.68 -71.33,-23.18"/><polygon class="ring ring-bright" points="0.00,-90.00 85.60,-27.81 52.90,72.81 -52.90,72.81 -85.60,-27.81"/><line class="axis-line" x1="0" y1="0" x2="0.00" y2="-90.00"/><line class="axis-line" x1="0" y1="0" x2="85.60" y2="-27.81"/><line class="axis-line" x1="0" y1="0" x2="52.90" y2="72.81"/><line class="axis-line" x1="0" y1="0" x2="-52.90" y2="72.81"/><line class="axis-line" x1="0" y1="0" x2="-85.60" y2="-27.81"/><polygon class="score-poly" points="0.00,-45.00 71.33,-23.18 26.45,36.41 -52.90,72.81 -14.27,-4.64"/><text x="0.0" y="-96.3" text-anchor="middle" font-size="8.5" fill="#8fa3bf">Valuation</text><text x="95.6" y="-29.8" text-anchor="start" font-size="8.5" fill="#8fa3bf">Future Growth</text><text x="60.6" y="83.9" text-anchor="start" font-size="8.5" fill="#8fa3bf">Past Perf.</text><text x="-60.6" y="83.9" text-anchor="end" font-size="8.5" fill="#8fa3bf">Fin. Health</text><text x="-95.6" y="-29.8" text-anchor="end" font-size="8.5" fill="#8fa3bf">Dividend</text><circle cx="0.00" cy="-45.00" r="4" fill="#17dbc9"/><circle cx="71.33" cy="-23.18" r="4" fill="#17dbc9"/><circle cx="26.45" cy="36.41" r="4" fill="#17dbc9"/><circle cx="-52.90" cy="72.81" r="4" fill="#17dbc9"/><circle cx="-14.27" cy="-4.64" r="4" fill="#f0995e"/></svg>
             <div class="snowflake-total">
-              <div><span class="num">19</span><span class="denom" style="font-size:18px;color:var(--text-3);"> / 30</span></div>
+              <div><span class="num">18</span><span class="denom" style="font-size:18px;color:var(--text-3);"> / 30</span></div>
               <div class="label">Smartmall Score</div>
             </div>
           </div>
@@ -286,10 +286,10 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
             <div class="score-row">
               <div class="score-row-label" style="color:var(--teal)">Valuation</div>
               <div>
-                <div class="score-bar-track"><div class="score-bar-fill" style="width:66.7%;background:var(--teal)"></div></div>
-                <div class="score-rationale">Trailing ~17.4x (vs S&amp;P500 ~26x), fwd ~12.7x — up on the Apple-Qwen news pop (+2.2% since 07-15), not on new earnings. SOTP fair value $150–200 vs consensus PT ~$189–195 still above spot. Aug 28, 2026 print is the confirmed next re-rate trigger</div>
+                <div class="score-bar-track"><div class="score-bar-fill" style="width:50.0%;background:var(--teal)"></div></div>
+                <div class="score-rationale">Trailing ~18.0x, fwd ~17.2x — the &#x27;cheap on FY27&#x27; narrative faded as consensus reset for the subsidy war (fwd was ~12.7x pre-reset). Still below S&amp;P ~26x, and 40 analysts still Strong Buy at ~$190 PT (~65% upside), but no longer a standout multiple. SOTP $150–200/ADR intact; Aug 28, 2026 print is the confirmed re-rate trigger</div>
               </div>
-              <div class="score-num" style="color:var(--teal)">4/6</div>
+              <div class="score-num" style="color:var(--teal)">3/6</div>
             </div>
             <div class="score-row">
               <div class="score-row-label" style="color:var(--teal)">Future Growth</div>
@@ -342,7 +342,7 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
       <div class="section-header"><div class="section-num">5</div><div class="section-title">Past Performance</div></div>
       <div class="card">
         <div style="font-size:12.5px;color:var(--text-3);margin-bottom:20px;">Revenue (US$B)</div>
-        <svg viewBox="0 0 720 240" width="100%" style="font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;overflow:visible;"><line x1="0" y1="220.0" x2="720" y2="220.0" stroke="rgba(255,255,255,0.08)" stroke-width="1"/><line x1="0" y1="148.8" x2="720" y2="148.8" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="4,4"/><line x1="0" y1="77.5" x2="720" y2="77.5" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="4,4"/><rect x="20.0" y="80.1" width="96.7" height="139.9" rx="5" fill="#00c4b4" opacity="0.55"/><text x="68.3" y="75.1" font-size="11" font-weight="700" fill="#00c4b4" text-anchor="middle">$109B</text><text x="68.3" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">FY21</text><rect x="136.7" y="57.0" width="96.7" height="163.0" rx="5" fill="#00c4b4" opacity="0.62"/><text x="185.0" y="52.0" font-size="11" font-weight="700" fill="#00c4b4" text-anchor="middle">$127B</text><text x="185.0" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">FY22</text><rect x="253.3" y="57.0" width="96.7" height="163.0" rx="5" fill="#00c4b4" opacity="0.69"/><text x="301.7" y="52.0" font-size="11" font-weight="700" fill="#00c4b4" text-anchor="middle">$127B</text><text x="301.7" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">FY23</text><rect x="370.0" y="51.8" width="96.7" height="168.2" rx="5" fill="#00c4b4" opacity="0.76"/><text x="418.3" y="46.8" font-size="11" font-weight="700" fill="#00c4b4" text-anchor="middle">$131B</text><text x="418.3" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">FY24</text><rect x="486.7" y="44.1" width="96.7" height="175.9" rx="5" fill="#00c4b4" opacity="0.83"/><text x="535.0" y="39.1" font-size="11" font-weight="700" fill="#00c4b4" text-anchor="middle">$137B</text><text x="535.0" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">FY25</text><rect x="603.3" y="30.0" width="96.7" height="190.0" rx="5" fill="#00c4b4" opacity="1.00"/><rect x="603.3" y="30.0" width="96.7" height="190.0" rx="5" fill="none" stroke="#00c4b4" stroke-width="1.5" opacity="0.5"/><text x="651.7" y="25.0" font-size="11" font-weight="700" fill="#00c4b4" text-anchor="middle">$148B</text><text x="651.7" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">FY26</text></svg>
+        <svg viewBox="0 0 720 240" width="100%" style="font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;overflow:visible;"><line x1="0" y1="220.0" x2="720" y2="220.0" stroke="rgba(255,255,255,0.08)" stroke-width="1"/><line x1="0" y1="148.8" x2="720" y2="148.8" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="4,4"/><line x1="0" y1="77.5" x2="720" y2="77.5" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="4,4"/><rect x="20.0" y="80.1" width="96.7" height="139.9" rx="5" fill="#17dbc9" opacity="0.55"/><text x="68.3" y="75.1" font-size="11" font-weight="700" fill="#17dbc9" text-anchor="middle">$109B</text><text x="68.3" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">FY21</text><rect x="136.7" y="57.0" width="96.7" height="163.0" rx="5" fill="#17dbc9" opacity="0.62"/><text x="185.0" y="52.0" font-size="11" font-weight="700" fill="#17dbc9" text-anchor="middle">$127B</text><text x="185.0" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">FY22</text><rect x="253.3" y="57.0" width="96.7" height="163.0" rx="5" fill="#17dbc9" opacity="0.69"/><text x="301.7" y="52.0" font-size="11" font-weight="700" fill="#17dbc9" text-anchor="middle">$127B</text><text x="301.7" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">FY23</text><rect x="370.0" y="51.8" width="96.7" height="168.2" rx="5" fill="#17dbc9" opacity="0.76"/><text x="418.3" y="46.8" font-size="11" font-weight="700" fill="#17dbc9" text-anchor="middle">$131B</text><text x="418.3" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">FY24</text><rect x="486.7" y="44.1" width="96.7" height="175.9" rx="5" fill="#17dbc9" opacity="0.83"/><text x="535.0" y="39.1" font-size="11" font-weight="700" fill="#17dbc9" text-anchor="middle">$137B</text><text x="535.0" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">FY25</text><rect x="603.3" y="30.0" width="96.7" height="190.0" rx="5" fill="#17dbc9" opacity="1.00"/><rect x="603.3" y="30.0" width="96.7" height="190.0" rx="5" fill="none" stroke="#17dbc9" stroke-width="1.5" opacity="0.5"/><text x="651.7" y="25.0" font-size="11" font-weight="700" fill="#17dbc9" text-anchor="middle">$148B</text><text x="651.7" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">FY26</text></svg>
         <div class="note-box" style="margin-top:16px;">~6–7% reported 5yr CAGR (~12% organic ex-disposals); growth slowed as commerce matured, now driven by cloud. FY26 GAAP NI −19%, non-GAAP −62% on subsidy war.</div>
       </div>
     </div>
@@ -353,17 +353,17 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
         
         <div class="growth-row">
           <div class="growth-label">Cloud (CIG) growth</div>
-          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:30%;background:linear-gradient(90deg,#00c4b4,#00a99d);">+30–40% YoY</div></div>
+          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:30%;background:linear-gradient(90deg,#17dbc9,#00c4b4);">+30–40% YoY</div></div>
           <div class="growth-value" style="color:var(--teal);">+30–40% YoY</div>
         </div>
         <div class="growth-row">
           <div class="growth-label">AI-product mix of cloud</div>
-          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:50%;background:linear-gradient(90deg,#00c4b4,#00a99d);">&gt;50% targeted within 12mo</div></div>
+          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:50%;background:linear-gradient(90deg,#17dbc9,#00c4b4);">&gt;50% targeted within 12mo</div></div>
           <div class="growth-value" style="color:var(--teal);">&gt;50% targeted within 12mo</div>
         </div>
         <div class="growth-row">
           <div class="growth-label">FY27 group revenue</div>
-          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:15%;background:linear-gradient(90deg,#00c4b4,#00a99d);">+7–12%</div></div>
+          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:15%;background:linear-gradient(90deg,#17dbc9,#00c4b4);">+7–12%</div></div>
           <div class="growth-value" style="color:var(--teal);">+7–12%</div>
         </div>
         <div class="note-box" style="margin-top:20px;">Cloud + Qwen LLM + Token Foundry token-monetization + in-house silicon is the re-rating engine; RMB 380bn ($56B) FY26–28 capex bet. Profit reacceleration is an FY28 story — FY27 is the trough-and-grind year.</div>
@@ -373,12 +373,12 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
       <div class="section-header"><div class="section-num">7</div><div class="section-title">Financial Health</div></div>
       <div class="card">
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px;align-items:end;">
-          <div style="background:var(--teal-dim);border:1px solid rgba(0,196,180,0.3);border-radius:12px;padding:20px;">
+          <div style="background:var(--teal-dim);border:1px solid rgba(23,219,201,0.3);border-radius:12px;padding:20px;">
             <div style="font-size:11px;color:var(--teal);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;font-weight:700;">Cash &amp; Equivalents</div>
             <div style="font-size:34px;font-weight:900;color:var(--teal);letter-spacing:-0.03em;">$85B</div>
             <div class="health-bar-track" style="margin-top:12px;"><div class="health-bar-fill" style="width:100%;background:var(--teal);"></div></div>
           </div>
-          <div style="background:rgba(245,139,66,0.08);border:1px solid rgba(245,139,66,0.2);border-radius:12px;padding:20px;">
+          <div style="background:rgba(240,153,94,0.08);border:1px solid rgba(240,153,94,0.2);border-radius:12px;padding:20px;">
             <div style="font-size:11px;color:var(--orange);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;font-weight:700;">Total Debt</div>
             <div style="font-size:34px;font-weight:900;color:var(--orange);letter-spacing:-0.03em;">$30B</div>
             <div class="health-bar-track" style="margin-top:12px;"><div class="health-bar-fill" style="width:35%;background:var(--orange);"></div></div>
@@ -401,8 +401,8 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
       <div class="section-header"><div class="section-num">8</div><div class="section-title">Dividend</div></div>
       <div class="card">
         <div class="div-row">
-          <div class="div-big">~0.93%</div>
-          <div class="div-note">$1.05/ADR annual; BABA80 paid ~฿0.077/DR in 2025. Thin income — the ~$19B buyback (3–4%/yr share shrink) is the real capital return.</div>
+          <div class="div-big">~0.91%</div>
+          <div class="div-note">$1.05/ADR annual; BABA80 paid ~฿0.077/DR in 2025 (next ~0.044 THB/DR on 11 Jun 2026). Thin income — the ~$19B buyback (3–4%/yr share shrink) is the real capital return.</div>
         </div>
         
       </div>
@@ -411,7 +411,7 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
       <div class="section-header"><div class="section-num">9</div><div class="section-title">Rewards &amp; Risks</div></div>
       <div class="card">
         <div class="two-col">
-          <div class="rr-col rewards"><h4>Rewards</h4><div class="rr-item"><div class="rr-dot"></div><div>NEW (2026-07-15): Apple licensed Qwen to power Apple Intelligence&#x27;s language layer across China (Baidu handles visual search) — Alibaba beat Baidu and ByteDance for the slot; first proof Qwen wins marquee external customers, not just Alibaba&#x27;s own stack</div></div><div class="rr-item"><div class="rr-dot"></div><div>Cloud +34% YoY — China&#x27;s only at-scale AI/cloud franchise, Qwen the volume-leading open-weight Chinese LLM</div></div><div class="rr-item"><div class="rr-dot"></div><div>Cloud standalone worth ~half the ~$275B market cap on SOTP — commerce cash machine effectively &#x27;free&#x27;</div></div><div class="rr-item"><div class="rr-dot"></div><div>Fortress balance sheet (~$85B net cash) + ~$19B buyback shrinking shares 3–4%/yr</div></div><div class="rr-item"><div class="rr-dot"></div><div>$600M DOJ settlement (2026-07) converts a years-old open-ended legal overhang into a known, finite, already-absorbed cost — de-risking event</div></div><div class="rr-item"><div class="rr-dot"></div><div>Street now modeling ~45% YoY cloud growth for the June quarter (vs +40% external in March) — the re-acceleration is still ahead of the stock, not behind it</div></div><div class="rr-item"><div class="rr-dot"></div><div>~12.7x forward for a 34–45% cloud-grower — undervalued vs 18–25x historical; SOTP $150–200/ADR and consensus 12mo PT ~$191 (Strong Buy)</div></div><div class="rr-item"><div class="rr-dot"></div><div>Thai DR available (BABA80, KTB issuer) — buyable in baht, no global brokerage account needed</div></div></div>
+          <div class="rr-col rewards"><h4>Rewards</h4><div class="rr-item"><div class="rr-dot"></div><div>NEW (2026-07-15): Apple licensed Qwen to power Apple Intelligence&#x27;s language layer across China (Baidu handles visual search) — Alibaba beat Baidu and ByteDance for the slot; first proof Qwen wins marquee external customers, not just Alibaba&#x27;s own stack</div></div><div class="rr-item"><div class="rr-dot"></div><div>Cloud +34% YoY — China&#x27;s only at-scale AI/cloud franchise, Qwen the volume-leading open-weight Chinese LLM</div></div><div class="rr-item"><div class="rr-dot"></div><div>Cloud standalone worth ~half the ~$275B market cap on SOTP — commerce cash machine effectively &#x27;free&#x27;</div></div><div class="rr-item"><div class="rr-dot"></div><div>Fortress balance sheet (~$85B net cash) + ~$19B buyback shrinking shares 3–4%/yr</div></div><div class="rr-item"><div class="rr-dot"></div><div>$600M DOJ settlement (2026-07) converts a years-old open-ended legal overhang into a known, finite, already-absorbed cost — de-risking event</div></div><div class="rr-item"><div class="rr-dot"></div><div>Street now modeling ~45% YoY cloud growth for the June quarter (vs +40% external in March) — the re-acceleration is still ahead of the stock, not behind it</div></div><div class="rr-item"><div class="rr-dot"></div><div>~17x forward on reset consensus for a 34–45% cloud-grower — still fair vs 18–25x historical though the &#x27;cheap&#x27; story faded; 40-analyst Strong Buy, PT ~$190/ADR (~65% upside), SOTP $150–200/ADR</div></div><div class="rr-item"><div class="rr-dot"></div><div>Thai DR available (BABA80, KTB issuer) — buyable in baht, no global brokerage account needed</div></div></div>
           <div class="rr-col risks"><h4>Risks</h4><div class="rr-item bold-risk"><div class="rr-dot"></div><div><strong>Apple-Qwen deal is strategic, not yet financial — licensing terms undisclosed, no revenue attached until Alibaba reports; don&#x27;t over-extrapolate the stock pop into a re-rated multiple before Aug 28</strong></div></div><div class="rr-item bold-risk"><div class="rr-dot"></div><div><strong>Instant-commerce subsidy war — drove op margin 14%→5% and non-GAAP NI −62%; if it runs hotter through FY27 the stock is dead-money ฿4.20–5.00</strong></div></div><div class="rr-item bold-risk"><div class="rr-dot"></div><div><strong>China-internet concentration — BABA + JD + BYD ≈ half the book, all correlated on the same US-China / VIE tail</strong></div></div><div class="rr-item"><div class="rr-dot"></div><div>Pentagon 1260H &#x27;military company&#x27; listing still stands — a court granted only a temporary reprieve on the lobbying restriction (2026-07-05), pending further review; the underlying designation is unresolved</div></div><div class="rr-item bold-risk"><div class="rr-dot"></div><div><strong>Unconfirmed report of a ~CNY 2T state-led data-center buildout for gov&#x27;t/SOE AI workloads — Morningstar cut fair value ~7% on a possible ~10%/yr cloud-revenue haircut starting FY2030; long-dated, no update since 07-11</strong></div></div><div class="rr-item"><div class="rr-dot"></div><div>Alibaba banned staff from using Anthropic&#x27;s Claude Code over a security dispute; China&#x27;s new AI-companion rules forced Qwen to disable consumer companion features — neither moves the model, but both confirm active US-China AI decoupling (even as the Apple deal cuts the other direction)</div></div><div class="rr-item"><div class="rr-dot"></div><div>Capex stays elevated through FY28 with no visible FCF payoff — keeps the multiple compressed (patience tax)</div></div><div class="rr-item"><div class="rr-dot"></div><div>VIE / ADR-delisting tail + DR-specific FX and premium-discount tracking risk for a baht holder</div></div></div>
         </div>
       </div>
@@ -423,19 +423,19 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
           <div class="agent">🪨 Steady</div>
           <div class="stance" style="color:var(--green);">HOLD</div>
           
-          <div class="rationale">10yr cloud re-rate is the thesis, Apple licensing Qwen is real evidence the moat is holding vs Baidu/ByteDance; DCF ฿6.0–8.1 vs current ฿4.83 — still too pessimistic. Concentration improved further (trimmed to 150k) but keep trimming JD80 before adding more BABA</div>
+          <div class="rationale">10yr cloud re-rate thesis intact — Apple licensing Qwen is real evidence the moat is holding vs Baidu/ByteDance. DCF ฿6.0–8.1 vs current ฿4.83 still too pessimistic. Concentration cleaned up (150k after the July trims); keep trimming JD80 before adding more BABA</div>
         </div>
         <div class="verdict-chip">
           <div class="agent">📉 Dippy</div>
           <div class="stance" style="color:var(--amber);">WATCH</div>
           
-          <div class="rationale">The dip is gone — ฿4.83 is ~27% off the ฿3.82 low, and the Apple news just added another leg up. Don&#x27;t chase; back up the truck only at ฿4.20 + Aug 28 loss-narrowing proof</div>
+          <div class="rationale">Dip is gone — ฿4.83 is ~27% off the ฿3.82 low, Apple-Qwen pop has faded but the level held. Fwd P/E now ~17x (reset), no longer &#x27;buy-the-panic&#x27; price. Back up the truck only at ฿4.20 + Aug 28 loss-narrowing proof</div>
         </div>
         <div class="verdict-chip">
           <div class="agent">🎩 Warren</div>
           <div class="stance" style="color:var(--text-2);">TOO HARD</div>
           
-          <div class="rationale">Apple choosing Qwen is a real quality signal, but strip the AI poetry → a Chinese retailer in a subsidy war that still doesn&#x27;t control its listing (VIE, 1260H unresolved) or its chips. Don&#x27;t add — let it shrink, fund a cleaner business</div>
+          <div class="rationale">Apple choosing Qwen is a real quality signal, but with fwd ~17x the &#x27;obvious cheap&#x27; margin is gone. Strip the AI poetry → a Chinese retailer in a subsidy war that still doesn&#x27;t control its listing (VIE, 1260H unresolved) or its chips. Don&#x27;t add — let it shrink, fund a cleaner business</div>
         </div></div>
       
       <div class="overall-verdict">

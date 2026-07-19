@@ -7,12 +7,12 @@
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
-  --bg: #0f1923; --surface: #172130; --surface-2: #1c2a3d; --border: #253347;
-  --teal: #00c4b4; --teal-mid: #00a99d; --teal-dim: rgba(0,196,180,0.15); --teal-fill: rgba(0,196,180,0.22);
-  --orange: #f58b42; --orange-mid: #e07030; --orange-dim: rgba(245,139,66,0.18);
-  --green: #30d97b; --green-dim: rgba(48,217,123,0.15); --red: #e85d5d; --red-dim: rgba(232,93,93,0.15);
-  --amber: #f5c842; --text-1: #e8edf5; --text-2: #8fa3bf; --text-3: #526070;
-  --number: #c9d9ed; --tag-bg: #1a3550; --badge-teal: #0a3030; --score-track: #1e2e40;
+  --bg: #19243c; --surface: #222f49; --surface-2: #2c3b58; --border: #3a4c6b;
+  --teal: #17dbc9; --teal-mid: #00c4b4; --teal-dim: rgba(23,219,201,0.15); --teal-fill: rgba(23,219,201,0.22);
+  --orange: #f0995e; --orange-mid: #dd8449; --orange-dim: rgba(240,153,94,0.18);
+  --green: #3ee08a; --green-dim: rgba(62,224,138,0.15); --red: #ef6a6a; --red-dim: rgba(239,106,106,0.15);
+  --amber: #f3d074; --text-1: #eef3fb; --text-2: #b0c1d8; --text-3: #8295ac;
+  --number: #d6e2f2; --tag-bg: #23406a; --badge-teal: #0c3a38; --score-track: #2c3b58;
 }
 html { scroll-behavior: smooth; }
 body { background: var(--bg); color: var(--text-1); font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Segoe UI', Arial, sans-serif; line-height: 1.5; min-height: 100vh; display: flex; justify-content: center; padding: 40px 20px 80px; }
@@ -53,14 +53,14 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
 .price-sub { font-size: 13px; color: var(--text-3); margin-top: 6px; }
 .badges { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
 .badge { display: inline-flex; align-items: center; gap: 5px; padding: 5px 11px; border-radius: 100px; font-size: 11.5px; font-weight: 600; letter-spacing: 0.02em; }
-.badge-teal { background: var(--teal-dim); color: var(--teal); border: 1px solid rgba(0,196,180,0.3); }
-.badge-orange { background: var(--orange-dim); color: var(--orange); border: 1px solid rgba(245,139,66,0.3); }
+.badge-teal { background: var(--teal-dim); color: var(--teal); border: 1px solid rgba(23,219,201,0.3); }
+.badge-orange { background: var(--orange-dim); color: var(--orange); border: 1px solid rgba(240,153,94,0.3); }
 .badge-muted { background: var(--surface-2); color: var(--text-2); border: 1px solid var(--border); }
 .range-bar-wrap { margin-top: 4px; }
 .range-label { display: flex; justify-content: space-between; font-size: 11.5px; color: var(--text-3); margin-bottom: 8px; }
 .range-bar-track { height: 6px; border-radius: 4px; background: var(--surface-2); position: relative; overflow: visible; }
 .range-bar-fill { height: 100%; border-radius: 4px; background: linear-gradient(90deg, var(--teal-mid) 0%, var(--teal) 100%); }
-.range-bar-marker { position: absolute; top: 50%; transform: translate(-50%, -50%); width: 14px; height: 14px; border-radius: 50%; background: #fff; border: 2px solid var(--teal); box-shadow: 0 0 0 3px rgba(0,196,180,0.3); }
+.range-bar-marker { position: absolute; top: 50%; transform: translate(-50%, -50%); width: 14px; height: 14px; border-radius: 50%; background: #fff; border: 2px solid var(--teal); box-shadow: 0 0 0 3px rgba(23,219,201,0.3); }
 .range-bar-label { position: absolute; bottom: -20px; transform: translateX(-50%); font-size: 11px; font-weight: 700; color: var(--text-1); white-space: nowrap; }
 .range-sublabels { margin-top: 22px; font-size: 11.5px; color: var(--text-3); display: flex; justify-content: space-between; }
 .range-sublabels span { font-weight: 600; color: var(--text-2); }
@@ -109,9 +109,9 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
 .verdict-chip { background: var(--surface-2); border: 1px solid var(--border); border-radius: 14px; padding: 20px; }
 .verdict-chip .agent { font-size: 11px; font-weight: 700; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
 .verdict-chip .stance { font-size: 15px; font-weight: 800; color: var(--text-1); margin-bottom: 6px; }
-.verdict-chip .conviction { display: inline-block; font-size: 10.5px; font-weight: 700; padding: 2px 8px; border-radius: 100px; background: var(--teal-dim); color: var(--teal); margin-bottom: 8px; border: 1px solid rgba(0,196,180,0.25); }
+.verdict-chip .conviction { display: inline-block; font-size: 10.5px; font-weight: 700; padding: 2px 8px; border-radius: 100px; background: var(--teal-dim); color: var(--teal); margin-bottom: 8px; border: 1px solid rgba(23,219,201,0.25); }
 .verdict-chip .rationale { font-size: 12px; color: var(--text-3); line-height: 1.5; }
-.overall-verdict { background: linear-gradient(135deg, rgba(0,196,180,0.12) 0%, rgba(0,169,157,0.06) 100%); border: 1px solid rgba(0,196,180,0.3); border-radius: 14px; padding: 24px 28px; display: flex; align-items: center; gap: 24px; }
+.overall-verdict { background: linear-gradient(135deg, rgba(23,219,201,0.12) 0%, rgba(0,169,157,0.06) 100%); border: 1px solid rgba(23,219,201,0.3); border-radius: 14px; padding: 24px 28px; display: flex; align-items: center; gap: 24px; }
 .ov-stance { font-size: 28px; font-weight: 900; color: var(--teal); letter-spacing: -0.02em; flex-shrink: 0; }
 .ov-detail { flex: 1; }
 .ov-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-3); margin-bottom: 4px; }
@@ -193,14 +193,14 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
             <span>Distance from low: <span>+6%</span></span>
           </div>
         </div>
-        <div class="stat-row" style="margin-top:28px;margin-bottom:0;"><div class="stat-pill"><div class="stat-pill-label">Market Cap</div><div class="stat-pill-value">~$13.5B</div></div><div class="stat-pill"><div class="stat-pill-label">Fwd P/E</div><div class="stat-pill-value">~7.9x</div></div><div class="stat-pill"><div class="stat-pill-label">Trailing P/E</div><div class="stat-pill-value">~10.6x</div></div><div class="stat-pill"><div class="stat-pill-label">P/B</div><div class="stat-pill-value">~2.57x</div></div><div class="stat-pill"><div class="stat-pill-label">Net Margin</div><div class="stat-pill-value">~50% GAAP / ~51% non-GAAP (FY25)</div></div><div class="stat-pill"><div class="stat-pill-label">Net Cash</div><div class="stat-pill-value">Net-cash, large client float</div></div><div class="stat-pill"><div class="stat-pill-label">Div Yield</div><div class="stat-pill-value">~0% (no regular div)</div></div></div>
+        <div class="stat-row" style="margin-top:28px;margin-bottom:0;"><div class="stat-pill"><div class="stat-pill-label">Market Cap</div><div class="stat-pill-value">~$13.5B</div></div><div class="stat-pill"><div class="stat-pill-label">Fwd P/E</div><div class="stat-pill-value">~10x (FY26E)</div></div><div class="stat-pill"><div class="stat-pill-label">Trailing P/E</div><div class="stat-pill-value">~11x GAAP / ~9x non-GAAP (post-CSRC hit)</div></div><div class="stat-pill"><div class="stat-pill-label">P/B</div><div class="stat-pill-value">~2.5x</div></div><div class="stat-pill"><div class="stat-pill-label">Net Margin</div><div class="stat-pill-value">~50% GAAP / ~51% non-GAAP (FY25); Q1-26 non-GAAP margin ~40% on penalty drag</div></div><div class="stat-pill"><div class="stat-pill-label">Net Cash</div><div class="stat-pill-value">Net-cash, large client float</div></div><div class="stat-pill"><div class="stat-pill-label">Div Yield</div><div class="stat-pill-value">~0% (no regular div)</div></div></div>
       </div>
     </div>
     <div class="section" id="s2">
       <div class="section-header"><div class="section-num">2</div><div class="section-title">Price History</div></div>
       <div class="card chart-section">
         <div class="chart-head">
-          <div><div class="chart-price">$96.40</div><div class="chart-sub">FUTU · $ · snapshot 2026-06-28</div></div>
+          <div><div class="chart-price">$96.40</div><div class="chart-sub">FUTU · $ · snapshot 2026-07-19</div></div>
           <div class="chart-tabs"><button class="chart-tab" data-range="1D">1D<span style="color:#30d97b;">+1.1%</span></button><button class="chart-tab" data-range="1W">1W<span style="color:#f5736b;">-1.3%</span></button><button class="chart-tab" data-range="1M">1M<span style="color:#f5736b;">-12.5%</span></button><button class="chart-tab active" data-range="1Y">1Y<span style="color:#f5736b;">-19.2%</span></button><button class="chart-tab" data-range="5Y">5Y<span style="color:#f5736b;">-38.2%</span></button></div>
         </div>
         
@@ -275,7 +275,7 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
       <div class="card">
         <div class="snowflake-grid">
           <div style="display:flex;flex-direction:column;align-items:center;">
-            <svg width="240" height="240" viewBox="-175 -125 350 250"><defs><style>.ring{fill:none;stroke:rgba(255,255,255,0.06);stroke-width:1;}.ring-bright{fill:none;stroke:rgba(255,255,255,0.12);stroke-width:1;}.axis-line{stroke:rgba(255,255,255,0.08);stroke-width:1;}.score-poly{fill:rgba(0,196,180,0.22);stroke:#00c4b4;stroke-width:2;}</style></defs><polygon class="ring" points="0.00,-15.00 14.27,-4.64 8.82,12.14 -8.82,12.14 -14.27,-4.64"/><polygon class="ring" points="0.00,-30.00 28.53,-9.27 17.63,24.27 -17.63,24.27 -28.53,-9.27"/><polygon class="ring" points="0.00,-45.00 42.80,-13.91 26.45,36.41 -26.45,36.41 -42.80,-13.91"/><polygon class="ring" points="0.00,-60.00 57.06,-18.54 35.27,48.54 -35.27,48.54 -57.06,-18.54"/><polygon class="ring ring-bright" points="0.00,-75.00 71.33,-23.18 44.08,60.68 -44.08,60.68 -71.33,-23.18"/><polygon class="ring ring-bright" points="0.00,-90.00 85.60,-27.81 52.90,72.81 -52.90,72.81 -85.60,-27.81"/><line class="axis-line" x1="0" y1="0" x2="0.00" y2="-90.00"/><line class="axis-line" x1="0" y1="0" x2="85.60" y2="-27.81"/><line class="axis-line" x1="0" y1="0" x2="52.90" y2="72.81"/><line class="axis-line" x1="0" y1="0" x2="-52.90" y2="72.81"/><line class="axis-line" x1="0" y1="0" x2="-85.60" y2="-27.81"/><polygon class="score-poly" points="0.00,-75.00 57.06,-18.54 52.90,72.81 -44.08,60.68 -14.27,-4.64"/><text x="0.0" y="-96.3" text-anchor="middle" font-size="8.5" fill="#8fa3bf">Valuation</text><text x="95.6" y="-29.8" text-anchor="start" font-size="8.5" fill="#8fa3bf">Future Growth</text><text x="60.6" y="83.9" text-anchor="start" font-size="8.5" fill="#8fa3bf">Past Perf.</text><text x="-60.6" y="83.9" text-anchor="end" font-size="8.5" fill="#8fa3bf">Fin. Health</text><text x="-95.6" y="-29.8" text-anchor="end" font-size="8.5" fill="#8fa3bf">Dividend</text><circle cx="0.00" cy="-75.00" r="4" fill="#00c4b4"/><circle cx="57.06" cy="-18.54" r="4" fill="#00c4b4"/><circle cx="52.90" cy="72.81" r="4" fill="#00c4b4"/><circle cx="-44.08" cy="60.68" r="4" fill="#00c4b4"/><circle cx="-14.27" cy="-4.64" r="4" fill="#f58b42"/></svg>
+            <svg width="240" height="240" viewBox="-175 -125 350 250"><defs><style>.ring{fill:none;stroke:rgba(255,255,255,0.06);stroke-width:1;}.ring-bright{fill:none;stroke:rgba(255,255,255,0.12);stroke-width:1;}.axis-line{stroke:rgba(255,255,255,0.08);stroke-width:1;}.score-poly{fill:rgba(23,219,201,0.22);stroke:#17dbc9;stroke-width:2;}</style></defs><polygon class="ring" points="0.00,-15.00 14.27,-4.64 8.82,12.14 -8.82,12.14 -14.27,-4.64"/><polygon class="ring" points="0.00,-30.00 28.53,-9.27 17.63,24.27 -17.63,24.27 -28.53,-9.27"/><polygon class="ring" points="0.00,-45.00 42.80,-13.91 26.45,36.41 -26.45,36.41 -42.80,-13.91"/><polygon class="ring" points="0.00,-60.00 57.06,-18.54 35.27,48.54 -35.27,48.54 -57.06,-18.54"/><polygon class="ring ring-bright" points="0.00,-75.00 71.33,-23.18 44.08,60.68 -44.08,60.68 -71.33,-23.18"/><polygon class="ring ring-bright" points="0.00,-90.00 85.60,-27.81 52.90,72.81 -52.90,72.81 -85.60,-27.81"/><line class="axis-line" x1="0" y1="0" x2="0.00" y2="-90.00"/><line class="axis-line" x1="0" y1="0" x2="85.60" y2="-27.81"/><line class="axis-line" x1="0" y1="0" x2="52.90" y2="72.81"/><line class="axis-line" x1="0" y1="0" x2="-52.90" y2="72.81"/><line class="axis-line" x1="0" y1="0" x2="-85.60" y2="-27.81"/><polygon class="score-poly" points="0.00,-75.00 57.06,-18.54 52.90,72.81 -44.08,60.68 -14.27,-4.64"/><text x="0.0" y="-96.3" text-anchor="middle" font-size="8.5" fill="#8fa3bf">Valuation</text><text x="95.6" y="-29.8" text-anchor="start" font-size="8.5" fill="#8fa3bf">Future Growth</text><text x="60.6" y="83.9" text-anchor="start" font-size="8.5" fill="#8fa3bf">Past Perf.</text><text x="-60.6" y="83.9" text-anchor="end" font-size="8.5" fill="#8fa3bf">Fin. Health</text><text x="-95.6" y="-29.8" text-anchor="end" font-size="8.5" fill="#8fa3bf">Dividend</text><circle cx="0.00" cy="-75.00" r="4" fill="#17dbc9"/><circle cx="57.06" cy="-18.54" r="4" fill="#17dbc9"/><circle cx="52.90" cy="72.81" r="4" fill="#17dbc9"/><circle cx="-44.08" cy="60.68" r="4" fill="#17dbc9"/><circle cx="-14.27" cy="-4.64" r="4" fill="#f0995e"/></svg>
             <div class="snowflake-total">
               <div><span class="num">21</span><span class="denom" style="font-size:18px;color:var(--text-3);"> / 30</span></div>
               <div class="label">Smartmall Score</div>
@@ -287,7 +287,7 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
               <div class="score-row-label" style="color:var(--teal)">Valuation</div>
               <div>
                 <div class="score-bar-track"><div class="score-bar-fill" style="width:83.3%;background:var(--teal)"></div></div>
-                <div class="score-rationale">Fwd P/E ~8x, trailing ~10x, P/B ~2.7x on a 68%-FY25 grower — deeply de-rated after the China penalty; cheap if non-China growth holds</div>
+                <div class="score-rationale">Fwd P/E ~10x FY26E, trailing ~11x GAAP / ~9x non-GAAP, P/B ~2.5x — still de-rated post-CSRC; cheap if non-China growth holds</div>
               </div>
               <div class="score-num" style="color:var(--teal)">5/6</div>
             </div>
@@ -295,7 +295,7 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
               <div class="score-row-label" style="color:var(--teal)">Future Growth</div>
               <div>
                 <div class="score-bar-track"><div class="score-bar-fill" style="width:66.7%;background:var(--teal)"></div></div>
-                <div class="score-rationale">FY25 revenue +68% YoY, Q1-26 +25%, funded accounts +34%; mainland China (~20% of revenue) on a 2yr sell-only wind-down — international Moomoo (&gt;55% of accounts) compounding fast enough to replace it</div>
+                <div class="score-rationale">FY25 revenue +68% YoY, Q1-26 +25% ($747M) — deceleration is expected as mainland (~20% of rev) enters 2yr sell-only wind-down; international Moomoo (&gt;55% of accounts) still compounding fast</div>
               </div>
               <div class="score-num" style="color:var(--teal)">4/6</div>
             </div>
@@ -342,7 +342,7 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
       <div class="section-header"><div class="section-num">5</div><div class="section-title">Past Performance</div></div>
       <div class="card">
         <div style="font-size:12.5px;color:var(--text-3);margin-bottom:20px;">Revenue (US$B, HKD/7.78)</div>
-        <svg viewBox="0 0 720 240" width="100%" style="font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;overflow:visible;"><line x1="0" y1="220.0" x2="720" y2="220.0" stroke="rgba(255,255,255,0.08)" stroke-width="1"/><line x1="0" y1="148.8" x2="720" y2="148.8" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="4,4"/><line x1="0" y1="77.5" x2="720" y2="77.5" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="4,4"/><rect x="20.0" y="161.2" width="120.0" height="58.8" rx="5" fill="#00c4b4" opacity="0.55"/><text x="80.0" y="156.2" font-size="11" font-weight="700" fill="#00c4b4" text-anchor="middle">$0.9B</text><text x="80.0" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">2021</text><rect x="160.0" y="156.7" width="120.0" height="63.3" rx="5" fill="#00c4b4" opacity="0.62"/><text x="220.0" y="151.7" font-size="11" font-weight="700" fill="#00c4b4" text-anchor="middle">$1.0B</text><text x="220.0" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">2022</text><rect x="300.0" y="136.6" width="120.0" height="83.4" rx="5" fill="#00c4b4" opacity="0.69"/><text x="360.0" y="131.6" font-size="11" font-weight="700" fill="#00c4b4" text-anchor="middle">$1.3B</text><text x="360.0" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">2023</text><rect x="440.0" y="106.9" width="120.0" height="113.1" rx="5" fill="#00c4b4" opacity="0.76"/><text x="500.0" y="101.9" font-size="11" font-weight="700" fill="#00c4b4" text-anchor="middle">$1.8B</text><text x="500.0" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">2024</text><rect x="580.0" y="30.0" width="120.0" height="190.0" rx="5" fill="#00c4b4" opacity="1.00"/><rect x="580.0" y="30.0" width="120.0" height="190.0" rx="5" fill="none" stroke="#00c4b4" stroke-width="1.5" opacity="0.5"/><text x="640.0" y="25.0" font-size="11" font-weight="700" fill="#00c4b4" text-anchor="middle">$2.9B</text><text x="640.0" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">2025</text></svg>
+        <svg viewBox="0 0 720 240" width="100%" style="font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;overflow:visible;"><line x1="0" y1="220.0" x2="720" y2="220.0" stroke="rgba(255,255,255,0.08)" stroke-width="1"/><line x1="0" y1="148.8" x2="720" y2="148.8" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="4,4"/><line x1="0" y1="77.5" x2="720" y2="77.5" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="4,4"/><rect x="20.0" y="161.2" width="120.0" height="58.8" rx="5" fill="#17dbc9" opacity="0.55"/><text x="80.0" y="156.2" font-size="11" font-weight="700" fill="#17dbc9" text-anchor="middle">$0.9B</text><text x="80.0" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">2021</text><rect x="160.0" y="156.7" width="120.0" height="63.3" rx="5" fill="#17dbc9" opacity="0.62"/><text x="220.0" y="151.7" font-size="11" font-weight="700" fill="#17dbc9" text-anchor="middle">$1.0B</text><text x="220.0" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">2022</text><rect x="300.0" y="136.6" width="120.0" height="83.4" rx="5" fill="#17dbc9" opacity="0.69"/><text x="360.0" y="131.6" font-size="11" font-weight="700" fill="#17dbc9" text-anchor="middle">$1.3B</text><text x="360.0" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">2023</text><rect x="440.0" y="106.9" width="120.0" height="113.1" rx="5" fill="#17dbc9" opacity="0.76"/><text x="500.0" y="101.9" font-size="11" font-weight="700" fill="#17dbc9" text-anchor="middle">$1.8B</text><text x="500.0" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">2024</text><rect x="580.0" y="30.0" width="120.0" height="190.0" rx="5" fill="#17dbc9" opacity="1.00"/><rect x="580.0" y="30.0" width="120.0" height="190.0" rx="5" fill="none" stroke="#17dbc9" stroke-width="1.5" opacity="0.5"/><text x="640.0" y="25.0" font-size="11" font-weight="700" fill="#17dbc9" text-anchor="middle">$2.9B</text><text x="640.0" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">2025</text></svg>
         <div class="note-box" style="margin-top:16px;">~34% revenue CAGR 2021→2025 (HK$ PRs: 7,115→7,614→10,008→13,590→22,847M; YoY +7.0%→+31.4%→+35.8%→+68.1%). FY25 net income +108% YoY. No down years — growth steady and accelerating.</div>
       </div>
     </div>
@@ -352,38 +352,38 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
         <div style="font-size:12.5px;color:var(--text-3);margin-bottom:24px;">Growth drivers — guided &amp; estimated</div>
         
         <div class="growth-row">
-          <div class="growth-label">FY25 revenue</div>
-          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:68%;background:linear-gradient(90deg,#00c4b4,#00a99d);">+68% YoY</div></div>
-          <div class="growth-value" style="color:var(--teal);">+68% YoY</div>
+          <div class="growth-label">Q1-26 revenue</div>
+          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:95%;background:linear-gradient(90deg,#17dbc9,#00c4b4);">$747M (+25% YoY)</div></div>
+          <div class="growth-value" style="color:var(--teal);">$747M (+25% YoY)</div>
         </div>
         <div class="growth-row">
-          <div class="growth-label">FY25 net income</div>
-          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:95%;background:linear-gradient(90deg,#00c4b4,#00a99d);">+108% YoY</div></div>
-          <div class="growth-value" style="color:var(--teal);">+108% YoY</div>
+          <div class="growth-label">Q1-26 net income (GAAP)</div>
+          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:61%;background:linear-gradient(90deg,#17dbc9,#00c4b4);">-61% YoY (CSRC penalty)</div></div>
+          <div class="growth-value" style="color:var(--teal);">-61% YoY (CSRC penalty)</div>
         </div>
         <div class="growth-row">
-          <div class="growth-label">Funded accounts</div>
-          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:15%;background:linear-gradient(90deg,#00c4b4,#00a99d);">3.59M (+34% YoY)</div></div>
-          <div class="growth-value" style="color:var(--teal);">3.59M (+34% YoY)</div>
+          <div class="growth-label">Q1-26 net income (non-GAAP)</div>
+          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:95%;background:linear-gradient(90deg,#17dbc9,#00c4b4);">$117M / +36% YoY ex-penalty</div></div>
+          <div class="growth-value" style="color:var(--teal);">$117M / +36% YoY ex-penalty</div>
         </div>
         <div class="growth-row">
           <div class="growth-label">Client assets</div>
-          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:15%;background:linear-gradient(90deg,#00c4b4,#00a99d);">HK$1.23T (+47–66% YoY)</div></div>
-          <div class="growth-value" style="color:var(--teal);">HK$1.23T (+47–66% YoY)</div>
+          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:15%;background:linear-gradient(90deg,#17dbc9,#00c4b4);">HK$1.23T+ (still growing)</div></div>
+          <div class="growth-value" style="color:var(--teal);">HK$1.23T+ (still growing)</div>
         </div>
-        <div class="note-box" style="margin-top:20px;">Growth engine = globalization (Moomoo &gt;55% of funded accounts; SG/US/MY/JP) offsetting the mainland China wind-down. China = ~13% accounts / ~17% assets / ~20% revenue, on a 2yr sell-only transition; the open question is how much group growth survives the severing.</div>
+        <div class="note-box" style="margin-top:20px;">Growth engine = globalization (Moomoo &gt;55% of funded accounts; SG/US/MY/JP) offsetting the mainland wind-down. Q1-26 shows the shape: underlying business +36% ex-penalty, but reported GAAP -61% because the RMB1.85B CSRC fine ran through the P&amp;L. Deceleration from +68% FY25 → +25% Q1-26 is the mainland book being severed; the open question is whether international can hold ≥20% once the transition is complete.</div>
       </div>
     </div>
     <div class="section" id="s7">
       <div class="section-header"><div class="section-num">7</div><div class="section-title">Financial Health</div></div>
       <div class="card">
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px;align-items:end;">
-          <div style="background:var(--teal-dim);border:1px solid rgba(0,196,180,0.3);border-radius:12px;padding:20px;">
+          <div style="background:var(--teal-dim);border:1px solid rgba(23,219,201,0.3);border-radius:12px;padding:20px;">
             <div style="font-size:11px;color:var(--teal);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;font-weight:700;">Cash &amp; Equivalents</div>
             <div style="font-size:34px;font-weight:900;color:var(--teal);letter-spacing:-0.03em;">$0B</div>
             <div class="health-bar-track" style="margin-top:12px;"><div class="health-bar-fill" style="width:0%;background:var(--teal);"></div></div>
           </div>
-          <div style="background:rgba(245,139,66,0.08);border:1px solid rgba(245,139,66,0.2);border-radius:12px;padding:20px;">
+          <div style="background:rgba(240,153,94,0.08);border:1px solid rgba(240,153,94,0.2);border-radius:12px;padding:20px;">
             <div style="font-size:11px;color:var(--orange);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;font-weight:700;">Total Debt</div>
             <div style="font-size:34px;font-weight:900;color:var(--orange);letter-spacing:-0.03em;">$0B</div>
             <div class="health-bar-track" style="margin-top:12px;"><div class="health-bar-fill" style="width:0%;background:var(--orange);"></div></div>
@@ -411,7 +411,7 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
       <div class="section-header"><div class="section-num">9</div><div class="section-title">Rewards &amp; Risks</div></div>
       <div class="card">
         <div class="two-col">
-          <div class="rr-col rewards"><h4>Rewards</h4><div class="rr-item"><div class="rr-dot"></div><div>Cheap: fwd P/E ~8x, trailing ~10x, P/B ~2.7x on a 68%-FY25 revenue grower</div></div><div class="rr-item"><div class="rr-dot"></div><div>FY25 revenue +68% YoY, net income +108% YoY, net margin ~50% GAAP / ~51% non-GAAP</div></div><div class="rr-item"><div class="rr-dot"></div><div>Net-cash balance sheet + active $800M buyback (~52% executed) — the risk is regulatory, not financial</div></div><div class="rr-item"><div class="rr-dot"></div><div>International Moomoo (&gt;55% of funded accounts; SG/US/MY/JP) compounding independent of mainland China</div></div><div class="rr-item"><div class="rr-dot"></div><div>Mainland at-risk book already small: ~20% of revenue, on a managed 2yr wind-down</div></div></div>
+          <div class="rr-col rewards"><h4>Rewards</h4><div class="rr-item"><div class="rr-dot"></div><div>Cheap: fwd P/E ~10x FY26E, trailing ~9x non-GAAP, P/B ~2.5x on a 25%-Q1-26 grower</div></div><div class="rr-item"><div class="rr-dot"></div><div>Q1-26 underlying earnings +36% ex-CSRC penalty; FY25 net margin ~50% GAAP / ~51% non-GAAP</div></div><div class="rr-item"><div class="rr-dot"></div><div>Net-cash balance sheet + active $800M buyback (~52% executed) — the risk is regulatory, not financial</div></div><div class="rr-item"><div class="rr-dot"></div><div>International Moomoo (&gt;55% of funded accounts; SG/US/MY/JP) compounding independent of mainland China</div></div><div class="rr-item"><div class="rr-dot"></div><div>Mainland at-risk book already small: ~20% of revenue, on a managed 2yr wind-down; penalty is now a P&amp;L event, not an overhang</div></div></div>
           <div class="rr-col risks"><h4>Risks</h4><div class="rr-item bold-risk"><div class="rr-dot"></div><div><strong>China regulatory crackdown (REALIZED) — CSRC RMB 1.85B (~US$272M) penalty for unlicensed mainland cross-border brokerage; existing mainland clients (~13% of accounts, ~20% of revenue) on a 2-year sell-only wind-down. Structural risk: the eight-agency crackdown widening to HK-booked mainland-resident assets</strong></div></div><div class="rr-item"><div class="rr-dot"></div><div>VIE / offshore structure — Cayman holdco over a VIE; PCAOB/HFCAA delisting risk dormant but live; concurrent US securities-law / class-action probes over China-exposure disclosure</div></div><div class="rr-item"><div class="rr-dot"></div><div>Earnings cyclical — interest income (~45% of revenue) falls with rates, commissions fall with trading volume; a HK/global market downturn hits both legs at once</div></div></div>
         </div>
       </div>
@@ -423,19 +423,19 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
           <div class="agent">🪨 Steady</div>
           <div class="stance" style="color:var(--text-2);">PASS</div>
           
-          <div class="rationale">CSRC penalty realized, not hypothetical — regulator already showed its hand; no DR, no yield, deepens an already-heavy China-tech sleeve. Nothing changes (affirmed 2026-06-24)</div>
+          <div class="rationale">CSRC penalty realized, no DR, no yield, still deepens an already-heavy China-tech sleeve. Q1-26 confirmed the deceleration (+25% vs +68% FY25) — thesis intact, no change (affirmed 2026-07-19)</div>
         </div>
         <div class="verdict-chip">
           <div class="agent">📉 Dippy</div>
           <div class="stance" style="color:var(--text-2);">PASS</div>
           
-          <div class="rationale">no Thai DR, ~0% yield (nothing to spike), and the stock already bounced off the crash low — no fresh dislocation to buy. At ~8x fwd I see the value, but no bat-signal, no entry (2026-06-24)</div>
+          <div class="rationale">price hasn&#x27;t moved off $95 since June; no Thai DR, ~0% yield, no fresh dislocation. At ~10x fwd I see the value but there&#x27;s no bat-signal — no entry (2026-07-19)</div>
         </div>
         <div class="verdict-chip">
           <div class="agent">🎩 Warren</div>
           <div class="stance" style="color:var(--text-2);">TOO HARD</div>
           
-          <div class="rationale">broker = regulator&#x27;s most direct lever; CSRC already took RMB1.85B — paying 8x fwd for a business that just demonstrated it operates at the state&#x27;s pleasure. No dividend, no DR (2026-06-24)</div>
+          <div class="rationale">Q1-26 GAAP -61% is exactly the risk — broker sitting at the regulator&#x27;s mercy, whole RMB1.85B fine ran through one quarter. No dividend, no DR, no way to size (2026-07-19)</div>
         </div></div>
       
       <div class="overall-verdict">
@@ -443,7 +443,7 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
         <div class="ov-detail">
           <div class="ov-label">Smartmall Overall Stance</div>
           <div class="ov-target"><strong>WATCH · Med conviction (tilt Buy on small scale-in)</strong> · Fair value target <strong>~$130 base (consensus ~$156, split: Neutral cluster ~$100 vs Buy cluster ~$170+)</strong></div>
-          <div class="ov-add-zone">Add zone: <strong>$85–100 — price $98.13 upper-mid band: starter tranche now, add into $85–90</strong></div>
+          <div class="ov-add-zone">Add zone: <strong>$85–100 — price $95.10 mid-band: starter tranche now, add into $85–90</strong></div>
         </div>
       </div>
     </div>
