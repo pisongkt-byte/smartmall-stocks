@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HANGLUNG — Hang Lung Properties Limited · Smartmall Stock Card</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #19243c; --surface: #222f49; --surface-2: #2c3b58; --border: #3a4c6b;
+  --teal: #17dbc9; --teal-mid: #00c4b4; --teal-dim: rgba(23,219,201,0.15); --teal-fill: rgba(23,219,201,0.22);
+  --orange: #f0995e; --orange-mid: #dd8449; --orange-dim: rgba(240,153,94,0.18);
+  --green: #3ee08a; --green-dim: rgba(62,224,138,0.15); --red: #ef6a6a; --red-dim: rgba(239,106,106,0.15);
+  --amber: #f3d074; --text-1: #eef3fb; --text-2: #b0c1d8; --text-3: #8295ac;
+  --number: #d6e2f2; --tag-bg: #23406a; --badge-teal: #0c3a38; --score-track: #2c3b58;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text-1); font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Segoe UI', Arial, sans-serif; line-height: 1.5; min-height: 100vh; display: flex; justify-content: center; padding: 40px 20px 80px; }
+.page { width: 1240px; max-width: 100%; display: grid; grid-template-columns: 220px 1fr; gap: 0; align-items: start; }
+.sidenav { position: sticky; top: 40px; padding: 32px 0 32px 0; }
+.sidenav-logo { display: flex; align-items: center; gap: 8px; margin-bottom: 20px; padding-left: 8px; text-decoration: none; transition: opacity 0.15s; }
+.sidenav-logo:hover { opacity: 0.8; }
+.sidenav-logo .dot { width: 28px; height: 28px; background: var(--teal); border-radius: 50%; flex-shrink: 0; }
+.sidenav-logo span { font-size: 13px; font-weight: 700; color: var(--text-2); letter-spacing: 0.05em; text-transform: uppercase; }
+.nav-item { display: flex; align-items: center; gap: 12px; padding: 10px 16px; border-radius: 10px; cursor: pointer; margin-bottom: 2px; transition: background 0.15s; text-decoration: none; }
+.nav-item:hover { background: var(--surface); }
+.nav-item.active { background: var(--teal-dim); border-left: 3px solid var(--teal); }
+.nav-back { margin-bottom: 16px; }
+.nav-back .nav-num { color: var(--teal); font-size: 14px; }
+.nav-back .nav-label { color: var(--text-2); font-weight: 600; }
+.nav-back:hover .nav-label { color: var(--teal); }
+.nav-num { font-size: 11px; font-weight: 700; color: var(--text-3); width: 18px; flex-shrink: 0; }
+.nav-label { font-size: 13px; font-weight: 500; color: var(--text-2); }
+.nav-item.active .nav-label { color: var(--teal); }
+.hero-verdict { display: flex; justify-content: flex-end; align-items: center; gap: 12px; margin-top: 14px; }
+.hv-stance { font-size: 13px; font-weight: 800; letter-spacing: 0.04em; border: 1.5px solid; border-radius: 999px; padding: 5px 16px; text-transform: uppercase; }
+.hv-score { font-size: 13px; color: var(--text-3); font-weight: 600; }
+.hv-score b { font-size: 19px; color: var(--text-1); font-weight: 800; }
+.main { min-width: 0; padding: 0 0 0 32px; }
+.section { margin-bottom: 40px; scroll-margin-top: 20px; }
+.section-header { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
+.section-num { width: 32px; height: 32px; border-radius: 50%; background: var(--surface-2); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: var(--text-2); flex-shrink: 0; }
+.section-title { font-size: 17px; font-weight: 700; color: var(--text-1); letter-spacing: -0.01em; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px 32px; margin-bottom: 16px; }
+.header-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 24px; }
+.header-ticker { display: flex; align-items: center; gap: 14px; margin-bottom: 8px; }
+.ticker-logo { width: 48px; height: 48px; background: linear-gradient(135deg, #1a3550 0%, #2a4a70 100%); border-radius: 12px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; color: var(--teal); letter-spacing: 0.02em; }
+.ticker-name h1 { font-size: 22px; font-weight: 800; color: var(--text-1); letter-spacing: -0.02em; line-height: 1.2; }
+.ticker-name .exch { font-size: 12px; color: var(--text-3); margin-top: 2px; }
+.header-price { text-align: right; }
+.price-big { font-size: 36px; font-weight: 800; color: var(--text-1); letter-spacing: -0.03em; line-height: 1; }
+.price-secondary { font-size: 14px; font-weight: 600; color: var(--text-3); margin-top: 5px; }
+.price-sub { font-size: 13px; color: var(--text-3); margin-top: 6px; }
+.badges { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
+.badge { display: inline-flex; align-items: center; gap: 5px; padding: 5px 11px; border-radius: 100px; font-size: 11.5px; font-weight: 600; letter-spacing: 0.02em; }
+.badge-teal { background: var(--teal-dim); color: var(--teal); border: 1px solid rgba(23,219,201,0.3); }
+.badge-orange { background: var(--orange-dim); color: var(--orange); border: 1px solid rgba(240,153,94,0.3); }
+.badge-muted { background: var(--surface-2); color: var(--text-2); border: 1px solid var(--border); }
+.range-bar-wrap { margin-top: 4px; }
+.range-label { display: flex; justify-content: space-between; font-size: 11.5px; color: var(--text-3); margin-bottom: 8px; }
+.range-bar-track { height: 6px; border-radius: 4px; background: var(--surface-2); position: relative; overflow: visible; }
+.range-bar-fill { height: 100%; border-radius: 4px; background: linear-gradient(90deg, var(--teal-mid) 0%, var(--teal) 100%); }
+.range-bar-marker { position: absolute; top: 50%; transform: translate(-50%, -50%); width: 14px; height: 14px; border-radius: 50%; background: #fff; border: 2px solid var(--teal); box-shadow: 0 0 0 3px rgba(23,219,201,0.3); }
+.range-bar-label { position: absolute; bottom: -20px; transform: translateX(-50%); font-size: 11px; font-weight: 700; color: var(--text-1); white-space: nowrap; }
+.range-sublabels { margin-top: 22px; font-size: 11.5px; color: var(--text-3); display: flex; justify-content: space-between; }
+.range-sublabels span { font-weight: 600; color: var(--text-2); }
+.snowflake-grid { display: grid; grid-template-columns: 240px 1fr; gap: 32px; align-items: start; }
+.score-rows { flex: 1; }
+.score-row { display: grid; grid-template-columns: 130px 1fr 36px; gap: 12px; align-items: center; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+.score-row:last-child { border-bottom: none; }
+.score-row-label { font-size: 13px; font-weight: 600; color: var(--text-2); }
+.score-bar-track { height: 8px; background: var(--score-track); border-radius: 4px; overflow: hidden; }
+.score-bar-fill { height: 100%; border-radius: 4px; }
+.score-num { font-size: 13px; font-weight: 700; text-align: right; }
+.score-rationale { grid-column: 1 / -1; font-size: 11.5px; color: var(--text-3); padding-top: 2px; line-height: 1.5; }
+.snowflake-total { text-align: center; margin-top: 16px; }
+.snowflake-total .num { font-size: 28px; font-weight: 800; color: var(--teal); }
+.snowflake-total .denom { font-size: 14px; color: var(--text-3); }
+.snowflake-total .label { font-size: 11px; color: var(--text-3); margin-top: 4px; }
+.sankey-wrap { width: 100%; overflow-x: auto; }
+.sankey-caption { margin-top: 16px; font-size: 12.5px; color: var(--text-2); background: var(--surface-2); border-radius: 8px; padding: 10px 14px; border-left: 3px solid var(--teal); }
+.health-row { display: flex; align-items: center; gap: 16px; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+.health-row:last-child { border-bottom: none; }
+.health-label { width: 140px; font-size: 13px; color: var(--text-2); flex-shrink: 0; }
+.health-bar-track { flex: 1; height: 8px; background: var(--score-track); border-radius: 4px; overflow: hidden; position: relative; }
+.health-bar-fill { height: 100%; border-radius: 4px; background: var(--teal); }
+.health-value { width: 90px; text-align: right; font-size: 13px; font-weight: 700; color: var(--number); }
+.chart-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 18px; flex-wrap: wrap; }
+.chart-price { font-size: 30px; font-weight: 900; color: var(--text-1); letter-spacing: -0.03em; }
+.chart-sub { font-size: 12px; color: var(--text-3); margin-top: 4px; }
+.chart-tabs { display: flex; gap: 8px; flex-wrap: wrap; }
+.chart-tab { background: var(--surface-2); border: 1px solid var(--border); border-radius: 9px; padding: 7px 13px; font-size: 12px; font-weight: 700; color: var(--text-3); cursor: pointer; display: flex; gap: 6px; align-items: center; font-family: inherit; transition: all .15s; }
+.chart-tab:hover { color: var(--text-1); }
+.chart-tab.active { border-color: var(--teal); color: var(--text-1); background: var(--teal-dim); }
+.chart-tab span { font-size: 11px; font-weight: 600; }
+.chart-pane { display: none; }
+.chart-pane.active { display: block; }
+.chart-svg { width: 100%; height: 240px; display: block; }
+.rsi-block { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--border); }
+.rsi-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 8px; }
+.rsi-title { font-size: 13px; font-weight: 700; color: var(--text-2); letter-spacing: 0.02em; }
+.rsi-now { font-size: 14px; font-weight: 800; }
+.rsi-chartwrap { position: relative; padding-left: 26px; }
+.rsi-axis { position: absolute; left: 0; top: 0; height: 120px; width: 22px; display: flex; flex-direction: column; justify-content: space-between; }
+.rsi-axis span { font-size: 10px; color: var(--text-3); line-height: 1; }
+.rsi-svg { width: 100%; height: 120px; display: block; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.verdict-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
+.verdict-chip { background: var(--surface-2); border: 1px solid var(--border); border-radius: 14px; padding: 20px; }
+.verdict-chip .agent { font-size: 11px; font-weight: 700; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+.verdict-chip .stance { font-size: 15px; font-weight: 800; color: var(--text-1); margin-bottom: 6px; }
+.verdict-chip .conviction { display: inline-block; font-size: 10.5px; font-weight: 700; padding: 2px 8px; border-radius: 100px; background: var(--teal-dim); color: var(--teal); margin-bottom: 8px; border: 1px solid rgba(23,219,201,0.25); }
+.verdict-chip .rationale { font-size: 12px; color: var(--text-3); line-height: 1.5; }
+.overall-verdict { background: linear-gradient(135deg, rgba(23,219,201,0.12) 0%, rgba(0,169,157,0.06) 100%); border: 1px solid rgba(23,219,201,0.3); border-radius: 14px; padding: 24px 28px; display: flex; align-items: center; gap: 24px; }
+.ov-stance { font-size: 28px; font-weight: 900; color: var(--teal); letter-spacing: -0.02em; flex-shrink: 0; }
+.ov-detail { flex: 1; }
+.ov-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-3); margin-bottom: 4px; }
+.ov-target { font-size: 14px; color: var(--text-2); }
+.ov-target strong { color: var(--text-1); }
+.ov-add-zone { font-size: 13px; color: var(--text-3); margin-top: 4px; }
+.rr-col h4 { font-size: 13px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 14px; }
+.rr-col.rewards h4 { color: var(--green); }
+.rr-col.risks h4 { color: var(--red); }
+.rr-item { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 12px; font-size: 13px; color: var(--text-2); line-height: 1.5; }
+.rr-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; margin-top: 6px; }
+.rr-col.rewards .rr-dot { background: var(--green); }
+.rr-col.risks .rr-dot { background: var(--red); }
+.rr-item.bold-risk { color: var(--text-1); font-weight: 600; }
+.rr-item.bold-risk .rr-dot { background: var(--red); box-shadow: 0 0 0 3px rgba(232,93,93,0.2); }
+.stat-row { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 16px; }
+.stat-pill { background: var(--surface-2); border: 1px solid var(--border); border-radius: 10px; padding: 10px 16px; min-width: 130px; }
+.stat-pill-label { font-size: 11px; color: var(--text-3); margin-bottom: 3px; text-transform: uppercase; letter-spacing: 0.04em; }
+.stat-pill-value { font-size: 18px; font-weight: 800; color: var(--number); }
+.stat-pill-sub { font-size: 11px; color: var(--text-3); margin-top: 2px; }
+.div-row { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+.div-big { font-size: 52px; font-weight: 900; color: var(--amber); letter-spacing: -0.04em; line-height: 1; }
+.div-note { font-size: 13px; color: var(--text-2); max-width: 460px; line-height: 1.6; }
+.div-trend { margin-top: 20px; font-size: 12.5px; color: var(--text-3); }
+.footer { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border); font-size: 11px; color: var(--text-3); line-height: 1.7; text-align: center; }
+.growth-row { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+.growth-label { width: 170px; font-size: 13px; color: var(--text-2); flex-shrink: 0; }
+.growth-bar-track { flex: 1; height: 28px; background: var(--score-track); border-radius: 8px; overflow: hidden; position: relative; }
+.growth-bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; padding-left: 10px; font-size: 12px; font-weight: 700; color: rgba(255,255,255,0.9); white-space: nowrap; }
+.growth-value { width: 90px; text-align: right; font-size: 14px; font-weight: 700; color: var(--number); flex-shrink: 0; }
+.biz-summary { font-size: 14px; color: var(--text-1); line-height: 1.65; margin-bottom: 22px; }
+.biz-rev-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-3); font-weight: 700; margin-bottom: 6px; }
+.biz-row { display: flex; align-items: baseline; gap: 14px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+.biz-row:last-child { border-bottom: none; }
+.biz-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; align-self: center; }
+.biz-name { font-size: 13px; font-weight: 700; color: var(--text-1); width: 92px; flex-shrink: 0; }
+.biz-pct { font-size: 13px; font-weight: 800; color: var(--teal); width: 46px; flex-shrink: 0; text-align: right; }
+.biz-desc { font-size: 12.5px; color: var(--text-2); line-height: 1.5; }
+.note-box { background: var(--surface-2); border-left: 3px solid var(--teal); border-radius: 0 8px 8px 0; padding: 12px 16px; font-size: 12.5px; color: var(--text-2); margin-top: 16px; line-height: 1.6; }
+.note-box.orange { border-left-color: var(--orange); }
+.note-box.red { border-left-color: var(--red); }
+</style>
+</head>
+<body>
+<div class="page">
+  <nav class="sidenav"><a class="sidenav-logo" href="index.html"><div class="dot"></div><span>Smartmall</span></a><a class="nav-item nav-back" href="index.html"><span class="nav-num">&larr;</span><span class="nav-label">All Stock Cards</span></a><a class="nav-item active" href="#s1"><span class="nav-num">1</span><span class="nav-label">Overview</span></a><a class="nav-item" href="#s2"><span class="nav-num">2</span><span class="nav-label">Price History</span></a><a class="nav-item" href="#s3"><span class="nav-num">3</span><span class="nav-label">Snowflake Score</span></a><a class="nav-item" href="#s4"><span class="nav-num">4</span><span class="nav-label">Revenue &amp; Expenses</span></a><a class="nav-item" href="#s5"><span class="nav-num">5</span><span class="nav-label">Past Performance</span></a><a class="nav-item" href="#s6"><span class="nav-num">6</span><span class="nav-label">Future Growth</span></a><a class="nav-item" href="#s7"><span class="nav-num">7</span><span class="nav-label">Financial Health</span></a><a class="nav-item" href="#s8"><span class="nav-num">8</span><span class="nav-label">Dividend</span></a><a class="nav-item" href="#s9"><span class="nav-num">9</span><span class="nav-label">Rewards &amp; Risks</span></a><a class="nav-item" href="#s10"><span class="nav-num">10</span><span class="nav-label">Council Verdict</span></a></nav>
+  <main class="main">
+    
+    <div class="section" id="s1">
+      <div class="card">
+        <div class="header-top">
+          <div>
+            <div class="header-ticker">
+              <div class="ticker-logo">HANGLUNG</div>
+              <div class="ticker-name">
+                <h1>Hang Lung Properties Limited</h1>
+                <div class="exch">HKEX: 0101 (no Thai DR found)</div>
+              </div>
+            </div>
+          </div>
+          <div class="header-price">
+            <div class="price-big">HK$7.29</div>
+            <div class="price-secondary">≈ ฿31.1 (HKD/THB 4.26)</div>
+            <div class="price-sub">as of 2026-08-01</div>
+            <div class="hero-verdict"><span class="hv-stance" style="color:var(--green);border-color:var(--green);">BUY</span><span class="hv-score"><b>19</b>/30</span></div>
+          </div>
+        </div>
+        <div class="badges"><span class="badge badge-teal"><svg width="10" height="10" viewBox="0 0 10 10"><circle cx="5" cy="5" r="4" fill="currentColor" opacity="0.6"/></svg> No Thai DR found (checked KTB 80-series + Krungthai list + SET)</span><span class="badge badge-teal">Buyable in THB</span><span class="badge badge-muted">hk-china-property</span><span class="badge badge-muted">luxury-malls</span><span class="badge badge-muted">deep-value</span><span class="badge badge-muted">dividend-7pct</span><span class="badge badge-muted">chan-family-controlled</span><span class="badge badge-muted">HK/China Luxury-Retail Landlord</span></div>
+        
+        <div style="margin-bottom:6px;font-size:12px;font-weight:600;color:var(--text-3);text-transform:uppercase;letter-spacing:0.05em;">52-Week Range</div>
+        <div class="range-bar-wrap">
+          <div class="range-label"><span>6.89 &nbsp; 52W Low</span><span>52W High &nbsp; 9.83</span></div>
+          <div class="range-bar-track">
+            <div class="range-bar-fill" style="width:13.6%"></div>
+            <div class="range-bar-marker" style="left:13.6%"><div class="range-bar-label">7.29</div></div>
+          </div>
+          <div class="range-sublabels" style="margin-top:28px;">
+            <span>Current <span>HK$7.29</span></span>
+            <span>Distance from low: <span>+6%</span></span>
+          </div>
+        </div>
+        <div class="stat-row" style="margin-top:28px;margin-bottom:0;"><div class="stat-pill"><div class="stat-pill-label">Market Cap</div><div class="stat-pill-value">HK$37.9B ≈ US$4.9B ≈ ฿161B</div></div><div class="stat-pill"><div class="stat-pill-label">P/B</div><div class="stat-pill-value">0.27x (NAV HK$26.6/sh)</div></div><div class="stat-pill"><div class="stat-pill-label">P/E (underlying)</div><div class="stat-pill-value">~11.2x (statutory 22x — revaluation-loss distorted)</div></div><div class="stat-pill"><div class="stat-pill-label">Div Yield</div><div class="stat-pill-value">~7.1% (HK$0.52/sh)</div></div><div class="stat-pill"><div class="stat-pill-label">Net Gearing</div><div class="stat-pill-value">31.6% (1H26, improving 3 periods)</div></div><div class="stat-pill"><div class="stat-pill-label">Borrowing Cost</div><div class="stat-pill-value">3.7% avg (was 4.3% FY24)</div></div><div class="stat-pill"><div class="stat-pill-label">Leasing Op Margin</div><div class="stat-pill-value">~71% (FY25)</div></div></div>
+      </div>
+    </div>
+    <div class="section" id="s2">
+      <div class="section-header"><div class="section-num">2</div><div class="section-title">Price History</div></div>
+      <div class="card chart-section">
+        <div class="chart-head">
+          <div><div class="chart-price">HK$7.29</div><div class="chart-sub">0101.HK · HK$ · snapshot 2026-08-01</div></div>
+          <div class="chart-tabs"><button class="chart-tab" data-range="1D">1D<span style="color:#f5736b;">-3.6%</span></button><button class="chart-tab" data-range="1W">1W<span style="color:#f5736b;">-1.9%</span></button><button class="chart-tab" data-range="1M">1M<span style="color:#30d97b;">+5.8%</span></button><button class="chart-tab active" data-range="1Y">1Y<span style="color:#f5736b;">-2.5%</span></button><button class="chart-tab" data-range="5Y">5Y<span style="color:#f5736b;">-49.6%</span></button></div>
+        </div>
+        
+        <div class="chart-pane" data-range="1D">
+          <svg class="chart-svg" viewBox="0 0 900 240" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="cg21D" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#f5736b" stop-opacity="0.22"/>
+              <stop offset="1" stop-color="#f5736b" stop-opacity="0"/></linearGradient></defs>
+            <path d="M0.0 60.9 L0.0 60.9 L13.8 55.6 L27.7 28.7 L41.5 18.0 L55.4 23.4 L69.2 44.8 L83.1 44.8 L96.9 39.5 L110.8 50.2 L124.6 34.1 L138.5 34.1 L152.3 39.5 L166.2 28.7 L180.0 39.5 L193.8 39.5 L207.7 28.7 L221.5 39.5 L235.4 34.1 L249.2 39.5 L263.1 60.9 L276.9 50.2 L290.8 55.6 L304.6 50.2 L318.5 60.9 L332.3 55.6 L346.2 44.8 L360.0 55.6 L373.8 66.3 L387.7 39.5 L401.5 162.9 L415.4 146.8 L429.2 211.3 L443.1 211.3 L456.9 205.9 L470.8 211.3 L484.6 222.0 L498.5 222.0 L512.3 216.6 L526.2 216.6 L540.0 211.3 L553.8 211.3 L567.7 222.0 L581.5 195.2 L595.4 189.8 L609.2 173.7 L623.1 184.4 L636.9 184.4 L650.8 173.7 L664.6 162.9 L678.5 152.2 L692.3 146.8 L706.2 152.2 L720.0 152.2 L733.8 157.6 L747.7 152.2 L761.5 152.2 L775.4 157.6 L789.2 173.7 L803.1 173.7 L816.9 162.9 L830.8 162.9 L844.6 162.9 L858.5 179.1 L872.3 168.3 L886.2 162.9 L900.0 205.9 L900.0 240.0 L0 240.0 Z" fill="url(#cg21D)"/>
+            <path d="M0.0 60.9 L13.8 55.6 L27.7 28.7 L41.5 18.0 L55.4 23.4 L69.2 44.8 L83.1 44.8 L96.9 39.5 L110.8 50.2 L124.6 34.1 L138.5 34.1 L152.3 39.5 L166.2 28.7 L180.0 39.5 L193.8 39.5 L207.7 28.7 L221.5 39.5 L235.4 34.1 L249.2 39.5 L263.1 60.9 L276.9 50.2 L290.8 55.6 L304.6 50.2 L318.5 60.9 L332.3 55.6 L346.2 44.8 L360.0 55.6 L373.8 66.3 L387.7 39.5 L401.5 162.9 L415.4 146.8 L429.2 211.3 L443.1 211.3 L456.9 205.9 L470.8 211.3 L484.6 222.0 L498.5 222.0 L512.3 216.6 L526.2 216.6 L540.0 211.3 L553.8 211.3 L567.7 222.0 L581.5 195.2 L595.4 189.8 L609.2 173.7 L623.1 184.4 L636.9 184.4 L650.8 173.7 L664.6 162.9 L678.5 152.2 L692.3 146.8 L706.2 152.2 L720.0 152.2 L733.8 157.6 L747.7 152.2 L761.5 152.2 L775.4 157.6 L789.2 173.7 L803.1 173.7 L816.9 162.9 L830.8 162.9 L844.6 162.9 L858.5 179.1 L872.3 168.3 L886.2 162.9 L900.0 205.9" fill="none" stroke="#f5736b" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="chart-pane" data-range="1W">
+          <svg class="chart-svg" viewBox="0 0 900 240" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="cg21W" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#f5736b" stop-opacity="0.22"/>
+              <stop offset="1" stop-color="#f5736b" stop-opacity="0"/></linearGradient></defs>
+            <path d="M0.0 126.4 L0.0 126.4 L26.5 113.6 L52.9 100.9 L79.4 120.0 L105.9 113.6 L132.4 120.0 L158.8 120.0 L185.3 132.8 L211.8 151.9 L238.2 145.5 L264.7 158.3 L291.2 126.4 L317.6 132.8 L344.1 126.4 L370.6 100.9 L397.1 113.6 L423.5 107.2 L450.0 120.0 L476.5 113.6 L502.9 94.5 L529.4 81.7 L555.9 30.7 L582.4 30.7 L608.8 37.1 L635.3 56.2 L661.8 56.2 L688.2 62.6 L714.7 49.9 L741.2 18.0 L767.6 30.7 L794.1 18.0 L820.6 222.0 L847.1 190.1 L873.5 177.4 L900.0 215.6 L900.0 240.0 L0 240.0 Z" fill="url(#cg21W)"/>
+            <path d="M0.0 126.4 L26.5 113.6 L52.9 100.9 L79.4 120.0 L105.9 113.6 L132.4 120.0 L158.8 120.0 L185.3 132.8 L211.8 151.9 L238.2 145.5 L264.7 158.3 L291.2 126.4 L317.6 132.8 L344.1 126.4 L370.6 100.9 L397.1 113.6 L423.5 107.2 L450.0 120.0 L476.5 113.6 L502.9 94.5 L529.4 81.7 L555.9 30.7 L582.4 30.7 L608.8 37.1 L635.3 56.2 L661.8 56.2 L688.2 62.6 L714.7 49.9 L741.2 18.0 L767.6 30.7 L794.1 18.0 L820.6 222.0 L847.1 190.1 L873.5 177.4 L900.0 215.6" fill="none" stroke="#f5736b" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="chart-pane" data-range="1M">
+          <svg class="chart-svg" viewBox="0 0 900 240" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="cg21M" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#30d97b" stop-opacity="0.22"/>
+              <stop offset="1" stop-color="#30d97b" stop-opacity="0"/></linearGradient></defs>
+            <path d="M0.0 222.0 L0.0 222.0 L40.9 204.5 L81.8 134.6 L122.7 146.2 L163.6 175.4 L204.5 137.5 L245.5 163.7 L286.4 160.8 L327.3 143.3 L368.2 117.1 L409.1 79.2 L450.0 20.9 L490.9 23.8 L531.8 18.0 L572.7 23.8 L613.6 70.5 L654.5 32.6 L695.5 102.5 L736.4 55.9 L777.3 64.6 L818.2 44.2 L859.1 29.7 L900.0 105.4 L900.0 240.0 L0 240.0 Z" fill="url(#cg21M)"/>
+            <path d="M0.0 222.0 L40.9 204.5 L81.8 134.6 L122.7 146.2 L163.6 175.4 L204.5 137.5 L245.5 163.7 L286.4 160.8 L327.3 143.3 L368.2 117.1 L409.1 79.2 L450.0 20.9 L490.9 23.8 L531.8 18.0 L572.7 23.8 L613.6 70.5 L654.5 32.6 L695.5 102.5 L736.4 55.9 L777.3 64.6 L818.2 44.2 L859.1 29.7 L900.0 105.4" fill="none" stroke="#30d97b" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="chart-pane active" data-range="1Y">
+          <svg class="chart-svg" viewBox="0 0 900 240" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="cg21Y" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#f5736b" stop-opacity="0.22"/>
+              <stop offset="1" stop-color="#f5736b" stop-opacity="0"/></linearGradient></defs>
+            <path d="M0.0 187.4 L0.0 187.4 L17.3 178.0 L34.6 166.5 L51.9 168.7 L69.2 180.2 L86.5 141.3 L103.8 108.1 L121.2 114.6 L138.5 140.5 L155.8 136.9 L173.1 107.4 L190.4 119.6 L207.7 117.5 L225.0 129.7 L242.3 136.9 L259.6 84.3 L276.9 124.7 L294.2 105.9 L311.5 103.1 L328.8 94.4 L346.2 107.4 L363.5 126.1 L380.8 125.4 L398.1 93.7 L415.4 77.1 L432.7 90.8 L450.0 75.7 L467.3 72.8 L484.6 52.6 L501.9 38.2 L519.2 18.0 L536.5 62.0 L553.8 93.7 L571.2 113.2 L588.5 129.0 L605.8 115.3 L623.1 85.0 L640.4 90.8 L657.7 103.8 L675.0 92.2 L692.3 74.2 L709.6 105.9 L726.9 127.6 L744.2 147.0 L761.5 159.3 L778.8 170.1 L796.2 196.0 L813.5 222.0 L830.8 208.3 L848.1 214.8 L865.4 180.9 L882.7 200.4 L900.0 201.1 L900.0 240.0 L0 240.0 Z" fill="url(#cg21Y)"/>
+            <path d="M0.0 187.4 L17.3 178.0 L34.6 166.5 L51.9 168.7 L69.2 180.2 L86.5 141.3 L103.8 108.1 L121.2 114.6 L138.5 140.5 L155.8 136.9 L173.1 107.4 L190.4 119.6 L207.7 117.5 L225.0 129.7 L242.3 136.9 L259.6 84.3 L276.9 124.7 L294.2 105.9 L311.5 103.1 L328.8 94.4 L346.2 107.4 L363.5 126.1 L380.8 125.4 L398.1 93.7 L415.4 77.1 L432.7 90.8 L450.0 75.7 L467.3 72.8 L484.6 52.6 L501.9 38.2 L519.2 18.0 L536.5 62.0 L553.8 93.7 L571.2 113.2 L588.5 129.0 L605.8 115.3 L623.1 85.0 L640.4 90.8 L657.7 103.8 L675.0 92.2 L692.3 74.2 L709.6 105.9 L726.9 127.6 L744.2 147.0 L761.5 159.3 L778.8 170.1 L796.2 196.0 L813.5 222.0 L830.8 208.3 L848.1 214.8 L865.4 180.9 L882.7 200.4 L900.0 201.1" fill="none" stroke="#f5736b" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="chart-pane" data-range="5Y">
+          <svg class="chart-svg" viewBox="0 0 900 240" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="cg25Y" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#f5736b" stop-opacity="0.22"/>
+              <stop offset="1" stop-color="#f5736b" stop-opacity="0"/></linearGradient></defs>
+            <path d="M0.0 18.0 L0.0 18.0 L9.1 35.8 L18.2 58.5 L27.3 70.1 L36.4 57.3 L45.5 60.5 L54.5 78.3 L63.6 89.1 L72.7 91.9 L81.8 85.1 L90.9 76.3 L100.0 82.9 L109.1 82.7 L118.2 90.7 L127.3 73.5 L136.4 98.6 L145.5 101.0 L154.5 95.2 L163.6 102.6 L172.7 112.6 L181.8 112.6 L190.9 120.4 L200.0 116.2 L209.1 122.8 L218.2 120.6 L227.3 154.9 L236.4 123.0 L245.5 90.7 L254.5 86.7 L263.6 93.5 L272.7 75.3 L281.8 77.1 L290.9 94.6 L300.0 95.4 L309.1 89.9 L318.2 92.3 L327.3 122.0 L336.4 109.0 L345.5 126.4 L354.5 133.2 L363.6 144.2 L372.7 149.3 L381.8 151.1 L390.9 145.4 L400.0 148.9 L409.1 145.0 L418.2 135.6 L427.3 150.1 L436.4 142.8 L445.5 148.5 L454.5 170.9 L463.6 179.5 L472.7 184.1 L481.8 188.7 L490.9 187.5 L500.0 172.3 L509.1 185.9 L518.2 189.5 L527.3 202.8 L536.4 196.6 L545.5 222.0 L554.5 219.4 L563.6 218.4 L572.7 198.4 L581.8 199.4 L590.9 199.4 L600.0 208.6 L609.1 204.0 L618.2 207.2 L627.3 207.2 L636.4 209.2 L645.5 205.6 L654.5 199.8 L663.6 201.2 L672.7 210.8 L681.8 204.2 L690.9 201.8 L700.0 198.4 L709.1 175.7 L718.2 177.5 L727.3 168.5 L736.4 163.3 L745.5 146.5 L754.5 155.5 L763.6 149.7 L772.7 152.5 L781.8 151.1 L790.9 142.8 L800.0 151.5 L809.1 138.0 L818.2 137.6 L827.3 127.2 L836.4 142.6 L845.5 152.3 L854.5 141.8 L863.6 142.2 L872.7 151.9 L881.8 163.7 L890.9 178.1 L900.0 166.7 L900.0 240.0 L0 240.0 Z" fill="url(#cg25Y)"/>
+            <path d="M0.0 18.0 L9.1 35.8 L18.2 58.5 L27.3 70.1 L36.4 57.3 L45.5 60.5 L54.5 78.3 L63.6 89.1 L72.7 91.9 L81.8 85.1 L90.9 76.3 L100.0 82.9 L109.1 82.7 L118.2 90.7 L127.3 73.5 L136.4 98.6 L145.5 101.0 L154.5 95.2 L163.6 102.6 L172.7 112.6 L181.8 112.6 L190.9 120.4 L200.0 116.2 L209.1 122.8 L218.2 120.6 L227.3 154.9 L236.4 123.0 L245.5 90.7 L254.5 86.7 L263.6 93.5 L272.7 75.3 L281.8 77.1 L290.9 94.6 L300.0 95.4 L309.1 89.9 L318.2 92.3 L327.3 122.0 L336.4 109.0 L345.5 126.4 L354.5 133.2 L363.6 144.2 L372.7 149.3 L381.8 151.1 L390.9 145.4 L400.0 148.9 L409.1 145.0 L418.2 135.6 L427.3 150.1 L436.4 142.8 L445.5 148.5 L454.5 170.9 L463.6 179.5 L472.7 184.1 L481.8 188.7 L490.9 187.5 L500.0 172.3 L509.1 185.9 L518.2 189.5 L527.3 202.8 L536.4 196.6 L545.5 222.0 L554.5 219.4 L563.6 218.4 L572.7 198.4 L581.8 199.4 L590.9 199.4 L600.0 208.6 L609.1 204.0 L618.2 207.2 L627.3 207.2 L636.4 209.2 L645.5 205.6 L654.5 199.8 L663.6 201.2 L672.7 210.8 L681.8 204.2 L690.9 201.8 L700.0 198.4 L709.1 175.7 L718.2 177.5 L727.3 168.5 L736.4 163.3 L745.5 146.5 L754.5 155.5 L763.6 149.7 L772.7 152.5 L781.8 151.1 L790.9 142.8 L800.0 151.5 L809.1 138.0 L818.2 137.6 L827.3 127.2 L836.4 142.6 L845.5 152.3 L854.5 141.8 L863.6 142.2 L872.7 151.9 L881.8 163.7 L890.9 178.1 L900.0 166.7" fill="none" stroke="#f5736b" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        
+        <div class="rsi-block">
+          <div class="rsi-head">
+            <div class="rsi-title">RSI (14)</div>
+            <div class="rsi-now" style="color:#9aa4b2;">44.8 · Neutral</div>
+          </div>
+          <div class="rsi-chartwrap">
+            <div class="rsi-axis"><span>70</span><span>50</span><span>30</span></div>
+            
+          <svg class="rsi-svg" viewBox="0 0 900 200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="0" y="8.0" width="900" height="55.2" fill="#f5736b" opacity="0.07"/>
+            <rect x="0" y="136.8" width="900" height="55.2" fill="#30d97b" opacity="0.07"/>
+            <line x1="0" y1="63.2" x2="900" y2="63.2" stroke="#f5736b" stroke-width="1" stroke-dasharray="6 5" opacity="0.5"/>
+            <line x1="0" y1="100.0" x2="900" y2="100.0" stroke="#9aa4b2" stroke-width="1" stroke-dasharray="2 6" opacity="0.4"/>
+            <line x1="0" y1="136.8" x2="900" y2="136.8" stroke="#30d97b" stroke-width="1" stroke-dasharray="6 5" opacity="0.5"/>
+            <path d="M0.0 115.2 L9.6 115.2 L19.1 115.9 L28.7 108.0 L38.3 103.5 L47.9 118.3 L57.4 122.7 L67.0 133.9 L76.6 121.2 L86.2 116.1 L95.7 119.6 L105.3 122.5 L114.9 123.8 L124.5 117.8 L134.0 102.8 L143.6 109.8 L153.2 92.7 L162.8 97.5 L172.3 92.7 L181.9 96.5 L191.5 89.1 L201.1 88.7 L210.6 90.2 L220.2 98.4 L229.8 106.2 L239.4 102.0 L248.9 105.5 L258.5 105.0 L268.1 106.5 L277.7 110.9 L287.2 108.4 L296.8 96.9 L306.4 95.8 L316.0 90.9 L325.5 90.9 L335.1 82.0 L344.7 69.5 L354.3 88.3 L363.8 90.7 L373.4 98.3 L383.0 103.2 L392.6 107.0 L402.1 112.7 L411.7 126.4 L421.3 118.7 L430.9 123.9 L440.4 124.7 L450.0 121.1 L459.6 127.8 L469.1 131.3 L478.7 135.0 L488.3 128.7 L497.9 129.5 L507.4 130.4 L517.0 136.7 L526.6 136.7 L536.2 134.7 L545.7 137.8 L555.3 143.6 L564.9 138.3 L574.5 142.5 L584.0 131.1 L593.6 128.1 L603.2 131.3 L612.8 138.8 L622.3 145.5 L631.9 150.1 L641.5 148.0 L651.1 148.3 L660.6 147.1 L670.2 155.3 L679.8 152.9 L689.4 156.9 L698.9 149.8 L708.5 125.5 L718.1 127.5 L727.7 132.3 L737.2 120.6 L746.8 125.3 L756.4 124.3 L766.0 118.8 L775.5 110.8 L785.1 100.5 L794.7 87.3 L804.3 88.1 L813.8 86.8 L823.4 88.6 L833.0 101.9 L842.6 92.4 L852.1 109.1 L861.7 98.2 L871.3 100.2 L880.9 95.5 L890.4 92.3 L900.0 109.5" fill="none" stroke="#7c83ff" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>
+          </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="section" id="s3">
+      <div class="section-header"><div class="section-num">3</div><div class="section-title">Snowflake Score</div></div>
+      <div class="card">
+        <div class="snowflake-grid">
+          <div style="display:flex;flex-direction:column;align-items:center;">
+            <svg width="240" height="240" viewBox="-175 -125 350 250"><defs><style>.ring{fill:none;stroke:rgba(255,255,255,0.06);stroke-width:1;}.ring-bright{fill:none;stroke:rgba(255,255,255,0.12);stroke-width:1;}.axis-line{stroke:rgba(255,255,255,0.08);stroke-width:1;}.score-poly{fill:rgba(23,219,201,0.22);stroke:#17dbc9;stroke-width:2;}</style></defs><polygon class="ring" points="0.00,-15.00 14.27,-4.64 8.82,12.14 -8.82,12.14 -14.27,-4.64"/><polygon class="ring" points="0.00,-30.00 28.53,-9.27 17.63,24.27 -17.63,24.27 -28.53,-9.27"/><polygon class="ring" points="0.00,-45.00 42.80,-13.91 26.45,36.41 -26.45,36.41 -42.80,-13.91"/><polygon class="ring" points="0.00,-60.00 57.06,-18.54 35.27,48.54 -35.27,48.54 -57.06,-18.54"/><polygon class="ring ring-bright" points="0.00,-75.00 71.33,-23.18 44.08,60.68 -44.08,60.68 -71.33,-23.18"/><polygon class="ring ring-bright" points="0.00,-90.00 85.60,-27.81 52.90,72.81 -52.90,72.81 -85.60,-27.81"/><line class="axis-line" x1="0" y1="0" x2="0.00" y2="-90.00"/><line class="axis-line" x1="0" y1="0" x2="85.60" y2="-27.81"/><line class="axis-line" x1="0" y1="0" x2="52.90" y2="72.81"/><line class="axis-line" x1="0" y1="0" x2="-52.90" y2="72.81"/><line class="axis-line" x1="0" y1="0" x2="-85.60" y2="-27.81"/><polygon class="score-poly" points="0.00,-90.00 42.80,-13.91 17.63,24.27 -35.27,48.54 -57.06,-18.54"/><text x="0.0" y="-96.3" text-anchor="middle" font-size="8.5" fill="#8fa3bf">Valuation</text><text x="95.6" y="-29.8" text-anchor="start" font-size="8.5" fill="#8fa3bf">Future Growth</text><text x="60.6" y="83.9" text-anchor="start" font-size="8.5" fill="#8fa3bf">Past Perf.</text><text x="-60.6" y="83.9" text-anchor="end" font-size="8.5" fill="#8fa3bf">Fin. Health</text><text x="-95.6" y="-29.8" text-anchor="end" font-size="8.5" fill="#8fa3bf">Dividend</text><circle cx="0.00" cy="-90.00" r="4" fill="#17dbc9"/><circle cx="42.80" cy="-13.91" r="4" fill="#17dbc9"/><circle cx="17.63" cy="24.27" r="4" fill="#f0995e"/><circle cx="-35.27" cy="48.54" r="4" fill="#17dbc9"/><circle cx="-57.06" cy="-18.54" r="4" fill="#17dbc9"/></svg>
+            <div class="snowflake-total">
+              <div><span class="num">19</span><span class="denom" style="font-size:18px;color:var(--text-3);"> / 30</span></div>
+              <div class="label">Smartmall Score</div>
+            </div>
+          </div>
+          <div class="score-rows">
+            
+            <div class="score-row">
+              <div class="score-row-label" style="color:var(--teal)">Valuation</div>
+              <div>
+                <div class="score-bar-track"><div class="score-bar-fill" style="width:100.0%;background:var(--teal)"></div></div>
+                <div class="score-rationale">0.27x book vs peers Wharf REIC 0.44 / Swire 0.51 / Link 0.68 — cheapest quality-mall landlord in HK, price halved over 5yrs while mainland mall rents just hit records. Re-rate to a still-conservative 0.34x book = HK$9.0 (+23%) on top of a 7.1% cash yield. Caveat: it has been &#x27;cheap&#x27; for 3 years — the catalyst must come from earnings, not hope</div>
+              </div>
+              <div class="score-num" style="color:var(--teal)">6/6</div>
+            </div>
+            <div class="score-row">
+              <div class="score-row-label" style="color:var(--teal)">Future Growth</div>
+              <div>
+                <div class="score-bar-track"><div class="score-bar-fill" style="width:50.0%;background:var(--teal)"></div></div>
+                <div class="score-rationale">Not a growth stock — but a new engine just switched on: Westlake 66 Hangzhou soft-opened 28 Apr 2026 at 89% occupancy / 98% committed, 120k peak daily footfall, &gt;RMB200M normalized annual rent guided (only RMB37M booked in 1H26), mall breakeven Q4-26. Plus Plaza 66 Pavilion Extension, 3 hotel openings 2026-27, and Westlake retail area +40% from 2029</div>
+              </div>
+              <div class="score-num" style="color:var(--teal)">3/6</div>
+            </div>
+            <div class="score-row">
+              <div class="score-row-label" style="color:var(--orange)">Past Performance</div>
+              <div>
+                <div class="score-bar-track"><div class="score-bar-fill" style="width:33.3%;background:var(--orange)"></div></div>
+                <div class="score-rationale">The scar tissue: underlying profit HK$4.1B (FY23) → 3.1B (FY24, -25%) → 3.2B (FY25, +3%) → 1H26 -10% on property-sales losses. Dividend cut 33% in FY2024 (0.78→0.52). Rental revenue itself only -1% through the storm — the core held; sentiment didn&#x27;t</div>
+              </div>
+              <div class="score-num" style="color:var(--orange)">2/6</div>
+            </div>
+            <div class="score-row">
+              <div class="score-row-label" style="color:var(--teal)">Financial Health</div>
+              <div>
+                <div class="score-bar-track"><div class="score-bar-fill" style="width:66.7%;background:var(--teal)"></div></div>
+                <div class="score-rationale">Net debt HK$47.3B but trending right: net gearing 33.4% → 32.7% → 31.6% over three periods, borrowing cost 4.3% → 3.7% (HIBOR down + ~half the book now cheaper RMB debt), HK$18B undrawn facilities, 69% of debt matures beyond 2 years. Interest cover ~3.4x on gross finance costs — adequate, not fortress</div>
+              </div>
+              <div class="score-num" style="color:var(--teal)">4/6</div>
+            </div>
+            <div class="score-row">
+              <div class="score-row-label" style="color:var(--teal)">Dividend</div>
+              <div>
+                <div class="score-bar-track"><div class="score-bar-fill" style="width:66.7%;background:var(--teal)"></div></div>
+                <div class="score-rationale">7.1% cash yield, held at HK$0.52 for two years post-cut and the 1H26 interim resumed FULL CASH payment (no scrip) — management calls it &#x27;a sign of confidence&#x27;. But payout = 82% of underlying profit and 102% of leasing profit less capitalized interest: management itself says cut risk ≈ raise risk. High yield, medium safety</div>
+              </div>
+              <div class="score-num" style="color:var(--teal)">4/6</div>
+            </div>
+            <div class="note-box" style="margin-top:16px;">
+              <strong>Transparent Smartmall scoring</strong> — not Simply Wall St's proprietary engine. Scores reflect our independent research and conviction framework.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="section" id="s4">
+      <div class="section-header"><div class="section-num">4</div><div class="section-title">Revenue &amp; Expenses Breakdown</div></div>
+      <div class="card">
+        <div style="font-size:12.5px;color:var(--text-3);margin-bottom:20px;">FY2025 ended 31 Dec 2025 (HK$ millions, audited) — latest full year; 1H2026 interim announced 30 Jul 2026</div>
+        <div class="sankey-wrap"><svg viewBox="0 -62.0 980 592.0" width="100%" style="font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;overflow:visible;"><defs><linearGradient id="gProfit" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#2fd6c0" stop-opacity="0.7"/><stop offset="100%" stop-color="#2fd6c0" stop-opacity="0.4"/></linearGradient><linearGradient id="gCost" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#8a7320" stop-opacity="0.85"/><stop offset="100%" stop-color="#8a7320" stop-opacity="0.55"/></linearGradient><linearGradient id="gExpense" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#d9a93a" stop-opacity="0.8"/><stop offset="100%" stop-color="#d9a93a" stop-opacity="0.5"/></linearGradient><linearGradient id="gNet" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#30d97b" stop-opacity="0.8"/><stop offset="100%" stop-color="#30d97b" stop-opacity="0.6"/></linearGradient></defs><polyline points="18.0,-56.0 268.0,-50.0 518.0,-50.6 768.0,-48.7" fill="none" stroke="#2fd6c0" stroke-width="1.5" opacity="0.85"/><text x="18.0" y="-20.0" text-anchor="middle" font-size="9" fill="#526070">2023</text><text x="268.0" y="-20.0" text-anchor="middle" font-size="9" fill="#526070">2024</text><text x="518.0" y="-20.0" text-anchor="middle" font-size="9" fill="#526070">2025</text><text x="768.0" y="-20.0" text-anchor="middle" font-size="9" fill="#526070">1H26 ann.</text><rect x="18" y="35.00" width="14" height="434.06" fill="#3b6fd4" rx="3"/><rect x="18" y="470.06" width="14" height="13.73" fill="#3360c2" rx="3"/><rect x="18" y="484.79" width="14" height="12.21" fill="#4a7ce0" rx="3"/><rect x="220" y="35.00" width="18" height="460.00" fill="#3b6fd4" rx="3"/><rect x="400" y="35.00" width="18" height="301.75" fill="#2fd6c0" rx="3"/><rect x="400" y="337.75" width="18" height="158.25" fill="#8a7320" rx="3"/><rect x="580" y="35.00" width="18" height="274.10" fill="#2fd6c0" rx="3"/><rect x="580" y="310.10" width="18" height="0.00" fill="#d9a93a" rx="3"/><rect x="580" y="311.10" width="18" height="30.14" fill="#d9a93a" rx="3"/><rect x="750" y="35.00" width="18" height="83.49" fill="#30d97b" rx="3"/><rect x="750" y="119.49" width="18" height="75.50" fill="#d9a93a" rx="3"/><path d="M32.00,35.00 C116.60,35.00 135.40,35.00 220.00,35.00 L220.00,469.06 C135.40,469.06 116.60,469.06 32.00,469.06 Z" fill="#3b6fd4" opacity="0.40"/><path d="M32.00,470.06 C116.60,470.06 135.40,469.06 220.00,469.06 L220.00,482.79 C135.40,482.79 116.60,483.79 32.00,483.79 Z" fill="#3360c2" opacity="0.40"/><path d="M32.00,484.79 C116.60,484.79 135.40,482.79 220.00,482.79 L220.00,495.00 C135.40,495.00 116.60,497.00 32.00,497.00 Z" fill="#4a7ce0" opacity="0.40"/><path d="M238.00,35.00 C310.90,35.00 327.10,35.00 400.00,35.00 L400.00,336.75 C327.10,336.75 310.90,336.75 238.00,336.75 Z" fill="url(#gProfit)" opacity="0.5"/><path d="M238.00,337.75 C310.90,337.75 327.10,337.75 400.00,337.75 L400.00,496.00 C327.10,496.00 310.90,496.00 238.00,496.00 Z" fill="url(#gCost)" opacity="0.55"/><path d="M418.00,35.00 C490.90,35.00 507.10,35.00 580.00,35.00 L580.00,309.10 C507.10,309.10 490.90,309.10 418.00,309.10 Z" fill="url(#gProfit)" opacity="0.5"/><path d="M418.00,309.10 C490.90,309.10 507.10,310.10 580.00,310.10 L580.00,310.10 C507.10,310.10 490.90,309.10 418.00,309.10 Z" fill="url(#gExpense)" opacity="0.55"/><path d="M418.00,309.10 C490.90,309.10 507.10,311.10 580.00,311.10 L580.00,341.25 C507.10,341.25 490.90,339.25 418.00,339.25 Z" fill="url(#gExpense)" opacity="0.5"/><path d="M598.00,35.00 C666.40,35.00 681.60,35.00 750.00,35.00 L750.00,118.49 C681.60,118.49 666.40,118.49 598.00,118.49 Z" fill="url(#gNet)" opacity="0.5"/><path d="M598.00,118.49 C666.40,118.49 681.60,119.49 750.00,119.49 L750.00,194.99 C681.60,194.99 666.40,193.99 598.00,193.99 Z" fill="url(#gExpense)" opacity="0.55"/><text x="38" y="35.0" dy="10" font-size="11" fill="#e8edf5" font-weight="600">Property Leasing (Mainland 6,414 + HK 2,975)</text><text x="38" y="35.0" dy="23" font-size="10.5" fill="#3b6fd4">HK$9.4T · 94%</text><text x="38" y="476.9" dy="3.5" font-size="9.5" fill="#8fa3bf">Hotels (Mainland) HK$297B · 3%</text><text x="38" y="490.9" dy="3.5" font-size="9.5" fill="#8fa3bf">Property Sales HK$264B · 3%</text><text x="229" y="8" text-anchor="middle" font-size="9.5" fill="#8fa3bf">Income</text><text x="229" y="8" dy="11" text-anchor="middle" font-size="9.5" fill="#8fa3bf">Statement</text><rect x="197.1" y="247.5" width="63.7" height="19.0" rx="9.5" fill="#3b6fd4"/><text x="229.0" y="257.0" dy="3.8" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">Revenue</text><text x="229" y="277" text-anchor="middle" font-size="11" font-weight="700" fill="#e8edf5">HK$9.9T</text><text x="409" y="8" text-anchor="middle" font-size="9.5" fill="#8fa3bf">Gross</text><text x="409" y="8" dy="11" text-anchor="middle" font-size="9.5" fill="#8fa3bf">Profit</text><text x="409" y="186" text-anchor="middle" font-size="12" fill="#2fd6c0" font-weight="800" transform="rotate(-90 409 186)">HK$6.5T</text><text x="589" y="8" text-anchor="middle" font-size="9.5" fill="#8fa3bf">Operating</text><text x="589" y="8" dy="11" text-anchor="middle" font-size="9.5" fill="#8fa3bf">Income</text><text x="589" y="172" text-anchor="middle" font-size="12" fill="#2fd6c0" font-weight="800" transform="rotate(-90 589 172)">HK$5.9T</text><text x="759" y="8" text-anchor="middle" font-size="9.5" fill="#8fa3bf">Net</text><text x="759" y="8" dy="11" text-anchor="middle" font-size="9.5" fill="#8fa3bf">Income</text><rect x="720.0" y="59.7" width="78.0" height="18.0" rx="9.0" fill="#30d97b"/><text x="759.0" y="68.7" dy="3.5" text-anchor="middle" font-size="10" font-weight="700" fill="#0f1923">Net Income</text><text x="759" y="89" text-anchor="middle" font-size="11" font-weight="700" fill="#30d97b">HK$1.8T</text><text x="409" y="421" text-anchor="middle" font-size="9.5" fill="#d9a93a" font-weight="700">CoR HK$3.4T</text><text x="602" y="313" font-size="10" fill="#d9a93a" font-weight="600">R&amp;D HK$0B</text><text x="602" y="337" font-size="10" fill="#d9a93a">SG&amp;A HK$652B</text><text x="772" y="160" font-size="10" fill="#d9a93a">Tax HK$1.6T</text><text x="602" y="304" font-size="9.5" fill="#d9a93a" font-weight="700" opacity="0.85">Expenses</text><text x="665" y="2" text-anchor="middle" font-size="9.5" fill="#d9a93a" font-style="italic">− Non-op HK$2.0T</text><text x="665" y="2" dy="12" text-anchor="middle" font-size="9.5" fill="#8fa3bf" font-style="italic">Pre-tax HK$4.0T</text><line x1="409" y1="496.0" x2="409" y2="518.0" stroke="#8a7320" stroke-width="2" stroke-dasharray="3,2" opacity="0.6"/><polygon points="409,523.0 405,516.0 413,516.0" fill="#8a7320" opacity="0.6"/><line x1="589" y1="341.2" x2="589" y2="363.2" stroke="#d9a93a" stroke-width="2" stroke-dasharray="3,2" opacity="0.6"/><polygon points="589,368.2 585,361.2 593,361.2" fill="#d9a93a" opacity="0.6"/><line x1="759" y1="195.0" x2="759" y2="217.0" stroke="#d9a93a" stroke-width="2" stroke-dasharray="3,2" opacity="0.6"/><polygon points="759,222.0 755,215.0 763,215.0" fill="#d9a93a" opacity="0.6"/><rect x="820" y="35" width="12" height="12" fill="#3b6fd4" rx="2" opacity="0.9"/><text x="836" y="45" font-size="10.5" fill="#8fa3bf">Revenue</text><rect x="820" y="54" width="12" height="12" fill="#d9a93a" rx="2" opacity="0.9"/><text x="836" y="64" font-size="10.5" fill="#8fa3bf">Cost / Expense</text><rect x="820" y="73" width="12" height="12" fill="#30d97b" rx="2" opacity="0.9"/><text x="836" y="83" font-size="10.5" fill="#8fa3bf">Net Income</text></svg></div>
+        <div class="sankey-caption">Leasing is 94% of revenue at a ~71% operating margin — a pure rent machine. &#x27;Cost of revenue&#x27; = direct costs &amp; operating expenses HK$3,423M; SG&amp;A = admin HK$652M (+ other net income HK$54M inside operating income). Non-operating −HK$1,968M bundles the NON-CASH property revaluation loss (−1,051), net interest expense (−920) and JV share (+3). Net income HK$1,806M is statutory attributable (after HK$522M non-controlling interests); UNDERLYING net profit ex-revaluation = HK$3,202M (+3% YoY) — the number that funds the dividend.</div>
+      </div>
+    </div>
+    <div class="section" id="s5">
+      <div class="section-header"><div class="section-num">5</div><div class="section-title">Past Performance</div></div>
+      <div class="card">
+        <div style="font-size:12.5px;color:var(--text-3);margin-bottom:20px;">Underlying net profit (HK$ M)</div>
+        <svg viewBox="0 0 720 240" width="100%" style="font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;overflow:visible;"><line x1="0" y1="220.0" x2="720" y2="220.0" stroke="rgba(255,255,255,0.08)" stroke-width="1"/><line x1="0" y1="148.8" x2="720" y2="148.8" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="4,4"/><line x1="0" y1="77.5" x2="720" y2="77.5" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="4,4"/><rect x="20.0" y="30.0" width="155.0" height="190.0" rx="5" fill="#17dbc9" opacity="0.55"/><text x="97.5" y="25.0" font-size="11" font-weight="700" fill="#17dbc9" text-anchor="middle">HK$4132B</text><text x="97.5" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">2023</text><rect x="195.0" y="77.7" width="155.0" height="142.3" rx="5" fill="#f0995e" opacity="0.62"/><text x="272.5" y="72.7" font-size="11" font-weight="700" fill="#f0995e" text-anchor="middle">HK$3095B</text><text x="272.5" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">2024</text><rect x="370.0" y="72.8" width="155.0" height="147.2" rx="5" fill="#17dbc9" opacity="0.69"/><text x="447.5" y="67.8" font-size="11" font-weight="700" fill="#17dbc9" text-anchor="middle">HK$3202B</text><text x="447.5" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">2025</text><rect x="545.0" y="87.6" width="155.0" height="132.4" rx="5" fill="#17dbc9" opacity="1.00"/><rect x="545.0" y="87.6" width="155.0" height="132.4" rx="5" fill="none" stroke="#17dbc9" stroke-width="1.5" opacity="0.5"/><text x="622.5" y="82.6" font-size="11" font-weight="700" fill="#17dbc9" text-anchor="middle">HK$2880B</text><text x="622.5" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">1H26 ann.</text></svg>
+        <div class="note-box" style="margin-top:16px;">FY2024 was the reset: underlying profit -25% and the dividend cut 33% (0.78→0.52) as China luxury slumped and HK offices sagged. FY2025 stabilized (+3%). 1H2026 shown annualized (2×HK$1,440M): still -10% YoY on property-sales losses/impairments and lower interest capitalization — while the RENTAL core inflected up (mainland retail rents +6%, record). Statutory net profit runs lower on continuing non-cash revaluation losses.</div>
+      </div>
+    </div>
+    <div class="section" id="s6">
+      <div class="section-header"><div class="section-num">6</div><div class="section-title">Future Growth</div></div>
+      <div class="card">
+        <div style="font-size:12.5px;color:var(--text-3);margin-bottom:24px;">Growth drivers — guided &amp; estimated</div>
+        
+        <div class="growth-row">
+          <div class="growth-label">Westlake 66 Hangzhou (opened 28 Apr 2026)</div>
+          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:89%;background:linear-gradient(90deg,#17dbc9,#00c4b4);">89% occupied / 98% committed; &gt;RMB200M normalized rent vs RMB37M booked 1H26; mall breakeven Q4-26</div></div>
+          <div class="growth-value" style="color:var(--teal);">89% occupied / 98% committed; &gt;RMB200M normalized rent vs RMB37M booked 1H26; mall breakeven Q4-26</div>
+        </div>
+        <div class="growth-row">
+          <div class="growth-label">Mainland retail momentum (1H26)</div>
+          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:15%;background:linear-gradient(90deg,#17dbc9,#00c4b4);">rental revenue +6% to record RMB2.57B; 7 of 10 malls record tenant sales; H2 guided high single digits</div></div>
+          <div class="growth-value" style="color:var(--teal);">rental revenue +6% to record RMB2.57B; 7 of 10 malls record tenant sales; H2 guided high single digits</div>
+        </div>
+        <div class="growth-row">
+          <div class="growth-label">Rate tailwind</div>
+          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:15%;background:linear-gradient(90deg,#17dbc9,#00c4b4);">avg borrowing cost 4.3% → 3.7% and falling with HIBOR; ~58% floating debt = direct P&amp;L benefit</div></div>
+          <div class="growth-value" style="color:var(--teal);">avg borrowing cost 4.3% → 3.7% and falling with HIBOR; ~58% floating debt = direct P&amp;L benefit</div>
+        </div>
+        <div class="growth-row">
+          <div class="growth-label">Pipeline</div>
+          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:66%;background:linear-gradient(90deg,#17dbc9,#00c4b4);">Plaza 66 Pavilion Extension, 3 hotels 2026-27, Westlake 66 Expansion (+40% retail GFA from 2029)</div></div>
+          <div class="growth-value" style="color:var(--teal);">Plaza 66 Pavilion Extension, 3 hotels 2026-27, Westlake 66 Expansion (+40% retail GFA from 2029)</div>
+        </div>
+        <div class="note-box" style="margin-top:20px;">This is a yield-plus-inflection story, not a compounder. The growth that matters: Westlake 66 ramping from near-zero to &gt;RMB200M annual rent, capitalized interest unwinding (40% → ~30% of interest in 2026), hotels crossing to profit, and every HIBOR cut dropping straight to the bottom line. Enough to grow underlying profit mid-single digits and de-risk the 7.1% dividend.</div>
+      </div>
+    </div>
+    <div class="section" id="s7">
+      <div class="section-header"><div class="section-num">7</div><div class="section-title">Financial Health</div></div>
+      <div class="card">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px;align-items:end;">
+          <div style="background:var(--teal-dim);border:1px solid rgba(23,219,201,0.3);border-radius:12px;padding:20px;">
+            <div style="font-size:11px;color:var(--teal);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;font-weight:700;">Cash &amp; Equivalents</div>
+            <div style="font-size:34px;font-weight:900;color:var(--teal);letter-spacing:-0.03em;">HK$6.3B</div>
+            <div class="health-bar-track" style="margin-top:12px;"><div class="health-bar-fill" style="width:12%;background:var(--teal);"></div></div>
+          </div>
+          <div style="background:rgba(240,153,94,0.08);border:1px solid rgba(240,153,94,0.2);border-radius:12px;padding:20px;">
+            <div style="font-size:11px;color:var(--orange);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;font-weight:700;">Total Debt</div>
+            <div style="font-size:34px;font-weight:900;color:var(--orange);letter-spacing:-0.03em;">HK$53.6B</div>
+            <div class="health-bar-track" style="margin-top:12px;"><div class="health-bar-fill" style="width:100%;background:var(--orange);"></div></div>
+          </div>
+        </div>
+        <div style="text-align:center;padding:24px;background:var(--surface-2);border-radius:12px;border:1px solid var(--border);margin-bottom:20px;">
+          <div style="font-size:11px;color:var(--text-3);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;">Net Position</div>
+          <div style="font-size:26px;font-weight:900;color:var(--teal);letter-spacing:-0.04em;line-height:1.1;">Net debt HK$47.3B · net gearing 31.6% (1H26) — third consecutive period of improvement</div>
+        </div>
+        
+        <div class="health-row">
+          <div class="health-label">Net debt / mkt cap</div>
+          <div class="health-bar-track"><div class="health-bar-fill" style="width:100%;background:var(--orange);"></div></div>
+          <div class="health-value">-125%</div>
+        </div>
+        <div class="note-box orange" style="margin-top:16px;">Total borrowings HK$53.6B (down from 57.4B a year earlier). Gearing path 33.4% → 32.7% → 31.6%; average borrowing cost 3.7% (was 4.3% FY24) helped by ~half the book in cheaper RMB debt; 42% fixed-rate; HK$18B undrawn facilities; 69% of debt matures beyond 2 years. Manageable for a landlord with HK$9.4B contracted rental revenue — but interest cover ~3.4x on gross finance costs leaves less slack than blue-chip peers.</div>
+      </div>
+    </div>
+    <div class="section" id="s8">
+      <div class="section-header"><div class="section-num">8</div><div class="section-title">Dividend</div></div>
+      <div class="card">
+        <div class="div-row">
+          <div class="div-big">~7.1%</div>
+          <div class="div-note">[position details omitted on the public site]</div>
+        </div>
+        <div class="div-trend">flat</div>
+      </div>
+    </div>
+    <div class="section" id="s9">
+      <div class="section-header"><div class="section-num">9</div><div class="section-title">Rewards &amp; Risks</div></div>
+      <div class="card">
+        <div class="two-col">
+          <div class="rr-col rewards"><h4>Rewards</h4><div class="rr-item"><div class="rr-dot"></div><div>0.27x book value — cheapest quality landlord in HK: NAV HK$26.6/sh vs HK$7.29 price, discount deeper than Wharf REIC (0.44), Swire (0.51), Link (0.68)</div></div><div class="rr-item"><div class="rr-dot"></div><div>7.1% cash dividend held for 2 years post-cut; 1H26 interim back to full cash (no scrip) — management&#x27;s stated &#x27;sign of confidence&#x27;</div></div><div class="rr-item"><div class="rr-dot"></div><div>Fundamentals just inflected: 1H26 mainland mall rents at record (+6%), 7 of 10 malls record tenant sales, luxury +15% / non-luxury +20% tenant-sales growth</div></div><div class="rr-item"><div class="rr-dot"></div><div>Westlake 66 = visible new earnings: 98% committed, &gt;RMB200M normalized rent guided vs RMB37M booked, breakeven Q4-26 — the ramp is contractual, not hoped-for</div></div><div class="rr-item"><div class="rr-dot"></div><div>Balance sheet trending right: gearing 31.6% and falling, borrowing cost 3.7% and falling with HIBOR, big capex cycle just completed</div></div><div class="rr-item"><div class="rr-dot"></div><div>Prime, irreplaceable assets: Plaza 66 Shanghai is arguably the top luxury mall in mainland China — 96% occupied through the worst luxury downturn in a decade</div></div></div>
+          <div class="rr-col risks"><h4>Risks</h4><div class="rr-item bold-risk"><div class="rr-dot"></div><div><strong>China luxury re-slump = the whole ballgame. Mainland retail momentum already cooled Q1→Q2 2026 (+24% → +9%), and with payout at 102% of leasing-profit-less-capitalized-interest, a renewed slump likely forces dividend cut #2 — the yield floor breaks and 0.27x book gets cheaper (classic value trap)</strong></div></div><div class="rr-item bold-risk"><div class="rr-dot"></div><div><strong>[position details omitted on the public site]</strong></div></div><div class="rr-item"><div class="rr-dot"></div><div>Luxury spending leakage to Japan/overseas on weak yen — structural drain on mainland tenant sales that Hang Lung cannot control</div></div><div class="rr-item"><div class="rr-dot"></div><div>Office weakness both sides: mainland office occupancy ~79-84% and drifting down; HK office only just &#x27;found the bottom&#x27; after two negative years</div></div><div class="rr-item"><div class="rr-dot"></div><div>CEO transition: Weber Lo retires 1 Oct 2026, successor starts 7 Sep 2026 but unnamed at results date — execution continuity risk during the Westlake ramp</div></div><div class="rr-item"><div class="rr-dot"></div><div>Chan family / Hang Lung Group holds ~57% — thin free float, minority interests ride shotgun; 2024-25 scrip dividends mildly diluted NAV/share (27.5 → 26.6)</div></div><div class="rr-item"><div class="rr-dot"></div><div>Continuing non-cash revaluation losses (−HK$0.9B FY24, −HK$1.4B FY25) keep eroding stated NAV while China/HK cap rates adjust</div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="section" id="s10">
+      <div class="section-header"><div class="section-num">10</div><div class="section-title">Stock Council Verdict</div></div>
+      <div class="verdict-grid"></div>
+      
+      <div class="overall-verdict">
+        <div class="ov-stance">BUY</div>
+        <div class="ov-detail">
+          <div class="ov-label">Smartmall Overall Stance</div>
+          <div class="ov-target"><strong>BUY (Medium conviction)</strong> · Fair value target <strong>HK$9.0 (12-mo) = 0.34x book, still below all peers — ~+23% price + 7.1% yield ≈ ~30% total return. Downside case (2nd dividend cut) retests HK$6.89 ≈ −6%</strong></div>
+          <div class="ov-add-zone">Add zone: <strong>Starter 3-5% max, ONLY via an offshore/global account (no Thai DR found) and ONLY funded by rotating out of existing China names — the book is already ~75% China. Entry attractive ≤HK$7.50; add if FY2026 final dividend is held at HK$0.40 (~Jan 2027) and mainland tenant sales keep growing. EXIT trigger: any dividend cut, or mainland tenant sales negative two consecutive halves. No position currently — fresh evaluation 2026-08-01</strong></div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">Generated by Smartmall · FY2025 audited results (HKEX announcement, 45pp primary source) + 1H2026 interim announced 30 Jul 2026 [earnings release + call transcript — awaiting full interim report] · price as of 2026-08-01 (0101.HK HK$7.29 ≈ ฿31.1) · Sankey from the audited FY2025 P&amp;L; non-operating bundles the non-cash revaluation loss — underlying profit HK$3,202M is the dividend-funding number · dividend history verified against company releases (cut was 0.78→0.52, −33%, FY2024 — not 0.58 as sometimes quoted) · no council run yet (fresh ticker, no position) · no Thai DR found after 3-layer check (yfinance 80-series probes / Krungthai DR list / SET DR search) — not 100% confirmed · layout inspired by Simply Wall St · not financial advice.</div>
+  </main>
+</div>
+<script>
+(function () {
+  var links = Array.prototype.slice.call(document.querySelectorAll('.nav-item'));
+  var map = {};
+  links.forEach(function (a) { var id = (a.getAttribute('href') || '').slice(1); if (id) map[id] = a; });
+  var sections = Object.keys(map).map(function (id) { return document.getElementById(id); }).filter(Boolean);
+  if (!('IntersectionObserver' in window) || !sections.length) return;
+  var obs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        links.forEach(function (l) { l.classList.remove('active'); });
+        var active = map[e.target.id];
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+  sections.forEach(function (s) { obs.observe(s); });
+})();
+(function () {
+  document.querySelectorAll('.chart-section').forEach(function (sec) {
+    var tabs = sec.querySelectorAll('.chart-tab');
+    var panes = sec.querySelectorAll('.chart-pane');
+    tabs.forEach(function (t) {
+      t.addEventListener('click', function () {
+        var r = t.getAttribute('data-range');
+        tabs.forEach(function (x) { x.classList.toggle('active', x === t); });
+        panes.forEach(function (p) { p.classList.toggle('active', p.getAttribute('data-range') === r); });
+      });
+    });
+  });
+})();
+</script>
+</body>
+</html>
