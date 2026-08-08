@@ -50,6 +50,15 @@ white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .mb-fill{display:block;height:100%;border-radius:3px}
 .stance{display:inline-block;font-size:11px;font-weight:700;border:1px solid;
 border-radius:999px;padding:3px 12px;letter-spacing:.02em}
+.pos-dot{display:inline-block;width:8px;height:8px;border-radius:50%;
+margin-left:7px;vertical-align:middle;position:relative;top:-1px}
+.pos-legend{color:var(--text3)}
+.fbar{display:flex;gap:8px;margin:0 0 22px;flex-wrap:wrap}
+.fbtn{background:var(--surface);border:1px solid var(--border);border-radius:999px;
+padding:5px 16px;font-size:12px;font-weight:700;color:var(--text2);cursor:pointer;
+transition:all .12s}
+.fbtn:hover{border-color:var(--teal);color:var(--text1)}
+.fbtn.active{background:rgba(0,196,180,0.14);border-color:var(--teal);color:var(--teal)}
 .foot{color:var(--text3);font-size:11px;margin-top:40px;line-height:1.7;
 border-top:1px solid var(--border);padding-top:18px}
 </style>
@@ -58,12 +67,19 @@ border-top:1px solid var(--border);padding-top:18px}
 <div class="wrap">
   <div class="head"><div class="dot"></div><h1>Stock Cards</h1></div>
   <div class="sub">Transparent, Simply Wall St-style analysis — snowflake score, revenue Sankey, and a three-mind council verdict per stock.</div>
-  <div class="count">52 stocks · 29 sectors · grouped by sector, ranked by score · updated monthly</div>
-  <div class="search-wrap"><input id="q" type="search" placeholder="Search ticker, company, sector…  (press /)" autocomplete="off"></div>
+  <div class="count">52 stocks · 29 sectors · grouped by sector, ranked by score · updated 2026-08-09 (refreshed monthly) </div>
+  <div class="search-wrap"><input id="q" type="search" placeholder="Search ticker, company, sector… ค้นไทยได้ (press /)" autocomplete="off"></div>
+  <div class="fbar">
+    <button class="fbtn active" data-f="all">All</button>
+    <button class="fbtn" data-f="buy">Buy</button>
+    <button class="fbtn" data-f="watch">Watch</button>
+    <button class="fbtn" data-f="hold">Hold / Pass</button>
+    <button class="fbtn" data-f="avoid">Avoid</button>
+  </div>
   <div id="no-hit" class="no-hit" style="display:none">No stocks match your search.</div>
   <div class="sector-head">Telecom<span>1</span></div>
   <div class="grid">
-    <a class="tile" href="CHINAMOBILE.html" data-search="chinamobile china mobile hkex: 0941 (hk$-only — no thai dr) telecom buy — cash-cow income core 💰">
+    <a class="tile" href="CHINAMOBILE.html" target="_blank" rel="noopener" data-search="chinamobile china mobile hkex: 0941 (hk$-only — no thai dr) telecom buy — cash-cow income core 💰 โทรคมนาคม มือถือ จีน ปันผล" data-stance="buy">
       <div class="tile-top">
         <div class="tk">CHINAMOBILE</div>
         <div class="score"><b>24</b><span>/30</span></div>
@@ -76,7 +92,7 @@ border-top:1px solid var(--border);padding-top:18px}
   </div>
   <div class="sector-head">Software — Financial / SMB &amp; Consumer<span>1</span></div>
   <div class="grid">
-    <a class="tile" href="INTU.html" data-search="[position details omitted on the public site]">
+    <a class="tile" href="INTU.html" target="_blank" rel="noopener" data-search="[position details omitted on the public site]" data-stance="buy">
       <div class="tile-top">
         <div class="tk">INTU</div>
         <div class="score"><b>23</b><span>/30</span></div>
@@ -89,7 +105,7 @@ border-top:1px solid var(--border);padding-top:18px}
   </div>
   <div class="sector-head">Software / Cloud<span>1</span></div>
   <div class="grid">
-    <a class="tile" href="MSFT.html" data-search="msft microsoft nasdaq: msft software / cloud buy (quality compounder at a fair — no longer cheap — price)">
+    <a class="tile" href="MSFT.html" target="_blank" rel="noopener" data-search="msft microsoft nasdaq: msft software / cloud buy (quality compounder at a fair — no longer cheap — price) ซอฟต์แวร์ คลาวด์ เอไอ วินโดวส์" data-stance="buy">
       <div class="tile-top">
         <div class="tk">MSFT</div>
         <div class="score"><b>23</b><span>/30</span></div>
@@ -102,7 +118,7 @@ border-top:1px solid var(--border);padding-top:18px}
   </div>
   <div class="sector-head">Education<span>1</span></div>
   <div class="grid">
-    <a class="tile" href="SISB.html" data-search="sisb sisb pcl set: sisb education hold with add tilt &lt;฿9.50 (dca only)">
+    <a class="tile" href="SISB.html" target="_blank" rel="noopener" data-search="sisb sisb pcl set: sisb education hold with add tilt &lt;฿9.50 (dca only) โรงเรียน นานาชาติ ไทย การศึกษา" data-stance="hold">
       <div class="tile-top">
         <div class="tk">SISB</div>
         <div class="score"><b>23</b><span>/30</span></div>
@@ -115,7 +131,7 @@ border-top:1px solid var(--border);padding-top:18px}
   </div>
   <div class="sector-head">Autos &amp; EV<span>2</span></div>
   <div class="grid">
-    <a class="tile" href="CATL01.html" data-search="catl01 catl (contemporary amperex) set dr · szse: 300750 autos &amp; ev hold — medium-high (business) / capped by bucket concentration · ⚠ 2026-08-06 add went against standing council guidance">
+    <a class="tile" href="CATL01.html" target="_blank" rel="noopener" data-search="catl01 catl (contemporary amperex) set dr · szse: 300750 autos &amp; ev hold — medium-high (business) / capped by bucket concentration · ⚠ 2026-08-06 add went against standing council guidance แบตเตอรี่ ลิเทียม อีวี จีน" data-stance="hold">
       <div class="tile-top">
         <div class="tk">CATL01</div>
         <div class="score"><b>22</b><span>/30</span></div>
@@ -125,7 +141,7 @@ border-top:1px solid var(--border);padding-top:18px}
       <div class="mini-bars"><div class="mb-row" title="Valuation: 4/6"><span class="mb-ax">Valuation</span><span class="mb-track"><span class="mb-fill" style="width:67%;background:#00c4b4"></span></span></div><div class="mb-row" title="Future Growth: 6/6"><span class="mb-ax">Future Growth</span><span class="mb-track"><span class="mb-fill" style="width:100%;background:#00c4b4"></span></span></div><div class="mb-row" title="Past Performance: 5/6"><span class="mb-ax">Past Performance</span><span class="mb-track"><span class="mb-fill" style="width:83%;background:#00c4b4"></span></span></div><div class="mb-row" title="Financial Health: 5/6"><span class="mb-ax">Financial Health</span><span class="mb-track"><span class="mb-fill" style="width:83%;background:#00c4b4"></span></span></div><div class="mb-row" title="Dividend: 2/6"><span class="mb-ax">Dividend</span><span class="mb-track"><span class="mb-fill" style="width:33%;background:#f5c842"></span></span></div></div>
       <div class="stance" style="color:#8fa3bf;border-color:#8fa3bf">HOLD — Medium-High</div>
     </a>
-    <a class="tile" href="BYDCOM01.html" data-search="bydcom01 byd company set dr · hkex: 1211 autos &amp; ev hold (add on aug 29 q2 confirm; reload dr ฿0.65–0.70) · council re-vote 2026-08-06: 3 hold / 1 watch">
+    <a class="tile" href="BYDCOM01.html" target="_blank" rel="noopener" data-search="bydcom01 byd company set dr · hkex: 1211 autos &amp; ev hold (add on aug 29 q2 confirm; reload dr ฿0.65–0.70) · council re-vote 2026-08-06: 3 hold / 1 watch รถยนต์ไฟฟ้า อีวี จีน แบตเตอรี่" data-stance="watch">
       <div class="tile-top">
         <div class="tk">BYDCOM01</div>
         <div class="score"><b>17</b><span>/30</span></div>
@@ -138,7 +154,7 @@ border-top:1px solid var(--border);padding-top:18px}
   </div>
   <div class="sector-head">Insurance<span>1</span></div>
   <div class="grid">
-    <a class="tile" href="PINGAN80.html" data-search="pingan80 ping an insurance hkex: 2318 · sse: 601318 insurance hold (pause new adds — china bucket ~69% of book, down from 74% but still high; wait for 2026-08-20 interim) · council re-vote 2026-08-06: 3 hold / 1 toohard">
+    <a class="tile" href="PINGAN80.html" target="_blank" rel="noopener" data-search="pingan80 ping an insurance hkex: 2318 · sse: 601318 insurance hold (pause new adds — china bucket ~69% of book, down from 74% but still high; wait for 2026-08-20 interim) · council re-vote 2026-08-06: 3 hold / 1 toohard ประกัน ประกันภัย การเงิน จีน" data-stance="hold">
       <div class="tile-top">
         <div class="tk">PINGAN80</div>
         <div class="score"><b>22</b><span>/30</span></div>
@@ -151,7 +167,7 @@ border-top:1px solid var(--border);padding-top:18px}
   </div>
   <div class="sector-head">Consumer Discretionary — IP Toys<span>1</span></div>
   <div class="grid">
-    <a class="tile" href="POPMART.html" data-search="popmart pop mart international group hkex: 9992 consumer discretionary — ip toys watch (downgraded from buy 2026-08-01) — wait for the 25 aug h1 print or a pullback ≤hk$150/฿6.40 · growth satellite (5-8% max), medium conviction · council re-vote 2026-08-06: 2 watch / 1 toohard / 1 buy">
+    <a class="tile" href="POPMART.html" target="_blank" rel="noopener" data-search="popmart pop mart international group hkex: 9992 consumer discretionary — ip toys watch (downgraded from buy 2026-08-01) — wait for the 25 aug h1 print or a pullback ≤hk$150/฿6.40 · growth satellite (5-8% max), medium conviction · council re-vote 2026-08-06: 2 watch / 1 toohard / 1 buy ของเล่น ฟิกเกอร์ ลาบูบู้ จีน" data-stance="buy">
       <div class="tile-top">
         <div class="tk">POPMART</div>
         <div class="score"><b>22</b><span>/30</span></div>
@@ -164,7 +180,7 @@ border-top:1px solid var(--border);padding-top:18px}
   </div>
   <div class="sector-head">China Internet<span>6</span></div>
   <div class="grid">
-    <a class="tile" href="TENCENT80.html" data-search="tencent80 tencent holdings ltd. set dr · hkex: 0700 china internet buy (small · rotate) · council re-vote 2026-08-06: 1 accumulate / 1 watch / 1 hold / 1 buy">
+    <a class="tile" href="TENCENT80.html" target="_blank" rel="noopener" data-search="tencent80 tencent holdings ltd. set dr · hkex: 0700 china internet buy (small · rotate) · council re-vote 2026-08-06: 1 accumulate / 1 watch / 1 hold / 1 buy เกม โซเชียล จีน วีแชท" data-stance="buy">
       <div class="tile-top">
         <div class="tk">TENCENT80</div>
         <div class="score"><b>22</b><span>/30</span></div>
@@ -174,7 +190,7 @@ border-top:1px solid var(--border);padding-top:18px}
       <div class="mini-bars"><div class="mb-row" title="Valuation: 5/6"><span class="mb-ax">Valuation</span><span class="mb-track"><span class="mb-fill" style="width:83%;background:#00c4b4"></span></span></div><div class="mb-row" title="Future Growth: 4/6"><span class="mb-ax">Future Growth</span><span class="mb-track"><span class="mb-fill" style="width:67%;background:#00c4b4"></span></span></div><div class="mb-row" title="Past Performance: 5/6"><span class="mb-ax">Past Performance</span><span class="mb-track"><span class="mb-fill" style="width:83%;background:#00c4b4"></span></span></div><div class="mb-row" title="Financial Health: 6/6"><span class="mb-ax">Financial Health</span><span class="mb-track"><span class="mb-fill" style="width:100%;background:#00c4b4"></span></span></div><div class="mb-row" title="Dividend: 2/6"><span class="mb-ax">Dividend</span><span class="mb-track"><span class="mb-fill" style="width:33%;background:#f5c842"></span></span></div></div>
       <div class="stance" style="color:#30d97b;border-color:#30d97b">BUY</div>
     </a>
-    <a class="tile" href="TCOM.html" data-search="tcom trip.com group hkex: 9961 · nasdaq: tcom (dr: tripcom80) china internet watch — sold in full 2026-07-30 @ ฿1.56 (+฿61,000 realized), not currently held. medium conviction on the business (regulatory tail resolved); medium-high conviction against chasing back in at current levels · council re-vote 2026-08-06: 4 watch">
+    <a class="tile" href="TCOM.html" target="_blank" rel="noopener" data-search="tcom trip.com group hkex: 9961 · nasdaq: tcom (dr: tripcom80) china internet watch — sold in full 2026-07-30 @ ฿1.56 (+฿61,000 realized), not currently held. medium conviction on the business (regulatory tail resolved); medium-high conviction against chasing back in at current levels · council re-vote 2026-08-06: 4 watch ท่องเที่ยว จองโรงแรม ตั๋วเครื่องบิน จีน" data-stance="watch">
       <div class="tile-top">
         <div class="tk">TCOM</div>
         <div class="score"><b>21</b><span>/30</span></div>
@@ -184,7 +200,7 @@ border-top:1px solid var(--border);padding-top:18px}
       <div class="mini-bars"><div class="mb-row" title="Valuation: 6/6"><span class="mb-ax">Valuation</span><span class="mb-track"><span class="mb-fill" style="width:100%;background:#00c4b4"></span></span></div><div class="mb-row" title="Future Growth: 4/6"><span class="mb-ax">Future Growth</span><span class="mb-track"><span class="mb-fill" style="width:67%;background:#00c4b4"></span></span></div><div class="mb-row" title="Past Performance: 4/6"><span class="mb-ax">Past Performance</span><span class="mb-track"><span class="mb-fill" style="width:67%;background:#00c4b4"></span></span></div><div class="mb-row" title="Financial Health: 6/6"><span class="mb-ax">Financial Health</span><span class="mb-track"><span class="mb-fill" style="width:100%;background:#00c4b4"></span></span></div><div class="mb-row" title="Dividend: 1/6"><span class="mb-ax">Dividend</span><span class="mb-track"><span class="mb-fill" style="width:17%;background:#f58b42"></span></span></div></div>
       <div class="stance" style="color:#f5c842;border-color:#f5c842">WATCH — sold in full 2026-07-30 @ ฿1.56</div>
     </a>
-    <a class="tile" href="BABA80.html" data-search="baba80 alibaba group set dr · nyse: baba china internet hold (lean-add into weakness) · council re-vote 2026-08-06: 2 hold / 1 watch / 1 toohard">
+    <a class="tile" href="BABA80.html" target="_blank" rel="noopener" data-search="baba80 alibaba group set dr · nyse: baba china internet hold (lean-add into weakness) · council re-vote 2026-08-06: 2 hold / 1 watch / 1 toohard อีคอมเมิร์ซ จีน คลาวด์ ค้าปลีกออนไลน์" data-stance="watch">
       <div class="tile-top">
         <div class="tk">BABA80</div>
         <div class="score"><b>18</b><span>/30</span></div>
@@ -194,7 +210,7 @@ border-top:1px solid var(--border);padding-top:18px}
       <div class="mini-bars"><div class="mb-row" title="Valuation: 3/6"><span class="mb-ax">Valuation</span><span class="mb-track"><span class="mb-fill" style="width:50%;background:#f5c842"></span></span></div><div class="mb-row" title="Future Growth: 5/6"><span class="mb-ax">Future Growth</span><span class="mb-track"><span class="mb-fill" style="width:83%;background:#00c4b4"></span></span></div><div class="mb-row" title="Past Performance: 3/6"><span class="mb-ax">Past Performance</span><span class="mb-track"><span class="mb-fill" style="width:50%;background:#f5c842"></span></span></div><div class="mb-row" title="Financial Health: 6/6"><span class="mb-ax">Financial Health</span><span class="mb-track"><span class="mb-fill" style="width:100%;background:#00c4b4"></span></span></div><div class="mb-row" title="Dividend: 1/6"><span class="mb-ax">Dividend</span><span class="mb-track"><span class="mb-fill" style="width:17%;background:#f58b42"></span></span></div></div>
       <div class="stance" style="color:#f5c842;border-color:#f5c842">HOLD</div>
     </a>
-    <a class="tile" href="JD80.html" data-search="jd80 jd.com set dr · nasdaq: jd china internet hold, medium conviction (jd-specific facts unchanged; position cut 125k→75k on 2026-07-22 to fund tencent80 — china-dr concentration flat ~77% since it was a within-china rotation, not de-risking; 13 aug 2026 q2 print is the next real test)">
+    <a class="tile" href="JD80.html" target="_blank" rel="noopener" data-search="jd80 jd.com set dr · nasdaq: jd china internet hold, medium conviction (jd-specific facts unchanged; position cut 125k→75k on 2026-07-22 to fund tencent80 — china-dr concentration flat ~77% since it was a within-china rotation, not de-risking; 13 aug 2026 q2 print is the next real test) อีคอมเมิร์ซ จีน ค้าปลีกออนไลน์ โลจิสติกส์" data-stance="hold">
       <div class="tile-top">
         <div class="tk">JD80</div>
         <div class="score"><b>16</b><span>/30</span></div>
@@ -204,7 +220,7 @@ border-top:1px solid var(--border);padding-top:18px}
       <div class="mini-bars"><div class="mb-row" title="Valuation: 4/6"><span class="mb-ax">Valuation</span><span class="mb-track"><span class="mb-fill" style="width:67%;background:#00c4b4"></span></span></div><div class="mb-row" title="Future Growth: 2/6"><span class="mb-ax">Future Growth</span><span class="mb-track"><span class="mb-fill" style="width:33%;background:#f5c842"></span></span></div><div class="mb-row" title="Past Performance: 2/6"><span class="mb-ax">Past Performance</span><span class="mb-track"><span class="mb-fill" style="width:33%;background:#f5c842"></span></span></div><div class="mb-row" title="Financial Health: 5/6"><span class="mb-ax">Financial Health</span><span class="mb-track"><span class="mb-fill" style="width:83%;background:#00c4b4"></span></span></div><div class="mb-row" title="Dividend: 3/6"><span class="mb-ax">Dividend</span><span class="mb-track"><span class="mb-fill" style="width:50%;background:#f5c842"></span></span></div></div>
       <div class="stance" style="color:#8fa3bf;border-color:#8fa3bf">HOLD, Medium conviction</div>
     </a>
-    <a class="tile" href="BIDU.html" data-search="bidu baidu, inc. set dr · nasdaq: bidu china internet watch · council re-vote 2026-08-06: 2 watch / 1 pass / 1 toohard">
+    <a class="tile" href="BIDU.html" target="_blank" rel="noopener" data-search="bidu baidu, inc. set dr · nasdaq: bidu china internet watch · council re-vote 2026-08-06: 2 watch / 1 pass / 1 toohard เสิร์ชเอนจิน เอไอ จีน รถไร้คนขับ" data-stance="watch">
       <div class="tile-top">
         <div class="tk">BIDU</div>
         <div class="score"><b>15</b><span>/30</span></div>
@@ -214,7 +230,7 @@ border-top:1px solid var(--border);padding-top:18px}
       <div class="mini-bars"><div class="mb-row" title="Valuation: 4/6"><span class="mb-ax">Valuation</span><span class="mb-track"><span class="mb-fill" style="width:67%;background:#00c4b4"></span></span></div><div class="mb-row" title="Future Growth: 4/6"><span class="mb-ax">Future Growth</span><span class="mb-track"><span class="mb-fill" style="width:67%;background:#00c4b4"></span></span></div><div class="mb-row" title="Past Performance: 2/6"><span class="mb-ax">Past Performance</span><span class="mb-track"><span class="mb-fill" style="width:33%;background:#f5c842"></span></span></div><div class="mb-row" title="Financial Health: 5/6"><span class="mb-ax">Financial Health</span><span class="mb-track"><span class="mb-fill" style="width:83%;background:#00c4b4"></span></span></div><div class="mb-row" title="Dividend: 0/6"><span class="mb-ax">Dividend</span><span class="mb-track"><span class="mb-fill" style="width:0%;background:#f58b42"></span></span></div></div>
       <div class="stance" style="color:#f5c842;border-color:#f5c842">WATCH · council re-vote 2026-08-06: 2 Watch / 1 Pass / 1 TooHard</div>
     </a>
-    <a class="tile" href="MEITUAN.html" data-search="meituan meituan set dr · hkex: 3690 china internet watch (conviction low-medium) — hk$63.65 → hk$92.50 rally has erased the discount; wait for q2 (sep 2) or samr final rules before entering · council re-vote 2026-08-06: 2 watch / 1 pass / 1 toohard">
+    <a class="tile" href="MEITUAN.html" target="_blank" rel="noopener" data-search="meituan meituan set dr · hkex: 3690 china internet watch (conviction low-medium) — hk$63.65 → hk$92.50 rally has erased the discount; wait for q2 (sep 2) or samr final rules before entering · council re-vote 2026-08-06: 2 watch / 1 pass / 1 toohard เดลิเวอรี่ อาหาร จีน" data-stance="watch">
       <div class="tile-top">
         <div class="tk">MEITUAN</div>
         <div class="score"><b>14</b><span>/30</span></div>
@@ -227,7 +243,7 @@ border-top:1px solid var(--border);padding-top:18px}
   </div>
   <div class="sector-head">Semiconductors<span>10</span></div>
   <div class="grid">
-    <a class="tile" href="TSM.html" data-search="tsm taiwan semiconductor manufacturing nyse: tsm semiconductors hold (add on further pullbacks, hard-capped)">
+    <a class="tile" href="TSM.html" target="_blank" rel="noopener" data-search="tsm taiwan semiconductor manufacturing nyse: tsm semiconductors hold (add on further pullbacks, hard-capped) ชิป เซมิคอนดักเตอร์ ไต้หวัน โรงงานชิป" data-stance="hold">
       <div class="tile-top">
         <div class="tk">TSM</div>
         <div class="score"><b>22</b><span>/30</span></div>
@@ -237,7 +253,7 @@ border-top:1px solid var(--border);padding-top:18px}
       <div class="mini-bars"><div class="mb-row" title="Valuation: 3/6"><span class="mb-ax">Valuation</span><span class="mb-track"><span class="mb-fill" style="width:50%;background:#f5c842"></span></span></div><div class="mb-row" title="Future Growth: 6/6"><span class="mb-ax">Future Growth</span><span class="mb-track"><span class="mb-fill" style="width:100%;background:#00c4b4"></span></span></div><div class="mb-row" title="Past Performance: 6/6"><span class="mb-ax">Past Performance</span><span class="mb-track"><span class="mb-fill" style="width:100%;background:#00c4b4"></span></span></div><div class="mb-row" title="Financial Health: 6/6"><span class="mb-ax">Financial Health</span><span class="mb-track"><span class="mb-fill" style="width:100%;background:#00c4b4"></span></span></div><div class="mb-row" title="Dividend: 1/6"><span class="mb-ax">Dividend</span><span class="mb-track"><span class="mb-fill" style="width:17%;background:#f58b42"></span></span></div></div>
       <div class="stance" style="color:#8fa3bf;border-color:#8fa3bf">HOLD</div>
     </a>
-    <a class="tile" href="SAMSUNG.html" data-search="samsung samsung electronics krx: 005930 · no thai dr found semiconductors watch">
+    <a class="tile" href="SAMSUNG.html" target="_blank" rel="noopener" data-search="samsung samsung electronics krx: 005930 · no thai dr found semiconductors watch ชิป มือถือ เกาหลี หน่วยความจำ" data-stance="watch">
       <div class="tile-top">
         <div class="tk">SAMSUNG</div>
         <div class="score"><b>21</b><span>/30</span></div>
@@ -247,7 +263,7 @@ border-top:1px solid var(--border);padding-top:18px}
       <div class="mini-bars"><div class="mb-row" title="Valuation: 4/6"><span class="mb-ax">Valuation</span><span class="mb-track"><span class="mb-fill" style="width:67%;background:#00c4b4"></span></span></div><div class="mb-row" title="Future Growth: 5/6"><span class="mb-ax">Future Growth</span><span class="mb-track"><span class="mb-fill" style="width:83%;background:#00c4b4"></span></span></div><div class="mb-row" title="Past Performance: 4/6"><span class="mb-ax">Past Performance</span><span class="mb-track"><span class="mb-fill" style="width:67%;background:#00c4b4"></span></span></div><div class="mb-row" title="Financial Health: 6/6"><span class="mb-ax">Financial Health</span><span class="mb-track"><span class="mb-fill" style="width:100%;background:#00c4b4"></span></span></div><div class="mb-row" title="Dividend: 2/6"><span class="mb-ax">Dividend</span><span class="mb-track"><span class="mb-fill" style="width:33%;background:#f5c842"></span></span></div></div>
       <div class="stance" style="color:#f5c842;border-color:#f5c842">WATCH</div>
     </a>
-    <a class="tile" href="ADI.html" data-search="adi analog devices nasdaq: adi semiconductors watch — inside fair value, no margin of safety">
+    <a class="tile" href="ADI.html" target="_blank" rel="noopener" data-search="adi analog devices nasdaq: adi semiconductors watch — inside fair value, no margin of safety ชิป อนาล็อก เซมิคอนดักเตอร์" data-stance="watch">
       <div class="tile-top">
         <div class="tk">ADI</div>
         <div class="score"><b>20</b><span>/30</span></div>
@@ -257,7 +273,7 @@ border-top:1px solid var(--border);padding-top:18px}
       <div class="mini-bars"><div class="mb-row" title="Valuation: 4/6"><span class="mb-ax">Valuation</span><span class="mb-track"><span class="mb-fill" style="width:67%;background:#00c4b4"></span></span></div><div class="mb-row" title="Future Growth: 3/6"><span class="mb-ax">Future Growth</span><span class="mb-track"><span class="mb-fill" style="width:50%;background:#f5c842"></span></span></div><div class="mb-row" title="Past Performance: 4/6"><span class="mb-ax">Past Performance</span><span class="mb-track"><span class="mb-fill" style="width:67%;background:#00c4b4"></span></span></div><div class="mb-row" title="Financial Health: 5/6"><span class="mb-ax">Financial Health</span><span class="mb-track"><span class="mb-fill" style="width:83%;background:#00c4b4"></span></span></div><div class="mb-row" title="Dividend: 4/6"><span class="mb-ax">Dividend</span><span class="mb-track"><span class="mb-fill" style="width:67%;background:#00c4b4"></span></span></div></div>
       <div class="stance" style="color:#f5c842;border-color:#f5c842">WATCH</div>
     </a>
-    <a class="tile" href="MU.html" data-search="mu micron technology nasdaq: mu · set dr semiconductors watch">
+    <a class="tile" href="MU.html" target="_blank" rel="noopener" data-search="mu micron technology nasdaq: mu · set dr semiconductors watch ชิป หน่วยความจำ เอไอ" data-stance="watch">
       <div class="tile-top">
         <div class="tk">MU</div>
         <div class="score"><b>20</b><span>/30</span></div>
@@ -267,7 +283,7 @@ border-top:1px solid var(--border);padding-top:18px}
       <div class="mini-bars"><div class="mb-row" title="Valuation: 3/6"><span class="mb-ax">Valuation</span><span class="mb-track"><span class="mb-fill" style="width:50%;background:#f5c842"></span></span></div><div class="mb-row" title="Future Growth: 6/6"><span class="mb-ax">Future Growth</span><span class="mb-track"><span class="mb-fill" style="width:100%;background:#00c4b4"></span></span></div><div class="mb-row" title="Past Performance: 4/6"><span class="mb-ax">Past Performance</span><span class="mb-track"><span class="mb-fill" style="width:67%;background:#00c4b4"></span></span></div><div class="mb-row" title="Financial Health: 6/6"><span class="mb-ax">Financial Health</span><span class="mb-track"><span class="mb-fill" style="width:100%;background:#00c4b4"></span></span></div><div class="mb-row" title="Dividend: 1/6"><span class="mb-ax">Dividend</span><span class="mb-track"><span class="mb-fill" style="width:17%;background:#f58b42"></span></span></div></div>
       <div class="stance" style="color:#f5c842;border-color:#f5c842">WATCH</div>
     </a>
-    <a class="tile" href="SKHYNIX.html" data-search="skhynix sk hynix inc. krx: 000660 · nasdaq adr: skhy semiconductors watch">
+    <a class="tile" href="SKHYNIX.html" target="_blank" rel="noopener" data-search="skhynix sk hynix inc. krx: 000660 · nasdaq adr: skhy semiconductors watch ชิป หน่วยความจำ เกาหลี เอไอ" data-stance="watch">
       <div class="tile-top">
         <div class="tk">SKHYNIX</div>
         <div class="score"><b>20</b><span>/30</span></div>
@@ -277,7 +293,7 @@ border-top:1px solid var(--border);padding-top:18px}
       <div class="mini-bars"><div class="mb-row" title="Valuation: 4/6"><span class="mb-ax">Valuation</span><span class="mb-track"><span class="mb-fill" style="width:67%;background:#00c4b4"></span></span></div><div class="mb-row" title="Future Growth: 5/6"><span class="mb-ax">Future Growth</span><span class="mb-track"><span class="mb-fill" style="width:83%;background:#00c4b4"></span></span></div><div class="mb-row" title="Past Performance: 4/6"><span class="mb-ax">Past Performance</span><span class="mb-track"><span class="mb-fill" style="width:67%;background:#00c4b4"></span></span></div><div class="mb-row" title="Financial Health: 6/6"><span class="mb-ax">Financial Health</span><span class="mb-track"><span class="mb-fill" style="width:100%;background:#00c4b4"></span></span></div><div class="mb-row" title="Dividend: 1/6"><span class="mb-ax">Dividend</span><span class="mb-track"><span class="mb-fill" style="width:17%;background:#f58b42"></span></span></div></div>
       <div class="stance" style="color:#f5c842;border-color:#f5c842">WATCH</div>
     </a>
-    <a class="tile" href="688041.html" data-search="688041 hygon information technology (海光信息) sse: 688041 semiconductors watch — great business, wrong price (don&#x27;t chase the parabola at ¥344)">
+    <a class="tile" href="688041.html" target="_blank" rel="noopener" data-search="688041 hygon information technology (海光信息) sse: 688041 semiconductors watch — great business, wrong price (don&#x27;t chase the parabola at ¥344) ชิป ซีพียู จีน เอไอ" data-stance="watch">
       <div class="tile-top">
         <div class="tk">688041</div>
         <div class="score"><b>18</b><span>/30</span></div>
@@ -287,7 +303,7 @@ border-top:1px solid var(--border);padding-top:18px}
       <div class="mini-bars"><div class="mb-row" title="Valuation: 1/6"><span class="mb-ax">Valuation</span><span class="mb-track"><span class="mb-fill" style="width:17%;background:#f58b42"></span></span></div><div class="mb-row" title="Future Growth: 6/6"><span class="mb-ax">Future Growth</span><span class="mb-track"><span class="mb-fill" style="width:100%;background:#00c4b4"></span></span></div><div class="mb-row" title="Past Performance: 6/6"><span class="mb-ax">Past Performance</span><span class="mb-track"><span class="mb-fill" style="width:100%;background:#00c4b4"></span></span></div><div class="mb-row" title="Financial Health: 4/6"><span class="mb-ax">Financial Health</span><span class="mb-track"><span class="mb-fill" style="width:67%;background:#00c4b4"></span></span></div><div class="mb-row" title="Dividend: 1/6"><span class="mb-ax">Dividend</span><span class="mb-track"><span class="mb-fill" style="width:17%;background:#f58b42"></span></span></div></div>
       <div class="stance" style="color:#f5c842;border-color:#f5c842">WATCH — great business, wrong price</div>
     </a>
-    <a class="tile" href="688256.html" data-search="688256 cambricon technologies (寒武纪) sse: 688256 semiconductors avoid at ¥1,350 — watch for a pullback (great business, dangerous price)">
+    <a class="tile" href="688256.html" target="_blank" rel="noopener" data-search="688256 cambricon technologies (寒武纪) sse: 688256 semiconductors avoid at ¥1,350 — watch for a pullback (great business, dangerous price) ชิป เอไอ จีน" data-stance="avoid">
       <div class="tile-top">
         <div class="tk">688256</div>
         <div class="score"><b>17</b><span>/30</span></div>
@@ -297,7 +313,7 @@ border-top:1px solid var(--border);padding-top:18px}
       <div class="mini-bars"><div class="mb-row" title="Valuation: 1/6"><span class="mb-ax">Valuation</span><span class="mb-track"><span class="mb-fill" style="width:17%;background:#f58b42"></span></span></div><div class="mb-row" title="Future Growth: 6/6"><span class="mb-ax">Future Growth</span><span class="mb-track"><span class="mb-fill" style="width:100%;background:#00c4b4"></span></span></div><div class="mb-row" title="Past Performance: 4/6"><span class="mb-ax">Past Performance</span><span class="mb-track"><span class="mb-fill" style="width:67%;background:#00c4b4"></span></span></div><div class="mb-row" title="Financial Health: 5/6"><span class="mb-ax">Financial Health</span><span class="mb-track"><span class="mb-fill" style="width:83%;background:#00c4b4"></span></span></div><div class="mb-row" title="Dividend: 1/6"><span class="mb-ax">Dividend</span><span class="mb-track"><span class="mb-fill" style="width:17%;background:#f58b42"></span></span></div></div>
       <div class="stance" style="color:#e85d5d;border-color:#e85d5d">AVOID at ¥1,350 — Watch for a pullback</div>
     </a>
-    <a class="tile" href="AMD.html" data-search="amd advanced micro devices nasdaq: amd semiconductors watch (great business, expensive entry near ath — wait for a pullback)">
+    <a class="tile" href="AMD.html" target="_blank" rel="noopener" data-search="amd advanced micro devices nasdaq: amd semiconductors watch (great business, expensive entry near ath — wait for a pullback) ชิป ซีพียู จีพียู เอไอ" data-stance="watch">
       <div class="tile-top">
         <div class="tk">AMD</div>
         <div class="score"><b>17</b><span>/30</span></div>
@@ -307,7 +323,7 @@ border-top:1px solid var(--border);padding-top:18px}
       <div class="mini-bars"><div class="mb-row" title="Valuation: 2/6"><span class="mb-ax">Valuation</span><span class="mb-track"><span class="mb-fill" style="width:33%;background:#f5c842"></span></span></div><div class="mb-row" title="Future Growth: 6/6"><span class="mb-ax">Future Growth</span><span class="mb-track"><span class="mb-fill" style="width:100%;background:#00c4b4"></span></span></div><div class="mb-row" title="Past Performance: 4/6"><span class="mb-ax">Past Performance</span><span class="mb-track"><span class="mb-fill" style="width:67%;background:#00c4b4"></span></span></div><div class="mb-row" title="Financial Health: 5/6"><span class="mb-ax">Financial Health</span><span class="mb-track"><span class="mb-fill" style="width:83%;background:#00c4b4"></span></span></div><div class="mb-row" title="Dividend: 0/6"><span class="mb-ax">Dividend</span><span class="mb-track"><span class="mb-fill" style="width:0%;background:#f58b42"></span></span></div></div>
       <div class="stance" style="color:#f5c842;border-color:#f5c842">WATCH</div>
     </a>
-    <a class="tile" href="ARM.html" data-search="arm arm holdings plc nasdaq: arm semiconductors watch — elite franchise, priced for perfection; no margin of safety">
+    <a class="tile" href="ARM.html" target="_blank" rel="noopener" data-search="arm arm holdings plc nasdaq: arm semiconductors watch — elite franchise, priced for perfection; no margin of safety ชิป สถาปัตยกรรม มือถือ" data-stance="watch">
       <div class="tile-top">
         <div class="tk">ARM</div>
         <div class="score"><b>17</b><span>/30</span></div>
@@ -317,7 +333,7 @@ border-top:1px solid var(--border);padding-top:18px}
       <div class="mini-bars"><div class="mb-row" title="Valuation: 1/6"><span class="mb-ax">Valuation</span><span class="mb-track"><span class="mb-fill" style="width:17%;background:#f58b42"></span></span></div><div class="mb-row" title="Future Growth: 6/6"><span class="mb-ax">Future Growth</span><span class="mb-track"><span class="mb-fill" style="width:100%;background:#00c4b4"></span></span></div><div class="mb-row" title="Past Performance: 4/6"><span class="mb-ax">Past Performance</span><span class="mb-track"><span class="mb-fill" style="width:67%;background:#00c4b4"></span></span></div><div class="mb-row" title="Financial Health: 6/6"><span class="mb-ax">Financial Health</span><span class="mb-track"><span class="mb-fill" style="width:100%;background:#00c4b4"></span></span></div><div class="mb-row" title="Dividend: 0/6"><span class="mb-ax">Dividend</span><span class="mb-track"><span class="mb-fill" style="width:0%;background:#f58b42"></span></span></div></div>
       <div class="stance" style="color:#f5c842;border-color:#f5c842">WATCH</div>
     </a>
-    <a class="tile" href="INTC.html" data-search="intc intel corporation nasdaq: intc semiconductors watch — real turnaround optionality, but neither cash-cow nor high-growth and valuation is stretched after the $19→$142→$98 run">
+    <a class="tile" href="INTC.html" target="_blank" rel="noopener" data-search="intc intel corporation nasdaq: intc semiconductors watch — real turnaround optionality, but neither cash-cow nor high-growth and valuation is stretched after the $19→$142→$98 run ชิป เซมิคอนดักเตอร์ ซีพียู" data-stance="watch">
       <div class="tile-top">
         <div class="tk">INTC</div>
         <div class="score"><b>8</b><span>/30</span></div>
@@ -330,7 +346,7 @@ border-top:1px solid var(--border);padding-top:18px}
   </div>
   <div class="sector-head">Financials<span>2</span></div>
   <div class="grid">
-    <a class="tile" href="FUTU.html" data-search="futu futu holdings nasdaq: futu financials watch · med conviction (price broke above entry zone — wait for pullback, don&#x27;t chase) · council re-vote 2026-08-06: 2 pass / 2 watch">
+    <a class="tile" href="FUTU.html" target="_blank" rel="noopener" data-search="futu futu holdings nasdaq: futu financials watch · med conviction (price broke above entry zone — wait for pullback, don&#x27;t chase) · council re-vote 2026-08-06: 2 pass / 2 watch โบรกเกอร์ หุ้น จีน เทรด" data-stance="watch">
       <div class="tile-top">
         <div class="tk">FUTU</div>
         <div class="score"><b>21</b><span>/30</span></div>
@@ -340,7 +356,7 @@ border-top:1px solid var(--border);padding-top:18px}
       <div class="mini-bars"><div class="mb-row" title="Valuation: 5/6"><span class="mb-ax">Valuation</span><span class="mb-track"><span class="mb-fill" style="width:83%;background:#00c4b4"></span></span></div><div class="mb-row" title="Future Growth: 4/6"><span class="mb-ax">Future Growth</span><span class="mb-track"><span class="mb-fill" style="width:67%;background:#00c4b4"></span></span></div><div class="mb-row" title="Past Performance: 6/6"><span class="mb-ax">Past Performance</span><span class="mb-track"><span class="mb-fill" style="width:100%;background:#00c4b4"></span></span></div><div class="mb-row" title="Financial Health: 5/6"><span class="mb-ax">Financial Health</span><span class="mb-track"><span class="mb-fill" style="width:83%;background:#00c4b4"></span></span></div><div class="mb-row" title="Dividend: 1/6"><span class="mb-ax">Dividend</span><span class="mb-track"><span class="mb-fill" style="width:17%;background:#f58b42"></span></span></div></div>
       <div class="stance" style="color:#f5c842;border-color:#f5c842">WATCH · Med conviction</div>
     </a>
-    <a class="tile" href="IBKR.html" data-search="ibkr interactive brokers nasdaq: ibkr financials watch (quality, but expensive) · council re-vote 2026-08-06: 3 watch / 1 hold">
+    <a class="tile" href="IBKR.html" target="_blank" rel="noopener" data-search="ibkr interactive brokers nasdaq: ibkr financials watch (quality, but expensive) · council re-vote 2026-08-06: 3 watch / 1 hold โบรกเกอร์ หุ้น เทรด" data-stance="watch">
       <div class="tile-top">
         <div class="tk">IBKR</div>
         <div class="score"><b>21</b><span>/30</span></div>
@@ -353,7 +369,7 @@ border-top:1px solid var(--border);padding-top:18px}
   </div>
   <div class="sector-head">Healthcare<span>7</span></div>
   <div class="grid">
-    <a class="tile" href="PR9.html" data-search="pr9 praram 9 hospital set: pr9 healthcare buy · council re-vote 2026-08-06: 2 hold / 2 watch">
+    <a class="tile" href="PR9.html" target="_blank" rel="noopener" data-search="pr9 praram 9 hospital set: pr9 healthcare buy · council re-vote 2026-08-06: 2 hold / 2 watch โรงพยาบาล ไทย พระราม 9" data-stance="buy">
       <div class="tile-top">
         <div class="tk">PR9</div>
         <div class="score"><b>21</b><span>/30</span></div>
@@ -363,7 +379,7 @@ border-top:1px solid var(--border);padding-top:18px}
       <div class="mini-bars"><div class="mb-row" title="Valuation: 4/6"><span class="mb-ax">Valuation</span><span class="mb-track"><span class="mb-fill" style="width:67%;background:#00c4b4"></span></span></div><div class="mb-row" title="Future Growth: 4/6"><span class="mb-ax">Future Growth</span><span class="mb-track"><span class="mb-fill" style="width:67%;background:#00c4b4"></span></span></div><div class="mb-row" title="Past Performance: 4/6"><span class="mb-ax">Past Performance</span><span class="mb-track"><span class="mb-fill" style="width:67%;background:#00c4b4"></span></span></div><div class="mb-row" title="Financial Health: 6/6"><span class="mb-ax">Financial Health</span><span class="mb-track"><span class="mb-fill" style="width:100%;background:#00c4b4"></span></span></div><div class="mb-row" title="Dividend: 3/6"><span class="mb-ax">Dividend</span><span class="mb-track"><span class="mb-fill" style="width:50%;background:#f5c842"></span></span></div></div>
       <div class="stance" style="color:#30d97b;border-color:#30d97b">BUY · council re-vote 2026-08-06: 2 Hold / 2 Watch</div>
     </a>
-    <a class="tile" href="ZTS.html" data-search="zts zoetis nyse: zts healthcare hold/watch (medium conviction) · council re-vote 2026-08-06 post-q2: 3 hold / 1 pass — downgraded from buy · council re-vote 2026-08-06: 2 hold / 1 pass / 1 watch">
+    <a class="tile" href="ZTS.html" target="_blank" rel="noopener" data-search="zts zoetis nyse: zts healthcare hold/watch (medium conviction) · council re-vote 2026-08-06 post-q2: 3 hold / 1 pass — downgraded from buy · council re-vote 2026-08-06: 2 hold / 1 pass / 1 watch ยาสัตว์ สัตว์เลี้ยง" data-stance="buy">
       <div class="tile-top">
         <div class="tk">ZTS</div>
         <div class="score"><b>21</b><span>/30</span></div>
@@ -373,7 +389,7 @@ border-top:1px solid var(--border);padding-top:18px}
       <div class="mini-bars"><div class="mb-row" title="Valuation: 5/6"><span class="mb-ax">Valuation</span><span class="mb-track"><span class="mb-fill" style="width:83%;background:#00c4b4"></span></span></div><div class="mb-row" title="Future Growth: 2/6"><span class="mb-ax">Future Growth</span><span class="mb-track"><span class="mb-fill" style="width:33%;background:#f5c842"></span></span></div><div class="mb-row" title="Past Performance: 5/6"><span class="mb-ax">Past Performance</span><span class="mb-track"><span class="mb-fill" style="width:83%;background:#00c4b4"></span></span></div><div class="mb-row" title="Financial Health: 5/6"><span class="mb-ax">Financial Health</span><span class="mb-track"><span class="mb-fill" style="width:83%;background:#00c4b4"></span></span></div><div class="mb-row" title="Dividend: 4/6"><span class="mb-ax">Dividend</span><span class="mb-track"><span class="mb-fill" style="width:67%;background:#00c4b4"></span></span></div></div>
       <div class="stance" style="color:#30d97b;border-color:#30d97b">HOLD/WATCH</div>
     </a>
-    <a class="tile" href="BH.html" data-search="bh bumrungrad hospital set: bh healthcare hold / watch · council re-vote 2026-08-06: 4 watch">
+    <a class="tile" href="BH.html" target="_blank" rel="noopener" data-search="bh bumrungrad hospital set: bh healthcare hold / watch · council re-vote 2026-08-06: 4 watch โรงพยาบาล ไทย บำรุงราษฎร์" data-stance="watch">
       <div class="tile-top">
         <div class="tk">BH</div>
         <div class="score"><b>20</b><span>/30</span></div>
@@ -383,7 +399,7 @@ border-top:1px solid var(--border);padding-top:18px}
       <div class="mini-bars"><div class="mb-row" title="Valuation: 3/6"><span class="mb-ax">Valuation</span><span class="mb-track"><span class="mb-fill" style="width:50%;background:#f5c842"></span></span></div><div class="mb-row" title="Future Growth: 3/6"><span class="mb-ax">Future Growth</span><span class="mb-track"><span class="mb-fill" style="width:50%;background:#f5c842"></span></span></div><div class="mb-row" title="Past Performance: 6/6"><span class="mb-ax">Past Performance</span><span class="mb-track"><span class="mb-fill" style="width:100%;background:#00c4b4"></span></span></div><div class="mb-row" title="Financial Health: 6/6"><span class="mb-ax">Financial Health</span><span class="mb-track"><span class="mb-fill" style="width:100%;background:#00c4b4"></span></span></div><div class="mb-row" title="Dividend: 2/6"><span class="mb-ax">Dividend</span><span class="mb-track"><span class="mb-fill" style="width:33%;background:#f5c842"></span></span></div></div>
       <div class="stance" style="color:#f5c842;border-color:#f5c842">HOLD / WATCH · council re-vote 2026-08-06: 4 Watch</div>
     </a>
-    <a class="tile" href="BDMS.html" data-search="bdms bangkok dusit medical set: bdms healthcare hold / watch · council re-vote 2026-08-06: 3 watch / 1 hold">
+    <a class="tile" href="BDMS.html" target="_blank" rel="noopener" data-search="bdms bangkok dusit medical set: bdms healthcare hold / watch · council re-vote 2026-08-06: 3 watch / 1 hold โรงพยาบาล ไทย กรุงเทพ" data-stance="watch">
       <div class="tile-top">
         <div class="tk">BDMS</div>
         <div class="score"><b>19</b><span>/30</span></div>
@@ -393,7 +409,7 @@ border-top:1px solid var(--border);padding-top:18px}
       <div class="mini-bars"><div class="mb-row" title="Valuation: 3/6"><span class="mb-ax">Valuation</span><span class="mb-track"><span class="mb-fill" style="width:50%;background:#f5c842"></span></span></div><div class="mb-row" title="Future Growth: 3/6"><span class="mb-ax">Future Growth</span><span class="mb-track"><span class="mb-fill" style="width:50%;background:#f5c842"></span></span></div><div class="mb-row" title="Past Performance: 5/6"><span class="mb-ax">Past Performance</span><span class="mb-track"><span class="mb-fill" style="width:83%;background:#00c4b4"></span></span></div><div class="mb-row" title="Financial Health: 4/6"><span class="mb-ax">Financial Health</span><span class="mb-track"><span class="mb-fill" style="width:67%;background:#00c4b4"></span></span></div><div class="mb-row" title="Dividend: 4/6"><span class="mb-ax">Dividend</span><span class="mb-track"><span class="mb-fill" style="width:67%;background:#00c4b4"></span></span></div></div>
       <div class="stance" style="color:#f5c842;border-color:#f5c842">HOLD / WATCH · council re-vote 2026-08-06: 3 Watch / 1 Hold</div>
     </a>
-    <a class="tile" href="NOVOB80.html" data-search="[position details omitted on the public site]">
+    <a class="tile" href="NOVOB80.html" target="_blank" rel="noopener" data-search="[position details omitted on the public site]" data-stance="buy">
       <div class="tile-top">
         <div class="tk">NOVOB80</div>
         <div class="score"><b>19</b><span>/30</span></div>
@@ -403,7 +419,7 @@ border-top:1px solid var(--border);padding-top:18px}
       <div class="mini-bars"><div class="mb-row" title="Valuation: 4/6"><span class="mb-ax">Valuation</span><span class="mb-track"><span class="mb-fill" style="width:67%;background:#00c4b4"></span></span></div><div class="mb-row" title="Future Growth: 3/6"><span class="mb-ax">Future Growth</span><span class="mb-track"><span class="mb-fill" style="width:50%;background:#f5c842"></span></span></div><div class="mb-row" title="Past Performance: 4/6"><span class="mb-ax">Past Performance</span><span class="mb-track"><span class="mb-fill" style="width:67%;background:#00c4b4"></span></span></div><div class="mb-row" title="Financial Health: 5/6"><span class="mb-ax">Financial Health</span><span class="mb-track"><span class="mb-fill" style="width:83%;background:#00c4b4"></span></span></div><div class="mb-row" title="Dividend: 3/6"><span class="mb-ax">Dividend</span><span class="mb-track"><span class="mb-fill" style="width:50%;background:#f5c842"></span></span></div></div>
       <div class="stance" style="color:#30d97b;border-color:#30d97b">BUY</div>
     </a>
-    <a class="tile" href="CHG.html" data-search="chg chularat hospital group set: chg healthcare watch (small starter on dip only) · council re-vote 2026-08-06: 2 hold / 2 watch">
+    <a class="tile" href="CHG.html" target="_blank" rel="noopener" data-search="chg chularat hospital group set: chg healthcare watch (small starter on dip only) · council re-vote 2026-08-06: 2 hold / 2 watch โรงพยาบาล ไทย จุฬารัตน์" data-stance="watch">
       <div class="tile-top">
         <div class="tk">CHG</div>
         <div class="score"><b>18</b><span>/30</span></div>
@@ -413,7 +429,7 @@ border-top:1px solid var(--border);padding-top:18px}
       <div class="mini-bars"><div class="mb-row" title="Valuation: 3/6"><span class="mb-ax">Valuation</span><span class="mb-track"><span class="mb-fill" style="width:50%;background:#f5c842"></span></span></div><div class="mb-row" title="Future Growth: 2/6"><span class="mb-ax">Future Growth</span><span class="mb-track"><span class="mb-fill" style="width:33%;background:#f5c842"></span></span></div><div class="mb-row" title="Past Performance: 3/6"><span class="mb-ax">Past Performance</span><span class="mb-track"><span class="mb-fill" style="width:50%;background:#f5c842"></span></span></div><div class="mb-row" title="Financial Health: 6/6"><span class="mb-ax">Financial Health</span><span class="mb-track"><span class="mb-fill" style="width:100%;background:#00c4b4"></span></span></div><div class="mb-row" title="Dividend: 4/6"><span class="mb-ax">Dividend</span><span class="mb-track"><span class="mb-fill" style="width:67%;background:#00c4b4"></span></span></div></div>
       <div class="stance" style="color:#f5c842;border-color:#f5c842">WATCH</div>
     </a>
-    <a class="tile" href="WUXIBIO.html" data-search="wuxibio wuxi biologics (cayman) inc. hkex: 2269 · adr: wxxwy healthcare watch (medium conviction) · council re-vote 2026-08-06: 3 watch / 1 toohard">
+    <a class="tile" href="WUXIBIO.html" target="_blank" rel="noopener" data-search="wuxibio wuxi biologics (cayman) inc. hkex: 2269 · adr: wxxwy healthcare watch (medium conviction) · council re-vote 2026-08-06: 3 watch / 1 toohard ยา ชีวเภสัช จีน รับจ้างผลิต" data-stance="watch">
       <div class="tile-top">
         <div class="tk">WUXIBIO</div>
         <div class="score"><b>17</b><span>/30</span></div>
@@ -426,7 +442,7 @@ border-top:1px solid var(--border);padding-top:18px}
   </div>
   <div class="sector-head">Medical Devices<span>1</span></div>
   <div class="grid">
-    <a class="tile" href="ISRG.html" data-search="isrg intuitive surgical nasdaq: isrg · set dr: isrg80 medical devices buy (start tranches, unchanged since 2026-07-21) · council re-vote 2026-08-06: 2 buy / 1 pass / 1 hold">
+    <a class="tile" href="ISRG.html" target="_blank" rel="noopener" data-search="isrg intuitive surgical nasdaq: isrg · set dr: isrg80 medical devices buy (start tranches, unchanged since 2026-07-21) · council re-vote 2026-08-06: 2 buy / 1 pass / 1 hold หุ่นยนต์ผ่าตัด การแพทย์" data-stance="buy">
       <div class="tile-top">
         <div class="tk">ISRG</div>
         <div class="score"><b>20</b><span>/30</span></div>
@@ -439,7 +455,7 @@ border-top:1px solid var(--border);padding-top:18px}
   </div>
   <div class="sector-head">Consumer Internet<span>1</span></div>
   <div class="grid">
-    <a class="tile" href="SE.html" data-search="se sea limited nyse: se consumer internet watch · medium conviction (buy on a pullback or a confirmed strong aug 11 print) · council re-vote 2026-08-06: 1 watch / 1 pass / 1 toohard / 1 buy">
+    <a class="tile" href="SE.html" target="_blank" rel="noopener" data-search="se sea limited nyse: se consumer internet watch · medium conviction (buy on a pullback or a confirmed strong aug 11 print) · council re-vote 2026-08-06: 1 watch / 1 pass / 1 toohard / 1 buy อีคอมเมิร์ซ เกม ช้อปปี้ อาเซียน" data-stance="buy">
       <div class="tile-top">
         <div class="tk">SE</div>
         <div class="score"><b>20</b><span>/30</span></div>
@@ -452,7 +468,7 @@ border-top:1px solid var(--border);padding-top:18px}
   </div>
   <div class="sector-head">Semiconductor Equipment<span>1</span></div>
   <div class="grid">
-    <a class="tile" href="ASML.html" data-search="asml asml holding n.v. nasdaq: asml semiconductor equipment watch (best-in-class monopoly — wait for a china/cyclical scare to buy the 3x-extended stock)">
+    <a class="tile" href="ASML.html" target="_blank" rel="noopener" data-search="asml asml holding n.v. nasdaq: asml semiconductor equipment watch (best-in-class monopoly — wait for a china/cyclical scare to buy the 3x-extended stock) เครื่องผลิตชิป เซมิคอนดักเตอร์ เนเธอร์แลนด์" data-stance="buy">
       <div class="tile-top">
         <div class="tk">ASML</div>
         <div class="score"><b>19</b><span>/30</span></div>
@@ -465,7 +481,7 @@ border-top:1px solid var(--border);padding-top:18px}
   </div>
   <div class="sector-head">HK/China Luxury-Retail Landlord<span>1</span></div>
   <div class="grid">
-    <a class="tile" href="HANGLUNG.html" data-search="hanglung hang lung properties limited hkex: 0101 (no thai dr found) hk/china luxury-retail landlord buy (medium conviction)">
+    <a class="tile" href="HANGLUNG.html" target="_blank" rel="noopener" data-search="hanglung hang lung properties limited hkex: 0101 (no thai dr found) hk/china luxury-retail landlord buy (medium conviction) อสังหา ห้างสรรพสินค้า ฮ่องกง" data-stance="buy">
       <div class="tile-top">
         <div class="tk">HANGLUNG</div>
         <div class="score"><b>19</b><span>/30</span></div>
@@ -478,7 +494,7 @@ border-top:1px solid var(--border);padding-top:18px}
   </div>
   <div class="sector-head">Interactive Media &amp; Services<span>2</span></div>
   <div class="grid">
-    <a class="tile" href="KUAISH01.html" data-search="kuaish01 kuaishou technology (快手) set dr · hkex: 1024 interactive media &amp; services watch (medium conviction, leaning slightly more constructive than 07-17) — council unchanged 1 buy-dip / 2 pass / 1 too-hard, but now backed by a real first dividend + confirmed $18b kling funding round instead of rumor. · council re-vote 2026-08-06: 2 pass / 1 buydip / 1 toohard">
+    <a class="tile" href="KUAISH01.html" target="_blank" rel="noopener" data-search="kuaish01 kuaishou technology (快手) set dr · hkex: 1024 interactive media &amp; services watch (medium conviction, leaning slightly more constructive than 07-17) — council unchanged 1 buy-dip / 2 pass / 1 too-hard, but now backed by a real first dividend + confirmed $18b kling funding round instead of rumor. · council re-vote 2026-08-06: 2 pass / 1 buydip / 1 toohard วิดีโอสั้น จีน โซเชียล" data-stance="buy">
       <div class="tile-top">
         <div class="tk">KUAISH01</div>
         <div class="score"><b>19</b><span>/30</span></div>
@@ -488,7 +504,7 @@ border-top:1px solid var(--border);padding-top:18px}
       <div class="mini-bars"><div class="mb-row" title="Value: 5/6"><span class="mb-ax">Value</span><span class="mb-track"><span class="mb-fill" style="width:83%;background:#00c4b4"></span></span></div><div class="mb-row" title="Future: 3/6"><span class="mb-ax">Future</span><span class="mb-track"><span class="mb-fill" style="width:50%;background:#f5c842"></span></span></div><div class="mb-row" title="Past: 3/6"><span class="mb-ax">Past</span><span class="mb-track"><span class="mb-fill" style="width:50%;background:#f5c842"></span></span></div><div class="mb-row" title="Health: 6/6"><span class="mb-ax">Health</span><span class="mb-track"><span class="mb-fill" style="width:100%;background:#00c4b4"></span></span></div><div class="mb-row" title="Dividend: 2/6"><span class="mb-ax">Dividend</span><span class="mb-track"><span class="mb-fill" style="width:33%;background:#f5c842"></span></span></div></div>
       <div class="stance" style="color:#30d97b;border-color:#30d97b">WATCH</div>
     </a>
-    <a class="tile" href="1024.html" data-search="1024 kuaishou technology (快手) set dr · hkex: 1024 interactive media &amp; services watch (medium conviction) — council 1 buy-dip / 2 pass / 1 too-hard. genuinely cheap + fortress balance sheet, but off-thesis (neither cash-cow nor high-growth) and the book is already concentrated in china-internet.">
+    <a class="tile" href="1024.html" target="_blank" rel="noopener" data-search="1024 kuaishou technology (快手) set dr · hkex: 1024 interactive media &amp; services watch (medium conviction) — council 1 buy-dip / 2 pass / 1 too-hard. genuinely cheap + fortress balance sheet, but off-thesis (neither cash-cow nor high-growth) and the book is already concentrated in china-internet. วิดีโอสั้น จีน โซเชียล" data-stance="buy">
       <div class="tile-top">
         <div class="tk">1024</div>
         <div class="score"><b>16</b><span>/30</span></div>
@@ -501,7 +517,7 @@ border-top:1px solid var(--border);padding-top:18px}
   </div>
   <div class="sector-head">Software<span>1</span></div>
   <div class="grid">
-    <a class="tile" href="PLTR.html" data-search="pltr palantir technologies set dr · nasdaq: pltr software hold · council re-vote 2026-08-06: 3 hold / 1 watch">
+    <a class="tile" href="PLTR.html" target="_blank" rel="noopener" data-search="pltr palantir technologies set dr · nasdaq: pltr software hold · council re-vote 2026-08-06: 3 hold / 1 watch เอไอ ข้อมูล ซอฟต์แวร์ รัฐบาล" data-stance="watch">
       <div class="tile-top">
         <div class="tk">PLTR</div>
         <div class="score"><b>19</b><span>/30</span></div>
@@ -514,7 +530,7 @@ border-top:1px solid var(--border);padding-top:18px}
   </div>
   <div class="sector-head">Mobility<span>1</span></div>
   <div class="grid">
-    <a class="tile" href="UBER.html" data-search="uber uber technologies nyse: uber (usd-only — no thai dr) mobility buy — accumulate at these levels">
+    <a class="tile" href="UBER.html" target="_blank" rel="noopener" data-search="uber uber technologies nyse: uber (usd-only — no thai dr) mobility buy — accumulate at these levels เรียกรถ เดลิเวอรี่ แท็กซี่" data-stance="buy">
       <div class="tile-top">
         <div class="tk">UBER</div>
         <div class="score"><b>19</b><span>/30</span></div>
@@ -527,7 +543,7 @@ border-top:1px solid var(--border);padding-top:18px}
   </div>
   <div class="sector-head">Industrials<span>1</span></div>
   <div class="grid">
-    <a class="tile" href="VRT.html" data-search="vrt vertiv holdings co nyse: vrt industrials buy (high-growth) — in the add-zone ahead of q2&#x27;26 print">
+    <a class="tile" href="VRT.html" target="_blank" rel="noopener" data-search="vrt vertiv holdings co nyse: vrt industrials buy (high-growth) — in the add-zone ahead of q2&#x27;26 print ดาต้าเซ็นเตอร์ ระบายความร้อน เอไอ" data-stance="buy">
       <div class="tile-top">
         <div class="tk">VRT</div>
         <div class="score"><b>18</b><span>/30</span></div>
@@ -540,7 +556,7 @@ border-top:1px solid var(--border);padding-top:18px}
   </div>
   <div class="sector-head">Public-Safety Tech (TASER + body-cam + SaaS)<span>1</span></div>
   <div class="grid">
-    <a class="tile" href="AXON.html" data-search="axon axon enterprise nasdaq: axon public-safety tech (taser + body-cam + saas) watch (lean pass at $510) · 🚀 high growth · conviction medium. a+ business but the $339→$510 bounce removed the value setup; ~14x trailing / ~11x fwd sales is fair-to-full, not asymmetric.">
+    <a class="tile" href="AXON.html" target="_blank" rel="noopener" data-search="axon axon enterprise nasdaq: axon public-safety tech (taser + body-cam + saas) watch (lean pass at $510) · 🚀 high growth · conviction medium. a+ business but the $339→$510 bounce removed the value setup; ~14x trailing / ~11x fwd sales is fair-to-full, not asymmetric. กล้องตำรวจ อาวุธ ความปลอดภัย" data-stance="watch">
       <div class="tile-top">
         <div class="tk">AXON</div>
         <div class="score"><b>17</b><span>/30</span></div>
@@ -553,7 +569,7 @@ border-top:1px solid var(--border);padding-top:18px}
   </div>
   <div class="sector-head">Media &amp; Entertainment<span>1</span></div>
   <div class="grid">
-    <a class="tile" href="NFLX80.html" data-search="nflx80 netflix set dr · nasdaq: nflx media &amp; entertainment hold — nothing material since 07-25; position ~10.5% of book, council 2-2 not unanimous (last run 07-19) · council re-vote 2026-08-06: 2 accumulate / 2 hold">
+    <a class="tile" href="NFLX80.html" target="_blank" rel="noopener" data-search="nflx80 netflix set dr · nasdaq: nflx media &amp; entertainment hold — nothing material since 07-25; position ~10.5% of book, council 2-2 not unanimous (last run 07-19) · council re-vote 2026-08-06: 2 accumulate / 2 hold สตรีมมิ่ง หนัง ซีรีส์ บันเทิง" data-stance="buy">
       <div class="tile-top">
         <div class="tk">NFLX80</div>
         <div class="score"><b>17</b><span>/30</span></div>
@@ -566,7 +582,7 @@ border-top:1px solid var(--border);padding-top:18px}
   </div>
   <div class="sector-head">Fintech / Digital Banking<span>1</span></div>
   <div class="grid">
-    <a class="tile" href="SOFI.html" data-search="sofi sofi technologies nasdaq: sofi · set drx: sofi23 fintech / digital banking buy (starter) — 3-1 council pass">
+    <a class="tile" href="SOFI.html" target="_blank" rel="noopener" data-search="sofi sofi technologies nasdaq: sofi · set drx: sofi23 fintech / digital banking buy (starter) — 3-1 council pass ฟินเทค ธนาคาร สินเชื่อ" data-stance="buy">
       <div class="tile-top">
         <div class="tk">SOFI</div>
         <div class="score"><b>17</b><span>/30</span></div>
@@ -579,7 +595,7 @@ border-top:1px solid var(--border);padding-top:18px}
   </div>
   <div class="sector-head">Managed Care / Health Insurance<span>1</span></div>
   <div class="grid">
-    <a class="tile" href="UNH.html" data-search="unh unitedhealth group nyse: unh managed care / health insurance watch — q2 beat + raised fy26 guide are real, but $860m was reserve-development and commercial-segment recovery just slipped past 2027; a second doj probe (claritev) layered on the original one keeps this a wait-for-more-proof situation, not a buy on the pullback · council re-vote 2026-08-06: 2 watch / 1 pass / 1 toohard">
+    <a class="tile" href="UNH.html" target="_blank" rel="noopener" data-search="unh unitedhealth group nyse: unh managed care / health insurance watch — q2 beat + raised fy26 guide are real, but $860m was reserve-development and commercial-segment recovery just slipped past 2027; a second doj probe (claritev) layered on the original one keeps this a wait-for-more-proof situation, not a buy on the pullback · council re-vote 2026-08-06: 2 watch / 1 pass / 1 toohard ประกันสุขภาพ สหรัฐ" data-stance="buy">
       <div class="tile-top">
         <div class="tk">UNH</div>
         <div class="score"><b>16</b><span>/30</span></div>
@@ -592,7 +608,7 @@ border-top:1px solid var(--border);padding-top:18px}
   </div>
   <div class="sector-head">Software — Cybersecurity<span>1</span></div>
   <div class="grid">
-    <a class="tile" href="CRWD.html" data-search="crwd crowdstrike holdings nasdaq: crwd software — cybersecurity watch — elite franchise, but no margin of safety at ~41x sales near 52-wk highs">
+    <a class="tile" href="CRWD.html" target="_blank" rel="noopener" data-search="crwd crowdstrike holdings nasdaq: crwd software — cybersecurity watch — elite franchise, but no margin of safety at ~41x sales near 52-wk highs ไซเบอร์ ความปลอดภัย ซอฟต์แวร์" data-stance="watch">
       <div class="tile-top">
         <div class="tk">CRWD</div>
         <div class="score"><b>15</b><span>/30</span></div>
@@ -605,7 +621,7 @@ border-top:1px solid var(--border);padding-top:18px}
   </div>
   <div class="sector-head">Social Media / Digital Advertising<span>1</span></div>
   <div class="grid">
-    <a class="tile" href="META.html" data-search="meta meta platforms nasdaq: meta social media / digital advertising ⛔ ไม่ซื้อที่ $542 — สภา 4–0 pass · แต่เหตุผลคือ &#x27;ราคา&#x27; ไม่ใช่ &#x27;ธุรกิจแย่&#x27; · council re-vote 2026-08-06: 4 pass">
+    <a class="tile" href="META.html" target="_blank" rel="noopener" data-search="meta meta platforms nasdaq: meta social media / digital advertising ⛔ ไม่ซื้อที่ $542 — สภา 4–0 pass · แต่เหตุผลคือ &#x27;ราคา&#x27; ไม่ใช่ &#x27;ธุรกิจแย่&#x27; · council re-vote 2026-08-06: 4 pass โซเชียล เฟซบุ๊ก ไอจี โฆษณา เอไอ" data-stance="hold">
       <div class="tile-top">
         <div class="tk">META</div>
         <div class="score"><b>15</b><span>/30</span></div>
@@ -618,7 +634,7 @@ border-top:1px solid var(--border);padding-top:18px}
   </div>
   <div class="sector-head">Consumer Electronics<span>1</span></div>
   <div class="grid">
-    <a class="tile" href="XIAOMI.html" data-search="xiaomi xiaomi corp set dr · hkex: 1810 consumer electronics watch (no position, medium conviction) · council re-vote 2026-08-06: 3 watch / 1 toohard">
+    <a class="tile" href="XIAOMI.html" target="_blank" rel="noopener" data-search="xiaomi xiaomi corp set dr · hkex: 1810 consumer electronics watch (no position, medium conviction) · council re-vote 2026-08-06: 3 watch / 1 toohard มือถือ สมาร์ทโฟน อีวี จีน" data-stance="watch">
       <div class="tile-top">
         <div class="tk">XIAOMI</div>
         <div class="score"><b>15</b><span>/30</span></div>
@@ -631,7 +647,7 @@ border-top:1px solid var(--border);padding-top:18px}
   </div>
   <div class="sector-head">Healthcare — Managed Care<span>1</span></div>
   <div class="grid">
-    <a class="tile" href="MOH.html" data-search="[position details omitted on the public site]">
+    <a class="tile" href="MOH.html" target="_blank" rel="noopener" data-search="[position details omitted on the public site]" data-stance="watch">
       <div class="tile-top">
         <div class="tk">MOH</div>
         <div class="score"><b>14</b><span>/30</span></div>
@@ -644,7 +660,7 @@ border-top:1px solid var(--border);padding-top:18px}
   </div>
   <div class="sector-head">Consumer Discretionary<span>1</span></div>
   <div class="grid">
-    <a class="tile" href="NKE.html" data-search="nke nike, inc. nyse: nke consumer discretionary watch (not yet — wait for $36-40 entry or a china inflection) · council re-vote 2026-08-06: 2 watch / 1 toohard / 1 pass">
+    <a class="tile" href="NKE.html" target="_blank" rel="noopener" data-search="nke nike, inc. nyse: nke consumer discretionary watch (not yet — wait for $36-40 entry or a china inflection) · council re-vote 2026-08-06: 2 watch / 1 toohard / 1 pass รองเท้า กีฬา เสื้อผ้า" data-stance="watch">
       <div class="tile-top">
         <div class="tk">NKE</div>
         <div class="score"><b>14</b><span>/30</span></div>
@@ -657,7 +673,7 @@ border-top:1px solid var(--border);padding-top:18px}
   </div>
   <div class="sector-head">Nuclear energy / SMR<span>1</span></div>
   <div class="grid">
-    <a class="tile" href="OKLO.html" data-search="oklo oklo inc. nyse: oklo · set dr: oklo23 nuclear energy / smr watch">
+    <a class="tile" href="OKLO.html" target="_blank" rel="noopener" data-search="oklo oklo inc. nyse: oklo · set dr: oklo23 nuclear energy / smr watch นิวเคลียร์ พลังงาน เอสเอ็มอาร์" data-stance="watch">
       <div class="tile-top">
         <div class="tk">OKLO</div>
         <div class="score"><b>11</b><span>/30</span></div>
@@ -679,11 +695,15 @@ border-top:1px solid var(--border);padding-top:18px}
   var tiles = Array.prototype.slice.call(document.querySelectorAll('.tile'));
   var heads = Array.prototype.slice.call(document.querySelectorAll('.sector-head'));
   var noHit = document.getElementById('no-hit');
+  var fbtns = Array.prototype.slice.call(document.querySelectorAll('.fbtn'));
+  var stanceFilter = 'all';
   function filter(){
     var s = q.value.trim().toLowerCase();
     var hits = 0;
     tiles.forEach(function(t){
-      var show = !s || t.dataset.search.indexOf(s) !== -1;
+      var okText = !s || t.dataset.search.indexOf(s) !== -1;
+      var okStance = stanceFilter === 'all' || t.dataset.stance === stanceFilter;
+      var show = okText && okStance;
       t.style.display = show ? '' : 'none';
       if (show) hits++;
     });
@@ -697,6 +717,13 @@ border-top:1px solid var(--border);padding-top:18px}
     });
     noHit.style.display = hits ? 'none' : '';
   }
+  fbtns.forEach(function(b){
+    b.addEventListener('click', function(){
+      stanceFilter = b.dataset.f;
+      fbtns.forEach(function(x){ x.classList.toggle('active', x === b); });
+      filter();
+    });
+  });
   q.addEventListener('input', filter);
   document.addEventListener('keydown', function(e){
     if (e.key === '/' && document.activeElement !== q) { e.preventDefault(); q.focus(); }
