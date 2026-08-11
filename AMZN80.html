@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AMZN80 — Amazon.com, Inc. · Smartmall Stock Card</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #19243c; --surface: #222f49; --surface-2: #2c3b58; --border: #3a4c6b;
+  --teal: #17dbc9; --teal-mid: #00c4b4; --teal-dim: rgba(23,219,201,0.15); --teal-fill: rgba(23,219,201,0.22);
+  --orange: #f0995e; --orange-mid: #dd8449; --orange-dim: rgba(240,153,94,0.18);
+  --green: #3ee08a; --green-dim: rgba(62,224,138,0.15); --red: #ef6a6a; --red-dim: rgba(239,106,106,0.15);
+  --amber: #f3d074; --text-1: #eef3fb; --text-2: #b0c1d8; --text-3: #8295ac;
+  --number: #d6e2f2; --tag-bg: #23406a; --badge-teal: #0c3a38; --score-track: #2c3b58;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text-1); font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Segoe UI', Arial, sans-serif; line-height: 1.5; min-height: 100vh; display: flex; justify-content: center; padding: 40px 20px 80px; }
+.page { width: 1240px; max-width: 100%; display: grid; grid-template-columns: 220px 1fr; gap: 0; align-items: start; }
+.sidenav { position: sticky; top: 40px; padding: 32px 0 32px 0; }
+.sidenav-logo { display: flex; align-items: center; gap: 8px; margin-bottom: 20px; padding-left: 8px; text-decoration: none; transition: opacity 0.15s; }
+.sidenav-logo:hover { opacity: 0.8; }
+.sidenav-logo .dot { width: 28px; height: 28px; background: var(--teal); border-radius: 50%; flex-shrink: 0; }
+.sidenav-logo span { font-size: 13px; font-weight: 700; color: var(--text-2); letter-spacing: 0.05em; text-transform: uppercase; }
+.nav-item { display: flex; align-items: center; gap: 12px; padding: 10px 16px; border-radius: 10px; cursor: pointer; margin-bottom: 2px; transition: background 0.15s; text-decoration: none; }
+.nav-item:hover { background: var(--surface); }
+.nav-item.active { background: var(--teal-dim); border-left: 3px solid var(--teal); }
+.nav-back { margin-bottom: 16px; }
+.nav-back .nav-num { color: var(--teal); font-size: 14px; }
+.nav-back .nav-label { color: var(--text-2); font-weight: 600; }
+.nav-back:hover .nav-label { color: var(--teal); }
+.nav-num { font-size: 11px; font-weight: 700; color: var(--text-3); width: 18px; flex-shrink: 0; }
+.nav-label { font-size: 13px; font-weight: 500; color: var(--text-2); }
+.nav-item.active .nav-label { color: var(--teal); }
+.hero-verdict { display: flex; justify-content: flex-end; align-items: center; gap: 12px; margin-top: 14px; }
+.hv-stance { font-size: 13px; font-weight: 800; letter-spacing: 0.04em; border: 1.5px solid; border-radius: 999px; padding: 5px 16px; text-transform: uppercase; }
+.hv-score { font-size: 13px; color: var(--text-3); font-weight: 600; }
+.hv-score b { font-size: 19px; color: var(--text-1); font-weight: 800; }
+.main { min-width: 0; padding: 0 0 0 32px; }
+.section { margin-bottom: 40px; scroll-margin-top: 20px; }
+.section-header { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
+.section-num { width: 32px; height: 32px; border-radius: 50%; background: var(--surface-2); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: var(--text-2); flex-shrink: 0; }
+.section-title { font-size: 17px; font-weight: 700; color: var(--text-1); letter-spacing: -0.01em; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px 32px; margin-bottom: 16px; }
+.header-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 24px; }
+.header-ticker { display: flex; align-items: center; gap: 14px; margin-bottom: 8px; }
+.ticker-logo { width: 48px; height: 48px; background: linear-gradient(135deg, #1a3550 0%, #2a4a70 100%); border-radius: 12px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; color: var(--teal); letter-spacing: 0.02em; }
+.ticker-name h1 { font-size: 22px; font-weight: 800; color: var(--text-1); letter-spacing: -0.02em; line-height: 1.2; }
+.ticker-name .exch { font-size: 12px; color: var(--text-3); margin-top: 2px; }
+.header-price { text-align: right; }
+.price-big { font-size: 36px; font-weight: 800; color: var(--text-1); letter-spacing: -0.03em; line-height: 1; }
+.price-secondary { font-size: 14px; font-weight: 600; color: var(--text-3); margin-top: 5px; }
+.price-sub { font-size: 13px; color: var(--text-3); margin-top: 6px; }
+.badges { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
+.badge { display: inline-flex; align-items: center; gap: 5px; padding: 5px 11px; border-radius: 100px; font-size: 11.5px; font-weight: 600; letter-spacing: 0.02em; }
+.badge-teal { background: var(--teal-dim); color: var(--teal); border: 1px solid rgba(23,219,201,0.3); }
+.badge-orange { background: var(--orange-dim); color: var(--orange); border: 1px solid rgba(240,153,94,0.3); }
+.badge-muted { background: var(--surface-2); color: var(--text-2); border: 1px solid var(--border); }
+.range-bar-wrap { margin-top: 4px; }
+.range-label { display: flex; justify-content: space-between; font-size: 11.5px; color: var(--text-3); margin-bottom: 8px; }
+.range-bar-track { height: 6px; border-radius: 4px; background: var(--surface-2); position: relative; overflow: visible; }
+.range-bar-fill { height: 100%; border-radius: 4px; background: linear-gradient(90deg, var(--teal-mid) 0%, var(--teal) 100%); }
+.range-bar-marker { position: absolute; top: 50%; transform: translate(-50%, -50%); width: 14px; height: 14px; border-radius: 50%; background: #fff; border: 2px solid var(--teal); box-shadow: 0 0 0 3px rgba(23,219,201,0.3); }
+.range-bar-label { position: absolute; bottom: -20px; transform: translateX(-50%); font-size: 11px; font-weight: 700; color: var(--text-1); white-space: nowrap; }
+.range-sublabels { margin-top: 22px; font-size: 11.5px; color: var(--text-3); display: flex; justify-content: space-between; }
+.range-sublabels span { font-weight: 600; color: var(--text-2); }
+.snowflake-grid { display: grid; grid-template-columns: 240px 1fr; gap: 32px; align-items: start; }
+.score-rows { flex: 1; }
+.score-row { display: grid; grid-template-columns: 130px 1fr 36px; gap: 12px; align-items: center; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+.score-row:last-child { border-bottom: none; }
+.score-row-label { font-size: 13px; font-weight: 600; color: var(--text-2); }
+.score-bar-track { height: 8px; background: var(--score-track); border-radius: 4px; overflow: hidden; }
+.score-bar-fill { height: 100%; border-radius: 4px; }
+.score-num { font-size: 13px; font-weight: 700; text-align: right; }
+.score-rationale { grid-column: 1 / -1; font-size: 11.5px; color: var(--text-3); padding-top: 2px; line-height: 1.5; }
+.snowflake-total { text-align: center; margin-top: 16px; }
+.snowflake-total .num { font-size: 28px; font-weight: 800; color: var(--teal); }
+.snowflake-total .denom { font-size: 14px; color: var(--text-3); }
+.snowflake-total .label { font-size: 11px; color: var(--text-3); margin-top: 4px; }
+.sankey-wrap { width: 100%; overflow-x: auto; }
+.sankey-caption { margin-top: 16px; font-size: 12.5px; color: var(--text-2); background: var(--surface-2); border-radius: 8px; padding: 10px 14px; border-left: 3px solid var(--teal); }
+.health-row { display: flex; align-items: center; gap: 16px; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+.health-row:last-child { border-bottom: none; }
+.health-label { width: 140px; font-size: 13px; color: var(--text-2); flex-shrink: 0; }
+.health-bar-track { flex: 1; height: 8px; background: var(--score-track); border-radius: 4px; overflow: hidden; position: relative; }
+.health-bar-fill { height: 100%; border-radius: 4px; background: var(--teal); }
+.health-value { width: 90px; text-align: right; font-size: 13px; font-weight: 700; color: var(--number); }
+.chart-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 18px; flex-wrap: wrap; }
+.chart-price { font-size: 30px; font-weight: 900; color: var(--text-1); letter-spacing: -0.03em; }
+.chart-sub { font-size: 12px; color: var(--text-3); margin-top: 4px; }
+.chart-tabs { display: flex; gap: 8px; flex-wrap: wrap; }
+.chart-tab { background: var(--surface-2); border: 1px solid var(--border); border-radius: 9px; padding: 7px 13px; font-size: 12px; font-weight: 700; color: var(--text-3); cursor: pointer; display: flex; gap: 6px; align-items: center; font-family: inherit; transition: all .15s; }
+.chart-tab:hover { color: var(--text-1); }
+.chart-tab.active { border-color: var(--teal); color: var(--text-1); background: var(--teal-dim); }
+.chart-tab span { font-size: 11px; font-weight: 600; }
+.chart-pane { display: none; }
+.chart-pane.active { display: block; }
+.chart-svg { width: 100%; height: 240px; display: block; }
+.rsi-block { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--border); }
+.rsi-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 8px; }
+.rsi-title { font-size: 13px; font-weight: 700; color: var(--text-2); letter-spacing: 0.02em; }
+.rsi-now { font-size: 14px; font-weight: 800; }
+.rsi-chartwrap { position: relative; padding-left: 26px; }
+.rsi-axis { position: absolute; left: 0; top: 0; height: 120px; width: 22px; display: flex; flex-direction: column; justify-content: space-between; }
+.rsi-axis span { font-size: 10px; color: var(--text-3); line-height: 1; }
+.rsi-svg { width: 100%; height: 120px; display: block; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.verdict-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
+.verdict-chip { background: var(--surface-2); border: 1px solid var(--border); border-radius: 14px; padding: 20px; }
+.verdict-chip .agent { font-size: 11px; font-weight: 700; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+.verdict-chip .stance { font-size: 15px; font-weight: 800; color: var(--text-1); margin-bottom: 6px; }
+.verdict-chip .conviction { display: inline-block; font-size: 10.5px; font-weight: 700; padding: 2px 8px; border-radius: 100px; background: var(--teal-dim); color: var(--teal); margin-bottom: 8px; border: 1px solid rgba(23,219,201,0.25); }
+.verdict-chip .rationale { font-size: 12px; color: var(--text-3); line-height: 1.5; }
+.overall-verdict { background: linear-gradient(135deg, rgba(23,219,201,0.12) 0%, rgba(0,169,157,0.06) 100%); border: 1px solid rgba(23,219,201,0.3); border-radius: 14px; padding: 24px 28px; display: flex; align-items: center; gap: 24px; }
+.ov-stance { font-size: 28px; font-weight: 900; color: var(--teal); letter-spacing: -0.02em; flex-shrink: 0; }
+.ov-detail { flex: 1; }
+.ov-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-3); margin-bottom: 4px; }
+.ov-target { font-size: 14px; color: var(--text-2); }
+.ov-target strong { color: var(--text-1); }
+.ov-add-zone { font-size: 13px; color: var(--text-3); margin-top: 4px; }
+.rr-col h4 { font-size: 13px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 14px; }
+.rr-col.rewards h4 { color: var(--green); }
+.rr-col.risks h4 { color: var(--red); }
+.rr-item { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 12px; font-size: 13px; color: var(--text-2); line-height: 1.5; }
+.rr-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; margin-top: 6px; }
+.rr-col.rewards .rr-dot { background: var(--green); }
+.rr-col.risks .rr-dot { background: var(--red); }
+.rr-item.bold-risk { color: var(--text-1); font-weight: 600; }
+.rr-item.bold-risk .rr-dot { background: var(--red); box-shadow: 0 0 0 3px rgba(232,93,93,0.2); }
+.stat-row { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 16px; }
+.stat-pill { background: var(--surface-2); border: 1px solid var(--border); border-radius: 10px; padding: 10px 16px; min-width: 130px; }
+.stat-pill-label { font-size: 11px; color: var(--text-3); margin-bottom: 3px; text-transform: uppercase; letter-spacing: 0.04em; }
+.stat-pill-value { font-size: 18px; font-weight: 800; color: var(--number); }
+.stat-pill-sub { font-size: 11px; color: var(--text-3); margin-top: 2px; }
+.div-row { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+.div-big { font-size: 52px; font-weight: 900; color: var(--amber); letter-spacing: -0.04em; line-height: 1; }
+.div-note { font-size: 13px; color: var(--text-2); max-width: 460px; line-height: 1.6; }
+.div-trend { margin-top: 20px; font-size: 12.5px; color: var(--text-3); }
+.footer { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border); font-size: 11px; color: var(--text-3); line-height: 1.7; text-align: center; }
+.growth-row { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+.growth-label { width: 170px; font-size: 13px; color: var(--text-2); flex-shrink: 0; }
+.growth-bar-track { flex: 1; height: 28px; background: var(--score-track); border-radius: 8px; overflow: hidden; position: relative; }
+.growth-bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; padding-left: 10px; font-size: 12px; font-weight: 700; color: rgba(255,255,255,0.9); white-space: nowrap; }
+.growth-value { width: 90px; text-align: right; font-size: 14px; font-weight: 700; color: var(--number); flex-shrink: 0; }
+.biz-summary { font-size: 14px; color: var(--text-1); line-height: 1.65; margin-bottom: 22px; }
+.biz-rev-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-3); font-weight: 700; margin-bottom: 6px; }
+.biz-row { display: flex; align-items: baseline; gap: 14px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+.biz-row:last-child { border-bottom: none; }
+.biz-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; align-self: center; }
+.biz-name { font-size: 13px; font-weight: 700; color: var(--text-1); width: 92px; flex-shrink: 0; }
+.biz-pct { font-size: 13px; font-weight: 800; color: var(--teal); width: 46px; flex-shrink: 0; text-align: right; }
+.biz-desc { font-size: 12.5px; color: var(--text-2); line-height: 1.5; }
+.note-box { background: var(--surface-2); border-left: 3px solid var(--teal); border-radius: 0 8px 8px 0; padding: 12px 16px; font-size: 12.5px; color: var(--text-2); margin-top: 16px; line-height: 1.6; }
+.note-box.orange { border-left-color: var(--orange); }
+.note-box.red { border-left-color: var(--red); }
+</style>
+</head>
+<body>
+<div class="page">
+  <nav class="sidenav"><a class="sidenav-logo" href="index.html"><div class="dot"></div><span>Smartmall</span></a><a class="nav-item nav-back" href="index.html"><span class="nav-num">&larr;</span><span class="nav-label">All Stock Cards</span></a><a class="nav-item active" href="#s1"><span class="nav-num">1</span><span class="nav-label">Overview</span></a><a class="nav-item" href="#s2"><span class="nav-num">2</span><span class="nav-label">Price History</span></a><a class="nav-item" href="#s3"><span class="nav-num">3</span><span class="nav-label">Snowflake Score</span></a><a class="nav-item" href="#s4"><span class="nav-num">4</span><span class="nav-label">Revenue &amp; Expenses</span></a><a class="nav-item" href="#s5"><span class="nav-num">5</span><span class="nav-label">Past Performance</span></a><a class="nav-item" href="#s6"><span class="nav-num">6</span><span class="nav-label">Future Growth</span></a><a class="nav-item" href="#s7"><span class="nav-num">7</span><span class="nav-label">Financial Health</span></a><a class="nav-item" href="#s8"><span class="nav-num">8</span><span class="nav-label">Dividend</span></a><a class="nav-item" href="#s9"><span class="nav-num">9</span><span class="nav-label">Rewards &amp; Risks</span></a><a class="nav-item" href="#s10"><span class="nav-num">10</span><span class="nav-label">Council Verdict</span></a></nav>
+  <main class="main">
+    
+    <div class="section" id="s1">
+      <div class="card">
+        <div class="header-top">
+          <div>
+            <div class="header-ticker">
+              <div class="ticker-logo">AMZN80</div>
+              <div class="ticker-name">
+                <h1>Amazon.com, Inc.</h1>
+                <div class="exch">NASDAQ: AMZN</div>
+              </div>
+            </div>
+          </div>
+          <div class="header-price">
+            <div class="price-big">$272.27</div>
+            <div class="price-secondary">DR AMZN80 ฿2.28</div>
+            <div class="price-sub">as of 2026-08-12</div>
+            <div class="hero-verdict"><span class="hv-stance" style="color:var(--amber);border-color:var(--amber);">WATCH — Medium-High · ธุรกิจผ่าน ราคายังไม่ผ่าน · NOT held</span><span class="hv-score"><b>14</b>/30</span></div>
+          </div>
+        </div>
+        <div class="badges"><span class="badge badge-teal"><svg width="10" height="10" viewBox="0 0 10 10"><circle cx="5" cy="5" r="4" fill="currentColor" opacity="0.6"/></svg> Thai DR: AMZN80 (KTB, ratio 3978, ฿3.69M/วัน — สภาพคล่องดีสุด) · เลี่ยง AMZN01 (฿305k/วัน) + AMZN19 (฿11k/วัน) · NOT held — เพิ่งเข้า watchlist 2026-08-12</span><span class="badge badge-teal">Buyable in THB</span><span class="badge badge-muted">cloud</span><span class="badge badge-muted">ai-capex</span><span class="badge badge-muted">e-commerce</span><span class="badge badge-muted">advertising</span><span class="badge badge-muted">mega-cap</span><span class="badge badge-muted">thai-dr</span><span class="badge badge-muted">Consumer Discretionary / Technology</span><span class="badge badge-muted">E-commerce + Cloud (AWS) + Digital Advertising</span><span class="badge badge-muted">USA</span></div>
+        
+        <div style="margin-bottom:6px;font-size:12px;font-weight:600;color:var(--text-3);text-transform:uppercase;letter-spacing:0.05em;">52-Week Range</div>
+        <div class="range-bar-wrap">
+          <div class="range-label"><span>196.0 &nbsp; 52W Low</span><span>52W High &nbsp; 287.2</span></div>
+          <div class="range-bar-track">
+            <div class="range-bar-fill" style="width:83.6%"></div>
+            <div class="range-bar-marker" style="left:83.6%"><div class="range-bar-label">272.27</div></div>
+          </div>
+          <div class="range-sublabels" style="margin-top:28px;">
+            <span>Current <span>$272.27</span></span>
+            <span>Distance from low: <span>+39%</span></span>
+          </div>
+        </div>
+        <div class="stat-row" style="margin-top:28px;margin-bottom:0;"><div class="stat-pill"><div class="stat-pill-label">Market Cap</div><div class="stat-pill-value">$2.94T</div><div class="stat-pill-sub">10,903M หุ้น diluted</div></div><div class="stat-pill"><div class="stat-pill-label">P/E (core FY26E / FY27E)</div><div class="stat-pill-value">~35.8x / ~29.7x</div><div class="stat-pill-sub">⚠ trailing 21.9x ที่เว็บโชว์ใช้ไม่ได้ — มีกำไรกระดาษ Anthropic</div></div><div class="stat-pill"><div class="stat-pill-label">AWS Q2&#x27;26</div><div class="stat-pill-value">$42.2B</div><div class="stat-pill-sub">+36.8% YoY — เร็วสุดใน 18 ไตรมาส, margin 39.4%</div></div><div class="stat-pill"><div class="stat-pill-label">Backlog (RPO)</div><div class="stat-pill-value">$496B</div><div class="stat-pill-sub">+154% YoY แต่ WAL ยาวขึ้น 4.0 → 6.4 ปี</div></div><div class="stat-pill"><div class="stat-pill-label">FCF (TTM มิ.ย. 26)</div><div class="stat-pill-value">−$7.6B</div><div class="stat-pill-sub">จาก +$18.2B ปีก่อน · capex 2026E ~$220B</div></div><div class="stat-pill"><div class="stat-pill-label">Cash / Debt</div><div class="stat-pill-value">$123.0B / $156.3B</div><div class="stat-pill-sub">net debt ~$33B · หนี้ระยะยาวโต $68.8B → $133.0B ในครึ่งปี</div></div></div>
+      </div>
+    </div>
+    <div class="section" id="s2">
+      <div class="section-header"><div class="section-num">2</div><div class="section-title">Price History</div></div>
+      <div class="card chart-section">
+        <div class="chart-head">
+          <div><div class="chart-price">$272.27</div><div class="chart-sub">AMZN · $ · snapshot 2026-08-12</div></div>
+          <div class="chart-tabs"><button class="chart-tab" data-range="1D">1D<span style="color:#f5736b;">-0.9%</span></button><button class="chart-tab" data-range="1W">1W<span style="color:#f5736b;">-1.3%</span></button><button class="chart-tab" data-range="1M">1M<span style="color:#30d97b;">+10.1%</span></button><button class="chart-tab active" data-range="1Y">1Y<span style="color:#30d97b;">+22.9%</span></button><button class="chart-tab" data-range="5Y">5Y<span style="color:#30d97b;">+65.3%</span></button></div>
+        </div>
+        
+        <div class="chart-pane" data-range="1D">
+          <svg class="chart-svg" viewBox="0 0 900 240" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="cg21D" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#f5736b" stop-opacity="0.22"/>
+              <stop offset="1" stop-color="#f5736b" stop-opacity="0"/></linearGradient></defs>
+            <path d="M0.0 47.1 L0.0 47.1 L11.7 37.9 L23.4 80.3 L35.1 99.8 L46.8 96.0 L58.4 65.6 L70.1 28.1 L81.8 22.0 L93.5 18.0 L105.2 53.4 L116.9 74.7 L128.6 52.9 L140.3 75.3 L151.9 78.7 L163.6 65.1 L175.3 59.0 L187.0 66.1 L198.7 62.8 L210.4 75.7 L222.1 131.6 L233.8 143.5 L245.5 134.9 L257.1 127.6 L268.8 127.1 L280.5 160.7 L292.2 162.3 L303.9 163.3 L315.6 180.0 L327.3 187.1 L339.0 178.5 L350.6 185.3 L362.3 169.1 L374.0 172.9 L385.7 201.5 L397.4 216.9 L409.1 200.7 L420.8 207.6 L432.5 202.8 L444.2 207.8 L455.8 196.7 L467.5 194.7 L479.2 192.6 L490.9 209.6 L502.6 195.2 L514.3 214.9 L526.0 211.4 L537.7 211.4 L549.4 189.6 L561.0 184.5 L572.7 180.0 L584.4 165.3 L596.1 153.7 L607.8 154.2 L619.5 160.7 L631.2 172.6 L642.9 173.9 L654.5 172.4 L666.2 174.9 L677.9 164.5 L689.6 190.4 L701.3 202.8 L713.0 222.0 L724.7 178.5 L736.4 161.3 L748.1 152.7 L759.7 162.8 L771.4 157.1 L783.1 146.6 L794.8 150.4 L806.5 177.7 L818.2 163.3 L829.9 158.2 L841.6 139.0 L853.2 127.1 L864.9 121.3 L876.6 123.3 L888.3 161.8 L900.0 177.5 L900.0 240.0 L0 240.0 Z" fill="url(#cg21D)"/>
+            <path d="M0.0 47.1 L11.7 37.9 L23.4 80.3 L35.1 99.8 L46.8 96.0 L58.4 65.6 L70.1 28.1 L81.8 22.0 L93.5 18.0 L105.2 53.4 L116.9 74.7 L128.6 52.9 L140.3 75.3 L151.9 78.7 L163.6 65.1 L175.3 59.0 L187.0 66.1 L198.7 62.8 L210.4 75.7 L222.1 131.6 L233.8 143.5 L245.5 134.9 L257.1 127.6 L268.8 127.1 L280.5 160.7 L292.2 162.3 L303.9 163.3 L315.6 180.0 L327.3 187.1 L339.0 178.5 L350.6 185.3 L362.3 169.1 L374.0 172.9 L385.7 201.5 L397.4 216.9 L409.1 200.7 L420.8 207.6 L432.5 202.8 L444.2 207.8 L455.8 196.7 L467.5 194.7 L479.2 192.6 L490.9 209.6 L502.6 195.2 L514.3 214.9 L526.0 211.4 L537.7 211.4 L549.4 189.6 L561.0 184.5 L572.7 180.0 L584.4 165.3 L596.1 153.7 L607.8 154.2 L619.5 160.7 L631.2 172.6 L642.9 173.9 L654.5 172.4 L666.2 174.9 L677.9 164.5 L689.6 190.4 L701.3 202.8 L713.0 222.0 L724.7 178.5 L736.4 161.3 L748.1 152.7 L759.7 162.8 L771.4 157.1 L783.1 146.6 L794.8 150.4 L806.5 177.7 L818.2 163.3 L829.9 158.2 L841.6 139.0 L853.2 127.1 L864.9 121.3 L876.6 123.3 L888.3 161.8 L900.0 177.5" fill="none" stroke="#f5736b" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="chart-pane" data-range="1W">
+          <svg class="chart-svg" viewBox="0 0 900 240" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="cg21W" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#f5736b" stop-opacity="0.22"/>
+              <stop offset="1" stop-color="#f5736b" stop-opacity="0"/></linearGradient></defs>
+            <path d="M0.0 112.0 L0.0 112.0 L14.1 91.2 L28.1 75.9 L42.2 126.6 L56.2 181.9 L70.3 177.2 L84.4 195.5 L98.4 204.6 L112.5 214.0 L126.6 218.8 L140.6 218.5 L154.7 220.6 L168.8 188.7 L182.8 168.1 L196.9 188.5 L210.9 151.0 L225.0 151.0 L239.1 173.7 L253.1 173.2 L267.2 198.1 L281.2 204.2 L295.3 206.3 L309.4 211.0 L323.4 207.3 L337.5 222.0 L351.6 198.1 L365.6 88.3 L379.7 105.5 L393.8 86.2 L407.8 57.6 L421.9 75.9 L435.9 105.0 L450.0 128.8 L464.1 147.8 L478.1 149.3 L492.2 128.5 L506.2 146.3 L520.3 136.4 L534.4 145.6 L548.4 113.6 L562.5 70.1 L576.6 69.1 L590.6 18.0 L604.7 21.3 L618.8 56.0 L632.8 76.7 L646.9 70.2 L660.9 87.4 L675.0 96.8 L689.1 84.2 L703.1 91.7 L717.2 60.2 L731.2 144.4 L745.3 138.5 L759.4 143.1 L773.4 172.9 L787.5 196.7 L801.6 207.0 L815.6 203.2 L829.7 201.8 L843.8 188.5 L857.8 202.2 L871.9 189.4 L885.9 187.3 L900.0 196.2 L900.0 240.0 L0 240.0 Z" fill="url(#cg21W)"/>
+            <path d="M0.0 112.0 L14.1 91.2 L28.1 75.9 L42.2 126.6 L56.2 181.9 L70.3 177.2 L84.4 195.5 L98.4 204.6 L112.5 214.0 L126.6 218.8 L140.6 218.5 L154.7 220.6 L168.8 188.7 L182.8 168.1 L196.9 188.5 L210.9 151.0 L225.0 151.0 L239.1 173.7 L253.1 173.2 L267.2 198.1 L281.2 204.2 L295.3 206.3 L309.4 211.0 L323.4 207.3 L337.5 222.0 L351.6 198.1 L365.6 88.3 L379.7 105.5 L393.8 86.2 L407.8 57.6 L421.9 75.9 L435.9 105.0 L450.0 128.8 L464.1 147.8 L478.1 149.3 L492.2 128.5 L506.2 146.3 L520.3 136.4 L534.4 145.6 L548.4 113.6 L562.5 70.1 L576.6 69.1 L590.6 18.0 L604.7 21.3 L618.8 56.0 L632.8 76.7 L646.9 70.2 L660.9 87.4 L675.0 96.8 L689.1 84.2 L703.1 91.7 L717.2 60.2 L731.2 144.4 L745.3 138.5 L759.4 143.1 L773.4 172.9 L787.5 196.7 L801.6 207.0 L815.6 203.2 L829.7 201.8 L843.8 188.5 L857.8 202.2 L871.9 189.4 L885.9 187.3 L900.0 196.2" fill="none" stroke="#f5736b" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="chart-pane" data-range="1M">
+          <svg class="chart-svg" viewBox="0 0 900 240" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="cg21M" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#30d97b" stop-opacity="0.22"/>
+              <stop offset="1" stop-color="#30d97b" stop-opacity="0"/></linearGradient></defs>
+            <path d="M0.0 148.5 L0.0 148.5 L42.9 147.9 L85.7 121.3 L128.6 139.4 L171.4 148.8 L214.3 139.0 L257.1 147.7 L300.0 157.3 L342.9 197.1 L385.7 202.6 L428.6 205.1 L471.4 207.0 L514.3 222.0 L557.1 190.5 L600.0 62.2 L642.9 18.0 L685.7 41.5 L728.6 58.4 L771.4 59.8 L814.3 51.9 L857.1 39.1 L900.0 59.8 L900.0 240.0 L0 240.0 Z" fill="url(#cg21M)"/>
+            <path d="M0.0 148.5 L42.9 147.9 L85.7 121.3 L128.6 139.4 L171.4 148.8 L214.3 139.0 L257.1 147.7 L300.0 157.3 L342.9 197.1 L385.7 202.6 L428.6 205.1 L471.4 207.0 L514.3 222.0 L557.1 190.5 L600.0 62.2 L642.9 18.0 L685.7 41.5 L728.6 58.4 L771.4 59.8 L814.3 51.9 L857.1 39.1 L900.0 59.8" fill="none" stroke="#30d97b" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="chart-pane active" data-range="1Y">
+          <svg class="chart-svg" viewBox="0 0 900 240" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="cg21Y" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#30d97b" stop-opacity="0.22"/>
+              <stop offset="1" stop-color="#30d97b" stop-opacity="0"/></linearGradient></defs>
+            <path d="M0.0 163.2 L0.0 163.2 L9.5 138.5 L18.9 146.2 L28.4 161.9 L37.9 144.4 L47.4 143.6 L56.8 151.4 L66.3 125.9 L75.8 140.2 L85.3 137.3 L94.7 137.8 L104.2 147.2 L113.7 171.8 L123.2 161.3 L132.6 160.7 L142.1 162.4 L151.6 146.9 L161.1 176.3 L170.5 185.0 L180.0 161.7 L189.5 156.0 L198.9 143.0 L208.4 104.1 L217.9 88.6 L227.4 103.6 L236.8 104.2 L246.3 128.9 L255.8 160.0 L265.3 150.7 L274.7 143.2 L284.2 129.6 L293.7 142.2 L303.2 146.4 L312.6 150.9 L322.1 160.3 L331.6 147.9 L341.1 134.9 L350.5 135.7 L360.0 150.1 L369.5 112.7 L378.9 95.9 L388.4 123.8 L397.9 117.4 L407.4 129.8 L416.8 102.9 L426.3 110.6 L435.8 118.7 L445.3 160.0 L454.7 200.8 L464.2 222.0 L473.7 206.4 L483.2 205.2 L492.6 191.3 L502.1 197.1 L511.6 169.7 L521.1 183.9 L530.5 194.1 L540.0 179.4 L549.5 196.1 L558.9 200.1 L568.4 199.3 L577.9 197.4 L587.4 185.7 L596.8 163.7 L606.3 115.4 L615.8 93.0 L625.3 93.6 L634.7 76.0 L644.2 60.3 L653.7 50.1 L663.2 28.0 L672.6 34.2 L682.1 48.1 L691.6 44.5 L701.1 64.9 L710.5 46.8 L720.0 32.5 L729.5 59.9 L738.9 89.1 L748.4 101.5 L757.9 111.2 L767.4 99.5 L776.8 103.7 L786.3 129.9 L795.8 134.0 L805.3 110.7 L814.7 104.3 L824.2 96.8 L833.7 95.7 L843.2 89.4 L852.6 95.5 L862.1 131.5 L871.6 138.8 L881.1 33.2 L890.5 18.0 L900.0 31.4 L900.0 240.0 L0 240.0 Z" fill="url(#cg21Y)"/>
+            <path d="M0.0 163.2 L9.5 138.5 L18.9 146.2 L28.4 161.9 L37.9 144.4 L47.4 143.6 L56.8 151.4 L66.3 125.9 L75.8 140.2 L85.3 137.3 L94.7 137.8 L104.2 147.2 L113.7 171.8 L123.2 161.3 L132.6 160.7 L142.1 162.4 L151.6 146.9 L161.1 176.3 L170.5 185.0 L180.0 161.7 L189.5 156.0 L198.9 143.0 L208.4 104.1 L217.9 88.6 L227.4 103.6 L236.8 104.2 L246.3 128.9 L255.8 160.0 L265.3 150.7 L274.7 143.2 L284.2 129.6 L293.7 142.2 L303.2 146.4 L312.6 150.9 L322.1 160.3 L331.6 147.9 L341.1 134.9 L350.5 135.7 L360.0 150.1 L369.5 112.7 L378.9 95.9 L388.4 123.8 L397.9 117.4 L407.4 129.8 L416.8 102.9 L426.3 110.6 L435.8 118.7 L445.3 160.0 L454.7 200.8 L464.2 222.0 L473.7 206.4 L483.2 205.2 L492.6 191.3 L502.1 197.1 L511.6 169.7 L521.1 183.9 L530.5 194.1 L540.0 179.4 L549.5 196.1 L558.9 200.1 L568.4 199.3 L577.9 197.4 L587.4 185.7 L596.8 163.7 L606.3 115.4 L615.8 93.0 L625.3 93.6 L634.7 76.0 L644.2 60.3 L653.7 50.1 L663.2 28.0 L672.6 34.2 L682.1 48.1 L691.6 44.5 L701.1 64.9 L710.5 46.8 L720.0 32.5 L729.5 59.9 L738.9 89.1 L748.4 101.5 L757.9 111.2 L767.4 99.5 L776.8 103.7 L786.3 129.9 L795.8 134.0 L805.3 110.7 L814.7 104.3 L824.2 96.8 L833.7 95.7 L843.2 89.4 L852.6 95.5 L862.1 131.5 L871.6 138.8 L881.1 33.2 L890.5 18.0 L900.0 31.4" fill="none" stroke="#30d97b" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="chart-pane" data-range="5Y">
+          <svg class="chart-svg" viewBox="0 0 900 240" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="cg25Y" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#30d97b" stop-opacity="0.22"/>
+              <stop offset="1" stop-color="#30d97b" stop-opacity="0"/></linearGradient></defs>
+            <path d="M0.0 135.9 L0.0 135.9 L9.5 132.8 L18.9 126.6 L28.4 136.2 L37.9 133.6 L47.4 123.2 L56.8 130.6 L66.3 128.9 L75.8 138.2 L85.3 158.6 L94.7 149.1 L104.2 156.9 L113.7 135.8 L123.2 150.1 L132.6 190.6 L142.1 198.4 L151.6 196.2 L161.1 196.3 L170.5 182.2 L180.0 162.0 L189.5 173.1 L198.9 181.0 L208.4 190.8 L217.9 185.6 L227.4 205.9 L236.8 213.2 L246.3 220.0 L255.8 222.0 L265.3 204.3 L274.7 209.8 L284.2 212.3 L293.7 208.8 L303.2 204.0 L312.6 200.5 L322.1 188.9 L331.6 181.1 L341.1 173.5 L350.5 168.8 L360.0 163.4 L369.5 170.3 L378.9 162.5 L388.4 177.0 L397.9 179.2 L407.4 159.0 L416.8 155.2 L426.3 152.0 L435.8 157.2 L445.3 142.0 L454.7 130.6 L464.2 121.0 L473.7 120.3 L483.2 112.4 L492.6 119.5 L502.1 113.9 L511.6 114.4 L521.1 104.6 L530.5 103.2 L540.0 132.4 L549.5 122.3 L558.9 112.0 L568.4 110.4 L577.9 109.2 L587.4 88.2 L596.8 100.3 L606.3 67.1 L615.8 70.7 L625.3 59.0 L634.7 65.2 L644.2 83.7 L653.7 101.3 L663.2 113.8 L672.6 109.2 L682.1 91.1 L691.6 82.3 L701.1 86.6 L710.5 69.8 L720.0 81.0 L729.5 65.6 L738.9 61.8 L748.4 75.5 L757.9 82.9 L767.4 48.5 L776.8 74.5 L786.3 68.5 L795.8 68.1 L805.3 54.3 L814.7 85.9 L824.2 86.2 L833.7 91.3 L843.2 86.5 L852.6 27.1 L862.1 26.9 L871.6 46.7 L881.1 48.5 L890.5 47.5 L900.0 18.0 L900.0 240.0 L0 240.0 Z" fill="url(#cg25Y)"/>
+            <path d="M0.0 135.9 L9.5 132.8 L18.9 126.6 L28.4 136.2 L37.9 133.6 L47.4 123.2 L56.8 130.6 L66.3 128.9 L75.8 138.2 L85.3 158.6 L94.7 149.1 L104.2 156.9 L113.7 135.8 L123.2 150.1 L132.6 190.6 L142.1 198.4 L151.6 196.2 L161.1 196.3 L170.5 182.2 L180.0 162.0 L189.5 173.1 L198.9 181.0 L208.4 190.8 L217.9 185.6 L227.4 205.9 L236.8 213.2 L246.3 220.0 L255.8 222.0 L265.3 204.3 L274.7 209.8 L284.2 212.3 L293.7 208.8 L303.2 204.0 L312.6 200.5 L322.1 188.9 L331.6 181.1 L341.1 173.5 L350.5 168.8 L360.0 163.4 L369.5 170.3 L378.9 162.5 L388.4 177.0 L397.9 179.2 L407.4 159.0 L416.8 155.2 L426.3 152.0 L435.8 157.2 L445.3 142.0 L454.7 130.6 L464.2 121.0 L473.7 120.3 L483.2 112.4 L492.6 119.5 L502.1 113.9 L511.6 114.4 L521.1 104.6 L530.5 103.2 L540.0 132.4 L549.5 122.3 L558.9 112.0 L568.4 110.4 L577.9 109.2 L587.4 88.2 L596.8 100.3 L606.3 67.1 L615.8 70.7 L625.3 59.0 L634.7 65.2 L644.2 83.7 L653.7 101.3 L663.2 113.8 L672.6 109.2 L682.1 91.1 L691.6 82.3 L701.1 86.6 L710.5 69.8 L720.0 81.0 L729.5 65.6 L738.9 61.8 L748.4 75.5 L757.9 82.9 L767.4 48.5 L776.8 74.5 L786.3 68.5 L795.8 68.1 L805.3 54.3 L814.7 85.9 L824.2 86.2 L833.7 91.3 L843.2 86.5 L852.6 27.1 L862.1 26.9 L871.6 46.7 L881.1 48.5 L890.5 47.5 L900.0 18.0" fill="none" stroke="#30d97b" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        
+        <div class="rsi-block">
+          <div class="rsi-head">
+            <div class="rsi-title">RSI (14)</div>
+            <div class="rsi-now" style="color:#9aa4b2;">61.0 · Neutral</div>
+          </div>
+          <div class="rsi-chartwrap">
+            <div class="rsi-axis"><span>70</span><span>50</span><span>30</span></div>
+            
+          <svg class="rsi-svg" viewBox="0 0 900 200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="0" y="8.0" width="900" height="55.2" fill="#f5736b" opacity="0.07"/>
+            <rect x="0" y="136.8" width="900" height="55.2" fill="#30d97b" opacity="0.07"/>
+            <line x1="0" y1="63.2" x2="900" y2="63.2" stroke="#f5736b" stroke-width="1" stroke-dasharray="6 5" opacity="0.5"/>
+            <line x1="0" y1="100.0" x2="900" y2="100.0" stroke="#9aa4b2" stroke-width="1" stroke-dasharray="2 6" opacity="0.4"/>
+            <line x1="0" y1="136.8" x2="900" y2="136.8" stroke="#30d97b" stroke-width="1" stroke-dasharray="6 5" opacity="0.5"/>
+            <path d="M0.0 90.5 L9.5 70.4 L18.9 74.1 L28.4 91.6 L37.9 89.1 L47.4 91.4 L56.8 101.0 L66.3 120.8 L75.8 109.1 L85.3 106.4 L94.7 109.1 L104.2 89.9 L113.7 107.7 L123.2 118.3 L132.6 111.1 L142.1 99.3 L151.6 87.2 L161.1 80.9 L170.5 59.7 L180.0 68.0 L189.5 75.2 L198.9 84.0 L208.4 103.1 L217.9 117.1 L227.4 107.2 L236.8 102.4 L246.3 93.6 L255.8 104.2 L265.3 106.1 L274.7 100.7 L284.2 116.3 L293.7 104.2 L303.2 91.1 L312.6 90.2 L322.1 90.4 L331.6 90.9 L341.1 73.9 L350.5 67.8 L360.0 96.3 L369.5 109.7 L378.9 101.5 L388.4 80.7 L397.9 88.4 L407.4 97.7 L416.8 125.8 L426.3 142.4 L435.8 148.8 L445.3 133.2 L454.7 119.6 L464.2 118.8 L473.7 113.5 L483.2 115.5 L492.6 104.6 L502.1 102.1 L511.6 116.0 L521.1 97.4 L530.5 117.4 L540.0 111.3 L549.5 122.5 L558.9 103.5 L568.4 94.9 L577.9 80.3 L587.4 59.1 L596.8 52.8 L606.3 57.5 L615.8 50.7 L625.3 44.1 L634.7 53.1 L644.2 48.3 L653.7 42.7 L663.2 53.8 L672.6 68.2 L682.1 84.2 L691.6 85.8 L701.1 85.3 L710.5 73.5 L720.0 101.9 L729.5 112.0 L738.9 123.4 L748.4 124.3 L757.9 112.5 L767.4 124.1 L776.8 122.4 L786.3 130.1 L795.8 109.4 L805.3 102.4 L814.7 101.1 L824.2 98.3 L833.7 81.3 L843.2 97.6 L852.6 102.9 L862.1 123.0 L871.6 130.7 L881.1 67.1 L890.5 75.2 L900.0 79.8" fill="none" stroke="#7c83ff" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>
+          </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="section" id="s3">
+      <div class="section-header"><div class="section-num">3</div><div class="section-title">Snowflake Score</div></div>
+      <div class="card">
+        <div class="snowflake-grid">
+          <div style="display:flex;flex-direction:column;align-items:center;">
+            <svg width="240" height="240" viewBox="-175 -125 350 250"><defs><style>.ring{fill:none;stroke:rgba(255,255,255,0.06);stroke-width:1;}.ring-bright{fill:none;stroke:rgba(255,255,255,0.12);stroke-width:1;}.axis-line{stroke:rgba(255,255,255,0.08);stroke-width:1;}.score-poly{fill:rgba(23,219,201,0.22);stroke:#17dbc9;stroke-width:2;}</style></defs><polygon class="ring" points="0.00,-15.00 14.27,-4.64 8.82,12.14 -8.82,12.14 -14.27,-4.64"/><polygon class="ring" points="0.00,-30.00 28.53,-9.27 17.63,24.27 -17.63,24.27 -28.53,-9.27"/><polygon class="ring" points="0.00,-45.00 42.80,-13.91 26.45,36.41 -26.45,36.41 -42.80,-13.91"/><polygon class="ring" points="0.00,-60.00 57.06,-18.54 35.27,48.54 -35.27,48.54 -57.06,-18.54"/><polygon class="ring ring-bright" points="0.00,-75.00 71.33,-23.18 44.08,60.68 -44.08,60.68 -71.33,-23.18"/><polygon class="ring ring-bright" points="0.00,-90.00 85.60,-27.81 52.90,72.81 -52.90,72.81 -85.60,-27.81"/><line class="axis-line" x1="0" y1="0" x2="0.00" y2="-90.00"/><line class="axis-line" x1="0" y1="0" x2="85.60" y2="-27.81"/><line class="axis-line" x1="0" y1="0" x2="52.90" y2="72.81"/><line class="axis-line" x1="0" y1="0" x2="-52.90" y2="72.81"/><line class="axis-line" x1="0" y1="0" x2="-85.60" y2="-27.81"/><polygon class="score-poly" points="0.00,-15.00 71.33,-23.18 44.08,60.68 -26.45,36.41 0.00,0.00"/><text x="0.0" y="-96.3" text-anchor="middle" font-size="8.5" fill="#8fa3bf">Value</text><text x="95.6" y="-29.8" text-anchor="start" font-size="8.5" fill="#8fa3bf">Future</text><text x="60.6" y="83.9" text-anchor="start" font-size="8.5" fill="#8fa3bf">Past</text><text x="-60.6" y="83.9" text-anchor="end" font-size="8.5" fill="#8fa3bf">Health</text><text x="-95.6" y="-29.8" text-anchor="end" font-size="8.5" fill="#8fa3bf">Dividend</text><circle cx="0.00" cy="-15.00" r="4" fill="#f0995e"/><circle cx="71.33" cy="-23.18" r="4" fill="#17dbc9"/><circle cx="44.08" cy="60.68" r="4" fill="#17dbc9"/><circle cx="-26.45" cy="36.41" r="4" fill="#17dbc9"/><circle cx="0.00" cy="0.00" r="4" fill="#f0995e"/></svg>
+            <div class="snowflake-total">
+              <div><span class="num">14</span><span class="denom" style="font-size:18px;color:var(--text-3);"> / 30</span></div>
+              <div class="label">Smartmall Score</div>
+            </div>
+          </div>
+          <div class="score-rows">
+            
+            <div class="score-row">
+              <div class="score-row-label" style="color:var(--orange)">Value</div>
+              <div>
+                <div class="score-bar-track"><div class="score-bar-fill" style="width:16.7%;background:var(--orange)"></div></div>
+                <div class="score-rationale">$272.27 สูงกว่า base SOTP $242 (=DR ฿2.01) ~13% · risk/reward +12% (bull $305) ต่อ −31% (bear $187) = ไม่คุ้ม · core P/E 35.8x FY26E แพงกว่า MSFT 21.4x และ GOOGL 23.3x ทั้งที่รายได้รวมโตช้ากว่า GOOGL</div>
+              </div>
+              <div class="score-num" style="color:var(--orange)">1/6</div>
+            </div>
+            <div class="score-row">
+              <div class="score-row-label" style="color:var(--teal)">Future</div>
+              <div>
+                <div class="score-bar-track"><div class="score-bar-fill" style="width:83.3%;background:var(--teal)"></div></div>
+                <div class="score-rationale">AWS เร่ง 5 ไตรมาสติด 17.5%→20.2%→23.6%→28.4%→36.8%, run-rate $169B; AI + chips &gt;$25B run-rate โต triple-digit; backlog +154% เป็น $496B; power capacity จะเป็น 2 เท่าปลายปี 2027 · หัก 1 คะแนน: ~48% ของ backlog มาจาก OpenAI+Anthropic ที่ Amazon เป็นคนออกเงินให้เอง</div>
+              </div>
+              <div class="score-num" style="color:var(--teal)">5/6</div>
+            </div>
+            <div class="score-row">
+              <div class="score-row-label" style="color:var(--teal)">Past</div>
+              <div>
+                <div class="score-bar-track"><div class="score-bar-fill" style="width:83.3%;background:var(--teal)"></div></div>
+                <div class="score-rationale">รายได้ 5yr CAGR +13.2% ($386B&#x27;20 → $717B&#x27;25) และ operating income 4yr CAGR +33.8% ($24.9B&#x27;21 → $80.0B&#x27;25) = operating leverage ของจริง · ใช้อายุ server 5 ปี (ลดจาก 6) อนุรักษ์นิยมกว่าคู่แข่ง = คุณภาพกำไรดี</div>
+              </div>
+              <div class="score-num" style="color:var(--teal)">5/6</div>
+            </div>
+            <div class="score-row">
+              <div class="score-row-label" style="color:var(--teal)">Health</div>
+              <div>
+                <div class="score-bar-track"><div class="score-bar-fill" style="width:50.0%;background:var(--teal)"></div></div>
+                <div class="score-rationale">งบดุลยังแข็ง (cash+securities $123.0B, net debt แค่ ~$33B บน mcap $2.94T) แต่ทิศทางน่ากังวล: หนี้ระยะยาวโตเท่าตัวใน 6 เดือน (+$64.2B) + DDTL $17.5B ยังไม่เบิก + ภาระผูกพันรวม $650B (leases not yet commenced $137B) + FCF พลิกลบ −$7.6B</div>
+              </div>
+              <div class="score-num" style="color:var(--teal)">3/6</div>
+            </div>
+            <div class="score-row">
+              <div class="score-row-label" style="color:var(--orange)">Dividend</div>
+              <div>
+                <div class="score-bar-track"><div class="score-bar-fill" style="width:0.0%;background:var(--orange)"></div></div>
+                <div class="score-rationale">ปันผล 0% และ buyback 0 ด้วย (ไม่มีบรรทัดซื้อหุ้นคืนทั้ง FY2025 และ H1 2026) — เงินทุกดอลลาร์ไป capex $220B + หุ้น Anthropic/OpenAI $250B</div>
+              </div>
+              <div class="score-num" style="color:var(--orange)">0/6</div>
+            </div>
+            <div class="note-box" style="margin-top:16px;">
+              <strong>Transparent Smartmall scoring</strong> — not Simply Wall St's proprietary engine. Scores reflect our independent research and conviction framework.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="section" id="s4">
+      <div class="section-header"><div class="section-num">4</div><div class="section-title">Revenue &amp; Expenses Breakdown</div></div>
+      <div class="card">
+        <div style="font-size:12.5px;color:var(--text-3);margin-bottom:20px;">Q2 2026 (สิ้นสุด 30 มิ.ย. 2026) — ทุกตัวเลข verified จาก 10-Q ยื่น 31 ก.ค. 2026 · หน่วย $B</div>
+        <div class="sankey-wrap"><svg viewBox="0 -62.0 980 592.0" width="100%" style="font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;overflow:visible;"><defs><linearGradient id="gProfit" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#2fd6c0" stop-opacity="0.7"/><stop offset="100%" stop-color="#2fd6c0" stop-opacity="0.4"/></linearGradient><linearGradient id="gCost" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#8a7320" stop-opacity="0.85"/><stop offset="100%" stop-color="#8a7320" stop-opacity="0.55"/></linearGradient><linearGradient id="gExpense" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#d9a93a" stop-opacity="0.8"/><stop offset="100%" stop-color="#d9a93a" stop-opacity="0.5"/></linearGradient><linearGradient id="gNet" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#30d97b" stop-opacity="0.8"/><stop offset="100%" stop-color="#30d97b" stop-opacity="0.6"/></linearGradient></defs><polyline points="18.0,-46.5 168.0,-47.9 318.0,-49.8 468.0,-51.7 618.0,-54.2 768.0,-56.0" fill="none" stroke="#2fd6c0" stroke-width="1.5" opacity="0.85"/><text x="18.0" y="-20.0" text-anchor="middle" font-size="9" fill="#526070">2021</text><text x="168.0" y="-20.0" text-anchor="middle" font-size="9" fill="#526070">2022</text><text x="318.0" y="-20.0" text-anchor="middle" font-size="9" fill="#526070">2023</text><text x="468.0" y="-20.0" text-anchor="middle" font-size="9" fill="#526070">2024</text><text x="618.0" y="-20.0" text-anchor="middle" font-size="9" fill="#526070">2025</text><text x="768.0" y="-20.0" text-anchor="middle" font-size="9" fill="#526070">TTM</text><rect x="18" y="35.00" width="14" height="266.40" fill="#3b6fd4" rx="3"/><rect x="18" y="302.40" width="14" height="96.84" fill="#3360c2" rx="3"/><rect x="18" y="400.24" width="14" height="96.76" fill="#4a7ce0" rx="3"/><rect x="220" y="35.00" width="18" height="460.00" fill="#3b6fd4" rx="3"/><rect x="400" y="35.00" width="18" height="240.38" fill="#2fd6c0" rx="3"/><rect x="400" y="276.38" width="18" height="219.62" fill="#8a7320" rx="3"/><rect x="580" y="35.00" width="18" height="62.97" fill="#2fd6c0" rx="3"/><rect x="580" y="98.97" width="18" height="76.03" fill="#d9a93a" rx="3"/><rect x="580" y="176.00" width="18" height="101.37" fill="#d9a93a" rx="3"/><rect x="750" y="35.00" width="18" height="143.65" fill="#30d97b" rx="3"/><rect x="750" y="179.65" width="18" height="41.73" fill="#d9a93a" rx="3"/><path d="M32.00,35.00 C116.60,35.00 135.40,35.00 220.00,35.00 L220.00,301.40 C135.40,301.40 116.60,301.40 32.00,301.40 Z" fill="#3b6fd4" opacity="0.40"/><path d="M32.00,302.40 C116.60,302.40 135.40,301.40 220.00,301.40 L220.00,398.24 C135.40,398.24 116.60,399.24 32.00,399.24 Z" fill="#3360c2" opacity="0.40"/><path d="M32.00,400.24 C116.60,400.24 135.40,398.24 220.00,398.24 L220.00,495.00 C135.40,495.00 116.60,497.00 32.00,497.00 Z" fill="#4a7ce0" opacity="0.40"/><path d="M238.00,35.00 C310.90,35.00 327.10,35.00 400.00,35.00 L400.00,275.38 C327.10,275.38 310.90,275.38 238.00,275.38 Z" fill="url(#gProfit)" opacity="0.5"/><path d="M238.00,276.38 C310.90,276.38 327.10,276.38 400.00,276.38 L400.00,496.00 C327.10,496.00 310.90,496.00 238.00,496.00 Z" fill="url(#gCost)" opacity="0.55"/><path d="M418.00,35.00 C490.90,35.00 507.10,35.00 580.00,35.00 L580.00,97.97 C507.10,97.97 490.90,97.97 418.00,97.97 Z" fill="url(#gProfit)" opacity="0.5"/><path d="M418.00,97.97 C490.90,97.97 507.10,98.97 580.00,98.97 L580.00,175.00 C507.10,175.00 490.90,174.00 418.00,174.00 Z" fill="url(#gExpense)" opacity="0.55"/><path d="M418.00,174.00 C490.90,174.00 507.10,176.00 580.00,176.00 L580.00,277.38 C507.10,277.38 490.90,275.38 418.00,275.38 Z" fill="url(#gExpense)" opacity="0.5"/><path d="M598.00,35.00 C666.40,35.00 681.60,35.00 750.00,35.00 L750.00,178.65 C681.60,178.65 666.40,178.65 598.00,178.65 Z" fill="url(#gNet)" opacity="0.5"/><path d="M598.00,178.65 C666.40,178.65 681.60,179.65 750.00,179.65 L750.00,221.38 C681.60,221.38 666.40,220.38 598.00,220.38 Z" fill="url(#gExpense)" opacity="0.55"/><text x="38" y="35.0" dy="10" font-size="11" fill="#e8edf5" font-weight="600">North America</text><text x="38" y="35.0" dy="23" font-size="10.5" fill="#3b6fd4">USD116.2B · 58% · +16.1% YoY · op margin 7.85% (7.30% ถ้าตัด tariff refund $640M)</text><text x="38" y="302.4" dy="10" font-size="11" fill="#e8edf5" font-weight="600">AWS</text><text x="38" y="302.4" dy="23" font-size="10.5" fill="#3360c2">USD42.2B · 21% · +36.8% YoY · op margin 39.4% = 61% ของกำไรทั้งบริษัท</text><text x="38" y="400.2" dy="10" font-size="11" fill="#e8edf5" font-weight="600">International</text><text x="38" y="400.2" dy="23" font-size="10.5" fill="#4a7ce0">USD42.2B · 21% · +14.8% YoY · op margin 4.07%</text><text x="229" y="8" text-anchor="middle" font-size="9.5" fill="#8fa3bf">Income</text><text x="229" y="8" dy="11" text-anchor="middle" font-size="9.5" fill="#8fa3bf">Statement</text><rect x="197.1" y="247.5" width="63.7" height="19.0" rx="9.5" fill="#3b6fd4"/><text x="229.0" y="257.0" dy="3.8" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">Revenue</text><text x="229" y="277" text-anchor="middle" font-size="11" font-weight="700" fill="#e8edf5">USD200.6B</text><text x="409" y="8" text-anchor="middle" font-size="9.5" fill="#8fa3bf">Gross</text><text x="409" y="8" dy="11" text-anchor="middle" font-size="9.5" fill="#8fa3bf">Profit</text><text x="409" y="155" text-anchor="middle" font-size="12" fill="#2fd6c0" font-weight="800" transform="rotate(-90 409 155)">USD104.8B</text><text x="589" y="8" text-anchor="middle" font-size="9.5" fill="#8fa3bf">Operating</text><text x="589" y="8" dy="11" text-anchor="middle" font-size="9.5" fill="#8fa3bf">Income</text><text x="589" y="66" text-anchor="middle" font-size="12" fill="#2fd6c0" font-weight="800" transform="rotate(-90 589 66)">USD27.5B</text><text x="759" y="8" text-anchor="middle" font-size="9.5" fill="#8fa3bf">Net</text><text x="759" y="8" dy="11" text-anchor="middle" font-size="9.5" fill="#8fa3bf">Income</text><rect x="720.0" y="89.8" width="78.0" height="18.0" rx="9.0" fill="#30d97b"/><text x="759.0" y="98.8" dy="3.5" text-anchor="middle" font-size="10" font-weight="700" fill="#0f1923">Net Income</text><text x="759" y="119" text-anchor="middle" font-size="11" font-weight="700" fill="#30d97b">USD62.6B</text><text x="409" y="390" text-anchor="middle" font-size="9.5" fill="#d9a93a" font-weight="700">CoR USD95.8B</text><text x="602" y="140" font-size="10" fill="#d9a93a" font-weight="600">R&amp;D USD33.2B</text><text x="602" y="238" font-size="10" fill="#d9a93a">SG&amp;A USD44.2B</text><text x="772" y="204" font-size="10" fill="#d9a93a">Tax USD18.2B</text><text x="602" y="93" font-size="9.5" fill="#d9a93a" font-weight="700" opacity="0.85">Expenses</text><text x="665" y="2" text-anchor="middle" font-size="9.5" fill="#d9a93a" font-style="italic">+ Non-op USD53.4B</text><text x="665" y="2" dy="12" text-anchor="middle" font-size="9.5" fill="#8fa3bf" font-style="italic">Pre-tax USD80.9B</text><line x1="409" y1="496.0" x2="409" y2="518.0" stroke="#8a7320" stroke-width="2" stroke-dasharray="3,2" opacity="0.6"/><polygon points="409,523.0 405,516.0 413,516.0" fill="#8a7320" opacity="0.6"/><line x1="589" y1="277.4" x2="589" y2="299.4" stroke="#d9a93a" stroke-width="2" stroke-dasharray="3,2" opacity="0.6"/><polygon points="589,304.4 585,297.4 593,297.4" fill="#d9a93a" opacity="0.6"/><line x1="759" y1="221.4" x2="759" y2="243.4" stroke="#d9a93a" stroke-width="2" stroke-dasharray="3,2" opacity="0.6"/><polygon points="759,248.4 755,241.4 763,241.4" fill="#d9a93a" opacity="0.6"/><rect x="820" y="35" width="12" height="12" fill="#3b6fd4" rx="2" opacity="0.9"/><text x="836" y="45" font-size="10.5" fill="#8fa3bf">Revenue</text><rect x="820" y="54" width="12" height="12" fill="#d9a93a" rx="2" opacity="0.9"/><text x="836" y="64" font-size="10.5" fill="#8fa3bf">Cost / Expense</text><rect x="820" y="73" width="12" height="12" fill="#30d97b" rx="2" opacity="0.9"/><text x="836" y="83" font-size="10.5" fill="#8fa3bf">Net Income</text></svg></div>
+        <div class="sankey-caption">⚠ อ่านตรงนี้ให้ดี: รายได้ $200.6B (+19.6%) และ operating income $27.5B (+43%) คือของจริง — แต่ net income $62.6B ไม่ใช่ เพราะ non-operating $53.4B ในนั้น $50.5B คือการ mark-up หุ้นบุริมสิทธิ์ Anthropic แบบ Level 3 (สมมติฐานผู้บริหาร ไม่มีราคาตลาด อ้างอิงรอบระดมทุนที่ Amazon เองร่วมลงเงิน) ไม่ใช่เงินสดสักดอลลาร์ · กำไรแกนจริงหลังภาษีอยู่ราว $21B/ไตรมาส · R&amp;D ในแผนภาพ = Technology &amp; infrastructure $33.2B, SG&amp;A = Fulfillment $29.6B + S&amp;M $11.7B + G&amp;A $2.8B + อื่นๆ $0.1B</div>
+      </div>
+    </div>
+    <div class="section" id="s5">
+      <div class="section-header"><div class="section-num">5</div><div class="section-title">Past Performance</div></div>
+      <div class="card">
+        <div style="font-size:12.5px;color:var(--text-3);margin-bottom:20px;">Revenue ($B)</div>
+        <svg viewBox="0 0 720 240" width="100%" style="font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;overflow:visible;"><line x1="0" y1="220.0" x2="720" y2="220.0" stroke="rgba(255,255,255,0.08)" stroke-width="1"/><line x1="0" y1="148.8" x2="720" y2="148.8" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="4,4"/><line x1="0" y1="77.5" x2="720" y2="77.5" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="4,4"/><rect x="20.0" y="104.9" width="96.7" height="115.1" rx="5" fill="#17dbc9" opacity="0.55"/><text x="68.3" y="99.9" font-size="11" font-weight="700" fill="#17dbc9" text-anchor="middle">USD469.8B</text><text x="68.3" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">2021</text><rect x="136.7" y="94.1" width="96.7" height="125.9" rx="5" fill="#f0995e" opacity="0.62"/><text x="185.0" y="89.1" font-size="11" font-weight="700" fill="#f0995e" text-anchor="middle">USD514B</text><text x="185.0" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">2022</text><rect x="253.3" y="79.2" width="96.7" height="140.8" rx="5" fill="#17dbc9" opacity="0.69"/><text x="301.7" y="74.2" font-size="11" font-weight="700" fill="#17dbc9" text-anchor="middle">USD574.8B</text><text x="301.7" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">2023</text><rect x="370.0" y="63.7" width="96.7" height="156.3" rx="5" fill="#17dbc9" opacity="0.76"/><text x="418.3" y="58.7" font-size="11" font-weight="700" fill="#17dbc9" text-anchor="middle">USD638B</text><text x="418.3" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">2024</text><rect x="486.7" y="44.4" width="96.7" height="175.6" rx="5" fill="#17dbc9" opacity="0.83"/><text x="535.0" y="39.4" font-size="11" font-weight="700" fill="#17dbc9" text-anchor="middle">USD716.9B</text><text x="535.0" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">2025</text><rect x="603.3" y="30.0" width="96.7" height="190.0" rx="5" fill="#17dbc9" opacity="1.00"/><rect x="603.3" y="30.0" width="96.7" height="190.0" rx="5" fill="none" stroke="#17dbc9" stroke-width="1.5" opacity="0.5"/><text x="651.7" y="25.0" font-size="11" font-weight="700" fill="#17dbc9" text-anchor="middle">USD775.7B</text><text x="651.7" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">TTM</text></svg>
+        <div class="note-box" style="margin-top:16px;">โตสม่ำเสมอแบบยักษ์ 5yr CAGR +13.2% — ไม่ใช่ hyper-growth · ตัวที่โตแรงคือกำไร: operating income $24.9B (2021) → $80.0B (2025) = 4yr CAGR +33.8% · แต่ FCF เดินสวนทาง: +$38.2B (2024) → +$11.2B (2025) → −$7.6B (TTM มิ.ย. 2026)</div>
+      </div>
+    </div>
+    <div class="section" id="s6">
+      <div class="section-header"><div class="section-num">6</div><div class="section-title">Future Growth</div></div>
+      <div class="card">
+        <div style="font-size:12.5px;color:var(--text-3);margin-bottom:24px;">Growth drivers — guided &amp; estimated</div>
+        
+        <div class="growth-row">
+          <div class="growth-label">AWS Q2&#x27;26</div>
+          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:0%;background:linear-gradient(90deg,#17dbc9,#00c4b4);">$42.2B (run-rate $169B)</div></div>
+          <div class="growth-value" style="color:var(--teal);">$42.2B (run-rate $169B)</div>
+        </div>
+        <div class="growth-row">
+          <div class="growth-label">Advertising Q2&#x27;26</div>
+          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:0%;background:linear-gradient(90deg,#17dbc9,#00c4b4);">$19.8B (run-rate $79B)</div></div>
+          <div class="growth-value" style="color:var(--teal);">$19.8B (run-rate $79B)</div>
+        </div>
+        <div class="growth-row">
+          <div class="growth-label">AI + Chips business</div>
+          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:0%;background:linear-gradient(90deg,#17dbc9,#00c4b4);">&gt;$25B run-rate ต่อตัว</div></div>
+          <div class="growth-value" style="color:var(--teal);">&gt;$25B run-rate ต่อตัว</div>
+        </div>
+        <div class="growth-row">
+          <div class="growth-label">Backlog (RPO)</div>
+          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:0%;background:linear-gradient(90deg,#17dbc9,#00c4b4);">$496B</div></div>
+          <div class="growth-value" style="color:var(--teal);">$496B</div>
+        </div>
+        <div class="growth-row">
+          <div class="growth-label">Q3&#x27;26 guidance</div>
+          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:0%;background:linear-gradient(90deg,#17dbc9,#00c4b4);">$197–202B / op $22.5–26.5B</div></div>
+          <div class="growth-value" style="color:var(--teal);">$197–202B / op $22.5–26.5B</div>
+        </div>
+        <div class="growth-row">
+          <div class="growth-label">เทียบคลาวด์ (ไตรมาส มิ.ย. 26)</div>
+          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:0%;background:linear-gradient(90deg,#17dbc9,#00c4b4);">Azure +43% · GCP +82%*</div></div>
+          <div class="growth-value" style="color:var(--teal);">Azure +43% · GCP +82%*</div>
+        </div>
+        <div class="note-box" style="margin-top:20px;">เครื่องยนต์คือ AWS + โฆษณา ไม่ใช่ค้าปลีก · แต่ backlog เทียบคู่แข่งแล้วเสียเปรียบ: MSFT commercial RPO $678B (+84%) &gt; Google Cloud backlog $513.9B (&gt;50% รับรู้ใน 24 เดือน) &gt; AWS $496B (WAL 6.4 ปี = แปลงเป็นรายได้ช้าที่สุด) — AWS ใหญ่สุดตามรายได้แต่ backlog เล็กสุดและยาวสุดในสามเจ้า</div>
+      </div>
+    </div>
+    <div class="section" id="s7">
+      <div class="section-header"><div class="section-num">7</div><div class="section-title">Financial Health</div></div>
+      <div class="card">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px;align-items:end;">
+          <div style="background:var(--teal-dim);border:1px solid rgba(23,219,201,0.3);border-radius:12px;padding:20px;">
+            <div style="font-size:11px;color:var(--teal);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;font-weight:700;">Cash &amp; Equivalents</div>
+            <div style="font-size:34px;font-weight:900;color:var(--teal);letter-spacing:-0.03em;">USD123B</div>
+            <div class="health-bar-track" style="margin-top:12px;"><div class="health-bar-fill" style="width:79%;background:var(--teal);"></div></div>
+          </div>
+          <div style="background:rgba(240,153,94,0.08);border:1px solid rgba(240,153,94,0.2);border-radius:12px;padding:20px;">
+            <div style="font-size:11px;color:var(--orange);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;font-weight:700;">Total Debt</div>
+            <div style="font-size:34px;font-weight:900;color:var(--orange);letter-spacing:-0.03em;">USD156.3B</div>
+            <div class="health-bar-track" style="margin-top:12px;"><div class="health-bar-fill" style="width:100%;background:var(--orange);"></div></div>
+          </div>
+        </div>
+        <div style="text-align:center;padding:24px;background:var(--surface-2);border-radius:12px;border:1px solid var(--border);margin-bottom:20px;">
+          <div style="font-size:11px;color:var(--text-3);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;">Net Position</div>
+          <div style="font-size:26px;font-weight:900;color:var(--teal);letter-spacing:-0.04em;line-height:1.1;">Net debt ~$33.3B (หนี้ระยะยาว face $133.0B + finance lease ~$14B + financing obligations $9.3B − cash &amp; securities $123.0B) = ~1.1% ของ mcap</div>
+        </div>
+        
+        <div class="health-row">
+          <div class="health-label">Net debt / mkt cap</div>
+          <div class="health-bar-track"><div class="health-bar-fill" style="width:1%;background:var(--orange);"></div></div>
+          <div class="health-value">-1%</div>
+        </div>
+        <div class="health-row">
+          <div class="health-label">Net debt / mcap</div>
+          <div class="health-bar-track"><div class="health-bar-fill" style="width:0%;background:green;"></div></div>
+          <div class="health-value">~1.1%</div>
+        </div>
+        <div class="health-row">
+          <div class="health-label">FCF TTM</div>
+          <div class="health-bar-track"><div class="health-bar-fill" style="width:0%;background:amber;"></div></div>
+          <div class="health-value">−$7.6B</div>
+        </div>
+        <div class="health-row">
+          <div class="health-label">Capex 2026E</div>
+          <div class="health-bar-track"><div class="health-bar-fill" style="width:0%;background:amber;"></div></div>
+          <div class="health-value">~$220B</div>
+        </div>
+        <div class="health-row">
+          <div class="health-label">หนี้ระยะยาว 6 เดือน</div>
+          <div class="health-bar-track"><div class="health-bar-fill" style="width:0%;background:amber;"></div></div>
+          <div class="health-value">+$64.2B</div>
+        </div>
+        <div class="note-box orange" style="margin-top:16px;">ระดับหนี้ยังไม่ใช่ปัญหา แต่ &#x27;ทิศทาง&#x27; คือเรื่องที่ต้องจับตา: หนี้ระยะยาว face value โตจาก $68.8B → $133.0B ในครึ่งปีเดียว (ออก US$37.0B + €14.5B + CHF2.8B + C$14.0B, อายุเฉลี่ย 14.2 ปี) บวก DDTL term loan $17.5B กับ Citibank ที่ยังไม่เบิก (commitment หมด 30 ก.ย. 2026) · ภาระผูกพันตามสัญญารวม $650.0B ในนั้นเป็น leases not yet commenced $137.2B (ดาต้าเซ็นเตอร์ที่กำลังสร้าง) + unconditional purchase obligations $130.1B · OCF ยังโต +33% เป็น $161.4B แต่ถูก capex $169.0B กลืนหมด · property &amp; equipment ที่ซื้อแล้วยังไม่จ่ายเงิน +$20.6B ในครึ่งปี = บิลรออยู่อีกก้อน</div>
+      </div>
+    </div>
+    <div class="section" id="s8">
+      <div class="section-header"><div class="section-num">8</div><div class="section-title">Dividend</div></div>
+      <div class="card">
+        <div class="div-row">
+          <div class="div-big">0%</div>
+          <div class="div-note">ไม่มีปันผล และไม่มี buyback ด้วย — งบกระแสเงินสดกิจกรรมจัดหาเงินไม่มีบรรทัดซื้อหุ้นคืนทั้ง FY2025 และ H1 2026 · ไม่เข้าเกณฑ์ 💰 CASH COW</div>
+        </div>
+        
+      </div>
+    </div>
+    <div class="section" id="s9">
+      <div class="section-header"><div class="section-num">9</div><div class="section-title">Rewards &amp; Risks</div></div>
+      <div class="card">
+        <div class="two-col">
+          <div class="rr-col rewards"><h4>Rewards</h4><div class="rr-item"><div class="rr-dot"></div><div>AWS เร่ง 5 ไตรมาสติด: 17.5% → 20.2% → 23.6% → 28.4% → +36.8% YoY (เร็วสุดใน 18 ไตรมาส) run-rate $169B — และ margin ขยายพร้อมกันจาก 32.9% → 39.4%</div></div><div class="rr-item"><div class="rr-dot"></div><div>margin AWS ขยายทั้งที่ D&amp;A ต่อไตรมาสโต +67% ($4.84B → $8.08B) และทั้งที่ใช้อายุ server 5 ปี ซึ่งอนุรักษ์นิยมกว่าคู่แข่งที่ใช้ 6 ปี = คุณภาพกำไรดีกว่าที่เห็น</div></div><div class="rr-item"><div class="rr-dot"></div><div>โฆษณา $19.8B (+26.2%) run-rate $79B = อันดับ 3 ของโลก และเป็นตัวที่แบกกำไรฝั่งค้าปลีกทั้งหมดอยู่จริง (มาร์จิ้นสูงมาก, ซ่อนอยู่ในเซกเมนต์ NA/Intl)</div></div><div class="rr-item"><div class="rr-dot"></div><div>AI business &gt;$25B run-rate + chips business &gt;$25B run-rate ทั้งคู่โต triple-digit; Graviton ใช้โดย 98% ของลูกค้า Top-1000 EC2, revenue commitment โตเกือบ 3x QoQ</div></div><div class="rr-item"><div class="rr-dot"></div><div>operating income $27.5B +43% YoY, operating leverage ของจริง — 4yr CAGR +33.8%</div></div><div class="rr-item"><div class="rr-dot"></div><div>งบดุลรับได้: cash &amp; securities $123.0B, net debt แค่ ~$33B บน mcap $2.94T</div></div><div class="rr-item"><div class="rr-dot"></div><div>สแกน 8-K 12 เดือนบน EDGAR สะอาด: ไม่มีเปลี่ยน CEO/CFO, ไม่มี restatement, ไม่มี guidance cut, ไม่มีปัญหา internal control</div></div><div class="rr-item"><div class="rr-dot"></div><div>DR AMZN80 สภาพคล่องดี ฿3.69M/วัน และซื้อได้ที่ NAV จริง (premium แค่ +0.58%) — ไม่ต้องเปิดบัญชี offshore, ไม่มี US estate tax, และเพราะ Amazon ไม่จ่ายปันผล ประเด็น withholding 30% จึงไม่มีผล</div></div></div>
+          <div class="rr-col risks"><h4>Risks</h4><div class="rr-item bold-risk"><div class="rr-dot"></div><div><strong>🔴 CIRCULAR FINANCING — Amazon ออกเงินให้ลูกค้ามาซื้อของตัวเอง: จ่ายออก OpenAI $50.0B + Anthropic $18.0B + วงเงินกู้ Anthropic อีกสูงสุด $20.0B; รับกลับเป็นสัญญา OpenAI $138B + Anthropic &gt;$100B ≈ 48% ของ backlog $496B · ถ้ามี down round หรือ IPO ต่ำกว่า mark จะโดนทั้ง writedown หมื่นล้านและ backlog เป็นคำถาม พร้อมกัน</strong></div></div><div class="rr-item bold-risk"><div class="rr-dot"></div><div><strong>🔴 กำไร Q2 $62.6B — $50.5B คือ mark-up หุ้น Anthropic แบบ Level 3 ที่อ้างอิงรอบระดมทุนที่ Amazon เองร่วมลงเงิน ไม่ใช่เงินสด · งบดุลถือเงินลงทุน AI lab ~$250B (Anthropic $190.4B + OpenAI $50.0B) จากที่ปลายปี 2025 มีแค่ $16.2B · &#x27;Other assets&#x27; พองจาก $122.6B → $284.1B ในครึ่งปี</strong></div></div><div class="rr-item bold-risk"><div class="rr-dot"></div><div><strong>🔴 FCF พลิกลบ: +$38.2B (2024) → +$11.2B (2025) → −$7.6B (TTM มิ.ย. 26) · capex 2026E ยกเป็น ~$220B จาก $200B เพราะ &#x27;ค่า memory แพงขึ้น&#x27; · Jassy ยอมรับว่าใช้ $220B แล้วยังมีกำลังการผลิตไม่พอ และ FCF จะมี headwind ต่อจนกว่าดาต้าเซ็นเตอร์จะ monetize</strong></div></div><div class="rr-item bold-risk"><div class="rr-dot"></div><div><strong>🟠 retail margin หยุดขยายแล้ว: NA margin ที่รายงาน 7.85% ดูดีขึ้น แต่ในนั้นมี IEEPA tariff refund $640M — ตัดออกเหลือ 7.30% เทียบปีก่อน 7.51% = ลดลง 21 bps YoY · International นิ่งที่ 4.07% · CFO ระบุแรงกดดันจากราคาน้ำมัน (ความขัดแย้งตะวันออกกลาง) + line-haul rate</strong></div></div><div class="rr-item bold-risk"><div class="rr-dot"></div><div><strong>🟠 AWS backlog เสียเปรียบเชิงเปรียบเทียบ: MSFT $678B (+84%) &gt; Google Cloud $513.9B (&gt;50% รับรู้ใน 24 เดือน) &gt; AWS $496B (WAL ยาวขึ้นเป็น 6.4 ปี) — คลาวด์ใหญ่สุดตามรายได้ แต่ backlog เล็กสุดและแปลงเป็นรายได้ช้าสุด · growth ก็ยังตาม Azure (+43%)</strong></div></div><div class="rr-item"><div class="rr-dot"></div><div>🟠 Q3&#x27;26 guidance บอกว่า margin ย่อ: op income กลางกรอบ $24.5B บนรายได้ $199.5B = 12.3% เทียบ Q2 ที่ 13.7% (−140 bps QoQ) · และการเติบโตแท้จริงหลังตัด Prime Day อยู่แค่ ~13–16% ไม่ใช่ +19.6%</div></div><div class="rr-item"><div class="rr-dot"></div><div>🟡 หนี้ระยะยาวโตเท่าตัวใน 6 เดือน (+$64.2B) อายุเฉลี่ย 14.2 ปี + DDTL $17.5B รอเบิก · ภาระผูกพันรวม $650B</div></div><div class="rr-item"><div class="rr-dot"></div><div>🟡 สัญญาพลังงาน 270 ล้าน MWh อายุเฉลี่ย 15 ปี ตีมูลค่า Level 3 ด้วย &#x27;significant management judgment&#x27; — Q2 บันทึก unrealized gain $551M เข้า AWS (ช่วย margin ~1.3 จุด) และอาจกลับด้านได้</div></div><div class="rr-item"><div class="rr-dot"></div><div>[position details omitted on the public site]</div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="section" id="s10">
+      <div class="section-header"><div class="section-num">10</div><div class="section-title">Stock Council Verdict</div></div>
+      <div class="verdict-grid"></div>
+      
+      <div class="overall-verdict">
+        <div class="ov-stance">WATCH</div>
+        <div class="ov-detail">
+          <div class="ov-label">Smartmall Overall Stance</div>
+          <div class="ov-target"><strong>[position details omitted on the public site]</strong> · Fair value target <strong>Sum-of-parts FY2027E (AWS EBIT $83B + NA/Intl EBIT $50B + หุ้น AI lab หลัง tax และ illiquidity discount − net debt $60B): base $242 = DR ฿2.01 · bull $305 = ฿2.54 · bear $187 = ฿1.56 (ตรงกับ 52wk low ฿1.54 พอดี = sanity check ผ่าน) · consensus street $325.19 (60 นักวิเคราะห์, Strong Buy, กรอบ $230–400) · risk/reward วันนี้ +12% ต่อ −31% = ไม่คุ้ม</strong></div>
+          <div class="ov-add-zone">Add zone: <strong>[position details omitted on the public site]</strong></div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">[position details omitted on the public site]</div>
+  </main>
+</div>
+<script>
+(function () {
+  var links = Array.prototype.slice.call(document.querySelectorAll('.nav-item'));
+  var map = {};
+  links.forEach(function (a) { var id = (a.getAttribute('href') || '').slice(1); if (id) map[id] = a; });
+  var sections = Object.keys(map).map(function (id) { return document.getElementById(id); }).filter(Boolean);
+  if (!('IntersectionObserver' in window) || !sections.length) return;
+  var obs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        links.forEach(function (l) { l.classList.remove('active'); });
+        var active = map[e.target.id];
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+  sections.forEach(function (s) { obs.observe(s); });
+})();
+(function () {
+  document.querySelectorAll('.chart-section').forEach(function (sec) {
+    var tabs = sec.querySelectorAll('.chart-tab');
+    var panes = sec.querySelectorAll('.chart-pane');
+    tabs.forEach(function (t) {
+      t.addEventListener('click', function () {
+        var r = t.getAttribute('data-range');
+        tabs.forEach(function (x) { x.classList.toggle('active', x === t); });
+        panes.forEach(function (p) { p.classList.toggle('active', p.getAttribute('data-range') === r); });
+      });
+    });
+  });
+})();
+</script>
+</body>
+</html>
