@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CPALL — CP ALL Public Company Limited · Smartmall Stock Card</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #19243c; --surface: #222f49; --surface-2: #2c3b58; --border: #3a4c6b;
+  --teal: #17dbc9; --teal-mid: #00c4b4; --teal-dim: rgba(23,219,201,0.15); --teal-fill: rgba(23,219,201,0.22);
+  --orange: #f0995e; --orange-mid: #dd8449; --orange-dim: rgba(240,153,94,0.18);
+  --green: #3ee08a; --green-dim: rgba(62,224,138,0.15); --red: #ef6a6a; --red-dim: rgba(239,106,106,0.15);
+  --amber: #f3d074; --text-1: #eef3fb; --text-2: #b0c1d8; --text-3: #8295ac;
+  --number: #d6e2f2; --tag-bg: #23406a; --badge-teal: #0c3a38; --score-track: #2c3b58;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text-1); font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Segoe UI', Arial, sans-serif; line-height: 1.5; min-height: 100vh; display: flex; justify-content: center; padding: 40px 20px 80px; }
+.page { width: 1240px; max-width: 100%; display: grid; grid-template-columns: 220px 1fr; gap: 0; align-items: start; }
+.sidenav { position: sticky; top: 40px; padding: 32px 0 32px 0; }
+.sidenav-logo { display: flex; align-items: center; gap: 8px; margin-bottom: 20px; padding-left: 8px; text-decoration: none; transition: opacity 0.15s; }
+.sidenav-logo:hover { opacity: 0.8; }
+.sidenav-logo .dot { width: 28px; height: 28px; background: var(--teal); border-radius: 50%; flex-shrink: 0; }
+.sidenav-logo span { font-size: 13px; font-weight: 700; color: var(--text-2); letter-spacing: 0.05em; text-transform: uppercase; }
+.nav-item { display: flex; align-items: center; gap: 12px; padding: 10px 16px; border-radius: 10px; cursor: pointer; margin-bottom: 2px; transition: background 0.15s; text-decoration: none; }
+.nav-item:hover { background: var(--surface); }
+.nav-item.active { background: var(--teal-dim); border-left: 3px solid var(--teal); }
+.nav-back { margin-bottom: 16px; }
+.nav-back .nav-num { color: var(--teal); font-size: 14px; }
+.nav-back .nav-label { color: var(--text-2); font-weight: 600; }
+.nav-back:hover .nav-label { color: var(--teal); }
+.nav-num { font-size: 11px; font-weight: 700; color: var(--text-3); width: 18px; flex-shrink: 0; }
+.nav-label { font-size: 13px; font-weight: 500; color: var(--text-2); }
+.nav-item.active .nav-label { color: var(--teal); }
+.hero-verdict { display: flex; justify-content: flex-end; align-items: center; gap: 12px; margin-top: 14px; }
+.hv-stance { font-size: 13px; font-weight: 800; letter-spacing: 0.04em; border: 1.5px solid; border-radius: 999px; padding: 5px 16px; text-transform: uppercase; }
+.hv-score { font-size: 13px; color: var(--text-3); font-weight: 600; }
+.hv-score b { font-size: 19px; color: var(--text-1); font-weight: 800; }
+.main { min-width: 0; padding: 0 0 0 32px; }
+.section { margin-bottom: 40px; scroll-margin-top: 20px; }
+.section-header { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
+.section-num { width: 32px; height: 32px; border-radius: 50%; background: var(--surface-2); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: var(--text-2); flex-shrink: 0; }
+.section-title { font-size: 17px; font-weight: 700; color: var(--text-1); letter-spacing: -0.01em; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px 32px; margin-bottom: 16px; }
+.header-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 24px; }
+.header-ticker { display: flex; align-items: center; gap: 14px; margin-bottom: 8px; }
+.ticker-logo { width: 48px; height: 48px; background: linear-gradient(135deg, #1a3550 0%, #2a4a70 100%); border-radius: 12px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; color: var(--teal); letter-spacing: 0.02em; }
+.ticker-name h1 { font-size: 22px; font-weight: 800; color: var(--text-1); letter-spacing: -0.02em; line-height: 1.2; }
+.ticker-name .exch { font-size: 12px; color: var(--text-3); margin-top: 2px; }
+.header-price { text-align: right; }
+.price-big { font-size: 36px; font-weight: 800; color: var(--text-1); letter-spacing: -0.03em; line-height: 1; }
+.price-secondary { font-size: 14px; font-weight: 600; color: var(--text-3); margin-top: 5px; }
+.price-sub { font-size: 13px; color: var(--text-3); margin-top: 6px; }
+.badges { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
+.badge { display: inline-flex; align-items: center; gap: 5px; padding: 5px 11px; border-radius: 100px; font-size: 11.5px; font-weight: 600; letter-spacing: 0.02em; }
+.badge-teal { background: var(--teal-dim); color: var(--teal); border: 1px solid rgba(23,219,201,0.3); }
+.badge-orange { background: var(--orange-dim); color: var(--orange); border: 1px solid rgba(240,153,94,0.3); }
+.badge-muted { background: var(--surface-2); color: var(--text-2); border: 1px solid var(--border); }
+.range-bar-wrap { margin-top: 4px; }
+.range-label { display: flex; justify-content: space-between; font-size: 11.5px; color: var(--text-3); margin-bottom: 8px; }
+.range-bar-track { height: 6px; border-radius: 4px; background: var(--surface-2); position: relative; overflow: visible; }
+.range-bar-fill { height: 100%; border-radius: 4px; background: linear-gradient(90deg, var(--teal-mid) 0%, var(--teal) 100%); }
+.range-bar-marker { position: absolute; top: 50%; transform: translate(-50%, -50%); width: 14px; height: 14px; border-radius: 50%; background: #fff; border: 2px solid var(--teal); box-shadow: 0 0 0 3px rgba(23,219,201,0.3); }
+.range-bar-label { position: absolute; bottom: -20px; transform: translateX(-50%); font-size: 11px; font-weight: 700; color: var(--text-1); white-space: nowrap; }
+.range-sublabels { margin-top: 22px; font-size: 11.5px; color: var(--text-3); display: flex; justify-content: space-between; }
+.range-sublabels span { font-weight: 600; color: var(--text-2); }
+.snowflake-grid { display: grid; grid-template-columns: 240px 1fr; gap: 32px; align-items: start; }
+.score-rows { flex: 1; }
+.score-row { display: grid; grid-template-columns: 130px 1fr 36px; gap: 12px; align-items: center; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+.score-row:last-child { border-bottom: none; }
+.score-row-label { font-size: 13px; font-weight: 600; color: var(--text-2); }
+.score-bar-track { height: 8px; background: var(--score-track); border-radius: 4px; overflow: hidden; }
+.score-bar-fill { height: 100%; border-radius: 4px; }
+.score-num { font-size: 13px; font-weight: 700; text-align: right; }
+.score-rationale { grid-column: 1 / -1; font-size: 11.5px; color: var(--text-3); padding-top: 2px; line-height: 1.5; }
+.snowflake-total { text-align: center; margin-top: 16px; }
+.snowflake-total .num { font-size: 28px; font-weight: 800; color: var(--teal); }
+.snowflake-total .denom { font-size: 14px; color: var(--text-3); }
+.snowflake-total .label { font-size: 11px; color: var(--text-3); margin-top: 4px; }
+.sankey-wrap { width: 100%; overflow-x: auto; }
+.sankey-caption { margin-top: 16px; font-size: 12.5px; color: var(--text-2); background: var(--surface-2); border-radius: 8px; padding: 10px 14px; border-left: 3px solid var(--teal); }
+.health-row { display: flex; align-items: center; gap: 16px; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+.health-row:last-child { border-bottom: none; }
+.health-label { width: 140px; font-size: 13px; color: var(--text-2); flex-shrink: 0; }
+.health-bar-track { flex: 1; height: 8px; background: var(--score-track); border-radius: 4px; overflow: hidden; position: relative; }
+.health-bar-fill { height: 100%; border-radius: 4px; background: var(--teal); }
+.health-value { width: 90px; text-align: right; font-size: 13px; font-weight: 700; color: var(--number); }
+.chart-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 18px; flex-wrap: wrap; }
+.chart-price { font-size: 30px; font-weight: 900; color: var(--text-1); letter-spacing: -0.03em; }
+.chart-sub { font-size: 12px; color: var(--text-3); margin-top: 4px; }
+.chart-tabs { display: flex; gap: 8px; flex-wrap: wrap; }
+.chart-tab { background: var(--surface-2); border: 1px solid var(--border); border-radius: 9px; padding: 7px 13px; font-size: 12px; font-weight: 700; color: var(--text-3); cursor: pointer; display: flex; gap: 6px; align-items: center; font-family: inherit; transition: all .15s; }
+.chart-tab:hover { color: var(--text-1); }
+.chart-tab.active { border-color: var(--teal); color: var(--text-1); background: var(--teal-dim); }
+.chart-tab span { font-size: 11px; font-weight: 600; }
+.chart-pane { display: none; }
+.chart-pane.active { display: block; }
+.chart-svg { width: 100%; height: 240px; display: block; }
+.rsi-block { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--border); }
+.rsi-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 8px; }
+.rsi-title { font-size: 13px; font-weight: 700; color: var(--text-2); letter-spacing: 0.02em; }
+.rsi-now { font-size: 14px; font-weight: 800; }
+.rsi-chartwrap { position: relative; padding-left: 26px; }
+.rsi-axis { position: absolute; left: 0; top: 0; height: 120px; width: 22px; display: flex; flex-direction: column; justify-content: space-between; }
+.rsi-axis span { font-size: 10px; color: var(--text-3); line-height: 1; }
+.rsi-svg { width: 100%; height: 120px; display: block; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.verdict-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
+.verdict-chip { background: var(--surface-2); border: 1px solid var(--border); border-radius: 14px; padding: 20px; }
+.verdict-chip .agent { font-size: 11px; font-weight: 700; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+.verdict-chip .stance { font-size: 15px; font-weight: 800; color: var(--text-1); margin-bottom: 6px; }
+.verdict-chip .conviction { display: inline-block; font-size: 10.5px; font-weight: 700; padding: 2px 8px; border-radius: 100px; background: var(--teal-dim); color: var(--teal); margin-bottom: 8px; border: 1px solid rgba(23,219,201,0.25); }
+.verdict-chip .rationale { font-size: 12px; color: var(--text-3); line-height: 1.5; }
+.overall-verdict { background: linear-gradient(135deg, rgba(23,219,201,0.12) 0%, rgba(0,169,157,0.06) 100%); border: 1px solid rgba(23,219,201,0.3); border-radius: 14px; padding: 24px 28px; display: flex; align-items: center; gap: 24px; }
+.ov-stance { font-size: 28px; font-weight: 900; color: var(--teal); letter-spacing: -0.02em; flex-shrink: 0; }
+.ov-detail { flex: 1; }
+.ov-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-3); margin-bottom: 4px; }
+.ov-target { font-size: 14px; color: var(--text-2); }
+.ov-target strong { color: var(--text-1); }
+.ov-add-zone { font-size: 13px; color: var(--text-3); margin-top: 4px; }
+.rr-col h4 { font-size: 13px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 14px; }
+.rr-col.rewards h4 { color: var(--green); }
+.rr-col.risks h4 { color: var(--red); }
+.rr-item { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 12px; font-size: 13px; color: var(--text-2); line-height: 1.5; }
+.rr-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; margin-top: 6px; }
+.rr-col.rewards .rr-dot { background: var(--green); }
+.rr-col.risks .rr-dot { background: var(--red); }
+.rr-item.bold-risk { color: var(--text-1); font-weight: 600; }
+.rr-item.bold-risk .rr-dot { background: var(--red); box-shadow: 0 0 0 3px rgba(232,93,93,0.2); }
+.stat-row { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 16px; }
+.stat-pill { background: var(--surface-2); border: 1px solid var(--border); border-radius: 10px; padding: 10px 16px; min-width: 130px; }
+.stat-pill-label { font-size: 11px; color: var(--text-3); margin-bottom: 3px; text-transform: uppercase; letter-spacing: 0.04em; }
+.stat-pill-value { font-size: 18px; font-weight: 800; color: var(--number); }
+.stat-pill-sub { font-size: 11px; color: var(--text-3); margin-top: 2px; }
+.div-row { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+.div-big { font-size: 52px; font-weight: 900; color: var(--amber); letter-spacing: -0.04em; line-height: 1; }
+.div-note { font-size: 13px; color: var(--text-2); max-width: 460px; line-height: 1.6; }
+.div-trend { margin-top: 20px; font-size: 12.5px; color: var(--text-3); }
+.footer { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border); font-size: 11px; color: var(--text-3); line-height: 1.7; text-align: center; }
+.growth-row { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+.growth-label { width: 170px; font-size: 13px; color: var(--text-2); flex-shrink: 0; }
+.growth-bar-track { flex: 1; height: 28px; background: var(--score-track); border-radius: 8px; overflow: hidden; position: relative; }
+.growth-bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; padding-left: 10px; font-size: 12px; font-weight: 700; color: rgba(255,255,255,0.9); white-space: nowrap; }
+.growth-value { width: 90px; text-align: right; font-size: 14px; font-weight: 700; color: var(--number); flex-shrink: 0; }
+.biz-summary { font-size: 14px; color: var(--text-1); line-height: 1.65; margin-bottom: 22px; }
+.biz-rev-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-3); font-weight: 700; margin-bottom: 6px; }
+.biz-row { display: flex; align-items: baseline; gap: 14px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+.biz-row:last-child { border-bottom: none; }
+.biz-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; align-self: center; }
+.biz-name { font-size: 13px; font-weight: 700; color: var(--text-1); width: 92px; flex-shrink: 0; }
+.biz-pct { font-size: 13px; font-weight: 800; color: var(--teal); width: 46px; flex-shrink: 0; text-align: right; }
+.biz-desc { font-size: 12.5px; color: var(--text-2); line-height: 1.5; }
+.note-box { background: var(--surface-2); border-left: 3px solid var(--teal); border-radius: 0 8px 8px 0; padding: 12px 16px; font-size: 12.5px; color: var(--text-2); margin-top: 16px; line-height: 1.6; }
+.note-box.orange { border-left-color: var(--orange); }
+.note-box.red { border-left-color: var(--red); }
+</style>
+</head>
+<body>
+<div class="page">
+  <nav class="sidenav"><a class="sidenav-logo" href="index.html"><div class="dot"></div><span>Smartmall</span></a><a class="nav-item nav-back" href="index.html"><span class="nav-num">&larr;</span><span class="nav-label">All Stock Cards</span></a><a class="nav-item active" href="#s1"><span class="nav-num">1</span><span class="nav-label">Overview</span></a><a class="nav-item" href="#s2"><span class="nav-num">2</span><span class="nav-label">Price History</span></a><a class="nav-item" href="#s3"><span class="nav-num">3</span><span class="nav-label">Snowflake Score</span></a><a class="nav-item" href="#s4"><span class="nav-num">4</span><span class="nav-label">Revenue &amp; Expenses</span></a><a class="nav-item" href="#s5"><span class="nav-num">5</span><span class="nav-label">Past Performance</span></a><a class="nav-item" href="#s6"><span class="nav-num">6</span><span class="nav-label">Future Growth</span></a><a class="nav-item" href="#s7"><span class="nav-num">7</span><span class="nav-label">Financial Health</span></a><a class="nav-item" href="#s8"><span class="nav-num">8</span><span class="nav-label">Dividend</span></a><a class="nav-item" href="#s9"><span class="nav-num">9</span><span class="nav-label">Rewards &amp; Risks</span></a><a class="nav-item" href="#s10"><span class="nav-num">10</span><span class="nav-label">Council Verdict</span></a></nav>
+  <main class="main">
+    
+    <div class="section" id="s1">
+      <div class="card">
+        <div class="header-top">
+          <div>
+            <div class="header-ticker">
+              <div class="ticker-logo">CPALL</div>
+              <div class="ticker-name">
+                <h1>CP ALL Public Company Limited</h1>
+                <div class="exch">SET: CPALL</div>
+              </div>
+            </div>
+          </div>
+          <div class="header-price">
+            <div class="price-big">฿48.00</div>
+            
+            <div class="price-sub">as of 2026-08-11 close · card built 2026-08-12</div>
+            <div class="hero-verdict"><span class="hv-stance" style="color:var(--green);border-color:var(--green);">BUY · conviction Medium · staged 3-tranche entry</span><span class="hv-score"><b>18</b>/30</span></div>
+          </div>
+        </div>
+        <div class="badges"><span class="badge badge-muted">cash-cow</span><span class="badge badge-muted">SET direct (no DR)</span><span class="badge badge-muted">beta 0.44</span><span class="badge badge-muted">7-Eleven monopoly</span><span class="badge badge-muted">Consumer Staples</span><span class="badge badge-muted">Convenience Stores / Retail</span><span class="badge badge-muted">Thailand</span></div>
+        
+        <div style="margin-bottom:6px;font-size:12px;font-weight:600;color:var(--text-3);text-transform:uppercase;letter-spacing:0.05em;">52-Week Range</div>
+        <div class="range-bar-wrap">
+          <div class="range-label"><span>40.5 &nbsp; 52W Low</span><span>52W High &nbsp; 54.5</span></div>
+          <div class="range-bar-track">
+            <div class="range-bar-fill" style="width:53.6%"></div>
+            <div class="range-bar-marker" style="left:53.6%"><div class="range-bar-label">48</div></div>
+          </div>
+          <div class="range-sublabels" style="margin-top:28px;">
+            <span>Current <span>฿48.00</span></span>
+            <span>Distance from low: <span>+19%</span></span>
+          </div>
+        </div>
+        <div class="stat-row" style="margin-top:28px;margin-bottom:0;"><div class="stat-pill"><div class="stat-pill-label">Market Cap</div><div class="stat-pill-value">฿427.7B</div><div class="stat-pill-sub">~US$12.9B · 8,911.5M shares</div></div><div class="stat-pill"><div class="stat-pill-label">Trailing P/E</div><div class="stat-pill-value">14.4x</div><div class="stat-pill-sub">TTM EPS ฿3.34</div></div><div class="stat-pill"><div class="stat-pill-label">Fwd P/E (FY26E)</div><div class="stat-pill-value">13.8x</div><div class="stat-pill-sub">consensus EPS ~฿3.48</div></div><div class="stat-pill"><div class="stat-pill-label">5yr P/E band</div><div class="stat-pill-value">27.2x mean</div><div class="stat-pill-sub">−1SD 17.3x → now below −1SD</div></div><div class="stat-pill"><div class="stat-pill-label">Div Yield</div><div class="stat-pill-value">3.44%</div><div class="stat-pill-sub">net 3.09% after 10% WHT</div></div><div class="stat-pill"><div class="stat-pill-label">ROE (ex-MI)</div><div class="stat-pill-value">21.3%</div><div class="stat-pill-sub">company-only 24.8%</div></div><div class="stat-pill"><div class="stat-pill-label">Net margin</div><div class="stat-pill-value">3.4%</div><div class="stat-pill-sub">1Q26 · 7-Eleven alone 5.8%</div></div><div class="stat-pill"><div class="stat-pill-label">Adj Debt/EBITDA</div><div class="stat-pill-value">4.2x</div><div class="stat-pill-sub">TRIS · was 6.2x in Mar-2021</div></div><div class="stat-pill"><div class="stat-pill-label">Credit rating</div><div class="stat-pill-value">AA- stable</div><div class="stat-pill-sub">TRIS · upgraded from A+</div></div><div class="stat-pill"><div class="stat-pill-label">Beta</div><div class="stat-pill-value">0.44</div><div class="stat-pill-sub">true defensive ballast</div></div><div class="stat-pill"><div class="stat-pill-label">Liquidity</div><div class="stat-pill-value">฿1.6B/day</div><div class="stat-pill-sub">33.2M shares/day</div></div><div class="stat-pill"><div class="stat-pill-label">Cash cycle</div><div class="stat-pill-value">−25 days</div><div class="stat-pill-sub">supplier-financed float</div></div></div>
+      </div>
+    </div>
+    <div class="section" id="s2">
+      <div class="section-header"><div class="section-num">2</div><div class="section-title">Price History</div></div>
+      <div class="card chart-section">
+        <div class="chart-head">
+          <div><div class="chart-price">฿48.00</div><div class="chart-sub">CPALL.BK · ฿ · snapshot 2026-08-12</div></div>
+          <div class="chart-tabs"><button class="chart-tab" data-range="1D">1D<span style="color:#f5736b;">-0.5%</span></button><button class="chart-tab" data-range="1W">1W<span style="color:#f5736b;">-3.0%</span></button><button class="chart-tab" data-range="1M">1M<span style="color:#30d97b;">+3.2%</span></button><button class="chart-tab active" data-range="1Y">1Y<span style="color:#30d97b;">+8.3%</span></button><button class="chart-tab" data-range="5Y">5Y<span style="color:#f5736b;">-7.6%</span></button></div>
+        </div>
+        
+        <div class="chart-pane" data-range="1D">
+          <svg class="chart-svg" viewBox="0 0 900 240" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="cg21D" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#f5736b" stop-opacity="0.22"/>
+              <stop offset="1" stop-color="#f5736b" stop-opacity="0"/></linearGradient></defs>
+            <path d="M0.0 86.0 L0.0 86.0 L15.0 86.0 L30.0 18.0 L45.0 18.0 L60.0 86.0 L75.0 86.0 L90.0 154.0 L105.0 154.0 L120.0 86.0 L135.0 154.0 L150.0 86.0 L165.0 86.0 L180.0 86.0 L195.0 18.0 L210.0 18.0 L225.0 18.0 L240.0 86.0 L255.0 18.0 L270.0 86.0 L285.0 86.0 L300.0 86.0 L315.0 86.0 L330.0 86.0 L345.0 86.0 L360.0 154.0 L375.0 86.0 L390.0 154.0 L405.0 154.0 L420.0 154.0 L435.0 154.0 L450.0 154.0 L465.0 154.0 L480.0 154.0 L495.0 222.0 L510.0 154.0 L525.0 154.0 L540.0 154.0 L555.0 154.0 L570.0 154.0 L585.0 154.0 L600.0 154.0 L615.0 154.0 L630.0 86.0 L645.0 154.0 L660.0 86.0 L675.0 154.0 L690.0 154.0 L705.0 86.0 L720.0 86.0 L735.0 154.0 L750.0 86.0 L765.0 154.0 L780.0 86.0 L795.0 154.0 L810.0 154.0 L825.0 86.0 L840.0 154.0 L855.0 154.0 L870.0 154.0 L885.0 86.0 L900.0 154.0 L900.0 240.0 L0 240.0 Z" fill="url(#cg21D)"/>
+            <path d="M0.0 86.0 L15.0 86.0 L30.0 18.0 L45.0 18.0 L60.0 86.0 L75.0 86.0 L90.0 154.0 L105.0 154.0 L120.0 86.0 L135.0 154.0 L150.0 86.0 L165.0 86.0 L180.0 86.0 L195.0 18.0 L210.0 18.0 L225.0 18.0 L240.0 86.0 L255.0 18.0 L270.0 86.0 L285.0 86.0 L300.0 86.0 L315.0 86.0 L330.0 86.0 L345.0 86.0 L360.0 154.0 L375.0 86.0 L390.0 154.0 L405.0 154.0 L420.0 154.0 L435.0 154.0 L450.0 154.0 L465.0 154.0 L480.0 154.0 L495.0 222.0 L510.0 154.0 L525.0 154.0 L540.0 154.0 L555.0 154.0 L570.0 154.0 L585.0 154.0 L600.0 154.0 L615.0 154.0 L630.0 86.0 L645.0 154.0 L660.0 86.0 L675.0 154.0 L690.0 154.0 L705.0 86.0 L720.0 86.0 L735.0 154.0 L750.0 86.0 L765.0 154.0 L780.0 86.0 L795.0 154.0 L810.0 154.0 L825.0 86.0 L840.0 154.0 L855.0 154.0 L870.0 154.0 L885.0 86.0 L900.0 154.0" fill="none" stroke="#f5736b" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="chart-pane" data-range="1W">
+          <svg class="chart-svg" viewBox="0 0 900 240" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="cg21W" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#f5736b" stop-opacity="0.22"/>
+              <stop offset="1" stop-color="#f5736b" stop-opacity="0"/></linearGradient></defs>
+            <path d="M0.0 47.1 L0.0 47.1 L16.7 105.4 L33.3 105.4 L50.0 105.4 L66.7 47.1 L83.3 76.3 L100.0 47.1 L116.7 47.1 L133.3 18.0 L150.0 47.1 L166.7 47.1 L183.3 134.6 L200.0 105.4 L216.7 76.3 L233.3 76.3 L250.0 76.3 L266.7 105.4 L283.3 76.3 L300.0 76.3 L316.7 76.3 L333.3 76.3 L350.0 134.6 L366.7 134.6 L383.3 105.4 L400.0 134.6 L416.7 134.6 L433.3 134.6 L450.0 163.7 L466.7 105.4 L483.3 105.4 L500.0 134.6 L516.7 134.6 L533.3 134.6 L550.0 192.9 L566.7 134.6 L583.3 163.7 L600.0 163.7 L616.7 192.9 L633.3 192.9 L650.0 134.6 L666.7 134.6 L683.3 134.6 L700.0 134.6 L716.7 163.7 L733.3 192.9 L750.0 192.9 L766.7 163.7 L783.3 192.9 L800.0 222.0 L816.7 222.0 L833.3 222.0 L850.0 192.9 L866.7 192.9 L883.3 222.0 L900.0 222.0 L900.0 240.0 L0 240.0 Z" fill="url(#cg21W)"/>
+            <path d="M0.0 47.1 L16.7 105.4 L33.3 105.4 L50.0 105.4 L66.7 47.1 L83.3 76.3 L100.0 47.1 L116.7 47.1 L133.3 18.0 L150.0 47.1 L166.7 47.1 L183.3 134.6 L200.0 105.4 L216.7 76.3 L233.3 76.3 L250.0 76.3 L266.7 105.4 L283.3 76.3 L300.0 76.3 L316.7 76.3 L333.3 76.3 L350.0 134.6 L366.7 134.6 L383.3 105.4 L400.0 134.6 L416.7 134.6 L433.3 134.6 L450.0 163.7 L466.7 105.4 L483.3 105.4 L500.0 134.6 L516.7 134.6 L533.3 134.6 L550.0 192.9 L566.7 134.6 L583.3 163.7 L600.0 163.7 L616.7 192.9 L633.3 192.9 L650.0 134.6 L666.7 134.6 L683.3 134.6 L700.0 134.6 L716.7 163.7 L733.3 192.9 L750.0 192.9 L766.7 163.7 L783.3 192.9 L800.0 222.0 L816.7 222.0 L833.3 222.0 L850.0 192.9 L866.7 192.9 L883.3 222.0 L900.0 222.0" fill="none" stroke="#f5736b" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="chart-pane" data-range="1M">
+          <svg class="chart-svg" viewBox="0 0 900 240" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="cg21M" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#30d97b" stop-opacity="0.22"/>
+              <stop offset="1" stop-color="#30d97b" stop-opacity="0"/></linearGradient></defs>
+            <path d="M0.0 205.0 L0.0 205.0 L42.9 222.0 L85.7 222.0 L128.6 188.0 L171.4 171.0 L214.3 137.0 L257.1 154.0 L300.0 171.0 L342.9 188.0 L385.7 205.0 L428.6 205.0 L471.4 205.0 L514.3 205.0 L557.1 171.0 L600.0 103.0 L642.9 69.0 L685.7 52.0 L728.6 18.0 L771.4 52.0 L814.3 35.0 L857.1 52.0 L900.0 103.0 L900.0 240.0 L0 240.0 Z" fill="url(#cg21M)"/>
+            <path d="M0.0 205.0 L42.9 222.0 L85.7 222.0 L128.6 188.0 L171.4 171.0 L214.3 137.0 L257.1 154.0 L300.0 171.0 L342.9 188.0 L385.7 205.0 L428.6 205.0 L471.4 205.0 L514.3 205.0 L557.1 171.0 L600.0 103.0 L642.9 69.0 L685.7 52.0 L728.6 18.0 L771.4 52.0 L814.3 35.0 L857.1 52.0 L900.0 103.0" fill="none" stroke="#30d97b" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="chart-pane active" data-range="1Y">
+          <svg class="chart-svg" viewBox="0 0 900 240" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="cg21Y" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#30d97b" stop-opacity="0.22"/>
+              <stop offset="1" stop-color="#30d97b" stop-opacity="0"/></linearGradient></defs>
+            <path d="M0.0 151.4 L0.0 151.4 L9.5 151.4 L18.9 159.2 L28.4 167.1 L37.9 171.0 L47.4 182.8 L56.8 135.7 L66.3 116.1 L75.8 123.9 L85.3 120.0 L94.7 108.2 L104.2 123.9 L113.7 123.9 L123.2 120.0 L132.6 120.0 L142.1 123.9 L151.6 112.2 L161.1 139.6 L170.5 131.8 L180.0 123.9 L189.5 139.6 L198.9 147.5 L208.4 147.5 L217.9 167.1 L227.4 167.1 L236.8 171.0 L246.3 182.8 L255.8 182.8 L265.3 178.8 L274.7 190.6 L284.2 178.8 L293.7 194.5 L303.2 194.5 L312.6 182.8 L322.1 190.6 L331.6 163.2 L341.1 171.0 L350.5 190.6 L360.0 190.6 L369.5 202.4 L378.9 222.0 L388.4 206.3 L397.9 174.9 L407.4 202.4 L416.8 190.6 L426.3 190.6 L435.8 174.9 L445.3 127.8 L454.7 96.5 L464.2 96.5 L473.7 18.0 L483.2 69.0 L492.6 29.8 L502.1 88.6 L511.6 112.2 L521.1 139.6 L530.5 143.5 L540.0 151.4 L549.5 159.2 L558.9 159.2 L568.4 174.9 L577.9 147.5 L587.4 163.2 L596.8 131.8 L606.3 127.8 L615.8 151.4 L625.3 171.0 L634.7 159.2 L644.2 164.9 L653.7 156.8 L663.2 160.9 L672.6 160.9 L682.1 95.7 L691.6 112.0 L701.1 112.0 L710.5 124.2 L720.0 103.9 L729.5 112.0 L738.9 136.4 L748.4 144.6 L757.9 128.3 L767.4 112.0 L776.8 132.4 L786.3 140.5 L795.8 112.0 L805.3 83.5 L814.7 95.7 L824.2 103.9 L833.7 120.2 L843.2 112.0 L852.6 103.9 L862.1 116.1 L871.6 116.1 L881.1 91.7 L890.5 79.4 L900.0 91.7 L900.0 240.0 L0 240.0 Z" fill="url(#cg21Y)"/>
+            <path d="M0.0 151.4 L9.5 151.4 L18.9 159.2 L28.4 167.1 L37.9 171.0 L47.4 182.8 L56.8 135.7 L66.3 116.1 L75.8 123.9 L85.3 120.0 L94.7 108.2 L104.2 123.9 L113.7 123.9 L123.2 120.0 L132.6 120.0 L142.1 123.9 L151.6 112.2 L161.1 139.6 L170.5 131.8 L180.0 123.9 L189.5 139.6 L198.9 147.5 L208.4 147.5 L217.9 167.1 L227.4 167.1 L236.8 171.0 L246.3 182.8 L255.8 182.8 L265.3 178.8 L274.7 190.6 L284.2 178.8 L293.7 194.5 L303.2 194.5 L312.6 182.8 L322.1 190.6 L331.6 163.2 L341.1 171.0 L350.5 190.6 L360.0 190.6 L369.5 202.4 L378.9 222.0 L388.4 206.3 L397.9 174.9 L407.4 202.4 L416.8 190.6 L426.3 190.6 L435.8 174.9 L445.3 127.8 L454.7 96.5 L464.2 96.5 L473.7 18.0 L483.2 69.0 L492.6 29.8 L502.1 88.6 L511.6 112.2 L521.1 139.6 L530.5 143.5 L540.0 151.4 L549.5 159.2 L558.9 159.2 L568.4 174.9 L577.9 147.5 L587.4 163.2 L596.8 131.8 L606.3 127.8 L615.8 151.4 L625.3 171.0 L634.7 159.2 L644.2 164.9 L653.7 156.8 L663.2 160.9 L672.6 160.9 L682.1 95.7 L691.6 112.0 L701.1 112.0 L710.5 124.2 L720.0 103.9 L729.5 112.0 L738.9 136.4 L748.4 144.6 L757.9 128.3 L767.4 112.0 L776.8 132.4 L786.3 140.5 L795.8 112.0 L805.3 83.5 L814.7 95.7 L824.2 103.9 L833.7 120.2 L843.2 112.0 L852.6 103.9 L862.1 116.1 L871.6 116.1 L881.1 91.7 L890.5 79.4 L900.0 91.7" fill="none" stroke="#30d97b" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="chart-pane" data-range="5Y">
+          <svg class="chart-svg" viewBox="0 0 900 240" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="cg25Y" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#f5736b" stop-opacity="0.22"/>
+              <stop offset="1" stop-color="#f5736b" stop-opacity="0"/></linearGradient></defs>
+            <path d="M0.0 125.0 L0.0 125.0 L9.5 87.1 L18.9 65.1 L28.4 77.1 L37.9 67.1 L47.4 63.1 L56.8 117.0 L66.3 119.0 L75.8 119.0 L85.3 93.0 L94.7 59.1 L104.2 57.1 L113.7 71.1 L123.2 45.1 L132.6 60.3 L142.1 62.3 L151.6 72.4 L161.1 82.5 L170.5 92.5 L180.0 100.6 L189.5 86.5 L198.9 108.6 L208.4 151.0 L217.9 112.7 L227.4 88.5 L236.8 62.3 L246.3 52.2 L255.8 18.0 L265.3 30.1 L274.7 50.2 L284.2 84.5 L293.7 78.4 L303.2 86.5 L312.6 60.3 L322.1 80.7 L331.6 68.4 L341.1 74.5 L350.5 72.5 L360.0 88.8 L369.5 50.1 L378.9 64.4 L388.4 90.8 L397.9 129.6 L407.4 129.6 L416.8 150.0 L426.3 143.8 L435.8 131.6 L445.3 160.1 L454.7 135.7 L464.2 115.3 L473.7 137.7 L483.2 119.4 L492.6 121.4 L502.1 94.7 L511.6 103.0 L521.1 127.9 L530.5 105.0 L540.0 103.0 L549.5 86.4 L558.9 47.0 L568.4 36.6 L577.9 24.2 L587.4 53.2 L596.8 59.4 L606.3 65.6 L615.8 117.5 L625.3 123.7 L634.7 169.3 L644.2 136.1 L653.7 167.3 L663.2 161.0 L672.6 167.3 L682.1 149.6 L691.6 179.4 L701.1 222.0 L710.5 205.0 L720.0 202.8 L729.5 200.7 L738.9 179.4 L748.4 177.3 L757.9 181.5 L767.4 200.7 L776.8 217.7 L786.3 209.2 L795.8 213.5 L805.3 222.0 L814.7 192.2 L824.2 143.2 L833.7 196.4 L843.2 196.4 L852.6 202.8 L862.1 175.2 L871.6 179.6 L881.1 173.0 L890.5 170.8 L900.0 159.8 L900.0 240.0 L0 240.0 Z" fill="url(#cg25Y)"/>
+            <path d="M0.0 125.0 L9.5 87.1 L18.9 65.1 L28.4 77.1 L37.9 67.1 L47.4 63.1 L56.8 117.0 L66.3 119.0 L75.8 119.0 L85.3 93.0 L94.7 59.1 L104.2 57.1 L113.7 71.1 L123.2 45.1 L132.6 60.3 L142.1 62.3 L151.6 72.4 L161.1 82.5 L170.5 92.5 L180.0 100.6 L189.5 86.5 L198.9 108.6 L208.4 151.0 L217.9 112.7 L227.4 88.5 L236.8 62.3 L246.3 52.2 L255.8 18.0 L265.3 30.1 L274.7 50.2 L284.2 84.5 L293.7 78.4 L303.2 86.5 L312.6 60.3 L322.1 80.7 L331.6 68.4 L341.1 74.5 L350.5 72.5 L360.0 88.8 L369.5 50.1 L378.9 64.4 L388.4 90.8 L397.9 129.6 L407.4 129.6 L416.8 150.0 L426.3 143.8 L435.8 131.6 L445.3 160.1 L454.7 135.7 L464.2 115.3 L473.7 137.7 L483.2 119.4 L492.6 121.4 L502.1 94.7 L511.6 103.0 L521.1 127.9 L530.5 105.0 L540.0 103.0 L549.5 86.4 L558.9 47.0 L568.4 36.6 L577.9 24.2 L587.4 53.2 L596.8 59.4 L606.3 65.6 L615.8 117.5 L625.3 123.7 L634.7 169.3 L644.2 136.1 L653.7 167.3 L663.2 161.0 L672.6 167.3 L682.1 149.6 L691.6 179.4 L701.1 222.0 L710.5 205.0 L720.0 202.8 L729.5 200.7 L738.9 179.4 L748.4 177.3 L757.9 181.5 L767.4 200.7 L776.8 217.7 L786.3 209.2 L795.8 213.5 L805.3 222.0 L814.7 192.2 L824.2 143.2 L833.7 196.4 L843.2 196.4 L852.6 202.8 L862.1 175.2 L871.6 179.6 L881.1 173.0 L890.5 170.8 L900.0 159.8" fill="none" stroke="#f5736b" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        
+        <div class="rsi-block">
+          <div class="rsi-head">
+            <div class="rsi-title">RSI (14)</div>
+            <div class="rsi-now" style="color:#9aa4b2;">54.1 · Neutral</div>
+          </div>
+          <div class="rsi-chartwrap">
+            <div class="rsi-axis"><span>70</span><span>50</span><span>30</span></div>
+            
+          <svg class="rsi-svg" viewBox="0 0 900 200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="0" y="8.0" width="900" height="55.2" fill="#f5736b" opacity="0.07"/>
+            <rect x="0" y="136.8" width="900" height="55.2" fill="#30d97b" opacity="0.07"/>
+            <line x1="0" y1="63.2" x2="900" y2="63.2" stroke="#f5736b" stroke-width="1" stroke-dasharray="6 5" opacity="0.5"/>
+            <line x1="0" y1="100.0" x2="900" y2="100.0" stroke="#9aa4b2" stroke-width="1" stroke-dasharray="2 6" opacity="0.4"/>
+            <line x1="0" y1="136.8" x2="900" y2="136.8" stroke="#30d97b" stroke-width="1" stroke-dasharray="6 5" opacity="0.5"/>
+            <path d="M0.0 106.6 L9.5 91.5 L18.9 76.5 L28.4 84.2 L37.9 83.0 L47.4 80.1 L56.8 94.7 L66.3 95.3 L75.8 92.4 L85.3 102.0 L94.7 96.3 L104.2 89.2 L113.7 112.1 L123.2 97.6 L132.6 100.8 L142.1 89.7 L151.6 119.9 L161.1 118.6 L170.5 120.4 L180.0 128.5 L189.5 124.4 L198.9 122.6 L208.4 123.7 L217.9 131.4 L227.4 111.2 L236.8 119.4 L246.3 106.5 L255.8 120.9 L265.3 116.8 L274.7 93.0 L284.2 110.1 L293.7 95.9 L303.2 90.8 L312.6 109.2 L322.1 115.5 L331.6 118.1 L341.1 132.7 L350.5 116.2 L360.0 97.5 L369.5 105.3 L378.9 108.1 L388.4 97.8 L397.9 97.8 L407.4 82.9 L416.8 54.3 L426.3 45.9 L435.8 47.0 L445.3 35.3 L454.7 70.9 L464.2 70.3 L473.7 79.4 L483.2 99.1 L492.6 108.4 L502.1 108.9 L511.6 117.0 L521.1 127.2 L530.5 125.3 L540.0 110.2 L549.5 114.7 L558.9 100.2 L568.4 107.8 L577.9 91.2 L587.4 90.1 L596.8 104.9 L606.3 116.4 L615.8 120.7 L625.3 108.5 L634.7 111.5 L644.2 94.1 L653.7 104.0 L663.2 71.6 L672.6 74.1 L682.1 80.5 L691.6 81.4 L701.1 86.8 L710.5 79.2 L720.0 98.4 L729.5 108.6 L738.9 114.8 L748.4 99.0 L757.9 85.2 L767.4 105.7 L776.8 101.5 L786.3 96.2 L795.8 86.1 L805.3 72.4 L814.7 103.1 L824.2 100.9 L833.7 103.7 L843.2 94.2 L852.6 95.7 L862.1 103.2 L871.6 103.2 L881.1 79.0 L890.5 64.7 L900.0 92.5" fill="none" stroke="#7c83ff" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>
+          </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="section" id="s3">
+      <div class="section-header"><div class="section-num">3</div><div class="section-title">Snowflake Score</div></div>
+      <div class="card">
+        <div class="snowflake-grid">
+          <div style="display:flex;flex-direction:column;align-items:center;">
+            <svg width="240" height="240" viewBox="-175 -125 350 250"><defs><style>.ring{fill:none;stroke:rgba(255,255,255,0.06);stroke-width:1;}.ring-bright{fill:none;stroke:rgba(255,255,255,0.12);stroke-width:1;}.axis-line{stroke:rgba(255,255,255,0.08);stroke-width:1;}.score-poly{fill:rgba(23,219,201,0.22);stroke:#17dbc9;stroke-width:2;}</style></defs><polygon class="ring" points="0.00,-15.00 14.27,-4.64 8.82,12.14 -8.82,12.14 -14.27,-4.64"/><polygon class="ring" points="0.00,-30.00 28.53,-9.27 17.63,24.27 -17.63,24.27 -28.53,-9.27"/><polygon class="ring" points="0.00,-45.00 42.80,-13.91 26.45,36.41 -26.45,36.41 -42.80,-13.91"/><polygon class="ring" points="0.00,-60.00 57.06,-18.54 35.27,48.54 -35.27,48.54 -57.06,-18.54"/><polygon class="ring ring-bright" points="0.00,-75.00 71.33,-23.18 44.08,60.68 -44.08,60.68 -71.33,-23.18"/><polygon class="ring ring-bright" points="0.00,-90.00 85.60,-27.81 52.90,72.81 -52.90,72.81 -85.60,-27.81"/><line class="axis-line" x1="0" y1="0" x2="0.00" y2="-90.00"/><line class="axis-line" x1="0" y1="0" x2="85.60" y2="-27.81"/><line class="axis-line" x1="0" y1="0" x2="52.90" y2="72.81"/><line class="axis-line" x1="0" y1="0" x2="-52.90" y2="72.81"/><line class="axis-line" x1="0" y1="0" x2="-85.60" y2="-27.81"/><polygon class="score-poly" points="0.00,-75.00 28.53,-9.27 35.27,48.54 -26.45,36.41 -57.06,-18.54"/><text x="0.0" y="-96.3" text-anchor="middle" font-size="8.5" fill="#8fa3bf">Valuation</text><text x="95.6" y="-29.8" text-anchor="start" font-size="8.5" fill="#8fa3bf">Future Growth</text><text x="60.6" y="83.9" text-anchor="start" font-size="8.5" fill="#8fa3bf">Past Perf.</text><text x="-60.6" y="83.9" text-anchor="end" font-size="8.5" fill="#8fa3bf">Fin. Health</text><text x="-95.6" y="-29.8" text-anchor="end" font-size="8.5" fill="#8fa3bf">Dividend</text><circle cx="0.00" cy="-75.00" r="4" fill="#17dbc9"/><circle cx="28.53" cy="-9.27" r="4" fill="#f0995e"/><circle cx="35.27" cy="48.54" r="4" fill="#17dbc9"/><circle cx="-26.45" cy="36.41" r="4" fill="#17dbc9"/><circle cx="-57.06" cy="-18.54" r="4" fill="#17dbc9"/></svg>
+            <div class="snowflake-total">
+              <div><span class="num">18</span><span class="denom" style="font-size:18px;color:var(--text-3);"> / 30</span></div>
+              <div class="label">Smartmall Score</div>
+            </div>
+          </div>
+          <div class="score-rows">
+            
+            <div class="score-row">
+              <div class="score-row-label" style="color:var(--teal)">Valuation</div>
+              <div>
+                <div class="score-bar-track"><div class="score-bar-fill" style="width:83.3%;background:var(--teal)"></div></div>
+                <div class="score-rationale">฿48.00 = trailing P/E 14.4x / fwd 13.8x vs its own 5-year band (mean 27.2x, −1SD 17.3x) — trading BELOW −1SD. SOTP (CVS at 11x EV/EBITDA + 60% of CPAXT at market − net debt) = ฿56.7; P/E method at 17x FY26E ฿3.44 = ฿58.5. Fair value ฿56 (range ฿52–60) → ~17% upside. Not a fire sale: stock is already +15.2% YTD and +18.5% off the ฿40.50 low.</div>
+              </div>
+              <div class="score-num" style="color:var(--teal)">5/6</div>
+            </div>
+            <div class="score-row">
+              <div class="score-row-label" style="color:var(--orange)">Future Growth</div>
+              <div>
+                <div class="score-bar-track"><div class="score-bar-fill" style="width:33.3%;background:var(--orange)"></div></div>
+                <div class="score-rationale">Revenue +5.8% YoY (1Q26), consensus FY26E net profit +7–9%. Growth is store-count-driven (~700 new stores/yr = +4.4%) plus margin mix, NOT same-store demand: SSSG was −0.3% for FY2025 and only +1.9% in 1Q26. O2O stuck at ~11% of sales for 4 straight years. Cambodia cut from 112 to 63 stores in one quarter — overseas is not a growth story.</div>
+              </div>
+              <div class="score-num" style="color:var(--orange)">2/6</div>
+            </div>
+            <div class="score-row">
+              <div class="score-row-label" style="color:var(--teal)">Past Performance</div>
+              <div>
+                <div class="score-bar-track"><div class="score-bar-fill" style="width:66.7%;background:var(--teal)"></div></div>
+                <div class="score-rationale">Net profit CAGR +28.6% (2022 ฿13.3B → 2025 ฿28.2B) on margin expansion + falling interest; net margin 1.6% → 2.8% → 3.4% (1Q26); ROAE (ex-MI) 13.0% → 21.3%. Marked down because the quality metric broke: SSSG went NEGATIVE in FY2025 (−0.3%) for the first time outside COVID, and customers/store/day have not grown in 2 years (978 → 951 → 958).</div>
+              </div>
+              <div class="score-num" style="color:var(--teal)">4/6</div>
+            </div>
+            <div class="score-row">
+              <div class="score-row-label" style="color:var(--teal)">Financial Health</div>
+              <div>
+                <div class="score-bar-track"><div class="score-bar-fill" style="width:50.0%;background:var(--teal)"></div></div>
+                <div class="score-rationale">Total debt ฿432.1B incl. leases (net ~฿389B) — genuinely levered. BUT: TRIS upgraded A+ → AA- stable; adj debt/EBITDA 6.2x (Mar-21) → 4.2x → forecast 4.0–4.4x; net debt/adjusted equity 0.76x vs 2.0x bond covenant (2.6x headroom); interest cover 6.3x; avg bond coupon &lt;4%; negative cash cycle funds working capital for free. RED FLAG: goodwill ฿363.7B &gt; total equity ฿343.4B → tangible equity is NEGATIVE ~฿20B, so a Lotus&#x27;s impairment would hit the covenant directly.</div>
+              </div>
+              <div class="score-num" style="color:var(--teal)">3/6</div>
+            </div>
+            <div class="score-row">
+              <div class="score-row-label" style="color:var(--teal)">Dividend</div>
+              <div>
+                <div class="score-bar-track"><div class="score-bar-fill" style="width:66.7%;background:var(--teal)"></div></div>
+                <div class="score-rationale">DPS ฿1.65 for FY2025 = 3.44% gross / 3.09% net of the 10% Thai WHT at ฿48. Policy ≥50% of company-only profit, actual payout 53–61%. Raised 12 of the last 15 years (cut only in 2021–22 COVID). FY26E DPS ฿1.72–1.85 → forward 3.6–3.9%. Docked for cadence: paid ONCE a year and XD already passed on 30 Apr 2026 — a buyer today waits ~8.5 months for the first cash.</div>
+              </div>
+              <div class="score-num" style="color:var(--teal)">4/6</div>
+            </div>
+            <div class="note-box" style="margin-top:16px;">
+              <strong>Transparent Smartmall scoring</strong> — not Simply Wall St's proprietary engine. Scores reflect our independent research and conviction framework.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="section" id="s4">
+      <div class="section-header"><div class="section-num">4</div><div class="section-title">Revenue &amp; Expenses Breakdown</div></div>
+      <div class="card">
+        <div style="font-size:12.5px;color:var(--text-3);margin-bottom:20px;">FY2025 ended 31 Dec 2025 (THB billions, consolidated)</div>
+        <div class="sankey-wrap"><svg viewBox="0 -62.0 980 592.0" width="100%" style="font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;overflow:visible;"><defs><linearGradient id="gProfit" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#2fd6c0" stop-opacity="0.7"/><stop offset="100%" stop-color="#2fd6c0" stop-opacity="0.4"/></linearGradient><linearGradient id="gCost" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#8a7320" stop-opacity="0.85"/><stop offset="100%" stop-color="#8a7320" stop-opacity="0.55"/></linearGradient><linearGradient id="gExpense" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#d9a93a" stop-opacity="0.8"/><stop offset="100%" stop-color="#d9a93a" stop-opacity="0.5"/></linearGradient><linearGradient id="gNet" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#30d97b" stop-opacity="0.8"/><stop offset="100%" stop-color="#30d97b" stop-opacity="0.6"/></linearGradient></defs><polyline points="18.0,-51.2 205.5,-52.8 393.0,-54.3 580.5,-55.0 768.0,-56.0" fill="none" stroke="#2fd6c0" stroke-width="1.5" opacity="0.85"/><text x="18.0" y="-20.0" text-anchor="middle" font-size="9" fill="#526070">2022</text><text x="205.5" y="-20.0" text-anchor="middle" font-size="9" fill="#526070">2023</text><text x="393.0" y="-20.0" text-anchor="middle" font-size="9" fill="#526070">2024</text><text x="580.5" y="-20.0" text-anchor="middle" font-size="9" fill="#526070">2025</text><text x="768.0" y="-20.0" text-anchor="middle" font-size="9" fill="#526070">2026E</text><rect x="18" y="35.00" width="14" height="202.44" fill="#3b6fd4" rx="3"/><rect x="18" y="238.44" width="14" height="124.44" fill="#3360c2" rx="3"/><rect x="18" y="363.88" width="14" height="91.93" fill="#4a7ce0" rx="3"/><rect x="18" y="456.81" width="14" height="41.19" fill="#2f57b0" rx="3"/><rect x="220" y="35.00" width="18" height="460.00" fill="#3b6fd4" rx="3"/><rect x="400" y="35.00" width="18" height="104.52" fill="#2fd6c0" rx="3"/><rect x="400" y="140.52" width="18" height="355.44" fill="#8a7320" rx="3"/><rect x="580" y="35.00" width="18" height="10.12" fill="#2fd6c0" rx="3"/><rect x="580" y="46.12" width="18" height="0.00" fill="#d9a93a" rx="3"/><rect x="580" y="47.12" width="18" height="94.40" fill="#d9a93a" rx="3"/><rect x="750" y="35.00" width="18" height="12.86" fill="#30d97b" rx="3"/><rect x="750" y="48.86" width="18" height="3.25" fill="#d9a93a" rx="3"/><path d="M32.00,35.00 C116.60,35.00 135.40,35.00 220.00,35.00 L220.00,237.44 C135.40,237.44 116.60,237.44 32.00,237.44 Z" fill="#3b6fd4" opacity="0.40"/><path d="M32.00,238.44 C116.60,238.44 135.40,237.44 220.00,237.44 L220.00,361.88 C135.40,361.88 116.60,362.88 32.00,362.88 Z" fill="#3360c2" opacity="0.40"/><path d="M32.00,363.88 C116.60,363.88 135.40,361.88 220.00,361.88 L220.00,453.81 C135.40,453.81 116.60,455.81 32.00,455.81 Z" fill="#4a7ce0" opacity="0.40"/><path d="M32.00,456.81 C116.60,456.81 135.40,453.81 220.00,453.81 L220.00,495.00 C135.40,495.00 116.60,498.00 32.00,498.00 Z" fill="#2f57b0" opacity="0.40"/><path d="M238.00,35.00 C310.90,35.00 327.10,35.00 400.00,35.00 L400.00,139.52 C327.10,139.52 310.90,139.52 238.00,139.52 Z" fill="url(#gProfit)" opacity="0.5"/><path d="M238.00,140.52 C310.90,140.52 327.10,140.52 400.00,140.52 L400.00,495.95 C327.10,495.95 310.90,495.95 238.00,495.95 Z" fill="url(#gCost)" opacity="0.55"/><path d="M418.00,35.00 C490.90,35.00 507.10,35.00 580.00,35.00 L580.00,45.12 C507.10,45.12 490.90,45.12 418.00,45.12 Z" fill="url(#gProfit)" opacity="0.5"/><path d="M418.00,45.12 C490.90,45.12 507.10,46.12 580.00,46.12 L580.00,46.12 C507.10,46.12 490.90,45.12 418.00,45.12 Z" fill="url(#gExpense)" opacity="0.55"/><path d="M418.00,45.12 C490.90,45.12 507.10,47.12 580.00,47.12 L580.00,141.52 C507.10,141.52 490.90,139.52 418.00,139.52 Z" fill="url(#gExpense)" opacity="0.5"/><path d="M598.00,35.00 C666.40,35.00 681.60,35.00 750.00,35.00 L750.00,47.86 C681.60,47.86 666.40,47.86 598.00,47.86 Z" fill="url(#gNet)" opacity="0.5"/><path d="M598.00,47.86 C666.40,47.86 681.60,48.86 750.00,48.86 L750.00,52.11 C681.60,52.11 666.40,51.11 598.00,51.11 Z" fill="url(#gExpense)" opacity="0.55"/><text x="38" y="35.0" dy="10" font-size="11" fill="#e8edf5" font-weight="600">7-Eleven CVS</text><text x="38" y="35.0" dy="23" font-size="10.5" fill="#3b6fd4">฿436B · 44% of rev · 62% of EBIT</text><text x="38" y="238.4" dy="10" font-size="11" fill="#e8edf5" font-weight="600">Makro wholesale</text><text x="38" y="238.4" dy="23" font-size="10.5" fill="#3360c2">฿268B · 27% of rev · 14% of EBIT</text><text x="38" y="363.9" dy="10" font-size="11" fill="#e8edf5" font-weight="600">Lotus&#x27;s retail</text><text x="38" y="363.9" dy="23" font-size="10.5" fill="#4a7ce0">฿198B · 20% of rev · 13% of EBIT</text><text x="38" y="456.8" dy="10" font-size="11" fill="#e8edf5" font-weight="600">Others / services</text><text x="38" y="456.8" dy="23" font-size="10.5" fill="#2f57b0">฿88.7B · 9% of rev · 11% of EBIT</text><text x="229" y="8" text-anchor="middle" font-size="9.5" fill="#8fa3bf">Income</text><text x="229" y="8" dy="11" text-anchor="middle" font-size="9.5" fill="#8fa3bf">Statement</text><rect x="197.1" y="247.5" width="63.7" height="19.0" rx="9.5" fill="#3b6fd4"/><text x="229.0" y="257.0" dy="3.8" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">Revenue</text><text x="229" y="277" text-anchor="middle" font-size="11" font-weight="700" fill="#e8edf5">฿990.7B</text><text x="409" y="8" text-anchor="middle" font-size="9.5" fill="#8fa3bf">Gross</text><text x="409" y="8" dy="11" text-anchor="middle" font-size="9.5" fill="#8fa3bf">Profit</text><text x="409" y="87" text-anchor="middle" font-size="12" fill="#2fd6c0" font-weight="800" transform="rotate(-90 409 87)">฿225.1B</text><text x="589" y="8" text-anchor="middle" font-size="9.5" fill="#8fa3bf">Operating</text><text x="589" y="8" dy="11" text-anchor="middle" font-size="9.5" fill="#8fa3bf">Income</text><text x="589" y="40" text-anchor="middle" font-size="12" fill="#2fd6c0" font-weight="800" transform="rotate(-90 589 40)">฿21.8B</text><text x="759" y="8" text-anchor="middle" font-size="9.5" fill="#8fa3bf">Net</text><text x="759" y="8" dy="11" text-anchor="middle" font-size="9.5" fill="#8fa3bf">Income</text><rect x="720.0" y="24.4" width="78.0" height="18.0" rx="9.0" fill="#30d97b"/><text x="759.0" y="33.4" dy="3.5" text-anchor="middle" font-size="10" font-weight="700" fill="#0f1923">Net Income</text><text x="759" y="53" text-anchor="middle" font-size="11" font-weight="700" fill="#30d97b">฿27.7B</text><text x="409" y="322" text-anchor="middle" font-size="9.5" fill="#d9a93a" font-weight="700">CoR ฿765.5B</text><text x="602" y="49" font-size="10" fill="#d9a93a" font-weight="600">R&amp;D ฿0B</text><text x="602" y="105" font-size="10" fill="#d9a93a">SG&amp;A ฿203.3B</text><text x="772" y="53" font-size="10" fill="#d9a93a">Tax ฿7B</text><text x="665" y="2" text-anchor="middle" font-size="9.5" fill="#d9a93a" font-style="italic">+ Non-op ฿16.6B</text><text x="665" y="2" dy="12" text-anchor="middle" font-size="9.5" fill="#8fa3bf" font-style="italic">Pre-tax ฿38.4B</text><line x1="409" y1="496.0" x2="409" y2="518.0" stroke="#8a7320" stroke-width="2" stroke-dasharray="3,2" opacity="0.6"/><polygon points="409,523.0 405,516.0 413,516.0" fill="#8a7320" opacity="0.6"/><line x1="589" y1="141.5" x2="589" y2="163.5" stroke="#d9a93a" stroke-width="2" stroke-dasharray="3,2" opacity="0.6"/><polygon points="589,168.5 585,161.5 593,161.5" fill="#d9a93a" opacity="0.6"/><line x1="759" y1="52.1" x2="759" y2="74.1" stroke="#d9a93a" stroke-width="2" stroke-dasharray="3,2" opacity="0.6"/><polygon points="759,79.1 755,72.1 763,72.1" fill="#d9a93a" opacity="0.6"/><rect x="820" y="35" width="12" height="12" fill="#3b6fd4" rx="2" opacity="0.9"/><text x="836" y="45" font-size="10.5" fill="#8fa3bf">Revenue</text><rect x="820" y="54" width="12" height="12" fill="#d9a93a" rx="2" opacity="0.9"/><text x="836" y="64" font-size="10.5" fill="#8fa3bf">Cost / Expense</text><rect x="820" y="73" width="12" height="12" fill="#30d97b" rx="2" opacity="0.9"/><text x="836" y="83" font-size="10.5" fill="#8fa3bf">Net Income</text></svg></div>
+        <div class="sankey-caption">The whole thesis in one picture: 7-Eleven is 44% of revenue but 62% of EBIT — the wholesale/retail arm (CPAXT: Makro + Lotus&#x27;s) is 47% of revenue for only 27% of profit. 7-Eleven net margin 5.0% vs CPAXT 1.4%. Non-operating +฿16.6B = other income ฿31.5B (rental, service fees) less ฿14.9B interest. Net income ฿27.7B is AFTER ฿3.7B stripped out to CPAXT minorities. Segment values are apportioned from the company&#x27;s before-elimination percentages, so they are indicative, not the audited segment note.</div>
+      </div>
+    </div>
+    <div class="section" id="s5">
+      <div class="section-header"><div class="section-num">5</div><div class="section-title">Past Performance</div></div>
+      <div class="card">
+        <div style="font-size:12.5px;color:var(--text-3);margin-bottom:20px;">Revenue from sales &amp; services (฿B)</div>
+        <svg viewBox="0 0 720 240" width="100%" style="font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;overflow:visible;"><line x1="0" y1="220.0" x2="720" y2="220.0" stroke="rgba(255,255,255,0.08)" stroke-width="1"/><line x1="0" y1="148.8" x2="720" y2="148.8" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="4,4"/><line x1="0" y1="77.5" x2="720" y2="77.5" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="4,4"/><rect x="20.0" y="67.7" width="120.0" height="152.3" rx="5" fill="#17dbc9" opacity="0.55"/><text x="80.0" y="62.7" font-size="11" font-weight="700" fill="#17dbc9" text-anchor="middle">฿829.1B</text><text x="80.0" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">2022</text><rect x="160.0" y="55.5" width="120.0" height="164.5" rx="5" fill="#17dbc9" opacity="0.62"/><text x="220.0" y="50.5" font-size="11" font-weight="700" fill="#17dbc9" text-anchor="middle">฿895.3B</text><text x="220.0" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">2023</text><rect x="300.0" y="43.8" width="120.0" height="176.2" rx="5" fill="#17dbc9" opacity="0.69"/><text x="360.0" y="38.8" font-size="11" font-weight="700" fill="#17dbc9" text-anchor="middle">฿959B</text><text x="360.0" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">2024</text><rect x="440.0" y="38.0" width="120.0" height="182.0" rx="5" fill="#17dbc9" opacity="0.76"/><text x="500.0" y="33.0" font-size="11" font-weight="700" fill="#17dbc9" text-anchor="middle">฿990.7B</text><text x="500.0" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">2025</text><rect x="580.0" y="30.0" width="120.0" height="190.0" rx="5" fill="#17dbc9" opacity="1.00"/><rect x="580.0" y="30.0" width="120.0" height="190.0" rx="5" fill="none" stroke="#17dbc9" stroke-width="1.5" opacity="0.5"/><text x="640.0" y="25.0" font-size="11" font-weight="700" fill="#17dbc9" text-anchor="middle">฿1034B</text><text x="640.0" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">2026E</text></svg>
+        <div class="note-box" style="margin-top:16px;">3yr revenue CAGR +6.2%, but net profit CAGR +28.6% over the same window (฿13.3B → ฿28.2B) — the earnings story is margin + deleveraging, not volume. 2026E = UOB Kay Hian. Note 2021 is excluded: Makro/Lotus&#x27;s only consolidated from Oct-2021, so it isn&#x27;t comparable.</div>
+      </div>
+    </div>
+    <div class="section" id="s6">
+      <div class="section-header"><div class="section-num">6</div><div class="section-title">Future Growth</div></div>
+      <div class="card">
+        <div style="font-size:12.5px;color:var(--text-3);margin-bottom:24px;">Growth drivers — guided &amp; estimated</div>
+        
+        <div class="growth-row">
+          <div class="growth-label">New 7-Eleven stores planned 2026 (Thailand)</div>
+          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:4%;background:linear-gradient(90deg,#17dbc9,#00c4b4);">~700 · from 16,084 base</div></div>
+          <div class="growth-value" style="color:var(--teal);">~700 · from 16,084 base</div>
+        </div>
+        <div class="growth-row">
+          <div class="growth-label">SSSG 1Q26 (vs FY2025 −0.3%)</div>
+          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:15%;background:linear-gradient(90deg,#17dbc9,#00c4b4);">+1.9% · 2Q26E only +0.6–1.0%</div></div>
+          <div class="growth-value" style="color:var(--teal);">+1.9% · 2Q26E only +0.6–1.0%</div>
+        </div>
+        <div class="growth-row">
+          <div class="growth-label">Consensus FY2026E net profit</div>
+          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:10%;background:linear-gradient(90deg,#17dbc9,#00c4b4);">฿31.0B</div></div>
+          <div class="growth-value" style="color:var(--teal);">฿31.0B</div>
+        </div>
+        <div class="growth-row">
+          <div class="growth-label">CVS gross margin trend</div>
+          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:29%;background:linear-gradient(90deg,#17dbc9,#00c4b4);">29.4% FY25 → 29.6% 1Q26</div></div>
+          <div class="growth-value" style="color:var(--teal);">29.4% FY25 → 29.6% 1Q26</div>
+        </div>
+        <div class="growth-row">
+          <div class="growth-label">CAPEX 2026 (CVS only)</div>
+          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:15%;background:linear-gradient(90deg,#17dbc9,#00c4b4);">฿12.0–13.6B · well under ฿40B company-only CFO</div></div>
+          <div class="growth-value" style="color:var(--teal);">฿12.0–13.6B · well under ฿40B company-only CFO</div>
+        </div>
+        <div class="note-box" style="margin-top:20px;">Growth comes from three levers, in order of reliability: (1) 700 new stores/yr, self-funded; (2) product mix into higher-margin food/RTD (food now 76.3% of sales, up from 73.7% in 2021); (3) falling interest expense as the Tesco-era debt runs off. NOT from same-store demand — and the &#x27;ไทยช่วยไทยพลัส&#x27; 60/40 co-pay scheme (1 Jun – 30 Sep 2026) explicitly bars franchise convenience stores from registering, so it diverts subsidised spending AWAY from 7-Eleven for all of Q3.</div>
+      </div>
+    </div>
+    <div class="section" id="s7">
+      <div class="section-header"><div class="section-num">7</div><div class="section-title">Financial Health</div></div>
+      <div class="card">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px;align-items:end;">
+          <div style="background:var(--teal-dim);border:1px solid rgba(23,219,201,0.3);border-radius:12px;padding:20px;">
+            <div style="font-size:11px;color:var(--teal);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;font-weight:700;">Cash &amp; Equivalents</div>
+            <div style="font-size:34px;font-weight:900;color:var(--teal);letter-spacing:-0.03em;">฿43B</div>
+            <div class="health-bar-track" style="margin-top:12px;"><div class="health-bar-fill" style="width:10%;background:var(--teal);"></div></div>
+          </div>
+          <div style="background:rgba(240,153,94,0.08);border:1px solid rgba(240,153,94,0.2);border-radius:12px;padding:20px;">
+            <div style="font-size:11px;color:var(--orange);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;font-weight:700;">Total Debt</div>
+            <div style="font-size:34px;font-weight:900;color:var(--orange);letter-spacing:-0.03em;">฿432B</div>
+            <div class="health-bar-track" style="margin-top:12px;"><div class="health-bar-fill" style="width:100%;background:var(--orange);"></div></div>
+          </div>
+        </div>
+        <div style="text-align:center;padding:24px;background:var(--surface-2);border-radius:12px;border:1px solid var(--border);margin-bottom:20px;">
+          <div style="font-size:11px;color:var(--text-3);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;">Net Position</div>
+          <div style="font-size:26px;font-weight:900;color:var(--teal);letter-spacing:-0.04em;line-height:1.1;">Net debt ~฿389B incl. leases (฿270B ex-lease)</div>
+        </div>
+        
+        <div class="health-row">
+          <div class="health-label">Net debt / mkt cap</div>
+          <div class="health-bar-track"><div class="health-bar-fill" style="width:91%;background:var(--orange);"></div></div>
+          <div class="health-value">-91%</div>
+        </div>
+        <div class="note-box orange" style="margin-top:16px;">Interest-bearing debt ex-lease has fallen from the 2021 peak ฿373.9B to ฿313.6B (31 Mar 2026) = −16.1%, and ฿12.7B was repaid in 1Q26 alone. Lease liabilities went the other way (฿88.5B → ฿118.6B, +34%) because of 700 stores/yr, so TOTAL debt is only −6.6% from peak — the honest number. What matters is the ratio, and that improved decisively: TRIS adjusted debt/EBITDA 6.2x (Mar-21) → 4.7x (2023) → 4.2x → forecast 4.0–4.4x through 2027, driving the A+ → AA- upgrade. Bond covenant net debt/adjusted equity ≤2.0x sits at 0.76x. Caveat: ฿363.7B goodwill exceeds ฿343.4B total equity, so tangible equity is negative and a Lotus&#x27;s write-down would tighten that covenant fast.</div>
+      </div>
+    </div>
+    <div class="section" id="s8">
+      <div class="section-header"><div class="section-num">8</div><div class="section-title">Dividend</div></div>
+      <div class="card">
+        <div class="div-row">
+          <div class="div-big">3.44% gross · 3.09% net</div>
+          <div class="div-note">฿1.65/share for FY2025 (XD 30 Apr 2026, paid 22 May 2026) — a SINGLE annual payment, so the next cash is ~late Apr 2027. Policy is ≥50% of company-only net profit; actual payout has run 53–61% for four years. Broker FY26E DPS ฿1.72–1.85 → forward yield 3.6–3.9% gross. Thai-listed, so withholding is 10% (not the 30% a US name costs through a DR), zero FX risk and no DR fee — the after-tax gap vs a foreign 3.4% yielder is roughly 20 percentage points of the dividend.</div>
+        </div>
+        
+      </div>
+    </div>
+    <div class="section" id="s9">
+      <div class="section-header"><div class="section-num">9</div><div class="section-title">Rewards &amp; Risks</div></div>
+      <div class="card">
+        <div class="two-col">
+          <div class="rr-col rewards"><h4>Rewards</h4><div class="rr-item"><div class="rr-dot"></div><div>7-Eleven is 44% of revenue but 62% of EBIT — and that EBIT share has climbed every year (55.9% → 59.1% → 62.2% → 73% in 1Q26). The company is becoming MORE 7-Eleven, not less.</div></div><div class="rr-item"><div class="rr-dot"></div><div>Deleveraging is real and third-party verified: TRIS upgraded A+ → AA- on &#x27;improved capital structure and strong cash flow&#x27;; adj debt/EBITDA 6.2x → 4.2x; interest expense ฿16.8B (2022) → ฿14.9B (2025), and every baht saved drops almost straight to the bottom line.</div></div><div class="rr-item"><div class="rr-dot"></div><div>Valuation is below its own −1SD: 14.4x trailing vs 27.2x 5-year mean. Consensus is 22 Buy / 0 Hold / 0 Sell with a ฿61.6 mean TP.</div></div><div class="rr-item"><div class="rr-dot"></div><div>Structurally cheap capital: cash cycle −25 days consolidated (−32 days company-only) means suppliers fund the working capital; ROE 21.3% consolidated / 24.8% company-only.</div></div><div class="rr-item"><div class="rr-dot"></div><div>Governance stress-test PASSED: on 29 May 2026 minorities voted 96.41% against transferring Counter Service, Thai Smart Card and CPAXT to CP Group&#x27;s virtual-bank vehicle ACMH — after 13 independent directors had already opposed it. Minority veto works here.</div></div><div class="rr-item"><div class="rr-dot"></div><div>[position details omitted on the public site]</div></div></div>
+          <div class="rr-col risks"><h4>Risks</h4><div class="rr-item bold-risk"><div class="rr-dot"></div><div><strong>SSSG MAY BE STRUCTURALLY STUCK NEAR ZERO — this is the whole bear case. FY2025 SSSG was −0.3% (first non-COVID negative ever) and customers/store/day have gone 978 → 951 → 958 over two years. Revenue is being held up by ticket size (฿85 → ฿90) and food mix, both of which have ceilings. If SSSG stays 0–1% forever, the fair multiple is 11–12x, not 16–18x, and the stock is worth ฿38–42 — a 12–21% loss from ฿48.</strong></div></div><div class="rr-item bold-risk"><div class="rr-dot"></div><div><strong>&#x27;ไทยช่วยไทยพลัส&#x27; 60/40 co-pay scheme (1 Jun – 30 Sep 2026) explicitly excludes franchise convenience stores from registering as merchants. That is state money routed deliberately AWAY from 7-Eleven and into small shops — Q2 takes one month of it, Q3 takes the full quarter. Expect the Q3 print (~Nov 2026) to be ugly.</strong></div></div><div class="rr-item"><div class="rr-dot"></div><div>Goodwill ฿363.7B exceeds total equity ฿343.4B — tangible equity is negative ~฿20B. A Lotus&#x27;s impairment (its profit IS shrinking) would hit the ≤2.0x net-debt/adjusted-equity covenant and force a TRIS review.</div></div><div class="rr-item"><div class="rr-dot"></div><div>CPAXT is bleeding: Q2/2026 net profit ฿1,874M −18% YoY, GPM 14.3% → 14.1%, opex +7.2% on energy and last-mile; H1 −5.3%; Makro SSSG −1%, Lotus&#x27;s SSSG −4%. UOB Kay Hian cut CPAXT to HOLD, TP ฿14.50. CPALL owns ~60%.</div></div><div class="rr-item"><div class="rr-dot"></div><div>CP Group already TRIED to move cash-generative subsidiaries out of CPALL in 2026. The Bank of Thailand left alternative routes open (partial transfer, reduced shareholding, licence return) — a smaller version that avoids a shareholder vote is still possible.</div></div><div class="rr-item"><div class="rr-dot"></div><div>Thai macro is the worst in ASEAN: household debt 86.7% of GDP, 2026 GDP growth forecast ~1.6%, headline inflation negative. Defensive does not mean immune — FY2025 SSSG proved that.</div></div><div class="rr-item"><div class="rr-dot"></div><div>Cost squeeze in Q2–Q3: Middle East oil prices raise DC logistics cost and electricity is a heavy input for a cold-chain store network. CPAXT has already confirmed this hit.</div></div><div class="rr-item"><div class="rr-dot"></div><div>Overseas expansion is failing quietly — Cambodia went from 112 to 63 stores in a single quarter (−49). Do not pay for international optionality.</div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="section" id="s10">
+      <div class="section-header"><div class="section-num">10</div><div class="section-title">Stock Council Verdict</div></div>
+      <div class="verdict-grid"></div>
+      
+      <div class="overall-verdict">
+        <div class="ov-stance">BUY</div>
+        <div class="ov-detail">
+          <div class="ov-label">Smartmall Overall Stance</div>
+          <div class="ov-target"><strong>BUY · conviction Medium · staged 3-tranche entry (no position yet)</strong> · Fair value target <strong>฿56 12-month (fair-value range ฿52–60) · bear ฿38–42 if SSSG stays flat</strong></div>
+          <div class="ov-add-zone">Add zone: <strong>Tranche 1 ฿46.00–48.50 (40%) — AFTER the Q2 print lands 12–14 Aug · Tranche 2 ฿43.00–45.50 (35%) — likely Sep–Nov when Q3 takes the full co-pay hit · Tranche 3 ≤฿41.50 (25%). Target size 8–10% of book (฿330–420k), NOT 20%+: undervaluation is moderate (17%), conviction is not High. Walk away if SSSG is negative in BOTH Q3 and Q4 2026, if TRIS goes Negative, or if Lotus&#x27;s goodwill is impaired.</strong></div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">Generated by Smartmall · Built from CPALL primary filings (MD&amp;A 1Q26/2Q25/3Q25 + FY2025 &amp; 1Q26 investor briefings filed with SET), TRIS Rating, CPAXT 2Q26 results, and UOB Kay Hian / Globlex / Asia Plus / FSS research. Q2/2026 results were NOT yet published when this card was built (verified 404 on the CPALL IR site, 12 Aug 2026 06:48 ICT) — expected 12–14 Aug 2026. Not a live feed, not financial advice.</div>
+  </main>
+</div>
+<script>
+(function () {
+  var links = Array.prototype.slice.call(document.querySelectorAll('.nav-item'));
+  var map = {};
+  links.forEach(function (a) { var id = (a.getAttribute('href') || '').slice(1); if (id) map[id] = a; });
+  var sections = Object.keys(map).map(function (id) { return document.getElementById(id); }).filter(Boolean);
+  if (!('IntersectionObserver' in window) || !sections.length) return;
+  var obs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        links.forEach(function (l) { l.classList.remove('active'); });
+        var active = map[e.target.id];
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+  sections.forEach(function (s) { obs.observe(s); });
+})();
+(function () {
+  document.querySelectorAll('.chart-section').forEach(function (sec) {
+    var tabs = sec.querySelectorAll('.chart-tab');
+    var panes = sec.querySelectorAll('.chart-pane');
+    tabs.forEach(function (t) {
+      t.addEventListener('click', function () {
+        var r = t.getAttribute('data-range');
+        tabs.forEach(function (x) { x.classList.toggle('active', x === t); });
+        panes.forEach(function (p) { p.classList.toggle('active', p.getAttribute('data-range') === r); });
+      });
+    });
+  });
+})();
+</script>
+</body>
+</html>
