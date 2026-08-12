@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ORCL19 — Oracle Corporation · Smartmall Stock Card</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #19243c; --surface: #222f49; --surface-2: #2c3b58; --border: #3a4c6b;
+  --teal: #17dbc9; --teal-mid: #00c4b4; --teal-dim: rgba(23,219,201,0.15); --teal-fill: rgba(23,219,201,0.22);
+  --orange: #f0995e; --orange-mid: #dd8449; --orange-dim: rgba(240,153,94,0.18);
+  --green: #3ee08a; --green-dim: rgba(62,224,138,0.15); --red: #ef6a6a; --red-dim: rgba(239,106,106,0.15);
+  --amber: #f3d074; --text-1: #eef3fb; --text-2: #b0c1d8; --text-3: #8295ac;
+  --number: #d6e2f2; --tag-bg: #23406a; --badge-teal: #0c3a38; --score-track: #2c3b58;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text-1); font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Segoe UI', Arial, sans-serif; line-height: 1.5; min-height: 100vh; display: flex; justify-content: center; padding: 40px 20px 80px; }
+.page { width: 1240px; max-width: 100%; display: grid; grid-template-columns: 220px 1fr; gap: 0; align-items: start; }
+.sidenav { position: sticky; top: 40px; padding: 32px 0 32px 0; }
+.sidenav-logo { display: flex; align-items: center; gap: 8px; margin-bottom: 20px; padding-left: 8px; text-decoration: none; transition: opacity 0.15s; }
+.sidenav-logo:hover { opacity: 0.8; }
+.sidenav-logo .dot { width: 28px; height: 28px; background: var(--teal); border-radius: 50%; flex-shrink: 0; }
+.sidenav-logo span { font-size: 13px; font-weight: 700; color: var(--text-2); letter-spacing: 0.05em; text-transform: uppercase; }
+.nav-item { display: flex; align-items: center; gap: 12px; padding: 10px 16px; border-radius: 10px; cursor: pointer; margin-bottom: 2px; transition: background 0.15s; text-decoration: none; }
+.nav-item:hover { background: var(--surface); }
+.nav-item.active { background: var(--teal-dim); border-left: 3px solid var(--teal); }
+.nav-back { margin-bottom: 16px; }
+.nav-back .nav-num { color: var(--teal); font-size: 14px; }
+.nav-back .nav-label { color: var(--text-2); font-weight: 600; }
+.nav-back:hover .nav-label { color: var(--teal); }
+.nav-num { font-size: 11px; font-weight: 700; color: var(--text-3); width: 18px; flex-shrink: 0; }
+.nav-label { font-size: 13px; font-weight: 500; color: var(--text-2); }
+.nav-item.active .nav-label { color: var(--teal); }
+.hero-verdict { display: flex; justify-content: flex-end; align-items: center; gap: 12px; margin-top: 14px; }
+.hv-stance { font-size: 13px; font-weight: 800; letter-spacing: 0.04em; border: 1.5px solid; border-radius: 999px; padding: 5px 16px; text-transform: uppercase; }
+.hv-score { font-size: 13px; color: var(--text-3); font-weight: 600; }
+.hv-score b { font-size: 19px; color: var(--text-1); font-weight: 800; }
+.main { min-width: 0; padding: 0 0 0 32px; }
+.section { margin-bottom: 40px; scroll-margin-top: 20px; }
+.section-header { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
+.section-num { width: 32px; height: 32px; border-radius: 50%; background: var(--surface-2); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: var(--text-2); flex-shrink: 0; }
+.section-title { font-size: 17px; font-weight: 700; color: var(--text-1); letter-spacing: -0.01em; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px 32px; margin-bottom: 16px; }
+.header-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 24px; }
+.header-ticker { display: flex; align-items: center; gap: 14px; margin-bottom: 8px; }
+.ticker-logo { width: 48px; height: 48px; background: linear-gradient(135deg, #1a3550 0%, #2a4a70 100%); border-radius: 12px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; color: var(--teal); letter-spacing: 0.02em; }
+.ticker-name h1 { font-size: 22px; font-weight: 800; color: var(--text-1); letter-spacing: -0.02em; line-height: 1.2; }
+.ticker-name .exch { font-size: 12px; color: var(--text-3); margin-top: 2px; }
+.header-price { text-align: right; }
+.price-big { font-size: 36px; font-weight: 800; color: var(--text-1); letter-spacing: -0.03em; line-height: 1; }
+.price-secondary { font-size: 14px; font-weight: 600; color: var(--text-3); margin-top: 5px; }
+.price-sub { font-size: 13px; color: var(--text-3); margin-top: 6px; }
+.badges { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
+.badge { display: inline-flex; align-items: center; gap: 5px; padding: 5px 11px; border-radius: 100px; font-size: 11.5px; font-weight: 600; letter-spacing: 0.02em; }
+.badge-teal { background: var(--teal-dim); color: var(--teal); border: 1px solid rgba(23,219,201,0.3); }
+.badge-orange { background: var(--orange-dim); color: var(--orange); border: 1px solid rgba(240,153,94,0.3); }
+.badge-muted { background: var(--surface-2); color: var(--text-2); border: 1px solid var(--border); }
+.range-bar-wrap { margin-top: 4px; }
+.range-label { display: flex; justify-content: space-between; font-size: 11.5px; color: var(--text-3); margin-bottom: 8px; }
+.range-bar-track { height: 6px; border-radius: 4px; background: var(--surface-2); position: relative; overflow: visible; }
+.range-bar-fill { height: 100%; border-radius: 4px; background: linear-gradient(90deg, var(--teal-mid) 0%, var(--teal) 100%); }
+.range-bar-marker { position: absolute; top: 50%; transform: translate(-50%, -50%); width: 14px; height: 14px; border-radius: 50%; background: #fff; border: 2px solid var(--teal); box-shadow: 0 0 0 3px rgba(23,219,201,0.3); }
+.range-bar-label { position: absolute; bottom: -20px; transform: translateX(-50%); font-size: 11px; font-weight: 700; color: var(--text-1); white-space: nowrap; }
+.range-sublabels { margin-top: 22px; font-size: 11.5px; color: var(--text-3); display: flex; justify-content: space-between; }
+.range-sublabels span { font-weight: 600; color: var(--text-2); }
+.snowflake-grid { display: grid; grid-template-columns: 240px 1fr; gap: 32px; align-items: start; }
+.score-rows { flex: 1; }
+.score-row { display: grid; grid-template-columns: 130px 1fr 36px; gap: 12px; align-items: center; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+.score-row:last-child { border-bottom: none; }
+.score-row-label { font-size: 13px; font-weight: 600; color: var(--text-2); }
+.score-bar-track { height: 8px; background: var(--score-track); border-radius: 4px; overflow: hidden; }
+.score-bar-fill { height: 100%; border-radius: 4px; }
+.score-num { font-size: 13px; font-weight: 700; text-align: right; }
+.score-rationale { grid-column: 1 / -1; font-size: 11.5px; color: var(--text-3); padding-top: 2px; line-height: 1.5; }
+.snowflake-total { text-align: center; margin-top: 16px; }
+.snowflake-total .num { font-size: 28px; font-weight: 800; color: var(--teal); }
+.snowflake-total .denom { font-size: 14px; color: var(--text-3); }
+.snowflake-total .label { font-size: 11px; color: var(--text-3); margin-top: 4px; }
+.sankey-wrap { width: 100%; overflow-x: auto; }
+.sankey-caption { margin-top: 16px; font-size: 12.5px; color: var(--text-2); background: var(--surface-2); border-radius: 8px; padding: 10px 14px; border-left: 3px solid var(--teal); }
+.health-row { display: flex; align-items: center; gap: 16px; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+.health-row:last-child { border-bottom: none; }
+.health-label { width: 140px; font-size: 13px; color: var(--text-2); flex-shrink: 0; }
+.health-bar-track { flex: 1; height: 8px; background: var(--score-track); border-radius: 4px; overflow: hidden; position: relative; }
+.health-bar-fill { height: 100%; border-radius: 4px; background: var(--teal); }
+.health-value { width: 90px; text-align: right; font-size: 13px; font-weight: 700; color: var(--number); }
+.chart-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 18px; flex-wrap: wrap; }
+.chart-price { font-size: 30px; font-weight: 900; color: var(--text-1); letter-spacing: -0.03em; }
+.chart-sub { font-size: 12px; color: var(--text-3); margin-top: 4px; }
+.chart-tabs { display: flex; gap: 8px; flex-wrap: wrap; }
+.chart-tab { background: var(--surface-2); border: 1px solid var(--border); border-radius: 9px; padding: 7px 13px; font-size: 12px; font-weight: 700; color: var(--text-3); cursor: pointer; display: flex; gap: 6px; align-items: center; font-family: inherit; transition: all .15s; }
+.chart-tab:hover { color: var(--text-1); }
+.chart-tab.active { border-color: var(--teal); color: var(--text-1); background: var(--teal-dim); }
+.chart-tab span { font-size: 11px; font-weight: 600; }
+.chart-pane { display: none; }
+.chart-pane.active { display: block; }
+.chart-svg { width: 100%; height: 240px; display: block; }
+.rsi-block { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--border); }
+.rsi-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 8px; }
+.rsi-title { font-size: 13px; font-weight: 700; color: var(--text-2); letter-spacing: 0.02em; }
+.rsi-now { font-size: 14px; font-weight: 800; }
+.rsi-chartwrap { position: relative; padding-left: 26px; }
+.rsi-axis { position: absolute; left: 0; top: 0; height: 120px; width: 22px; display: flex; flex-direction: column; justify-content: space-between; }
+.rsi-axis span { font-size: 10px; color: var(--text-3); line-height: 1; }
+.rsi-svg { width: 100%; height: 120px; display: block; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.verdict-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
+.verdict-chip { background: var(--surface-2); border: 1px solid var(--border); border-radius: 14px; padding: 20px; }
+.verdict-chip .agent { font-size: 11px; font-weight: 700; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+.verdict-chip .stance { font-size: 15px; font-weight: 800; color: var(--text-1); margin-bottom: 6px; }
+.verdict-chip .conviction { display: inline-block; font-size: 10.5px; font-weight: 700; padding: 2px 8px; border-radius: 100px; background: var(--teal-dim); color: var(--teal); margin-bottom: 8px; border: 1px solid rgba(23,219,201,0.25); }
+.verdict-chip .rationale { font-size: 12px; color: var(--text-3); line-height: 1.5; }
+.overall-verdict { background: linear-gradient(135deg, rgba(23,219,201,0.12) 0%, rgba(0,169,157,0.06) 100%); border: 1px solid rgba(23,219,201,0.3); border-radius: 14px; padding: 24px 28px; display: flex; align-items: center; gap: 24px; }
+.ov-stance { font-size: 28px; font-weight: 900; color: var(--teal); letter-spacing: -0.02em; flex-shrink: 0; }
+.ov-detail { flex: 1; }
+.ov-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-3); margin-bottom: 4px; }
+.ov-target { font-size: 14px; color: var(--text-2); }
+.ov-target strong { color: var(--text-1); }
+.ov-add-zone { font-size: 13px; color: var(--text-3); margin-top: 4px; }
+.rr-col h4 { font-size: 13px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 14px; }
+.rr-col.rewards h4 { color: var(--green); }
+.rr-col.risks h4 { color: var(--red); }
+.rr-item { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 12px; font-size: 13px; color: var(--text-2); line-height: 1.5; }
+.rr-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; margin-top: 6px; }
+.rr-col.rewards .rr-dot { background: var(--green); }
+.rr-col.risks .rr-dot { background: var(--red); }
+.rr-item.bold-risk { color: var(--text-1); font-weight: 600; }
+.rr-item.bold-risk .rr-dot { background: var(--red); box-shadow: 0 0 0 3px rgba(232,93,93,0.2); }
+.stat-row { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 16px; }
+.stat-pill { background: var(--surface-2); border: 1px solid var(--border); border-radius: 10px; padding: 10px 16px; min-width: 130px; }
+.stat-pill-label { font-size: 11px; color: var(--text-3); margin-bottom: 3px; text-transform: uppercase; letter-spacing: 0.04em; }
+.stat-pill-value { font-size: 18px; font-weight: 800; color: var(--number); }
+.stat-pill-sub { font-size: 11px; color: var(--text-3); margin-top: 2px; }
+.div-row { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+.div-big { font-size: 52px; font-weight: 900; color: var(--amber); letter-spacing: -0.04em; line-height: 1; }
+.div-note { font-size: 13px; color: var(--text-2); max-width: 460px; line-height: 1.6; }
+.div-trend { margin-top: 20px; font-size: 12.5px; color: var(--text-3); }
+.footer { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border); font-size: 11px; color: var(--text-3); line-height: 1.7; text-align: center; }
+.growth-row { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+.growth-label { width: 170px; font-size: 13px; color: var(--text-2); flex-shrink: 0; }
+.growth-bar-track { flex: 1; height: 28px; background: var(--score-track); border-radius: 8px; overflow: hidden; position: relative; }
+.growth-bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; padding-left: 10px; font-size: 12px; font-weight: 700; color: rgba(255,255,255,0.9); white-space: nowrap; }
+.growth-value { width: 90px; text-align: right; font-size: 14px; font-weight: 700; color: var(--number); flex-shrink: 0; }
+.biz-summary { font-size: 14px; color: var(--text-1); line-height: 1.65; margin-bottom: 22px; }
+.biz-rev-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-3); font-weight: 700; margin-bottom: 6px; }
+.biz-row { display: flex; align-items: baseline; gap: 14px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+.biz-row:last-child { border-bottom: none; }
+.biz-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; align-self: center; }
+.biz-name { font-size: 13px; font-weight: 700; color: var(--text-1); width: 92px; flex-shrink: 0; }
+.biz-pct { font-size: 13px; font-weight: 800; color: var(--teal); width: 46px; flex-shrink: 0; text-align: right; }
+.biz-desc { font-size: 12.5px; color: var(--text-2); line-height: 1.5; }
+.note-box { background: var(--surface-2); border-left: 3px solid var(--teal); border-radius: 0 8px 8px 0; padding: 12px 16px; font-size: 12.5px; color: var(--text-2); margin-top: 16px; line-height: 1.6; }
+.note-box.orange { border-left-color: var(--orange); }
+.note-box.red { border-left-color: var(--red); }
+</style>
+</head>
+<body>
+<div class="page">
+  <nav class="sidenav"><a class="sidenav-logo" href="index.html"><div class="dot"></div><span>Smartmall</span></a><a class="nav-item nav-back" href="index.html"><span class="nav-num">&larr;</span><span class="nav-label">All Stock Cards</span></a><a class="nav-item active" href="#s1"><span class="nav-num">1</span><span class="nav-label">Overview</span></a><a class="nav-item" href="#s2"><span class="nav-num">2</span><span class="nav-label">Price History</span></a><a class="nav-item" href="#s3"><span class="nav-num">3</span><span class="nav-label">Snowflake Score</span></a><a class="nav-item" href="#s4"><span class="nav-num">4</span><span class="nav-label">Revenue &amp; Expenses</span></a><a class="nav-item" href="#s5"><span class="nav-num">5</span><span class="nav-label">Past Performance</span></a><a class="nav-item" href="#s6"><span class="nav-num">6</span><span class="nav-label">Future Growth</span></a><a class="nav-item" href="#s7"><span class="nav-num">7</span><span class="nav-label">Financial Health</span></a><a class="nav-item" href="#s8"><span class="nav-num">8</span><span class="nav-label">Dividend</span></a><a class="nav-item" href="#s9"><span class="nav-num">9</span><span class="nav-label">Rewards &amp; Risks</span></a><a class="nav-item" href="#s10"><span class="nav-num">10</span><span class="nav-label">Council Verdict</span></a></nav>
+  <main class="main">
+    
+    <div class="section" id="s1">
+      <div class="card">
+        <div class="header-top">
+          <div>
+            <div class="header-ticker">
+              <div class="ticker-logo">ORCL19</div>
+              <div class="ticker-name">
+                <h1>Oracle Corporation</h1>
+                <div class="exch">SET DR · NYSE: ORCL</div>
+              </div>
+            </div>
+          </div>
+          <div class="header-price">
+            <div class="price-big">฿5.00</div>
+            <div class="price-secondary">≈ US$145.48</div>
+            <div class="price-sub">as of 2026-08-12</div>
+            <div class="hero-verdict"><span class="hv-stance" style="color:var(--green);border-color:var(--green);">WATCH · conviction Medium-High · 🚀 HIGH GROWTH</span><span class="hv-score"><b>12</b>/30</span></div>
+          </div>
+        </div>
+        <div class="badges"><span class="badge badge-teal"><svg width="10" height="10" viewBox="0 0 10 10"><circle cx="5" cy="5" r="4" fill="currentColor" opacity="0.6"/></svg> Thai DR: ORCL19 (Yuanta · ratio 1,000:1)</span><span class="badge badge-teal">Buyable in THB</span><span class="badge badge-muted">AI infrastructure</span><span class="badge badge-muted">mega-cap</span><span class="badge badge-muted">leveraged</span><span class="badge badge-muted">BBB− credit</span><span class="badge badge-muted">US DR</span><span class="badge badge-muted">Software / Cloud Infrastructure</span><span class="badge badge-muted">Enterprise database + AI cloud (OCI)</span><span class="badge badge-muted">United States</span></div>
+        
+        <div style="margin-bottom:6px;font-size:12px;font-weight:600;color:var(--text-3);text-transform:uppercase;letter-spacing:0.05em;">52-Week Range</div>
+        <div class="range-bar-wrap">
+          <div class="range-label"><span>3.81 &nbsp; 52W Low</span><span>52W High &nbsp; 10.75</span></div>
+          <div class="range-bar-track">
+            <div class="range-bar-fill" style="width:17.1%"></div>
+            <div class="range-bar-marker" style="left:17.1%"><div class="range-bar-label">5</div></div>
+          </div>
+          <div class="range-sublabels" style="margin-top:28px;">
+            <span>Current <span>฿5.00</span></span>
+            <span>Distance from low: <span>+31%</span></span>
+          </div>
+        </div>
+        <div class="stat-row" style="margin-top:28px;margin-bottom:0;"><div class="stat-pill"><div class="stat-pill-label">Market Cap</div><div class="stat-pill-value">~$419B</div></div><div class="stat-pill"><div class="stat-pill-label">P/E (guide FY27)</div><div class="stat-pill-value">18.1x</div><div class="stat-pill-sub">EPS $8.05</div></div><div class="stat-pill"><div class="stat-pill-label">P/E trailing (สะอาด)</div><div class="stat-pill-value">~28.3x</div><div class="stat-pill-sub">ตัดกำไรพิเศษ Ampere/Bloom</div></div><div class="stat-pill"><div class="stat-pill-label">EV/EBITDA</div><div class="stat-pill-value">18.5x</div><div class="stat-pill-sub">รวม lease</div></div><div class="stat-pill"><div class="stat-pill-label">Net debt/EBITDA</div><div class="stat-pill-value">4.53x</div><div class="stat-pill-sub">S&amp;P: BBB−</div></div><div class="stat-pill"><div class="stat-pill-label">FCF FY2026</div><div class="stat-pill-value">−$23.7B</div></div><div class="stat-pill"><div class="stat-pill-label">RPO (backlog)</div><div class="stat-pill-value">$638B</div><div class="stat-pill-sub">9.5× รายได้ปีล่าสุด</div></div><div class="stat-pill"><div class="stat-pill-label">Div Yield</div><div class="stat-pill-value">1.37%</div></div></div>
+      </div>
+    </div>
+    <div class="section" id="s2">
+      <div class="section-header"><div class="section-num">2</div><div class="section-title">Price History</div></div>
+      <div class="card chart-section">
+        <div class="chart-head">
+          <div><div class="chart-price">$145.48</div><div class="chart-sub">ORCL · $ · snapshot 2026-08-12</div></div>
+          <div class="chart-tabs"><button class="chart-tab" data-range="1D">1D<span style="color:#f5736b;">-2.1%</span></button><button class="chart-tab" data-range="1W">1W<span style="color:#30d97b;">+0.7%</span></button><button class="chart-tab" data-range="1M">1M<span style="color:#30d97b;">+10.6%</span></button><button class="chart-tab active" data-range="1Y">1Y<span style="color:#f5736b;">-42.0%</span></button><button class="chart-tab" data-range="5Y">5Y<span style="color:#30d97b;">+72.2%</span></button></div>
+        </div>
+        
+        <div class="chart-pane" data-range="1D">
+          <svg class="chart-svg" viewBox="0 0 900 240" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="cg21D" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#f5736b" stop-opacity="0.22"/>
+              <stop offset="1" stop-color="#f5736b" stop-opacity="0"/></linearGradient></defs>
+            <path d="M0.0 18.0 L0.0 18.0 L11.7 52.0 L23.4 102.0 L35.1 138.1 L46.8 194.8 L58.4 164.8 L70.1 110.7 L81.8 102.7 L93.5 44.9 L105.2 80.7 L116.9 138.1 L128.6 127.7 L140.3 139.6 L151.9 157.4 L163.6 153.4 L175.3 128.7 L187.0 138.1 L198.7 135.0 L210.4 160.9 L222.1 186.9 L233.8 179.7 L245.5 183.6 L257.1 175.0 L268.8 169.3 L280.5 206.4 L292.2 218.0 L303.9 189.8 L315.6 198.5 L327.3 205.3 L339.0 201.5 L350.6 204.9 L362.3 195.5 L374.0 207.4 L385.7 214.8 L397.4 221.3 L409.1 217.3 L420.8 217.8 L432.5 203.4 L444.2 208.1 L455.8 193.0 L467.5 197.8 L479.2 200.5 L490.9 192.6 L502.6 202.2 L514.3 203.4 L526.0 202.5 L537.7 205.9 L549.4 200.6 L561.0 201.7 L572.7 203.4 L584.4 192.1 L596.1 194.5 L607.8 189.1 L619.5 192.6 L631.2 189.1 L642.9 200.5 L654.5 204.4 L666.2 206.4 L677.9 203.4 L689.6 222.0 L701.3 216.3 L713.0 211.6 L724.7 212.3 L736.4 200.5 L748.1 197.0 L759.7 195.3 L771.4 182.4 L783.1 196.0 L794.8 190.8 L806.5 187.6 L818.2 183.6 L829.9 174.2 L841.6 174.7 L853.2 181.2 L864.9 191.3 L876.6 200.0 L888.3 191.1 L900.0 172.5 L900.0 240.0 L0 240.0 Z" fill="url(#cg21D)"/>
+            <path d="M0.0 18.0 L11.7 52.0 L23.4 102.0 L35.1 138.1 L46.8 194.8 L58.4 164.8 L70.1 110.7 L81.8 102.7 L93.5 44.9 L105.2 80.7 L116.9 138.1 L128.6 127.7 L140.3 139.6 L151.9 157.4 L163.6 153.4 L175.3 128.7 L187.0 138.1 L198.7 135.0 L210.4 160.9 L222.1 186.9 L233.8 179.7 L245.5 183.6 L257.1 175.0 L268.8 169.3 L280.5 206.4 L292.2 218.0 L303.9 189.8 L315.6 198.5 L327.3 205.3 L339.0 201.5 L350.6 204.9 L362.3 195.5 L374.0 207.4 L385.7 214.8 L397.4 221.3 L409.1 217.3 L420.8 217.8 L432.5 203.4 L444.2 208.1 L455.8 193.0 L467.5 197.8 L479.2 200.5 L490.9 192.6 L502.6 202.2 L514.3 203.4 L526.0 202.5 L537.7 205.9 L549.4 200.6 L561.0 201.7 L572.7 203.4 L584.4 192.1 L596.1 194.5 L607.8 189.1 L619.5 192.6 L631.2 189.1 L642.9 200.5 L654.5 204.4 L666.2 206.4 L677.9 203.4 L689.6 222.0 L701.3 216.3 L713.0 211.6 L724.7 212.3 L736.4 200.5 L748.1 197.0 L759.7 195.3 L771.4 182.4 L783.1 196.0 L794.8 190.8 L806.5 187.6 L818.2 183.6 L829.9 174.2 L841.6 174.7 L853.2 181.2 L864.9 191.3 L876.6 200.0 L888.3 191.1 L900.0 172.5" fill="none" stroke="#f5736b" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="chart-pane" data-range="1W">
+          <svg class="chart-svg" viewBox="0 0 900 240" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="cg21W" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#30d97b" stop-opacity="0.22"/>
+              <stop offset="1" stop-color="#30d97b" stop-opacity="0"/></linearGradient></defs>
+            <path d="M0.0 194.1 L0.0 194.1 L14.1 181.8 L28.1 192.6 L42.2 198.0 L56.2 194.6 L70.3 188.7 L84.4 200.8 L98.4 199.9 L112.5 180.0 L126.6 198.1 L140.6 202.1 L154.7 187.7 L168.8 196.3 L182.8 191.4 L196.9 180.1 L210.9 169.6 L225.0 183.2 L239.1 189.2 L253.1 215.3 L267.2 197.8 L281.2 197.5 L295.3 208.0 L309.4 200.8 L323.4 220.8 L337.5 208.7 L351.6 219.1 L365.6 222.0 L379.7 177.2 L393.8 186.3 L407.8 161.8 L421.9 150.1 L435.9 165.1 L450.0 180.1 L464.1 195.8 L478.1 181.5 L492.2 180.5 L506.2 175.9 L520.3 162.5 L534.4 135.4 L548.4 103.0 L562.5 77.2 L576.6 68.3 L590.6 76.1 L604.7 64.7 L618.8 50.8 L632.8 64.1 L646.9 18.0 L660.9 31.0 L675.0 52.4 L689.1 31.3 L703.1 25.6 L717.2 37.9 L731.2 167.7 L745.3 149.9 L759.4 153.4 L773.4 169.9 L787.5 185.3 L801.6 193.0 L815.6 184.9 L829.7 184.9 L843.8 181.1 L857.8 195.2 L871.9 182.4 L885.9 172.2 L900.0 171.4 L900.0 240.0 L0 240.0 Z" fill="url(#cg21W)"/>
+            <path d="M0.0 194.1 L14.1 181.8 L28.1 192.6 L42.2 198.0 L56.2 194.6 L70.3 188.7 L84.4 200.8 L98.4 199.9 L112.5 180.0 L126.6 198.1 L140.6 202.1 L154.7 187.7 L168.8 196.3 L182.8 191.4 L196.9 180.1 L210.9 169.6 L225.0 183.2 L239.1 189.2 L253.1 215.3 L267.2 197.8 L281.2 197.5 L295.3 208.0 L309.4 200.8 L323.4 220.8 L337.5 208.7 L351.6 219.1 L365.6 222.0 L379.7 177.2 L393.8 186.3 L407.8 161.8 L421.9 150.1 L435.9 165.1 L450.0 180.1 L464.1 195.8 L478.1 181.5 L492.2 180.5 L506.2 175.9 L520.3 162.5 L534.4 135.4 L548.4 103.0 L562.5 77.2 L576.6 68.3 L590.6 76.1 L604.7 64.7 L618.8 50.8 L632.8 64.1 L646.9 18.0 L660.9 31.0 L675.0 52.4 L689.1 31.3 L703.1 25.6 L717.2 37.9 L731.2 167.7 L745.3 149.9 L759.4 153.4 L773.4 169.9 L787.5 185.3 L801.6 193.0 L815.6 184.9 L829.7 184.9 L843.8 181.1 L857.8 195.2 L871.9 182.4 L885.9 172.2 L900.0 171.4" fill="none" stroke="#30d97b" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="chart-pane" data-range="1M">
+          <svg class="chart-svg" viewBox="0 0 900 240" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="cg21M" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#30d97b" stop-opacity="0.22"/>
+              <stop offset="1" stop-color="#30d97b" stop-opacity="0"/></linearGradient></defs>
+            <path d="M0.0 128.4 L0.0 128.4 L42.9 148.7 L85.7 123.0 L128.6 169.8 L171.4 157.4 L214.3 185.9 L257.1 153.8 L300.0 160.6 L342.9 193.4 L385.7 222.0 L428.6 194.2 L471.4 193.9 L514.3 206.4 L557.1 150.9 L600.0 137.8 L642.9 70.0 L685.7 48.0 L728.6 55.7 L771.4 60.9 L814.3 40.8 L857.1 18.0 L900.0 49.5 L900.0 240.0 L0 240.0 Z" fill="url(#cg21M)"/>
+            <path d="M0.0 128.4 L42.9 148.7 L85.7 123.0 L128.6 169.8 L171.4 157.4 L214.3 185.9 L257.1 153.8 L300.0 160.6 L342.9 193.4 L385.7 222.0 L428.6 194.2 L471.4 193.9 L514.3 206.4 L557.1 150.9 L600.0 137.8 L642.9 70.0 L685.7 48.0 L728.6 55.7 L771.4 60.9 L814.3 40.8 L857.1 18.0 L900.0 49.5" fill="none" stroke="#30d97b" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="chart-pane active" data-range="1Y">
+          <svg class="chart-svg" viewBox="0 0 900 240" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="cg21Y" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#f5736b" stop-opacity="0.22"/>
+              <stop offset="1" stop-color="#f5736b" stop-opacity="0"/></linearGradient></defs>
+            <path d="M0.0 91.4 L0.0 91.4 L9.5 100.2 L18.9 110.4 L28.4 111.8 L37.9 110.8 L47.4 118.7 L56.8 121.4 L66.3 106.5 L75.8 18.0 L85.3 43.8 L94.7 49.3 L104.2 18.2 L113.7 54.5 L123.2 62.9 L132.6 57.0 L142.1 61.5 L151.6 48.4 L161.1 46.4 L170.5 54.0 L180.0 69.9 L189.5 61.9 L198.9 64.3 L208.4 82.3 L217.9 94.5 L227.4 105.4 L236.8 117.5 L246.3 121.6 L255.8 118.9 L265.3 143.9 L274.7 139.2 L284.2 143.0 L293.7 126.8 L303.2 122.9 L312.6 154.0 L322.1 155.3 L331.6 152.1 L341.1 146.6 L350.5 148.7 L360.0 148.4 L369.5 150.3 L378.9 145.1 L388.4 149.9 L397.9 152.4 L407.4 165.2 L416.8 168.4 L426.3 174.3 L435.8 188.5 L445.3 206.5 L454.7 183.3 L464.2 183.1 L473.7 187.0 L483.2 201.7 L492.6 195.2 L502.1 193.8 L511.6 188.4 L521.1 191.6 L530.5 184.0 L540.0 188.5 L549.5 187.6 L558.9 196.0 L568.4 200.2 L577.9 196.0 L587.4 197.5 L596.8 199.4 L606.3 187.0 L615.8 172.9 L625.3 165.2 L634.7 166.5 L644.2 169.8 L653.7 181.3 L663.2 157.5 L672.6 148.3 L682.1 156.0 L691.6 147.3 L701.1 161.3 L710.5 150.8 L720.0 151.9 L729.5 95.1 L738.9 112.8 L748.4 131.2 L757.9 158.7 L767.4 150.2 L776.8 158.5 L786.3 185.1 L795.8 194.0 L805.3 200.0 L814.7 198.8 L824.2 198.3 L833.7 214.0 L843.2 217.8 L852.6 214.9 L862.1 221.9 L871.6 222.0 L881.1 212.1 L890.5 196.3 L900.0 196.6 L900.0 240.0 L0 240.0 Z" fill="url(#cg21Y)"/>
+            <path d="M0.0 91.4 L9.5 100.2 L18.9 110.4 L28.4 111.8 L37.9 110.8 L47.4 118.7 L56.8 121.4 L66.3 106.5 L75.8 18.0 L85.3 43.8 L94.7 49.3 L104.2 18.2 L113.7 54.5 L123.2 62.9 L132.6 57.0 L142.1 61.5 L151.6 48.4 L161.1 46.4 L170.5 54.0 L180.0 69.9 L189.5 61.9 L198.9 64.3 L208.4 82.3 L217.9 94.5 L227.4 105.4 L236.8 117.5 L246.3 121.6 L255.8 118.9 L265.3 143.9 L274.7 139.2 L284.2 143.0 L293.7 126.8 L303.2 122.9 L312.6 154.0 L322.1 155.3 L331.6 152.1 L341.1 146.6 L350.5 148.7 L360.0 148.4 L369.5 150.3 L378.9 145.1 L388.4 149.9 L397.9 152.4 L407.4 165.2 L416.8 168.4 L426.3 174.3 L435.8 188.5 L445.3 206.5 L454.7 183.3 L464.2 183.1 L473.7 187.0 L483.2 201.7 L492.6 195.2 L502.1 193.8 L511.6 188.4 L521.1 191.6 L530.5 184.0 L540.0 188.5 L549.5 187.6 L558.9 196.0 L568.4 200.2 L577.9 196.0 L587.4 197.5 L596.8 199.4 L606.3 187.0 L615.8 172.9 L625.3 165.2 L634.7 166.5 L644.2 169.8 L653.7 181.3 L663.2 157.5 L672.6 148.3 L682.1 156.0 L691.6 147.3 L701.1 161.3 L710.5 150.8 L720.0 151.9 L729.5 95.1 L738.9 112.8 L748.4 131.2 L757.9 158.7 L767.4 150.2 L776.8 158.5 L786.3 185.1 L795.8 194.0 L805.3 200.0 L814.7 198.8 L824.2 198.3 L833.7 214.0 L843.2 217.8 L852.6 214.9 L862.1 221.9 L871.6 222.0 L881.1 212.1 L890.5 196.3 L900.0 196.6" fill="none" stroke="#f5736b" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="chart-pane" data-range="5Y">
+          <svg class="chart-svg" viewBox="0 0 900 240" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="cg25Y" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#30d97b" stop-opacity="0.22"/>
+              <stop offset="1" stop-color="#30d97b" stop-opacity="0"/></linearGradient></defs>
+            <path d="M0.0 200.2 L0.0 200.2 L9.5 201.1 L18.9 203.5 L28.4 196.6 L37.9 193.4 L47.4 197.3 L56.8 201.7 L66.3 200.5 L75.8 202.1 L85.3 208.0 L94.7 213.0 L104.2 210.2 L113.7 206.9 L123.2 208.6 L132.6 214.5 L142.1 217.7 L151.6 219.0 L161.1 215.8 L170.5 212.2 L180.0 210.1 L189.5 212.4 L198.9 217.3 L208.4 222.0 L217.9 213.7 L227.4 209.4 L236.8 204.6 L246.3 207.8 L255.8 202.7 L265.3 199.5 L274.7 201.0 L284.2 199.3 L293.7 200.4 L303.2 193.4 L312.6 192.4 L322.1 187.3 L331.6 181.3 L341.1 173.4 L350.5 172.8 L360.0 177.0 L369.5 175.6 L378.9 177.5 L388.4 184.4 L397.9 187.5 L407.4 177.8 L416.8 174.3 L426.3 186.3 L435.8 186.8 L445.3 176.1 L454.7 179.0 L464.2 176.8 L473.7 164.7 L483.2 170.1 L492.6 173.5 L502.1 168.1 L511.6 165.9 L521.1 152.6 L530.5 149.2 L540.0 159.2 L549.5 154.0 L558.9 134.1 L568.4 128.2 L577.9 122.7 L587.4 109.9 L596.8 107.3 L606.3 123.8 L615.8 130.0 L625.3 114.5 L634.7 122.5 L644.2 129.9 L653.7 142.0 L663.2 159.1 L672.6 153.6 L682.1 134.3 L691.6 122.3 L701.1 94.9 L710.5 72.1 L720.0 59.8 L729.5 67.0 L738.9 70.1 L748.4 25.4 L757.9 18.0 L767.4 64.0 L776.8 99.9 L786.3 107.6 L795.8 102.6 L805.3 106.2 L814.7 149.0 L824.2 146.7 L833.7 142.9 L843.2 145.8 L852.6 121.5 L862.1 104.0 L871.6 85.5 L881.1 111.7 L890.5 150.1 L900.0 145.7 L900.0 240.0 L0 240.0 Z" fill="url(#cg25Y)"/>
+            <path d="M0.0 200.2 L9.5 201.1 L18.9 203.5 L28.4 196.6 L37.9 193.4 L47.4 197.3 L56.8 201.7 L66.3 200.5 L75.8 202.1 L85.3 208.0 L94.7 213.0 L104.2 210.2 L113.7 206.9 L123.2 208.6 L132.6 214.5 L142.1 217.7 L151.6 219.0 L161.1 215.8 L170.5 212.2 L180.0 210.1 L189.5 212.4 L198.9 217.3 L208.4 222.0 L217.9 213.7 L227.4 209.4 L236.8 204.6 L246.3 207.8 L255.8 202.7 L265.3 199.5 L274.7 201.0 L284.2 199.3 L293.7 200.4 L303.2 193.4 L312.6 192.4 L322.1 187.3 L331.6 181.3 L341.1 173.4 L350.5 172.8 L360.0 177.0 L369.5 175.6 L378.9 177.5 L388.4 184.4 L397.9 187.5 L407.4 177.8 L416.8 174.3 L426.3 186.3 L435.8 186.8 L445.3 176.1 L454.7 179.0 L464.2 176.8 L473.7 164.7 L483.2 170.1 L492.6 173.5 L502.1 168.1 L511.6 165.9 L521.1 152.6 L530.5 149.2 L540.0 159.2 L549.5 154.0 L558.9 134.1 L568.4 128.2 L577.9 122.7 L587.4 109.9 L596.8 107.3 L606.3 123.8 L615.8 130.0 L625.3 114.5 L634.7 122.5 L644.2 129.9 L653.7 142.0 L663.2 159.1 L672.6 153.6 L682.1 134.3 L691.6 122.3 L701.1 94.9 L710.5 72.1 L720.0 59.8 L729.5 67.0 L738.9 70.1 L748.4 25.4 L757.9 18.0 L767.4 64.0 L776.8 99.9 L786.3 107.6 L795.8 102.6 L805.3 106.2 L814.7 149.0 L824.2 146.7 L833.7 142.9 L843.2 145.8 L852.6 121.5 L862.1 104.0 L871.6 85.5 L881.1 111.7 L890.5 150.1 L900.0 145.7" fill="none" stroke="#30d97b" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        
+        <div class="rsi-block">
+          <div class="rsi-head">
+            <div class="rsi-title">RSI (14)</div>
+            <div class="rsi-now" style="color:#9aa4b2;">54.2 · Neutral</div>
+          </div>
+          <div class="rsi-chartwrap">
+            <div class="rsi-axis"><span>70</span><span>50</span><span>30</span></div>
+            
+          <svg class="rsi-svg" viewBox="0 0 900 200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="0" y="8.0" width="900" height="55.2" fill="#f5736b" opacity="0.07"/>
+            <rect x="0" y="136.8" width="900" height="55.2" fill="#30d97b" opacity="0.07"/>
+            <line x1="0" y1="63.2" x2="900" y2="63.2" stroke="#f5736b" stroke-width="1" stroke-dasharray="6 5" opacity="0.5"/>
+            <line x1="0" y1="100.0" x2="900" y2="100.0" stroke="#9aa4b2" stroke-width="1" stroke-dasharray="2 6" opacity="0.4"/>
+            <line x1="0" y1="136.8" x2="900" y2="136.8" stroke="#30d97b" stroke-width="1" stroke-dasharray="6 5" opacity="0.5"/>
+            <path d="M0.0 145.4 L9.5 147.3 L18.9 112.8 L28.4 65.9 L37.9 74.0 L47.4 80.4 L56.8 65.6 L66.3 93.9 L75.8 99.4 L85.3 95.2 L94.7 93.1 L104.2 88.8 L113.7 81.4 L123.2 80.1 L132.6 109.4 L142.1 105.9 L151.6 104.6 L161.1 110.1 L170.5 121.2 L180.0 125.1 L189.5 130.3 L198.9 139.3 L208.4 138.6 L217.9 129.8 L227.4 143.9 L236.8 133.6 L246.3 136.1 L255.8 115.2 L265.3 105.1 L274.7 128.2 L284.2 132.2 L293.7 136.6 L303.2 114.4 L312.6 110.9 L322.1 111.0 L331.6 116.4 L341.1 115.6 L350.5 93.2 L360.0 109.9 L369.5 125.8 L378.9 123.8 L388.4 123.9 L397.9 130.0 L407.4 142.8 L416.8 154.6 L426.3 115.3 L435.8 118.7 L445.3 116.2 L454.7 125.0 L464.2 123.0 L473.7 121.5 L483.2 115.0 L492.6 107.5 L502.1 113.3 L511.6 102.7 L521.1 103.4 L530.5 111.4 L540.0 113.8 L549.5 124.2 L558.9 107.5 L568.4 109.7 L577.9 112.7 L587.4 86.5 L596.8 69.4 L606.3 65.7 L615.8 57.0 L625.3 83.4 L634.7 98.5 L644.2 87.7 L653.7 65.7 L663.2 64.1 L672.6 78.1 L682.1 76.8 L691.6 87.4 L701.1 82.6 L710.5 70.4 L720.0 43.5 L729.5 65.2 L738.9 91.4 L748.4 114.6 L757.9 106.1 L767.4 113.6 L776.8 127.3 L786.3 135.2 L795.8 138.8 L805.3 142.8 L814.7 139.2 L824.2 134.8 L833.7 135.7 L843.2 137.9 L852.6 132.1 L862.1 141.4 L871.6 133.8 L881.1 111.2 L890.5 91.1 L900.0 92.2" fill="none" stroke="#7c83ff" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>
+          </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="section" id="s3">
+      <div class="section-header"><div class="section-num">3</div><div class="section-title">Snowflake Score</div></div>
+      <div class="card">
+        <div class="snowflake-grid">
+          <div style="display:flex;flex-direction:column;align-items:center;">
+            <svg width="240" height="240" viewBox="-175 -125 350 250"><defs><style>.ring{fill:none;stroke:rgba(255,255,255,0.06);stroke-width:1;}.ring-bright{fill:none;stroke:rgba(255,255,255,0.12);stroke-width:1;}.axis-line{stroke:rgba(255,255,255,0.08);stroke-width:1;}.score-poly{fill:rgba(23,219,201,0.22);stroke:#17dbc9;stroke-width:2;}</style></defs><polygon class="ring" points="0.00,-15.00 14.27,-4.64 8.82,12.14 -8.82,12.14 -14.27,-4.64"/><polygon class="ring" points="0.00,-30.00 28.53,-9.27 17.63,24.27 -17.63,24.27 -28.53,-9.27"/><polygon class="ring" points="0.00,-45.00 42.80,-13.91 26.45,36.41 -26.45,36.41 -42.80,-13.91"/><polygon class="ring" points="0.00,-60.00 57.06,-18.54 35.27,48.54 -35.27,48.54 -57.06,-18.54"/><polygon class="ring ring-bright" points="0.00,-75.00 71.33,-23.18 44.08,60.68 -44.08,60.68 -71.33,-23.18"/><polygon class="ring ring-bright" points="0.00,-90.00 85.60,-27.81 52.90,72.81 -52.90,72.81 -85.60,-27.81"/><line class="axis-line" x1="0" y1="0" x2="0.00" y2="-90.00"/><line class="axis-line" x1="0" y1="0" x2="85.60" y2="-27.81"/><line class="axis-line" x1="0" y1="0" x2="52.90" y2="72.81"/><line class="axis-line" x1="0" y1="0" x2="-52.90" y2="72.81"/><line class="axis-line" x1="0" y1="0" x2="-85.60" y2="-27.81"/><polygon class="score-poly" points="0.00,-30.00 71.33,-23.18 26.45,36.41 -8.82,12.14 -14.27,-4.64"/><text x="0.0" y="-96.3" text-anchor="middle" font-size="8.5" fill="#8fa3bf">Valuation</text><text x="95.6" y="-29.8" text-anchor="start" font-size="8.5" fill="#8fa3bf">Future Growth</text><text x="60.6" y="83.9" text-anchor="start" font-size="8.5" fill="#8fa3bf">Past Perf.</text><text x="-60.6" y="83.9" text-anchor="end" font-size="8.5" fill="#8fa3bf">Fin. Health</text><text x="-95.6" y="-29.8" text-anchor="end" font-size="8.5" fill="#8fa3bf">Dividend</text><circle cx="0.00" cy="-30.00" r="4" fill="#f0995e"/><circle cx="71.33" cy="-23.18" r="4" fill="#17dbc9"/><circle cx="26.45" cy="36.41" r="4" fill="#17dbc9"/><circle cx="-8.82" cy="12.14" r="4" fill="#f0995e"/><circle cx="-14.27" cy="-4.64" r="4" fill="#f0995e"/></svg>
+            <div class="snowflake-total">
+              <div><span class="num">12</span><span class="denom" style="font-size:18px;color:var(--text-3);"> / 30</span></div>
+              <div class="label">Smartmall Score</div>
+            </div>
+          </div>
+          <div class="score-rows">
+            
+            <div class="score-row">
+              <div class="score-row-label" style="color:var(--orange)">Valuation</div>
+              <div>
+                <div class="score-bar-track"><div class="score-bar-fill" style="width:33.3%;background:var(--orange)"></div></div>
+                <div class="score-rationale">18.1x บน guidance FY2027 ($8.05) ดูถูก — แต่ trailing P/E ที่สะอาดจริงคือ 28.3x (EPS ที่รายงาน $5.83 มีกำไรพิเศษจากขาย Ampere + Bloom warrants ปนอยู่; บริษัทยอมรับเองใน footnote ว่า non-GAAP สะอาด = $6.83 โต 13% ไม่ใช่ $7.63 โต 27%). มูลค่าถ่วงน้ำหนัก ~$156 = DR ฿5.17 → upside แค่ +7% หลังตกมา 55% แล้ว = fairly valued ไม่ใช่ของถูก</div>
+              </div>
+              <div class="score-num" style="color:var(--orange)">2/6</div>
+            </div>
+            <div class="score-row">
+              <div class="score-row-label" style="color:var(--teal)">Future Growth</div>
+              <div>
+                <div class="score-bar-track"><div class="score-bar-fill" style="width:83.3%;background:var(--teal)"></div></div>
+                <div class="score-rationale">guidance FY2027 รายได้ $90B (+33.6%), cloud +58–64%, OCI FY2026 โต 77% เป็น $18.1B. RPO $638B (+363%) ปิด 85% ของ guidance ปีหน้าแล้ว = visibility สูงผิดปกติ. แต่ 10-K ระบุชัด: รับรู้แค่ 12% ใน 12 เดือน ($76.6B), 34% เดือน 13–36, 34% เดือน 37–60 → duration ~3.4 ปี. เป้าผู้บริหาร FY2030 $225B ต้องหาสัญญาใหม่อีก ~$117B/ปี ที่ยังไม่ได้เซ็น</div>
+              </div>
+              <div class="score-num" style="color:var(--teal)">5/6</div>
+            </div>
+            <div class="score-row">
+              <div class="score-row-label" style="color:var(--teal)">Past Performance</div>
+              <div>
+                <div class="score-bar-track"><div class="score-bar-fill" style="width:50.0%;background:var(--teal)"></div></div>
+                <div class="score-rationale">รายได้ 5 ปี $42.4B → $67.4B (CAGR ~12%) เร่งตัวเป็น +17.3% ใน FY2026 จาก OCI. แต่ธุรกิจ software เดิมแบนสามปีติด ($24.69B → $24.72B → $24.54B) และ operating margin ทรงที่ 30.6%. Cloud+software segment margin ถอยจาก 63% → 59% ในปีเดียว เพราะ mix OCI ขึ้นจาก 42% → 53% ของรายได้ cloud</div>
+              </div>
+              <div class="score-num" style="color:var(--teal)">3/6</div>
+            </div>
+            <div class="score-row">
+              <div class="score-row-label" style="color:var(--orange)">Financial Health</div>
+              <div>
+                <div class="score-bar-track"><div class="score-bar-fill" style="width:16.7%;background:var(--orange)"></div></div>
+                <div class="score-rationale">จุดอ่อนที่สุด — หนี้ $129.5B + lease บนงบ $37.9B = $167.4B เทียบ equity แค่ $43.1B (D/E 3.9x, net debt/EBITDA 4.53x). FCF −$23.7B จาก capex $55.7B. S&amp;P หั่นเป็น BBB− เมื่อ 9 ก.ค. 2026 เหลืออีกขั้นเดียวถึง junk. และ Note 9 ของ 10-K ระบุ lease commitment นอกงบดุลอีก $260B อายุ 15–19 ปี ที่ยังไม่ขึ้นงบ</div>
+              </div>
+              <div class="score-num" style="color:var(--orange)">1/6</div>
+            </div>
+            <div class="score-row">
+              <div class="score-row-label" style="color:var(--orange)">Dividend</div>
+              <div>
+                <div class="score-bar-track"><div class="score-bar-fill" style="width:16.7%;background:var(--orange)"></div></div>
+                <div class="score-rationale">$2.00/ปี = yield 1.37% — ต่ำกว่าเกณฑ์ cash-cow 3% มาก และจ่ายไป $5.79B ในปีที่ FCF ติดลบ $23.7B = จ่ายปันผลด้วยเงินกู้ในทางปฏิบัติ. buyback หยุดแล้ว (FY26 $95M เทียบ FY24 $1,202M) และกำลังทำตรงข้าม: ขายหุ้นใหม่ผ่าน ATM $20B (dilution ~4.8–6%)</div>
+              </div>
+              <div class="score-num" style="color:var(--orange)">1/6</div>
+            </div>
+            <div class="note-box" style="margin-top:16px;">
+              <strong>Transparent Smartmall scoring</strong> — not Simply Wall St's proprietary engine. Scores reflect our independent research and conviction framework.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="section" id="s4">
+      <div class="section-header"><div class="section-num">4</div><div class="section-title">Revenue &amp; Expenses Breakdown</div></div>
+      <div class="card">
+        <div style="font-size:12.5px;color:var(--text-3);margin-bottom:20px;">FY2026 (ปีบัญชีจบ 31 พ.ค. 2026) — ตัวเลข US$ พันล้าน, ตรวจกับ 10-K ที่ยื่น SEC 22 มิ.ย. 2026</div>
+        <div class="sankey-wrap"><svg viewBox="0 -62.0 980 592.0" width="100%" style="font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;overflow:visible;"><defs><linearGradient id="gProfit" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#2fd6c0" stop-opacity="0.7"/><stop offset="100%" stop-color="#2fd6c0" stop-opacity="0.4"/></linearGradient><linearGradient id="gCost" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#8a7320" stop-opacity="0.85"/><stop offset="100%" stop-color="#8a7320" stop-opacity="0.55"/></linearGradient><linearGradient id="gExpense" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#d9a93a" stop-opacity="0.8"/><stop offset="100%" stop-color="#d9a93a" stop-opacity="0.5"/></linearGradient><linearGradient id="gNet" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#30d97b" stop-opacity="0.8"/><stop offset="100%" stop-color="#30d97b" stop-opacity="0.6"/></linearGradient></defs><polyline points="18.0,-47.1 205.5,-49.8 393.0,-50.9 580.5,-52.5 768.0,-56.0" fill="none" stroke="#2fd6c0" stroke-width="1.5" opacity="0.85"/><text x="18.0" y="-20.0" text-anchor="middle" font-size="9" fill="#526070">FY2022</text><text x="205.5" y="-20.0" text-anchor="middle" font-size="9" fill="#526070">FY2023</text><text x="393.0" y="-20.0" text-anchor="middle" font-size="9" fill="#526070">FY2024</text><text x="580.5" y="-20.0" text-anchor="middle" font-size="9" fill="#526070">FY2025</text><text x="768.0" y="-20.0" text-anchor="middle" font-size="9" fill="#526070">FY2026</text><rect x="18" y="35.00" width="14" height="167.60" fill="#3b6fd4" rx="3"/><rect x="18" y="203.60" width="14" height="123.62" fill="#3360c2" rx="3"/><rect x="18" y="328.21" width="14" height="108.50" fill="#4a7ce0" rx="3"/><rect x="18" y="437.72" width="14" height="60.28" fill="#2f57b0" rx="3"/><rect x="220" y="35.00" width="18" height="460.00" fill="#3b6fd4" rx="3"/><rect x="400" y="35.00" width="18" height="302.78" fill="#2fd6c0" rx="3"/><rect x="400" y="338.78" width="18" height="157.22" fill="#8a7320" rx="3"/><rect x="580" y="35.00" width="18" height="140.72" fill="#2fd6c0" rx="3"/><rect x="580" y="176.72" width="18" height="70.15" fill="#d9a93a" rx="3"/><rect x="580" y="247.87" width="18" height="91.91" fill="#d9a93a" rx="3"/><rect x="750" y="35.00" width="18" height="116.69" fill="#30d97b" rx="3"/><rect x="750" y="152.69" width="18" height="16.85" fill="#d9a93a" rx="3"/><path d="M32.00,35.00 C116.60,35.00 135.40,35.00 220.00,35.00 L220.00,202.60 C135.40,202.60 116.60,202.60 32.00,202.60 Z" fill="#3b6fd4" opacity="0.40"/><path d="M32.00,203.60 C116.60,203.60 135.40,202.60 220.00,202.60 L220.00,326.21 C135.40,326.21 116.60,327.21 32.00,327.21 Z" fill="#3360c2" opacity="0.40"/><path d="M32.00,328.21 C116.60,328.21 135.40,326.21 220.00,326.21 L220.00,434.72 C135.40,434.72 116.60,436.72 32.00,436.72 Z" fill="#4a7ce0" opacity="0.40"/><path d="M32.00,437.72 C116.60,437.72 135.40,434.72 220.00,434.72 L220.00,495.00 C135.40,495.00 116.60,498.00 32.00,498.00 Z" fill="#2f57b0" opacity="0.40"/><path d="M238.00,35.00 C310.90,35.00 327.10,35.00 400.00,35.00 L400.00,337.78 C327.10,337.78 310.90,337.78 238.00,337.78 Z" fill="url(#gProfit)" opacity="0.5"/><path d="M238.00,338.78 C310.90,338.78 327.10,338.78 400.00,338.78 L400.00,496.00 C327.10,496.00 310.90,496.00 238.00,496.00 Z" fill="url(#gCost)" opacity="0.55"/><path d="M418.00,35.00 C490.90,35.00 507.10,35.00 580.00,35.00 L580.00,175.72 C507.10,175.72 490.90,175.72 418.00,175.72 Z" fill="url(#gProfit)" opacity="0.5"/><path d="M418.00,175.72 C490.90,175.72 507.10,176.72 580.00,176.72 L580.00,246.87 C507.10,246.87 490.90,245.87 418.00,245.87 Z" fill="url(#gExpense)" opacity="0.55"/><path d="M418.00,245.87 C490.90,245.87 507.10,247.87 580.00,247.87 L580.00,339.78 C507.10,339.78 490.90,337.78 418.00,337.78 Z" fill="url(#gExpense)" opacity="0.5"/><path d="M598.00,35.00 C666.40,35.00 681.60,35.00 750.00,35.00 L750.00,151.69 C681.60,151.69 666.40,151.69 598.00,151.69 Z" fill="url(#gNet)" opacity="0.5"/><path d="M598.00,151.69 C666.40,151.69 681.60,152.69 750.00,152.69 L750.00,169.54 C681.60,169.54 666.40,168.54 598.00,168.54 Z" fill="url(#gExpense)" opacity="0.55"/><text x="38" y="35.0" dy="10" font-size="11" fill="#e8edf5" font-weight="600">Software (database/support)</text><text x="38" y="35.0" dy="23" font-size="10.5" fill="#3b6fd4">$24.5B · 36%</text><text x="38" y="203.6" dy="10" font-size="11" fill="#e8edf5" font-weight="600">OCI — cloud infra (IaaS)</text><text x="38" y="203.6" dy="23" font-size="10.5" fill="#3360c2">$18.1B · 27%</text><text x="38" y="328.2" dy="10" font-size="11" fill="#e8edf5" font-weight="600">Cloud Apps (SaaS)</text><text x="38" y="328.2" dy="23" font-size="10.5" fill="#4a7ce0">$15.9B · 24%</text><text x="38" y="437.7" dy="10" font-size="11" fill="#e8edf5" font-weight="600">Services + Hardware</text><text x="38" y="437.7" dy="23" font-size="10.5" fill="#2f57b0">$8.8B · 13%</text><text x="229" y="8" text-anchor="middle" font-size="9.5" fill="#8fa3bf">Income</text><text x="229" y="8" dy="11" text-anchor="middle" font-size="9.5" fill="#8fa3bf">Statement</text><rect x="197.1" y="247.5" width="63.7" height="19.0" rx="9.5" fill="#3b6fd4"/><text x="229.0" y="257.0" dy="3.8" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">Revenue</text><text x="229" y="277" text-anchor="middle" font-size="11" font-weight="700" fill="#e8edf5">$67.4B</text><text x="409" y="8" text-anchor="middle" font-size="9.5" fill="#8fa3bf">Gross</text><text x="409" y="8" dy="11" text-anchor="middle" font-size="9.5" fill="#8fa3bf">Profit</text><text x="409" y="186" text-anchor="middle" font-size="12" fill="#2fd6c0" font-weight="800" transform="rotate(-90 409 186)">$44.3B</text><text x="589" y="8" text-anchor="middle" font-size="9.5" fill="#8fa3bf">Operating</text><text x="589" y="8" dy="11" text-anchor="middle" font-size="9.5" fill="#8fa3bf">Income</text><text x="589" y="105" text-anchor="middle" font-size="12" fill="#2fd6c0" font-weight="800" transform="rotate(-90 589 105)">$20.6B</text><text x="759" y="8" text-anchor="middle" font-size="9.5" fill="#8fa3bf">Net</text><text x="759" y="8" dy="11" text-anchor="middle" font-size="9.5" fill="#8fa3bf">Income</text><rect x="720.0" y="76.3" width="78.0" height="18.0" rx="9.0" fill="#30d97b"/><text x="759.0" y="85.3" dy="3.5" text-anchor="middle" font-size="10" font-weight="700" fill="#0f1923">Net Income</text><text x="759" y="105" text-anchor="middle" font-size="11" font-weight="700" fill="#30d97b">$17.1B</text><text x="409" y="421" text-anchor="middle" font-size="9.5" fill="#d9a93a" font-weight="700">CoR $23.0B</text><text x="602" y="215" font-size="10" fill="#d9a93a" font-weight="600">R&amp;D $10.3B</text><text x="602" y="305" font-size="10" fill="#d9a93a">SG&amp;A $13.5B</text><text x="772" y="164" font-size="10" fill="#d9a93a">Tax $2.5B</text><text x="602" y="171" font-size="9.5" fill="#d9a93a" font-weight="700" opacity="0.85">Expenses</text><text x="665" y="2" text-anchor="middle" font-size="9.5" fill="#d9a93a" font-style="italic">− Non-op $1.1B</text><text x="665" y="2" dy="12" text-anchor="middle" font-size="9.5" fill="#8fa3bf" font-style="italic">Pre-tax $19.6B</text><line x1="409" y1="496.0" x2="409" y2="518.0" stroke="#8a7320" stroke-width="2" stroke-dasharray="3,2" opacity="0.6"/><polygon points="409,523.0 405,516.0 413,516.0" fill="#8a7320" opacity="0.6"/><line x1="589" y1="339.8" x2="589" y2="361.8" stroke="#d9a93a" stroke-width="2" stroke-dasharray="3,2" opacity="0.6"/><polygon points="589,366.8 585,359.8 593,359.8" fill="#d9a93a" opacity="0.6"/><line x1="759" y1="169.5" x2="759" y2="191.5" stroke="#d9a93a" stroke-width="2" stroke-dasharray="3,2" opacity="0.6"/><polygon points="759,196.5 755,189.5 763,189.5" fill="#d9a93a" opacity="0.6"/><rect x="820" y="35" width="12" height="12" fill="#3b6fd4" rx="2" opacity="0.9"/><text x="836" y="45" font-size="10.5" fill="#8fa3bf">Revenue</text><rect x="820" y="54" width="12" height="12" fill="#d9a93a" rx="2" opacity="0.9"/><text x="836" y="64" font-size="10.5" fill="#8fa3bf">Cost / Expense</text><rect x="820" y="73" width="12" height="12" fill="#30d97b" rx="2" opacity="0.9"/><text x="836" y="83" font-size="10.5" fill="#8fa3bf">Net Income</text></svg></div>
+        <div class="sankey-caption">GAAP net margin 25.4% — แต่ net income $17.09B มีกำไรพิเศษจากการลงทุน ~$2.43B (ขายธุรกิจชิป Ampere + Bloom Energy warrants) ปนอยู่ → EPS ที่สะอาดคือ ~$5.13 ไม่ใช่ $5.83. SG&amp;A ในผังนี้รวม sales&amp;marketing $8.33B + G&amp;A $1.62B + amortization $1.67B + restructuring $1.84B (restructuring โต 5 เท่าจาก $0.37B = การลดคนเพื่อเอาเงินไปอุด data center). non-operating −$1.05B = ดอกเบี้ยจ่าย −$4.60B + รายได้อื่น +$3.55B</div>
+      </div>
+    </div>
+    <div class="section" id="s5">
+      <div class="section-header"><div class="section-num">5</div><div class="section-title">Past Performance</div></div>
+      <div class="card">
+        <div style="font-size:12.5px;color:var(--text-3);margin-bottom:20px;">รายได้รวม (US$B) — ปีบัญชีจบ 31 พ.ค.</div>
+        <svg viewBox="0 0 720 240" width="100%" style="font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;overflow:visible;"><line x1="0" y1="220.0" x2="720" y2="220.0" stroke="rgba(255,255,255,0.08)" stroke-width="1"/><line x1="0" y1="148.8" x2="720" y2="148.8" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="4,4"/><line x1="0" y1="77.5" x2="720" y2="77.5" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="4,4"/><rect x="20.0" y="100.3" width="120.0" height="119.7" rx="5" fill="#17dbc9" opacity="0.55"/><text x="80.0" y="95.3" font-size="11" font-weight="700" fill="#17dbc9" text-anchor="middle">$42.4B</text><text x="80.0" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">FY2022</text><rect x="160.0" y="79.1" width="120.0" height="140.9" rx="5" fill="#17dbc9" opacity="0.62"/><text x="220.0" y="74.1" font-size="11" font-weight="700" fill="#17dbc9" text-anchor="middle">$50.0B</text><text x="220.0" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">FY2023</text><rect x="300.0" y="70.6" width="120.0" height="149.4" rx="5" fill="#17dbc9" opacity="0.69"/><text x="360.0" y="65.6" font-size="11" font-weight="700" fill="#17dbc9" text-anchor="middle">$53.0B</text><text x="360.0" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">FY2024</text><rect x="440.0" y="58.1" width="120.0" height="161.9" rx="5" fill="#17dbc9" opacity="0.76"/><text x="500.0" y="53.1" font-size="11" font-weight="700" fill="#17dbc9" text-anchor="middle">$57.4B</text><text x="500.0" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">FY2025</text><rect x="580.0" y="30.0" width="120.0" height="190.0" rx="5" fill="#17dbc9" opacity="1.00"/><rect x="580.0" y="30.0" width="120.0" height="190.0" rx="5" fill="none" stroke="#17dbc9" stroke-width="1.5" opacity="0.5"/><text x="640.0" y="25.0" font-size="11" font-weight="700" fill="#17dbc9" text-anchor="middle">$67.4B</text><text x="640.0" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">FY2026</text></svg>
+        <div class="note-box" style="margin-top:16px;">4-yr CAGR ~12.2% และเร่งเป็น +17.3% ใน FY2026 — แต่การเร่งตัวมาจาก OCI ตัวเดียว (+77% เป็น $18.1B) ส่วน software เดิมแบน −0.7%. ตัวเลข 5 ปีดึงจาก XBRL ของ SEC โดยตรง. FCF: FY2024 +$11.8B → FY2025 −$0.4B → FY2026 −$23.7B คือเส้นที่เล่าเรื่องได้ดีกว่าเส้นรายได้</div>
+      </div>
+    </div>
+    <div class="section" id="s6">
+      <div class="section-header"><div class="section-num">6</div><div class="section-title">Future Growth</div></div>
+      <div class="card">
+        <div style="font-size:12.5px;color:var(--text-3);margin-bottom:24px;">Growth drivers — guided &amp; estimated</div>
+        
+        <div class="growth-row">
+          <div class="growth-label">guidance FY2027 รายได้</div>
+          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:34%;background:linear-gradient(90deg,#17dbc9,#00c4b4);">$90B</div></div>
+          <div class="growth-value" style="color:var(--teal);">$90B</div>
+        </div>
+        <div class="growth-row">
+          <div class="growth-label">guidance FY2027 non-GAAP EPS</div>
+          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:0%;background:linear-gradient(90deg,#17dbc9,#00c4b4);">$8.05</div></div>
+          <div class="growth-value" style="color:var(--teal);">$8.05</div>
+        </div>
+        <div class="growth-row">
+          <div class="growth-label">RPO ที่รับรู้ใน 12 เดือน</div>
+          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:0%;background:linear-gradient(90deg,#17dbc9,#00c4b4);">$76.6B</div></div>
+          <div class="growth-value" style="color:var(--teal);">$76.6B</div>
+        </div>
+        <div class="growth-row">
+          <div class="growth-label">RPO เดือน 13–60</div>
+          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:0%;background:linear-gradient(90deg,#17dbc9,#00c4b4);">$433.8B</div></div>
+          <div class="growth-value" style="color:var(--teal);">$433.8B</div>
+        </div>
+        <div class="growth-row">
+          <div class="growth-label">เป้าผู้บริหาร FY2030</div>
+          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:0%;background:linear-gradient(90deg,#17dbc9,#00c4b4);">$225B / EPS $21</div></div>
+          <div class="growth-value" style="color:var(--teal);">$225B / EPS $21</div>
+        </div>
+        <div class="note-box" style="margin-top:20px;">RPO $638B = 9.5 เท่าของรายได้ปีล่าสุด (Microsoft ~1.3 เท่า) — แต่มัน back-loaded: weighted duration ~3.4 ปี. ข่าวดีคือ guidance FY2027 มี backlog รองรับแล้ว 85% จึงแทบไม่มีทาง miss ด้านรายได้. ข่าวร้ายคือเป้า FY2030 $225B ต้องพึ่งสัญญาที่ยังไม่ได้เซ็นอีก ~$117B/ปี = เดิมพันบน demand ไม่ใช่ contract. ตัวจุดชนวน rally +27% ใน 2 สัปดาห์ล่าสุดคือดีล Google Gemini เข้า Oracle AI Agent Studio (30 ก.ค. 2026)</div>
+      </div>
+    </div>
+    <div class="section" id="s7">
+      <div class="section-header"><div class="section-num">7</div><div class="section-title">Financial Health</div></div>
+      <div class="card">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px;align-items:end;">
+          <div style="background:var(--teal-dim);border:1px solid rgba(23,219,201,0.3);border-radius:12px;padding:20px;">
+            <div style="font-size:11px;color:var(--teal);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;font-weight:700;">Cash &amp; Equivalents</div>
+            <div style="font-size:34px;font-weight:900;color:var(--teal);letter-spacing:-0.03em;">$31.9B</div>
+            <div class="health-bar-track" style="margin-top:12px;"><div class="health-bar-fill" style="width:19%;background:var(--teal);"></div></div>
+          </div>
+          <div style="background:rgba(240,153,94,0.08);border:1px solid rgba(240,153,94,0.2);border-radius:12px;padding:20px;">
+            <div style="font-size:11px;color:var(--orange);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;font-weight:700;">Total Debt</div>
+            <div style="font-size:34px;font-weight:900;color:var(--orange);letter-spacing:-0.03em;">$167.4B</div>
+            <div class="health-bar-track" style="margin-top:12px;"><div class="health-bar-fill" style="width:100%;background:var(--orange);"></div></div>
+          </div>
+        </div>
+        <div style="text-align:center;padding:24px;background:var(--surface-2);border-radius:12px;border:1px solid var(--border);margin-bottom:20px;">
+          <div style="font-size:11px;color:var(--text-3);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;">Net Position</div>
+          <div style="font-size:26px;font-weight:900;color:var(--teal);letter-spacing:-0.04em;line-height:1.1;">Net debt $135.5B (รวม lease) · BBB− เหลืออีกขั้นเดียวถึง junk</div>
+        </div>
+        
+        <div class="health-row">
+          <div class="health-label">Net debt / mkt cap</div>
+          <div class="health-bar-track"><div class="health-bar-fill" style="width:32%;background:var(--orange);"></div></div>
+          <div class="health-value">-32%</div>
+        </div>
+        <div class="health-row">
+          <div class="health-label">Net debt / EBITDA</div>
+          <div class="health-bar-track"><div class="health-bar-fill" style="width:50%;background:red;"></div></div>
+          <div class="health-value">4.53x</div>
+        </div>
+        <div class="health-row">
+          <div class="health-label">D/E (รวม lease)</div>
+          <div class="health-bar-track"><div class="health-bar-fill" style="width:50%;background:red;"></div></div>
+          <div class="health-value">3.89x</div>
+        </div>
+        <div class="health-row">
+          <div class="health-label">FCF FY2026</div>
+          <div class="health-bar-track"><div class="health-bar-fill" style="width:50%;background:red;"></div></div>
+          <div class="health-value">−$23.7B</div>
+        </div>
+        <div class="health-row">
+          <div class="health-label">Operating cash flow</div>
+          <div class="health-bar-track"><div class="health-bar-fill" style="width:50%;background:green;"></div></div>
+          <div class="health-value">+$32.0B (+54%)</div>
+        </div>
+        <div class="health-row">
+          <div class="health-label">Lease นอกงบดุล</div>
+          <div class="health-bar-track"><div class="health-bar-fill" style="width:50%;background:red;"></div></div>
+          <div class="health-value">$260B</div>
+        </div>
+        <div class="note-box orange" style="margin-top:16px;">หนี้ $129.5B + lease บนงบ $37.9B − เงินสด $31.9B = net debt $135.5B (4.53x EBITDA). แต่ตัวเลขที่น่ากลัวกว่าอยู่นอกงบ: Note 9 ของ 10-K ระบุ lease commitment เพิ่มอีก $260B (data center, อายุ 15–19 ปี, เริ่ม FY2027–29) + purchase obligation $13.3B + สัญญาซื้อ cloud assets หลังปิดงบอีก $19B. GPU อายุ 3–6 ปี แต่สัญญาเช่า 15–19 ปี = duration mismatch. Construction in Progress $40.0B (32.6% ของ gross PP&amp;E) ยังไม่เริ่มตัดค่าเสื่อม → หน้าผาค่าเสื่อม ~$6.7B/ปี รอเข้ามา</div>
+      </div>
+    </div>
+    <div class="section" id="s8">
+      <div class="section-header"><div class="section-num">8</div><div class="section-title">Dividend</div></div>
+      <div class="card">
+        <div class="div-row">
+          <div class="div-big">1.37%</div>
+          <div class="div-note">[position details omitted on the public site]</div>
+        </div>
+        
+      </div>
+    </div>
+    <div class="section" id="s9">
+      <div class="section-header"><div class="section-num">9</div><div class="section-title">Rewards &amp; Risks</div></div>
+      <div class="card">
+        <div class="two-col">
+          <div class="rr-col rewards"><h4>Rewards</h4><div class="rr-item"><div class="rr-dot"></div><div>RPO $638B (+363% YoY) ปิด ~85% ของ guidance FY2027 ($90B) แล้ว — visibility ด้านรายได้สูงผิดปกติสำหรับหุ้นเทค</div></div><div class="rr-item"><div class="rr-dot"></div><div>OCI โต 77% เป็น $18.1B และ Q4 โต 93% — Oracle เป็นผู้ให้บริการ AI cloud ที่โตเร็วที่สุดในบรรดารายใหญ่</div></div><div class="rr-item"><div class="rr-dot"></div><div>$75B ของสัญญา AI ใหญ่เป็นแบบลูกค้าจ่ายล่วงหน้าหรือซื้อ GPU มาให้เอง — ยืนยันด้วยงบกระแสเงินสด (prepayment $4.59B เข้ามาใหม่, deferred revenue ระยะยาว $1.35B → $5.48B) ลดความต้องการเงินทุนและความเสี่ยง GPU ล้าสมัยได้จริง</div></div><div class="rr-item"><div class="rr-dot"></div><div>คูเมือง database ยังไม่แตก: Multicloud AI Database โต 404% ใน Q4 = ธุรกิจที่โตเร็วที่สุดในประวัติศาสตร์บริษัท และลูกค้าที่ย้ายจาก support ไป cloud เพิ่ม annualized cloud revenue $5.4B ใน 3 ปี = ย้ายฐานอย่างมีระเบียบ ไม่ใช่รั่วไปคู่แข่ง</div></div><div class="rr-item"><div class="rr-dot"></div><div>ดีล Google Gemini (30 ก.ค. 2026) เอาโมเดลเข้า Fusion Apps + NetSuite — ยอมรับว่าจะไม่แข่งสร้างโมเดลเอง แต่ขาย distribution ให้ฐานลูกค้า enterprise ที่มีอยู่แล้ว</div></div></div>
+          <div class="rr-col risks"><h4>Risks</h4><div class="rr-item bold-risk"><div class="rr-dot"></div><div><strong>OpenAI คิดเป็นราวครึ่งหนึ่งของ RPO $638B (S&amp;P ระบุ; เช็กเลขเองแล้ว — ดีล $300B ที่รายงานกัน = 47% พอดี) และต้องจ่าย Oracle ~$60B/ปีเมื่อเข้า scale เต็ม ขณะที่รายได้ OpenAI เองอยู่ราว $24B/ปี ต้องโตอีก 5–10 เท่าใน 2–3 ปี พร้อมกับจ่าย Microsoft/CoreWeave/AMD/Broadcom ไปด้วย — นี่คือความเสี่ยงระดับขาดทุนถาวร ไม่ใช่แค่ drawdown</strong></div></div><div class="rr-item bold-risk"><div class="rr-dot"></div><div><strong>OCI มี gross margin แค่ 14–16% (เอกสารภายในที่ The Information/DCD รายงาน; ขาดทุน operating ~$100M จากการปล่อยเช่าชิป Blackwell ในไตรมาสหนึ่ง) เทียบ AWS operating margin 36.8% และ Google Cloud 35.6% — งบจริงยืนยันทิศทาง: cloud+software segment margin 63% → 59%, gross margin 76.5% → 69.9% ในปีเดียว. Oracle รับงานถูกเพื่อซื้อ backlog จริง</strong></div></div><div class="rr-item bold-risk"><div class="rr-dot"></div><div><strong>lease commitment นอกงบดุล $260B อายุ 15–19 ปี (Note 9 ของ 10-K) เทียบกับ GPU ที่อายุ 3–6 ปี — ถ้าลูกค้าหายในปีที่ 4 Oracle ยังติดสัญญาอีก 11–15 ปี รวมภาระผูกพันทั้งหมด (หนี้ + lease บน/นอกงบ + purchase obligation) ประมาณ $475B แลกกับ RPO $638B ที่ margin บาง</strong></div></div><div class="rr-item bold-risk"><div class="rr-dot"></div><div><strong>S&amp;P หั่นเรตติ้งเป็น BBB− เมื่อ 9 ก.ค. 2026 (จาก BBB) เหลืออีกขั้นเดียวถึง junk — ถ้าโดนหั่นเป็น BB+ กองทุน investment-grade-only จะถูกบังคับขายหนี้ ต้นทุนกู้พุ่ง วงจรเร่งตัวเอง. S&amp;P ประเมิน capex FY2027 ที่ $90–95B (จากเดิม $60B) และ FOCF −$42B</strong></div></div><div class="rr-item"><div class="rr-dot"></div><div>ATM ขายหุ้นใหม่ $20B ค้างอยู่ (424B5 ยื่น 23 มิ.ย. 2026 เพิ่ม sales agent อีก 15 ราย = ตั้งใจขายจริง) → ทุกครั้งที่หุ้นเด้งจะมี supply กดทันที และ dilution ~4.8–6% ที่ราคาต่ำกว่าจุดสูงสุด 55%</div></div><div class="rr-item"><div class="rr-dot"></div><div>หน้าผาค่าเสื่อมราคา: CIP $40.0B ยังไม่เริ่มตัดค่าเสื่อม (~$6.7B/ปีรอเข้ามา ที่อายุ server 6 ปี) + ค่าเสื่อม FY2026 พุ่งจาก $3.9B → $7.6B + ดอกเบี้ยเต็มปีของหนี้ $46B ที่กู้กลางปี = headwind ต่อ pre-tax income ราว $10–14B ใน FY2027</div></div><div class="rr-item"><div class="rr-dot"></div><div>EPS ที่รายงานถูกแต่งด้วยกำไรพิเศษ — บริษัทยอมรับใน footnote เองว่าถ้าตัดกำไรขาย Ampere + Bloom warrants ออก non-GAAP EPS FY2026 = $6.83 โต 13% ไม่ใช่ $7.63 โต 27%</div></div><div class="rr-item"><div class="rr-dot"></div><div>beta 1.72 — เคยขยับ −41% ในเดือนเดียว (มิ.ย. 2026 หลังงบ Q4) และ DR มี FX risk เพิ่ม: บาทแข็งจาก 33.12 เป็น 31.00 = มูลค่า DR หาย 6.4% โดยหุ้นแม่ไม่ขยับ</div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="section" id="s10">
+      <div class="section-header"><div class="section-num">10</div><div class="section-title">Stock Council Verdict</div></div>
+      <div class="verdict-grid">
+        <div class="verdict-chip">
+          <div class="agent">🪨 Steady</div>
+          <div class="stance" style="color:var(--text-2);">PASS — คุณภาพงบดุลตกเกณฑ์</div>
+          <div class="conviction" style="background:var(--surface-2);color:var(--text-2);border-color:var(--border);">High</div>
+          <div class="rationale">net debt/EBITDA 4.53x, BBB− เหลือขั้นเดียวถึง junk, FCF −$23.7B, ปันผลจ่ายด้วยเงินกู้, buyback หยุด, กำลังจะ dilute อีก 5%. ผมไม่สนใจว่า backlog จะสวยแค่ไหน — บริษัทที่ต้องกู้เงินมาจ่ายปันผลไม่ใช่ของที่ผมถือยาว 5 ปีได้</div>
+        </div>
+        <div class="verdict-chip">
+          <div class="agent">📉 Dippy</div>
+          <div class="stance" style="color:var(--amber);">WATCH — เพิ่งเด้ง +27% ผมไม่ไล่</div>
+          <div class="conviction" style="background:rgba(245,200,66,0.1);color:var(--amber);border-color:rgba(245,200,66,0.3);">Medium-High</div>
+          <div class="rationale">ลงมา 55% จากยอด $324.63 ก็จริง แต่เพิ่งเด้งจาก $114.99 (24 ก.ค.) ขึ้นมา $151 ใน 2 สัปดาห์ด้วยข่าว Gemini — และมี ATM $20B รอขายกดอยู่ทุกครั้งที่ขึ้น. ผมรอทดสอบ $115 ใหม่ หรือรอ capitulation หลังงบ 11 ก.ย. ไม่ซื้อกลางทางเด้ง</div>
+        </div>
+        <div class="verdict-chip">
+          <div class="agent">🎩 Warren</div>
+          <div class="stance" style="color:var(--text-2);">TOO HARD — ประเมิน owner&#x27;s earnings ไม่ได้</div>
+          <div class="conviction" style="background:var(--surface-2);color:var(--text-2);border-color:var(--border);">High</div>
+          <div class="rationale">ธุรกิจ database ผมเข้าใจและชอบมาก — margin 90% ลูกค้าย้ายยาก 141,000 พนักงาน tenure เฉลี่ย 8 ปี. แต่ธุรกิจให้เช่า GPU ที่ gross margin 15% ผูกกับลูกค้ารายเดียวที่ยังไม่ทำกำไร บวก lease นอกงบ $260B อายุ 19 ปี — ผมบอกไม่ได้ว่าอีก 10 ปีบริษัทนี้จะทำเงินสดได้เท่าไร ก็คือไม่ลงทุน ไม่ใช่ว่ามันแย่ แต่มันอยู่นอกวงความรู้ผม</div>
+        </div>
+        <div class="verdict-chip">
+          <div class="agent">🚀 Lynch</div>
+          <div class="stance" style="color:var(--amber);">WATCH ค่อนไป BUY — ตัวเลขถูก แต่ขอดูงบก่อน</div>
+          <div class="conviction" style="background:rgba(245,200,66,0.1);color:var(--amber);border-color:rgba(245,200,66,0.3);">Medium</div>
+          <div class="rationale">18.1x forward กับรายได้ที่ guide โต 34% ได้ PEG ~0.5 — ในเชิงตัวเลขนี่ถูก และ RPO 9.5 เท่าของรายได้ปิด 85% ของ guidance ปีหน้าไปแล้ว คือ story ที่จับต้องได้จริง ไม่ใช่ลม. แต่ผมยอมจ่ายแพงขึ้น $10–15 เพื่อรอเห็นตัวเลข capex กับค่าเสื่อมในงบ 11 ก.ย. ก่อน — ถ้า margin OCI ขยายจริง ผมไล่ซื้อถึง $160 ได้เลย</div>
+        </div></div>
+      
+      <div class="overall-verdict">
+        <div class="ov-stance">WATCH</div>
+        <div class="ov-detail">
+          <div class="ov-label">Smartmall Overall Stance</div>
+          <div class="ov-target"><strong>WATCH · conviction Medium-High · 🚀 HIGH GROWTH (ไม่ใช่ CASH COW) · สภา 0 Buy / 3 Watch-Pass / 1 Too Hard</strong> · Fair value target <strong>มูลค่าถ่วงน้ำหนัก ~$156 = DR ฿5.17 (bear $85–95/฿2.81–3.15 น้ำหนัก 25% · base $145–161/฿4.80–5.33 น้ำหนัก 50% · bull $231/฿7.65 น้ำหนัก 25%) → upside จากราคาปัจจุบันแค่ +7% = fairly valued ไม่ใช่ของถูก. ราคาเป้าหมาย 12 เดือนถ้าเข้าซื้อ $175–190 = ฿5.80–6.29. analyst mean $247.17 แต่ช่วง $110–400 กว้างผิดปกติ</strong></div>
+          <div class="ov-add-zone">Add zone: <strong>[position details omitted on the public site]</strong></div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">Generated by Smartmall · ตัวเลขงบทั้งหมดตรวจกับ Form 10-K FY2026 ที่ยื่น SEC 22 มิ.ย. 2026 (accession 0001193125-26-277521) + 8-K Ex-99.1 10 มิ.ย. 2026 + 424B5 23 มิ.ย. 2026 · รายได้ 5 ปีดึงจาก SEC XBRL · ratio DR 1,000:1 ยืนยันจากประกาศรับหลักทรัพย์ของ SET (Yuanta, เทรดวันแรก 15 ก.ย. 2025 ที่ ฿9.84) และ symbols.json แก้จาก 985 → 1000 แล้ว · ราคา ณ 12 ส.ค. 2026</div>
+  </main>
+</div>
+<script>
+(function () {
+  var links = Array.prototype.slice.call(document.querySelectorAll('.nav-item'));
+  var map = {};
+  links.forEach(function (a) { var id = (a.getAttribute('href') || '').slice(1); if (id) map[id] = a; });
+  var sections = Object.keys(map).map(function (id) { return document.getElementById(id); }).filter(Boolean);
+  if (!('IntersectionObserver' in window) || !sections.length) return;
+  var obs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        links.forEach(function (l) { l.classList.remove('active'); });
+        var active = map[e.target.id];
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+  sections.forEach(function (s) { obs.observe(s); });
+})();
+(function () {
+  document.querySelectorAll('.chart-section').forEach(function (sec) {
+    var tabs = sec.querySelectorAll('.chart-tab');
+    var panes = sec.querySelectorAll('.chart-pane');
+    tabs.forEach(function (t) {
+      t.addEventListener('click', function () {
+        var r = t.getAttribute('data-range');
+        tabs.forEach(function (x) { x.classList.toggle('active', x === t); });
+        panes.forEach(function (p) { p.classList.toggle('active', p.getAttribute('data-range') === r); });
+      });
+    });
+  });
+})();
+</script>
+</body>
+</html>
