@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SCB — SCB X Public Company Limited · Smartmall Stock Card</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #19243c; --surface: #222f49; --surface-2: #2c3b58; --border: #3a4c6b;
+  --teal: #17dbc9; --teal-mid: #00c4b4; --teal-dim: rgba(23,219,201,0.15); --teal-fill: rgba(23,219,201,0.22);
+  --orange: #f0995e; --orange-mid: #dd8449; --orange-dim: rgba(240,153,94,0.18);
+  --green: #3ee08a; --green-dim: rgba(62,224,138,0.15); --red: #ef6a6a; --red-dim: rgba(239,106,106,0.15);
+  --amber: #f3d074; --text-1: #eef3fb; --text-2: #b0c1d8; --text-3: #8295ac;
+  --number: #d6e2f2; --tag-bg: #23406a; --badge-teal: #0c3a38; --score-track: #2c3b58;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text-1); font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Segoe UI', Arial, sans-serif; line-height: 1.5; min-height: 100vh; display: flex; justify-content: center; padding: 40px 20px 80px; }
+.page { width: 1240px; max-width: 100%; display: grid; grid-template-columns: 220px 1fr; gap: 0; align-items: start; }
+.sidenav { position: sticky; top: 40px; padding: 32px 0 32px 0; }
+.sidenav-logo { display: flex; align-items: center; gap: 8px; margin-bottom: 20px; padding-left: 8px; text-decoration: none; transition: opacity 0.15s; }
+.sidenav-logo:hover { opacity: 0.8; }
+.sidenav-logo .dot { width: 28px; height: 28px; background: var(--teal); border-radius: 50%; flex-shrink: 0; }
+.sidenav-logo span { font-size: 13px; font-weight: 700; color: var(--text-2); letter-spacing: 0.05em; text-transform: uppercase; }
+.nav-item { display: flex; align-items: center; gap: 12px; padding: 10px 16px; border-radius: 10px; cursor: pointer; margin-bottom: 2px; transition: background 0.15s; text-decoration: none; }
+.nav-item:hover { background: var(--surface); }
+.nav-item.active { background: var(--teal-dim); border-left: 3px solid var(--teal); }
+.nav-back { margin-bottom: 16px; }
+.nav-back .nav-num { color: var(--teal); font-size: 14px; }
+.nav-back .nav-label { color: var(--text-2); font-weight: 600; }
+.nav-back:hover .nav-label { color: var(--teal); }
+.nav-num { font-size: 11px; font-weight: 700; color: var(--text-3); width: 18px; flex-shrink: 0; }
+.nav-label { font-size: 13px; font-weight: 500; color: var(--text-2); }
+.nav-item.active .nav-label { color: var(--teal); }
+.hero-verdict { display: flex; justify-content: flex-end; align-items: center; gap: 12px; margin-top: 14px; }
+.hv-stance { font-size: 13px; font-weight: 800; letter-spacing: 0.04em; border: 1.5px solid; border-radius: 999px; padding: 5px 16px; text-transform: uppercase; }
+.hv-score { font-size: 13px; color: var(--text-3); font-weight: 600; }
+.hv-score b { font-size: 19px; color: var(--text-1); font-weight: 800; }
+.main { min-width: 0; padding: 0 0 0 32px; }
+.section { margin-bottom: 40px; scroll-margin-top: 20px; }
+.section-header { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
+.section-num { width: 32px; height: 32px; border-radius: 50%; background: var(--surface-2); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: var(--text-2); flex-shrink: 0; }
+.section-title { font-size: 17px; font-weight: 700; color: var(--text-1); letter-spacing: -0.01em; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px 32px; margin-bottom: 16px; }
+.header-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 24px; }
+.header-ticker { display: flex; align-items: center; gap: 14px; margin-bottom: 8px; }
+.ticker-logo { width: 48px; height: 48px; background: linear-gradient(135deg, #1a3550 0%, #2a4a70 100%); border-radius: 12px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; color: var(--teal); letter-spacing: 0.02em; }
+.ticker-name h1 { font-size: 22px; font-weight: 800; color: var(--text-1); letter-spacing: -0.02em; line-height: 1.2; }
+.ticker-name .exch { font-size: 12px; color: var(--text-3); margin-top: 2px; }
+.header-price { text-align: right; }
+.price-big { font-size: 36px; font-weight: 800; color: var(--text-1); letter-spacing: -0.03em; line-height: 1; }
+.price-secondary { font-size: 14px; font-weight: 600; color: var(--text-3); margin-top: 5px; }
+.price-sub { font-size: 13px; color: var(--text-3); margin-top: 6px; }
+.badges { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
+.badge { display: inline-flex; align-items: center; gap: 5px; padding: 5px 11px; border-radius: 100px; font-size: 11.5px; font-weight: 600; letter-spacing: 0.02em; }
+.badge-teal { background: var(--teal-dim); color: var(--teal); border: 1px solid rgba(23,219,201,0.3); }
+.badge-orange { background: var(--orange-dim); color: var(--orange); border: 1px solid rgba(240,153,94,0.3); }
+.badge-muted { background: var(--surface-2); color: var(--text-2); border: 1px solid var(--border); }
+.range-bar-wrap { margin-top: 4px; }
+.range-label { display: flex; justify-content: space-between; font-size: 11.5px; color: var(--text-3); margin-bottom: 8px; }
+.range-bar-track { height: 6px; border-radius: 4px; background: var(--surface-2); position: relative; overflow: visible; }
+.range-bar-fill { height: 100%; border-radius: 4px; background: linear-gradient(90deg, var(--teal-mid) 0%, var(--teal) 100%); }
+.range-bar-marker { position: absolute; top: 50%; transform: translate(-50%, -50%); width: 14px; height: 14px; border-radius: 50%; background: #fff; border: 2px solid var(--teal); box-shadow: 0 0 0 3px rgba(23,219,201,0.3); }
+.range-bar-label { position: absolute; bottom: -20px; transform: translateX(-50%); font-size: 11px; font-weight: 700; color: var(--text-1); white-space: nowrap; }
+.range-sublabels { margin-top: 22px; font-size: 11.5px; color: var(--text-3); display: flex; justify-content: space-between; }
+.range-sublabels span { font-weight: 600; color: var(--text-2); }
+.snowflake-grid { display: grid; grid-template-columns: 240px 1fr; gap: 32px; align-items: start; }
+.score-rows { flex: 1; }
+.score-row { display: grid; grid-template-columns: 130px 1fr 36px; gap: 12px; align-items: center; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+.score-row:last-child { border-bottom: none; }
+.score-row-label { font-size: 13px; font-weight: 600; color: var(--text-2); }
+.score-bar-track { height: 8px; background: var(--score-track); border-radius: 4px; overflow: hidden; }
+.score-bar-fill { height: 100%; border-radius: 4px; }
+.score-num { font-size: 13px; font-weight: 700; text-align: right; }
+.score-rationale { grid-column: 1 / -1; font-size: 11.5px; color: var(--text-3); padding-top: 2px; line-height: 1.5; }
+.snowflake-total { text-align: center; margin-top: 16px; }
+.snowflake-total .num { font-size: 28px; font-weight: 800; color: var(--teal); }
+.snowflake-total .denom { font-size: 14px; color: var(--text-3); }
+.snowflake-total .label { font-size: 11px; color: var(--text-3); margin-top: 4px; }
+.sankey-wrap { width: 100%; overflow-x: auto; }
+.sankey-caption { margin-top: 16px; font-size: 12.5px; color: var(--text-2); background: var(--surface-2); border-radius: 8px; padding: 10px 14px; border-left: 3px solid var(--teal); }
+.health-row { display: flex; align-items: center; gap: 16px; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+.health-row:last-child { border-bottom: none; }
+.health-label { width: 140px; font-size: 13px; color: var(--text-2); flex-shrink: 0; }
+.health-bar-track { flex: 1; height: 8px; background: var(--score-track); border-radius: 4px; overflow: hidden; position: relative; }
+.health-bar-fill { height: 100%; border-radius: 4px; background: var(--teal); }
+.health-value { width: 90px; text-align: right; font-size: 13px; font-weight: 700; color: var(--number); }
+.chart-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 18px; flex-wrap: wrap; }
+.chart-price { font-size: 30px; font-weight: 900; color: var(--text-1); letter-spacing: -0.03em; }
+.chart-sub { font-size: 12px; color: var(--text-3); margin-top: 4px; }
+.chart-tabs { display: flex; gap: 8px; flex-wrap: wrap; }
+.chart-tab { background: var(--surface-2); border: 1px solid var(--border); border-radius: 9px; padding: 7px 13px; font-size: 12px; font-weight: 700; color: var(--text-3); cursor: pointer; display: flex; gap: 6px; align-items: center; font-family: inherit; transition: all .15s; }
+.chart-tab:hover { color: var(--text-1); }
+.chart-tab.active { border-color: var(--teal); color: var(--text-1); background: var(--teal-dim); }
+.chart-tab span { font-size: 11px; font-weight: 600; }
+.chart-pane { display: none; }
+.chart-pane.active { display: block; }
+.chart-svg { width: 100%; height: 240px; display: block; }
+.rsi-block { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--border); }
+.rsi-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 8px; }
+.rsi-title { font-size: 13px; font-weight: 700; color: var(--text-2); letter-spacing: 0.02em; }
+.rsi-now { font-size: 14px; font-weight: 800; }
+.rsi-chartwrap { position: relative; padding-left: 26px; }
+.rsi-axis { position: absolute; left: 0; top: 0; height: 120px; width: 22px; display: flex; flex-direction: column; justify-content: space-between; }
+.rsi-axis span { font-size: 10px; color: var(--text-3); line-height: 1; }
+.rsi-svg { width: 100%; height: 120px; display: block; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.verdict-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
+.verdict-chip { background: var(--surface-2); border: 1px solid var(--border); border-radius: 14px; padding: 20px; }
+.verdict-chip .agent { font-size: 11px; font-weight: 700; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+.verdict-chip .stance { font-size: 15px; font-weight: 800; color: var(--text-1); margin-bottom: 6px; }
+.verdict-chip .conviction { display: inline-block; font-size: 10.5px; font-weight: 700; padding: 2px 8px; border-radius: 100px; background: var(--teal-dim); color: var(--teal); margin-bottom: 8px; border: 1px solid rgba(23,219,201,0.25); }
+.verdict-chip .rationale { font-size: 12px; color: var(--text-3); line-height: 1.5; }
+.overall-verdict { background: linear-gradient(135deg, rgba(23,219,201,0.12) 0%, rgba(0,169,157,0.06) 100%); border: 1px solid rgba(23,219,201,0.3); border-radius: 14px; padding: 24px 28px; display: flex; align-items: center; gap: 24px; }
+.ov-stance { font-size: 28px; font-weight: 900; color: var(--teal); letter-spacing: -0.02em; flex-shrink: 0; }
+.ov-detail { flex: 1; }
+.ov-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-3); margin-bottom: 4px; }
+.ov-target { font-size: 14px; color: var(--text-2); }
+.ov-target strong { color: var(--text-1); }
+.ov-add-zone { font-size: 13px; color: var(--text-3); margin-top: 4px; }
+.rr-col h4 { font-size: 13px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 14px; }
+.rr-col.rewards h4 { color: var(--green); }
+.rr-col.risks h4 { color: var(--red); }
+.rr-item { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 12px; font-size: 13px; color: var(--text-2); line-height: 1.5; }
+.rr-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; margin-top: 6px; }
+.rr-col.rewards .rr-dot { background: var(--green); }
+.rr-col.risks .rr-dot { background: var(--red); }
+.rr-item.bold-risk { color: var(--text-1); font-weight: 600; }
+.rr-item.bold-risk .rr-dot { background: var(--red); box-shadow: 0 0 0 3px rgba(232,93,93,0.2); }
+.stat-row { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 16px; }
+.stat-pill { background: var(--surface-2); border: 1px solid var(--border); border-radius: 10px; padding: 10px 16px; min-width: 130px; }
+.stat-pill-label { font-size: 11px; color: var(--text-3); margin-bottom: 3px; text-transform: uppercase; letter-spacing: 0.04em; }
+.stat-pill-value { font-size: 18px; font-weight: 800; color: var(--number); }
+.stat-pill-sub { font-size: 11px; color: var(--text-3); margin-top: 2px; }
+.div-row { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+.div-big { font-size: 52px; font-weight: 900; color: var(--amber); letter-spacing: -0.04em; line-height: 1; }
+.div-note { font-size: 13px; color: var(--text-2); max-width: 460px; line-height: 1.6; }
+.div-trend { margin-top: 20px; font-size: 12.5px; color: var(--text-3); }
+.footer { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border); font-size: 11px; color: var(--text-3); line-height: 1.7; text-align: center; }
+.growth-row { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+.growth-label { width: 170px; font-size: 13px; color: var(--text-2); flex-shrink: 0; }
+.growth-bar-track { flex: 1; height: 28px; background: var(--score-track); border-radius: 8px; overflow: hidden; position: relative; }
+.growth-bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; padding-left: 10px; font-size: 12px; font-weight: 700; color: rgba(255,255,255,0.9); white-space: nowrap; }
+.growth-value { width: 90px; text-align: right; font-size: 14px; font-weight: 700; color: var(--number); flex-shrink: 0; }
+.biz-summary { font-size: 14px; color: var(--text-1); line-height: 1.65; margin-bottom: 22px; }
+.biz-rev-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-3); font-weight: 700; margin-bottom: 6px; }
+.biz-row { display: flex; align-items: baseline; gap: 14px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+.biz-row:last-child { border-bottom: none; }
+.biz-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; align-self: center; }
+.biz-name { font-size: 13px; font-weight: 700; color: var(--text-1); width: 92px; flex-shrink: 0; }
+.biz-pct { font-size: 13px; font-weight: 800; color: var(--teal); width: 46px; flex-shrink: 0; text-align: right; }
+.biz-desc { font-size: 12.5px; color: var(--text-2); line-height: 1.5; }
+.note-box { background: var(--surface-2); border-left: 3px solid var(--teal); border-radius: 0 8px 8px 0; padding: 12px 16px; font-size: 12.5px; color: var(--text-2); margin-top: 16px; line-height: 1.6; }
+.note-box.orange { border-left-color: var(--orange); }
+.note-box.red { border-left-color: var(--red); }
+</style>
+</head>
+<body>
+<div class="page">
+  <nav class="sidenav"><a class="sidenav-logo" href="index.html"><div class="dot"></div><span>Smartmall</span></a><a class="nav-item nav-back" href="index.html"><span class="nav-num">&larr;</span><span class="nav-label">All Stock Cards</span></a><a class="nav-item active" href="#s1"><span class="nav-num">1</span><span class="nav-label">Overview</span></a><a class="nav-item" href="#s2"><span class="nav-num">2</span><span class="nav-label">Snowflake Score</span></a><a class="nav-item" href="#s3"><span class="nav-num">3</span><span class="nav-label">Revenue &amp; Expenses</span></a><a class="nav-item" href="#s4"><span class="nav-num">4</span><span class="nav-label">Past Performance</span></a><a class="nav-item" href="#s5"><span class="nav-num">5</span><span class="nav-label">Future Growth</span></a><a class="nav-item" href="#s6"><span class="nav-num">6</span><span class="nav-label">Financial Health</span></a><a class="nav-item" href="#s7"><span class="nav-num">7</span><span class="nav-label">Dividend</span></a><a class="nav-item" href="#s8"><span class="nav-num">8</span><span class="nav-label">Rewards &amp; Risks</span></a><a class="nav-item" href="#s9"><span class="nav-num">9</span><span class="nav-label">Council Verdict</span></a></nav>
+  <main class="main">
+    
+    <div class="section" id="s1">
+      <div class="card">
+        <div class="header-top">
+          <div>
+            <div class="header-ticker">
+              <div class="ticker-logo">SCB</div>
+              <div class="ticker-name">
+                <h1>SCB X Public Company Limited</h1>
+                <div class="exch">SET: SCB</div>
+              </div>
+            </div>
+          </div>
+          <div class="header-price">
+            <div class="price-big">฿151.50</div>
+            
+            <div class="price-sub">as of 2026-08-19</div>
+            <div class="hero-verdict"><span class="hv-stance" style="color:var(--green);border-color:var(--green);">WATCH · conviction Medium</span><span class="hv-score"><b>19</b>/30</span></div>
+          </div>
+        </div>
+        <div class="badges"><span class="badge badge-muted">cash-cow</span><span class="badge badge-muted">SET direct (no DR)</span><span class="badge badge-muted">big-four bank</span><span class="badge badge-muted">P/B re-rated above book</span><span class="badge badge-muted">highest yield of big-four</span><span class="badge badge-muted">Banking</span><span class="badge badge-muted">Big-four Thai Bank / Fintech Holding</span><span class="badge badge-muted">Thailand</span></div>
+        
+        <div style="margin-bottom:6px;font-size:12px;font-weight:600;color:var(--text-3);text-transform:uppercase;letter-spacing:0.05em;">52-Week Range</div>
+        <div class="range-bar-wrap">
+          <div class="range-label"><span>125.0 &nbsp; 52W Low</span><span>52W High &nbsp; 160.0</span></div>
+          <div class="range-bar-track">
+            <div class="range-bar-fill" style="width:75.7%"></div>
+            <div class="range-bar-marker" style="left:75.7%"><div class="range-bar-label">151.5</div></div>
+          </div>
+          <div class="range-sublabels" style="margin-top:28px;">
+            <span>Current <span>฿151.50</span></span>
+            <span>Distance from low: <span>+21%</span></span>
+          </div>
+        </div>
+        <div class="stat-row" style="margin-top:28px;margin-bottom:0;"><div class="stat-pill"><div class="stat-pill-label">Market Cap</div><div class="stat-pill-value">฿510.1B</div><div class="stat-pill-sub">~3.37B shares</div></div><div class="stat-pill"><div class="stat-pill-label">Trailing P/E</div><div class="stat-pill-value">11.72x</div><div class="stat-pill-sub">up from 10.0x in May 2026 report</div></div><div class="stat-pill"><div class="stat-pill-label">P/B</div><div class="stat-pill-value">1.04x</div><div class="stat-pill-sub">re-rated from 0.89x (below book) in May 2026 — now above book</div></div><div class="stat-pill"><div class="stat-pill-label">Div Yield</div><div class="stat-pill-value">7.42%</div><div class="stat-pill-sub">down from 8.39% as price rose; still highest of big-four (KTB ~7.15%, BBL ~5.56%)</div></div><div class="stat-pill"><div class="stat-pill-label">ROE</div><div class="stat-pill-value">9.09%</div><div class="stat-pill-sub">flat vs 9.06% in May 2026</div></div><div class="stat-pill"><div class="stat-pill-label">Q2/2026 net profit</div><div class="stat-pill-value">฿11,117M</div><div class="stat-pill-sub">+9.0% QoQ, -13.1% YoY</div></div><div class="stat-pill"><div class="stat-pill-label">Q2/2026 NII</div><div class="stat-pill-value">฿27,306M</div><div class="stat-pill-sub">+2.0% QoQ (trigger confirmed) but -10.2% YoY</div></div><div class="stat-pill"><div class="stat-pill-label">Q2/2026 fee income</div><div class="stat-pill-value">฿11,365M</div><div class="stat-pill-sub">+14.8% YoY, still double-digit growth</div></div><div class="stat-pill"><div class="stat-pill-label">NPL ratio</div><div class="stat-pill-value">3.17%</div><div class="stat-pill-sub">improving 3rd straight quarter (3.29%→3.23%→3.17%)</div></div><div class="stat-pill"><div class="stat-pill-label">Coverage ratio</div><div class="stat-pill-value">158.6%</div><div class="stat-pill-sub">down slightly from 160.8%, still very strong</div></div><div class="stat-pill"><div class="stat-pill-label">CAR (Basel III)</div><div class="stat-pill-value">18.6%</div><div class="stat-pill-sub">down slightly from 18.9%, still well above minimum</div></div><div class="stat-pill"><div class="stat-pill-label">Cost-to-income</div><div class="stat-pill-value">41.3%</div><div class="stat-pill-sub">Q2/2026, normal range</div></div></div>
+      </div>
+    </div>
+    <div class="section" id="s2">
+      <div class="section-header"><div class="section-num">2</div><div class="section-title">Snowflake Score</div></div>
+      <div class="card">
+        <div class="snowflake-grid">
+          <div style="display:flex;flex-direction:column;align-items:center;">
+            <svg width="240" height="240" viewBox="-175 -125 350 250"><defs><style>.ring{fill:none;stroke:rgba(255,255,255,0.06);stroke-width:1;}.ring-bright{fill:none;stroke:rgba(255,255,255,0.12);stroke-width:1;}.axis-line{stroke:rgba(255,255,255,0.08);stroke-width:1;}.score-poly{fill:rgba(23,219,201,0.22);stroke:#17dbc9;stroke-width:2;}</style></defs><polygon class="ring" points="0.00,-15.00 14.27,-4.64 8.82,12.14 -8.82,12.14 -14.27,-4.64"/><polygon class="ring" points="0.00,-30.00 28.53,-9.27 17.63,24.27 -17.63,24.27 -28.53,-9.27"/><polygon class="ring" points="0.00,-45.00 42.80,-13.91 26.45,36.41 -26.45,36.41 -42.80,-13.91"/><polygon class="ring" points="0.00,-60.00 57.06,-18.54 35.27,48.54 -35.27,48.54 -57.06,-18.54"/><polygon class="ring ring-bright" points="0.00,-75.00 71.33,-23.18 44.08,60.68 -44.08,60.68 -71.33,-23.18"/><polygon class="ring ring-bright" points="0.00,-90.00 85.60,-27.81 52.90,72.81 -52.90,72.81 -85.60,-27.81"/><line class="axis-line" x1="0" y1="0" x2="0.00" y2="-90.00"/><line class="axis-line" x1="0" y1="0" x2="85.60" y2="-27.81"/><line class="axis-line" x1="0" y1="0" x2="52.90" y2="72.81"/><line class="axis-line" x1="0" y1="0" x2="-52.90" y2="72.81"/><line class="axis-line" x1="0" y1="0" x2="-85.60" y2="-27.81"/><polygon class="score-poly" points="0.00,-45.00 42.80,-13.91 35.27,48.54 -44.08,60.68 -57.06,-18.54"/><text x="0.0" y="-96.3" text-anchor="middle" font-size="8.5" fill="#8fa3bf">Valuation</text><text x="95.6" y="-29.8" text-anchor="start" font-size="8.5" fill="#8fa3bf">Future Growth</text><text x="60.6" y="83.9" text-anchor="start" font-size="8.5" fill="#8fa3bf">Past Perf.</text><text x="-60.6" y="83.9" text-anchor="end" font-size="8.5" fill="#8fa3bf">Fin. Health</text><text x="-95.6" y="-29.8" text-anchor="end" font-size="8.5" fill="#8fa3bf">Dividend</text><circle cx="0.00" cy="-45.00" r="4" fill="#17dbc9"/><circle cx="42.80" cy="-13.91" r="4" fill="#17dbc9"/><circle cx="35.27" cy="48.54" r="4" fill="#17dbc9"/><circle cx="-44.08" cy="60.68" r="4" fill="#17dbc9"/><circle cx="-57.06" cy="-18.54" r="4" fill="#17dbc9"/></svg>
+            <div class="snowflake-total">
+              <div><span class="num">19</span><span class="denom" style="font-size:18px;color:var(--text-3);"> / 30</span></div>
+              <div class="label">Smartmall Score</div>
+            </div>
+          </div>
+          <div class="score-rows">
+            
+            <div class="score-row">
+              <div class="score-row-label" style="color:var(--teal)">Valuation</div>
+              <div>
+                <div class="score-bar-track"><div class="score-bar-fill" style="width:50.0%;background:var(--teal)"></div></div>
+                <div class="score-rationale">P/B has re-rated from 0.89x (below book) in May 2026 to 1.04x (above book) now — a fast ~3-month move that has consumed the entire margin-of-safety the original Buy call relied on. P/E 11.72x is not expensive in absolute terms for a bank earning ~9% ROE, but consensus target ฿155.30-158.10 implies only 3-6% further upside from ฿151.50. No margin of safety at current price.</div>
+              </div>
+              <div class="score-num" style="color:var(--teal)">3/6</div>
+            </div>
+            <div class="score-row">
+              <div class="score-row-label" style="color:var(--teal)">Future Growth</div>
+              <div>
+                <div class="score-bar-track"><div class="score-bar-fill" style="width:50.0%;background:var(--teal)"></div></div>
+                <div class="score-rationale">The NII trigger the May report set — QoQ NII stops falling — fired in Q2/2026 (+2.0% QoQ), the first positive quarterly NII move since the BoT rate-cutting cycle began. YoY NII is still -10.2%, so one quarter of QoQ improvement needs Q3/2026 confirmation before calling it a trend. Fee income +14.8% YoY continues to offset, though decelerating from +17.7% in Q1.</div>
+              </div>
+              <div class="score-num" style="color:var(--teal)">3/6</div>
+            </div>
+            <div class="score-row">
+              <div class="score-row-label" style="color:var(--teal)">Past Performance</div>
+              <div>
+                <div class="score-bar-track"><div class="score-bar-fill" style="width:66.7%;background:var(--teal)"></div></div>
+                <div class="score-rationale">Q2/2026 net profit ฿11,117M, +9.0% QoQ — a real sequential improvement, though still -13.1% YoY. H1/2026 combined ≈฿21,312M. Asset quality has improved three straight quarters running (NPL 3.29%→3.23%→3.17%), the cleanest data series in this update.</div>
+              </div>
+              <div class="score-num" style="color:var(--teal)">4/6</div>
+            </div>
+            <div class="score-row">
+              <div class="score-row-label" style="color:var(--teal)">Financial Health</div>
+              <div>
+                <div class="score-bar-track"><div class="score-bar-fill" style="width:83.3%;background:var(--teal)"></div></div>
+                <div class="score-rationale">CAR (Basel III) 18.6% — still nearly 2x the regulatory minimum, though down slightly from 18.9%. NPL 3.17% with coverage 158.6% (down slightly from 160.8% but still very strong). Fortress balance sheet intact — no deterioration since May 2026.</div>
+              </div>
+              <div class="score-num" style="color:var(--teal)">5/6</div>
+            </div>
+            <div class="score-row">
+              <div class="score-row-label" style="color:var(--teal)">Dividend</div>
+              <div>
+                <div class="score-bar-track"><div class="score-bar-fill" style="width:66.7%;background:var(--teal)"></div></div>
+                <div class="score-rationale">Yield 7.42% at ฿151.50, down from 8.39% at ฿134.50 purely from price appreciation (DPS unchanged at ฿11.28). Still the highest yield of the Thai big-four (KTB ~7.15%, BBL ~5.56%), though the gap has narrowed from May 2026 when SCB led by a wider margin (8.4% vs KTB 6.7%). No interim H1/2026 dividend declaration found yet [not found, not confirmed].</div>
+              </div>
+              <div class="score-num" style="color:var(--teal)">4/6</div>
+            </div>
+            <div class="note-box" style="margin-top:16px;">
+              <strong>Transparent Smartmall scoring</strong> — not Simply Wall St's proprietary engine. Scores reflect our independent research and conviction framework.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="section" id="s3">
+      <div class="section-header"><div class="section-num">3</div><div class="section-title">Revenue &amp; Expenses Breakdown</div></div>
+      <div class="card">
+        <div style="font-size:12.5px;color:var(--text-3);margin-bottom:20px;">Q2/2026 ended 30 Jun 2026 (THB millions, consolidated, approximate)</div>
+        <div class="sankey-wrap"><svg viewBox="0 -62.0 980 592.0" width="100%" style="font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;overflow:visible;"><defs><linearGradient id="gProfit" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#2fd6c0" stop-opacity="0.7"/><stop offset="100%" stop-color="#2fd6c0" stop-opacity="0.4"/></linearGradient><linearGradient id="gCost" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#8a7320" stop-opacity="0.85"/><stop offset="100%" stop-color="#8a7320" stop-opacity="0.55"/></linearGradient><linearGradient id="gExpense" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#d9a93a" stop-opacity="0.8"/><stop offset="100%" stop-color="#d9a93a" stop-opacity="0.5"/></linearGradient><linearGradient id="gNet" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#30d97b" stop-opacity="0.8"/><stop offset="100%" stop-color="#30d97b" stop-opacity="0.6"/></linearGradient></defs><polyline points="18.0,-56.0 393.0,-51.1 768.0,-52.8" fill="none" stroke="#2fd6c0" stroke-width="1.5" opacity="0.85"/><text x="18.0" y="-20.0" text-anchor="middle" font-size="9" fill="#526070">Q4/2025</text><text x="393.0" y="-20.0" text-anchor="middle" font-size="9" fill="#526070">Q1/2026</text><text x="768.0" y="-20.0" text-anchor="middle" font-size="9" fill="#526070">Q2/2026</text><rect x="18" y="35.00" width="14" height="304.70" fill="#3b6fd4" rx="3"/><rect x="18" y="340.70" width="14" height="126.82" fill="#3360c2" rx="3"/><rect x="18" y="468.52" width="14" height="28.48" fill="#4a7ce0" rx="3"/><rect x="18" y="498.00" width="14" height="190.17" fill="#2f57b0" rx="3"/><rect x="18" y="689.17" width="14" height="124.05" fill="#5a89ea" rx="3"/><rect x="220" y="35.00" width="18" height="460.00" fill="#3b6fd4" rx="3"/><rect x="400" y="35.00" width="18" height="460.00" fill="#2fd6c0" rx="3"/><rect x="400" y="496.00" width="18" height="0.00" fill="#8a7320" rx="3"/><rect x="580" y="35.00" width="18" height="269.83" fill="#2fd6c0" rx="3"/><rect x="580" y="305.83" width="18" height="0.00" fill="#d9a93a" rx="3"/><rect x="580" y="306.83" width="18" height="190.17" fill="#d9a93a" rx="3"/><rect x="750" y="35.00" width="18" height="124.05" fill="#30d97b" rx="3"/><rect x="750" y="160.05" width="18" height="0.00" fill="#d9a93a" rx="3"/><path d="M32.00,35.00 C116.60,35.00 135.40,35.00 220.00,35.00 L220.00,339.70 C135.40,339.70 116.60,339.70 32.00,339.70 Z" fill="#3b6fd4" opacity="0.40"/><path d="M32.00,340.70 C116.60,340.70 135.40,339.70 220.00,339.70 L220.00,466.52 C135.40,466.52 116.60,467.52 32.00,467.52 Z" fill="#3360c2" opacity="0.40"/><path d="M32.00,468.52 C116.60,468.52 135.40,466.52 220.00,466.52 L220.00,495.00 C135.40,495.00 116.60,497.00 32.00,497.00 Z" fill="#4a7ce0" opacity="0.40"/><path d="M32.00,498.00 C116.60,498.00 135.40,495.00 220.00,495.00 L220.00,685.17 C135.40,685.17 116.60,688.17 32.00,688.17 Z" fill="#2f57b0" opacity="0.40"/><path d="M32.00,689.17 C116.60,689.17 135.40,685.17 220.00,685.17 L220.00,809.22 C135.40,809.22 116.60,813.22 32.00,813.22 Z" fill="#5a89ea" opacity="0.40"/><path d="M238.00,35.00 C310.90,35.00 327.10,35.00 400.00,35.00 L400.00,495.00 C327.10,495.00 310.90,495.00 238.00,495.00 Z" fill="url(#gProfit)" opacity="0.5"/><path d="M238.00,496.00 C310.90,496.00 327.10,496.00 400.00,496.00 L400.00,496.00 C327.10,496.00 310.90,496.00 238.00,496.00 Z" fill="url(#gCost)" opacity="0.55"/><path d="M418.00,35.00 C490.90,35.00 507.10,35.00 580.00,35.00 L580.00,304.83 C507.10,304.83 490.90,304.83 418.00,304.83 Z" fill="url(#gProfit)" opacity="0.5"/><path d="M418.00,304.83 C490.90,304.83 507.10,305.83 580.00,305.83 L580.00,305.83 C507.10,305.83 490.90,304.83 418.00,304.83 Z" fill="url(#gExpense)" opacity="0.55"/><path d="M418.00,304.83 C490.90,304.83 507.10,306.83 580.00,306.83 L580.00,497.00 C507.10,497.00 490.90,495.00 418.00,495.00 Z" fill="url(#gExpense)" opacity="0.5"/><path d="M598.00,35.00 C666.40,35.00 681.60,35.00 750.00,35.00 L750.00,159.05 C681.60,159.05 666.40,159.05 598.00,159.05 Z" fill="url(#gNet)" opacity="0.5"/><path d="M598.00,159.05 C666.40,159.05 681.60,160.05 750.00,160.05 L750.00,160.05 C681.60,160.05 666.40,159.05 598.00,159.05 Z" fill="url(#gExpense)" opacity="0.55"/><text x="38" y="35.0" dy="10" font-size="11" fill="#e8edf5" font-weight="600">Net Interest Income</text><text x="38" y="35.0" dy="23" font-size="10.5" fill="#3b6fd4">฿27.3T · +2.0% QoQ (trigger confirmed) but -10.2% YoY</text><text x="38" y="340.7" dy="10" font-size="11" fill="#e8edf5" font-weight="600">Fee &amp; Other Income</text><text x="38" y="340.7" dy="23" font-size="10.5" fill="#3360c2">฿11.4T · +14.8% YoY, still growing</text><text x="38" y="468.5" dy="10" font-size="11" fill="#e8edf5" font-weight="600">Investment &amp; Trading Income</text><text x="38" y="468.5" dy="23" font-size="10.5" fill="#4a7ce0">฿2.6T · +349.1% QoQ but volatile, -21.2% YoY</text><text x="38" y="498.0" dy="10" font-size="11" fill="#e8edf5" font-weight="600">Operating Expenses</text><text x="38" y="498.0" dy="23" font-size="10.5" fill="#2f57b0">฿17.0T · cost-to-income 41.3%, opex -2.2% YoY</text><text x="38" y="689.2" dy="10" font-size="11" fill="#e8edf5" font-weight="600">Net Profit</text><text x="38" y="689.2" dy="23" font-size="10.5" fill="#5a89ea">฿11.1T · +9.0% QoQ, -13.1% YoY</text><text x="229" y="8" text-anchor="middle" font-size="9.5" fill="#8fa3bf">Income</text><text x="229" y="8" dy="11" text-anchor="middle" font-size="9.5" fill="#8fa3bf">Statement</text><rect x="197.1" y="247.5" width="63.7" height="19.0" rx="9.5" fill="#3b6fd4"/><text x="229.0" y="257.0" dy="3.8" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">Revenue</text><text x="229" y="277" text-anchor="middle" font-size="11" font-weight="700" fill="#e8edf5">฿41.2T</text><text x="409" y="8" text-anchor="middle" font-size="9.5" fill="#8fa3bf">Gross</text><text x="409" y="8" dy="11" text-anchor="middle" font-size="9.5" fill="#8fa3bf">Profit</text><text x="409" y="265" text-anchor="middle" font-size="12" fill="#2fd6c0" font-weight="800" transform="rotate(-90 409 265)">฿41.2T</text><text x="589" y="8" text-anchor="middle" font-size="9.5" fill="#8fa3bf">Operating</text><text x="589" y="8" dy="11" text-anchor="middle" font-size="9.5" fill="#8fa3bf">Income</text><text x="589" y="170" text-anchor="middle" font-size="12" fill="#2fd6c0" font-weight="800" transform="rotate(-90 589 170)">฿24.2T</text><text x="759" y="8" text-anchor="middle" font-size="9.5" fill="#8fa3bf">Net</text><text x="759" y="8" dy="11" text-anchor="middle" font-size="9.5" fill="#8fa3bf">Income</text><rect x="720.0" y="80.0" width="78.0" height="18.0" rx="9.0" fill="#30d97b"/><text x="759.0" y="89.0" dy="3.5" text-anchor="middle" font-size="10" font-weight="700" fill="#0f1923">Net Income</text><text x="759" y="109" text-anchor="middle" font-size="11" font-weight="700" fill="#30d97b">฿11.1T</text><text x="409" y="500" text-anchor="middle" font-size="9.5" fill="#d9a93a" font-weight="700">CoR ฿0B</text><text x="602" y="309" font-size="10" fill="#d9a93a" font-weight="600">R&amp;D ฿0B</text><text x="602" y="413" font-size="10" fill="#d9a93a">SG&amp;A ฿17.0T</text><text x="772" y="163" font-size="10" fill="#d9a93a">Tax ฿0B</text><text x="602" y="300" font-size="9.5" fill="#d9a93a" font-weight="700" opacity="0.85">Expenses</text><line x1="409" y1="496.0" x2="409" y2="518.0" stroke="#8a7320" stroke-width="2" stroke-dasharray="3,2" opacity="0.6"/><polygon points="409,523.0 405,516.0 413,516.0" fill="#8a7320" opacity="0.6"/><line x1="589" y1="497.0" x2="589" y2="519.0" stroke="#d9a93a" stroke-width="2" stroke-dasharray="3,2" opacity="0.6"/><polygon points="589,524.0 585,517.0 593,517.0" fill="#d9a93a" opacity="0.6"/><line x1="759" y1="160.1" x2="759" y2="182.1" stroke="#d9a93a" stroke-width="2" stroke-dasharray="3,2" opacity="0.6"/><polygon points="759,187.1 755,180.1 763,180.1" fill="#d9a93a" opacity="0.6"/><rect x="820" y="35" width="12" height="12" fill="#3b6fd4" rx="2" opacity="0.9"/><text x="836" y="45" font-size="10.5" fill="#8fa3bf">Revenue</text><rect x="820" y="54" width="12" height="12" fill="#d9a93a" rx="2" opacity="0.9"/><text x="836" y="64" font-size="10.5" fill="#8fa3bf">Cost / Expense</text><rect x="820" y="73" width="12" height="12" fill="#30d97b" rx="2" opacity="0.9"/><text x="836" y="83" font-size="10.5" fill="#8fa3bf">Net Income</text></svg></div>
+        <div class="sankey-caption">Q2/2026 waterfall: NII ฿27,306M (+2.0% QoQ, the NII-trigger event) + fee income ฿11,365M (+14.8% YoY) + investment/trading income ฿2,552M (volatile, +349% QoQ) = total operating income ฿41,223M → less opex ฿17,042M (cost-to-income 41.3%) and provisions → net profit ฿11,117M (+9.0% QoQ). The QoQ NII inflection is the single most important data point in this update — it is the exact trigger the May 2026 report set as the thesis-confirming event.</div>
+      </div>
+    </div>
+    <div class="section" id="s4">
+      <div class="section-header"><div class="section-num">4</div><div class="section-title">Past Performance</div></div>
+      <div class="card">
+        <div style="font-size:12.5px;color:var(--text-3);margin-bottom:20px;">Quarterly net profit (฿B)</div>
+        <svg viewBox="0 0 720 240" width="100%" style="font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;overflow:visible;"><line x1="0" y1="220.0" x2="720" y2="220.0" stroke="rgba(255,255,255,0.08)" stroke-width="1"/><line x1="0" y1="148.8" x2="720" y2="148.8" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="4,4"/><line x1="0" y1="77.5" x2="720" y2="77.5" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="4,4"/><rect x="20.0" y="30.0" width="213.3" height="190.0" rx="5" fill="#17dbc9" opacity="0.55"/><text x="126.7" y="25.0" font-size="11" font-weight="700" fill="#17dbc9" text-anchor="middle">฿12.8B</text><text x="126.7" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">Q4/2025</text><rect x="253.3" y="68.6" width="213.3" height="151.4" rx="5" fill="#f0995e" opacity="0.62"/><text x="360.0" y="63.6" font-size="11" font-weight="700" fill="#f0995e" text-anchor="middle">฿10.2B</text><text x="360.0" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">Q1/2026</text><rect x="486.7" y="55.2" width="213.3" height="164.8" rx="5" fill="#17dbc9" opacity="1.00"/><rect x="486.7" y="55.2" width="213.3" height="164.8" rx="5" fill="none" stroke="#17dbc9" stroke-width="1.5" opacity="0.5"/><text x="593.3" y="50.2" font-size="11" font-weight="700" fill="#17dbc9" text-anchor="middle">฿11.1B</text><text x="593.3" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">Q2/2026</text></svg>
+        <div class="note-box" style="margin-top:16px;">Q4/2025 figure back-solved from FY2025 total (฿47.49B) minus the other three quarters [inferred, not independently re-verified this cycle]. Q2/2026 shows the first QoQ improvement after the Q1 dip — consistent with the NII stabilization thesis.</div>
+      </div>
+    </div>
+    <div class="section" id="s5">
+      <div class="section-header"><div class="section-num">5</div><div class="section-title">Future Growth</div></div>
+      <div class="card">
+        <div style="font-size:12.5px;color:var(--text-3);margin-bottom:24px;">Growth drivers — guided &amp; estimated</div>
+        
+        <div class="growth-row">
+          <div class="growth-label">Q2/2026 net profit</div>
+          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:0%;background:linear-gradient(90deg,#17dbc9,#00c4b4);">฿11,117M</div></div>
+          <div class="growth-value" style="color:var(--teal);">฿11,117M</div>
+        </div>
+        <div class="growth-row">
+          <div class="growth-label">Q2/2026 NII</div>
+          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:0%;background:linear-gradient(90deg,#17dbc9,#00c4b4);">฿27,306M</div></div>
+          <div class="growth-value" style="color:var(--teal);">฿27,306M</div>
+        </div>
+        <div class="growth-row">
+          <div class="growth-label">Fee income</div>
+          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:0%;background:linear-gradient(90deg,#17dbc9,#00c4b4);">฿11,365M</div></div>
+          <div class="growth-value" style="color:var(--teal);">฿11,365M</div>
+        </div>
+        <div class="growth-row">
+          <div class="growth-label">NPL trend</div>
+          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:0%;background:linear-gradient(90deg,#17dbc9,#00c4b4);">3.17%</div></div>
+          <div class="growth-value" style="color:var(--teal);">3.17%</div>
+        </div>
+        <div class="growth-row">
+          <div class="growth-label">BankX launch</div>
+          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:0%;background:linear-gradient(90deg,#17dbc9,#00c4b4);">Q4/2026</div></div>
+          <div class="growth-value" style="color:var(--teal);">Q4/2026</div>
+        </div>
+        <div class="note-box" style="margin-top:20px;">The growth story has shifted from &#x27;waiting for NII to stabilize&#x27; (May 2026) to &#x27;NII stabilization is happening, confirm it holds&#x27; (Aug 2026). One quarter of positive QoQ NII plus continued double-digit fee growth is encouraging but not yet proof of a durable trend — Q3/2026 is the next checkpoint.</div>
+      </div>
+    </div>
+    <div class="section" id="s6">
+      <div class="section-header"><div class="section-num">6</div><div class="section-title">Financial Health</div></div>
+      <div class="card">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px;align-items:end;">
+          <div style="background:var(--teal-dim);border:1px solid rgba(23,219,201,0.3);border-radius:12px;padding:20px;">
+            <div style="font-size:11px;color:var(--teal);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;font-weight:700;">Cash &amp; Equivalents</div>
+            <div style="font-size:34px;font-weight:900;color:var(--teal);letter-spacing:-0.03em;">฿0B</div>
+            <div class="health-bar-track" style="margin-top:12px;"><div class="health-bar-fill" style="width:0%;background:var(--teal);"></div></div>
+          </div>
+          <div style="background:rgba(240,153,94,0.08);border:1px solid rgba(240,153,94,0.2);border-radius:12px;padding:20px;">
+            <div style="font-size:11px;color:var(--orange);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;font-weight:700;">Total Debt</div>
+            <div style="font-size:34px;font-weight:900;color:var(--orange);letter-spacing:-0.03em;">฿0B</div>
+            <div class="health-bar-track" style="margin-top:12px;"><div class="health-bar-fill" style="width:0%;background:var(--orange);"></div></div>
+          </div>
+        </div>
+        <div style="text-align:center;padding:24px;background:var(--surface-2);border-radius:12px;border:1px solid var(--border);margin-bottom:20px;">
+          <div style="font-size:11px;color:var(--text-3);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;">Net Position</div>
+          <div style="font-size:26px;font-weight:900;color:var(--teal);letter-spacing:-0.04em;line-height:1.1;">CAR (Basel III) 18.6% — ~2x regulatory minimum</div>
+        </div>
+        
+        <div class="health-row">
+          <div class="health-label">Net cash / mkt cap</div>
+          <div class="health-bar-track"><div class="health-bar-fill" style="width:0%;background:green;"></div></div>
+          <div class="health-value">+0%</div>
+        </div>
+        <div class="note-box orange" style="margin-top:16px;">Banks don&#x27;t carry &#x27;debt&#x27; in the conventional corporate sense — the relevant health metrics are capital adequacy and asset quality. CAR 18.6% (down slightly from 18.9% in May), NPL 3.17% (improving), coverage 158.6% (down slightly from 160.8%, still strong). No material deterioration since the May 2026 report.</div>
+      </div>
+    </div>
+    <div class="section" id="s7">
+      <div class="section-header"><div class="section-num">7</div><div class="section-title">Dividend</div></div>
+      <div class="card">
+        <div class="div-row">
+          <div class="div-big">7.42% gross (฿11.28 DPS, unchanged)</div>
+          <div class="div-note">Yield compressed from 8.39% to 7.42% purely on price appreciation — DPS itself unchanged at ฿11.28 (~80% payout on FY2025, policy floor &#x27;not less than 30%&#x27;). Still the highest yield among the Thai big-four (KTB ~7.15%, BBL ~5.56%) but the lead has narrowed. No interim H1/2026 dividend declaration confirmed yet at time of writing.</div>
+        </div>
+        
+      </div>
+    </div>
+    <div class="section" id="s8">
+      <div class="section-header"><div class="section-num">8</div><div class="section-title">Rewards &amp; Risks</div></div>
+      <div class="card">
+        <div class="two-col">
+          <div class="rr-col rewards"><h4>Rewards</h4><div class="rr-item"><div class="rr-dot"></div><div>The exact NII trigger the May 2026 report set — QoQ NII stops falling — fired in Q2/2026 (+2.0% QoQ), the thesis-confirming event.</div></div><div class="rr-item"><div class="rr-dot"></div><div>Fee &amp; other income still growing double-digit (+14.8% YoY Q2), continuing to offset the shrinking NII line.</div></div><div class="rr-item"><div class="rr-dot"></div><div>Asset quality improving for three straight quarters (NPL 3.29%→3.23%→3.17%), coverage still very strong at 158.6%.</div></div><div class="rr-item"><div class="rr-dot"></div><div>Fortress capital position intact: CAR 18.6%, ~2x regulatory minimum, no deterioration since May.</div></div><div class="rr-item"><div class="rr-dot"></div><div>Still the highest dividend yield of the Thai big-four at 7.42%, even after price appreciation.</div></div></div>
+          <div class="rr-col risks"><h4>Risks</h4><div class="rr-item bold-risk"><div class="rr-dot"></div><div><strong>NO MARGIN OF SAFETY LEFT. P/B re-rated from 0.89x (below book) to 1.04x (above book) in ~3 months as price rose 12.6% (฿134.50→฿151.50). Current price sits close to the 52-week high of ฿160.00. The core &#x27;buy below book&#x27; thesis that justified the original High-conviction Buy call has run its course — buying now means paying up for a re-rate that has largely already happened.</strong></div></div><div class="rr-item bold-risk"><div class="rr-dot"></div><div><strong>BankX remains unresolved: launch deferred to Q4/2026 due to technical build-out complexity, registered capital rising toward ~5B THB, still no company-disclosed loss guidance. The May 2026 base-case estimate (2-4B THB/yr loss, ~4-8% of group profit) remains the working assumption but is unconfirmed by management.</strong></div></div><div class="rr-item"><div class="rr-dot"></div><div>Dividend yield has compressed from 8.39% to 7.42% — still attractive but the entry point is materially less generous than it was 3 months ago.</div></div><div class="rr-item"><div class="rr-dot"></div><div>NII is still down -10.2% YoY despite the positive QoQ print — one quarter is not yet a confirmed trend; needs Q3/2026 to validate.</div></div><div class="rr-item"><div class="rr-dot"></div><div>Sector-wide risk unchanged: elevated Thai household debt could pressure asset quality if the macro backdrop weakens faster than the current improving-NPL trend suggests.</div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="section" id="s9">
+      <div class="section-header"><div class="section-num">9</div><div class="section-title">Stock Council Verdict</div></div>
+      <div class="verdict-grid"></div>
+      
+      <div class="overall-verdict">
+        <div class="ov-stance">WATCH</div>
+        <div class="ov-detail">
+          <div class="ov-label">Smartmall Overall Stance</div>
+          <div class="ov-target"><strong>WATCH · conviction Medium (down from Buy · High in May 2026) · no position — re-evaluation 2026-08-19, added to watchlist 2026-08-12 at ฿152.00</strong> · Fair value target <strong>฿155-160 12-month base case (raised slightly from ฿150 on continued asset-quality improvement) · bear case ฿122-136 if P/B reverts toward 0.85-0.95x on a NII relapse or BankX loss surprise</strong></div>
+          <div class="ov-add-zone">Add zone: <strong>Wait for a pullback to ฿135-140 (yield ≥8.0-8.4%) before a first tranche, ฿125 (yield ≥9.0%) for an aggressive add — do NOT chase ฿151.50, which sits near the 52-week high after a P/B re-rate from 0.89x to 1.04x in roughly 3 months. Re-evaluate on Q3/2026 results (~Oct-Nov 2026) and BankX Q4/2026 launch guidance.</strong></div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">Generated by Smartmall · Built from SCBX&#x27;s official Q2/2026 results release (scbx.com, 21 Jul 2026), stockanalysis.com price/valuation data (19 Aug 2026), Nation Thailand and Asia Pacific Express coverage of the BankX Q4/2026 deferral, and peer dividend-yield cross-checks against KTB and BBL. Second deep-dive on this ticker — biweekly refresh of the 2026-05-31 report (was Buy, High conviction). Not a live feed, not financial advice.</div>
+  </main>
+</div>
+<script>
+(function () {
+  var links = Array.prototype.slice.call(document.querySelectorAll('.nav-item'));
+  var map = {};
+  links.forEach(function (a) { var id = (a.getAttribute('href') || '').slice(1); if (id) map[id] = a; });
+  var sections = Object.keys(map).map(function (id) { return document.getElementById(id); }).filter(Boolean);
+  if (!('IntersectionObserver' in window) || !sections.length) return;
+  var obs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        links.forEach(function (l) { l.classList.remove('active'); });
+        var active = map[e.target.id];
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+  sections.forEach(function (s) { obs.observe(s); });
+})();
+(function () {
+  document.querySelectorAll('.chart-section').forEach(function (sec) {
+    var tabs = sec.querySelectorAll('.chart-tab');
+    var panes = sec.querySelectorAll('.chart-pane');
+    tabs.forEach(function (t) {
+      t.addEventListener('click', function () {
+        var r = t.getAttribute('data-range');
+        tabs.forEach(function (x) { x.classList.toggle('active', x === t); });
+        panes.forEach(function (p) { p.classList.toggle('active', p.getAttribute('data-range') === r); });
+      });
+    });
+  });
+})();
+</script>
+</body>
+</html>
