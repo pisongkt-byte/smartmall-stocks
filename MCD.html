@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MCD — McDonald&#x27;s Corporation · Smartmall Stock Card</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #19243c; --surface: #222f49; --surface-2: #2c3b58; --border: #3a4c6b;
+  --teal: #17dbc9; --teal-mid: #00c4b4; --teal-dim: rgba(23,219,201,0.15); --teal-fill: rgba(23,219,201,0.22);
+  --orange: #f0995e; --orange-mid: #dd8449; --orange-dim: rgba(240,153,94,0.18);
+  --green: #3ee08a; --green-dim: rgba(62,224,138,0.15); --red: #ef6a6a; --red-dim: rgba(239,106,106,0.15);
+  --amber: #f3d074; --text-1: #eef3fb; --text-2: #b0c1d8; --text-3: #8295ac;
+  --number: #d6e2f2; --tag-bg: #23406a; --badge-teal: #0c3a38; --score-track: #2c3b58;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text-1); font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Segoe UI', Arial, sans-serif; line-height: 1.5; min-height: 100vh; display: flex; justify-content: center; padding: 40px 20px 80px; }
+.page { width: 1240px; max-width: 100%; display: grid; grid-template-columns: 220px 1fr; gap: 0; align-items: start; }
+.sidenav { position: sticky; top: 40px; padding: 32px 0 32px 0; }
+.sidenav-logo { display: flex; align-items: center; gap: 8px; margin-bottom: 20px; padding-left: 8px; text-decoration: none; transition: opacity 0.15s; }
+.sidenav-logo:hover { opacity: 0.8; }
+.sidenav-logo .dot { width: 28px; height: 28px; background: var(--teal); border-radius: 50%; flex-shrink: 0; }
+.sidenav-logo span { font-size: 13px; font-weight: 700; color: var(--text-2); letter-spacing: 0.05em; text-transform: uppercase; }
+.nav-item { display: flex; align-items: center; gap: 12px; padding: 10px 16px; border-radius: 10px; cursor: pointer; margin-bottom: 2px; transition: background 0.15s; text-decoration: none; }
+.nav-item:hover { background: var(--surface); }
+.nav-item.active { background: var(--teal-dim); border-left: 3px solid var(--teal); }
+.nav-back { margin-bottom: 16px; }
+.nav-back .nav-num { color: var(--teal); font-size: 14px; }
+.nav-back .nav-label { color: var(--text-2); font-weight: 600; }
+.nav-back:hover .nav-label { color: var(--teal); }
+.nav-num { font-size: 11px; font-weight: 700; color: var(--text-3); width: 18px; flex-shrink: 0; }
+.nav-label { font-size: 13px; font-weight: 500; color: var(--text-2); }
+.nav-item.active .nav-label { color: var(--teal); }
+.hero-verdict { display: flex; justify-content: flex-end; align-items: center; gap: 12px; margin-top: 14px; }
+.hv-stance { font-size: 13px; font-weight: 800; letter-spacing: 0.04em; border: 1.5px solid; border-radius: 999px; padding: 5px 16px; text-transform: uppercase; }
+.hv-score { font-size: 13px; color: var(--text-3); font-weight: 600; }
+.hv-score b { font-size: 19px; color: var(--text-1); font-weight: 800; }
+.main { min-width: 0; padding: 0 0 0 32px; }
+.section { margin-bottom: 40px; scroll-margin-top: 20px; }
+.section-header { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
+.section-num { width: 32px; height: 32px; border-radius: 50%; background: var(--surface-2); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: var(--text-2); flex-shrink: 0; }
+.section-title { font-size: 17px; font-weight: 700; color: var(--text-1); letter-spacing: -0.01em; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px 32px; margin-bottom: 16px; }
+.header-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 24px; }
+.header-ticker { display: flex; align-items: center; gap: 14px; margin-bottom: 8px; }
+.ticker-logo { width: 48px; height: 48px; background: linear-gradient(135deg, #1a3550 0%, #2a4a70 100%); border-radius: 12px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; color: var(--teal); letter-spacing: 0.02em; }
+.ticker-name h1 { font-size: 22px; font-weight: 800; color: var(--text-1); letter-spacing: -0.02em; line-height: 1.2; }
+.ticker-name .exch { font-size: 12px; color: var(--text-3); margin-top: 2px; }
+.header-price { text-align: right; }
+.price-big { font-size: 36px; font-weight: 800; color: var(--text-1); letter-spacing: -0.03em; line-height: 1; }
+.price-secondary { font-size: 14px; font-weight: 600; color: var(--text-3); margin-top: 5px; }
+.price-sub { font-size: 13px; color: var(--text-3); margin-top: 6px; }
+.badges { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
+.badge { display: inline-flex; align-items: center; gap: 5px; padding: 5px 11px; border-radius: 100px; font-size: 11.5px; font-weight: 600; letter-spacing: 0.02em; }
+.badge-teal { background: var(--teal-dim); color: var(--teal); border: 1px solid rgba(23,219,201,0.3); }
+.badge-orange { background: var(--orange-dim); color: var(--orange); border: 1px solid rgba(240,153,94,0.3); }
+.badge-muted { background: var(--surface-2); color: var(--text-2); border: 1px solid var(--border); }
+.range-bar-wrap { margin-top: 4px; }
+.range-label { display: flex; justify-content: space-between; font-size: 11.5px; color: var(--text-3); margin-bottom: 8px; }
+.range-bar-track { height: 6px; border-radius: 4px; background: var(--surface-2); position: relative; overflow: visible; }
+.range-bar-fill { height: 100%; border-radius: 4px; background: linear-gradient(90deg, var(--teal-mid) 0%, var(--teal) 100%); }
+.range-bar-marker { position: absolute; top: 50%; transform: translate(-50%, -50%); width: 14px; height: 14px; border-radius: 50%; background: #fff; border: 2px solid var(--teal); box-shadow: 0 0 0 3px rgba(23,219,201,0.3); }
+.range-bar-label { position: absolute; bottom: -20px; transform: translateX(-50%); font-size: 11px; font-weight: 700; color: var(--text-1); white-space: nowrap; }
+.range-sublabels { margin-top: 22px; font-size: 11.5px; color: var(--text-3); display: flex; justify-content: space-between; }
+.range-sublabels span { font-weight: 600; color: var(--text-2); }
+.snowflake-grid { display: grid; grid-template-columns: 240px 1fr; gap: 32px; align-items: start; }
+.score-rows { flex: 1; }
+.score-row { display: grid; grid-template-columns: 130px 1fr 36px; gap: 12px; align-items: center; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+.score-row:last-child { border-bottom: none; }
+.score-row-label { font-size: 13px; font-weight: 600; color: var(--text-2); }
+.score-bar-track { height: 8px; background: var(--score-track); border-radius: 4px; overflow: hidden; }
+.score-bar-fill { height: 100%; border-radius: 4px; }
+.score-num { font-size: 13px; font-weight: 700; text-align: right; }
+.score-rationale { grid-column: 1 / -1; font-size: 11.5px; color: var(--text-3); padding-top: 2px; line-height: 1.5; }
+.snowflake-total { text-align: center; margin-top: 16px; }
+.snowflake-total .num { font-size: 28px; font-weight: 800; color: var(--teal); }
+.snowflake-total .denom { font-size: 14px; color: var(--text-3); }
+.snowflake-total .label { font-size: 11px; color: var(--text-3); margin-top: 4px; }
+.sankey-wrap { width: 100%; overflow-x: auto; }
+.sankey-caption { margin-top: 16px; font-size: 12.5px; color: var(--text-2); background: var(--surface-2); border-radius: 8px; padding: 10px 14px; border-left: 3px solid var(--teal); }
+.health-row { display: flex; align-items: center; gap: 16px; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+.health-row:last-child { border-bottom: none; }
+.health-label { width: 140px; font-size: 13px; color: var(--text-2); flex-shrink: 0; }
+.health-bar-track { flex: 1; height: 8px; background: var(--score-track); border-radius: 4px; overflow: hidden; position: relative; }
+.health-bar-fill { height: 100%; border-radius: 4px; background: var(--teal); }
+.health-value { width: 90px; text-align: right; font-size: 13px; font-weight: 700; color: var(--number); }
+.chart-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 18px; flex-wrap: wrap; }
+.chart-price { font-size: 30px; font-weight: 900; color: var(--text-1); letter-spacing: -0.03em; }
+.chart-sub { font-size: 12px; color: var(--text-3); margin-top: 4px; }
+.chart-tabs { display: flex; gap: 8px; flex-wrap: wrap; }
+.chart-tab { background: var(--surface-2); border: 1px solid var(--border); border-radius: 9px; padding: 7px 13px; font-size: 12px; font-weight: 700; color: var(--text-3); cursor: pointer; display: flex; gap: 6px; align-items: center; font-family: inherit; transition: all .15s; }
+.chart-tab:hover { color: var(--text-1); }
+.chart-tab.active { border-color: var(--teal); color: var(--text-1); background: var(--teal-dim); }
+.chart-tab span { font-size: 11px; font-weight: 600; }
+.chart-pane { display: none; }
+.chart-pane.active { display: block; }
+.chart-svg { width: 100%; height: 240px; display: block; }
+.rsi-block { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--border); }
+.rsi-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 8px; }
+.rsi-title { font-size: 13px; font-weight: 700; color: var(--text-2); letter-spacing: 0.02em; }
+.rsi-now { font-size: 14px; font-weight: 800; }
+.rsi-chartwrap { position: relative; padding-left: 26px; }
+.rsi-axis { position: absolute; left: 0; top: 0; height: 120px; width: 22px; display: flex; flex-direction: column; justify-content: space-between; }
+.rsi-axis span { font-size: 10px; color: var(--text-3); line-height: 1; }
+.rsi-svg { width: 100%; height: 120px; display: block; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.verdict-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
+.verdict-chip { background: var(--surface-2); border: 1px solid var(--border); border-radius: 14px; padding: 20px; }
+.verdict-chip .agent { font-size: 11px; font-weight: 700; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+.verdict-chip .stance { font-size: 15px; font-weight: 800; color: var(--text-1); margin-bottom: 6px; }
+.verdict-chip .conviction { display: inline-block; font-size: 10.5px; font-weight: 700; padding: 2px 8px; border-radius: 100px; background: var(--teal-dim); color: var(--teal); margin-bottom: 8px; border: 1px solid rgba(23,219,201,0.25); }
+.verdict-chip .rationale { font-size: 12px; color: var(--text-3); line-height: 1.5; }
+.overall-verdict { background: linear-gradient(135deg, rgba(23,219,201,0.12) 0%, rgba(0,169,157,0.06) 100%); border: 1px solid rgba(23,219,201,0.3); border-radius: 14px; padding: 24px 28px; display: flex; align-items: center; gap: 24px; }
+.ov-stance { font-size: 28px; font-weight: 900; color: var(--teal); letter-spacing: -0.02em; flex-shrink: 0; }
+.ov-detail { flex: 1; }
+.ov-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-3); margin-bottom: 4px; }
+.ov-target { font-size: 14px; color: var(--text-2); }
+.ov-target strong { color: var(--text-1); }
+.ov-add-zone { font-size: 13px; color: var(--text-3); margin-top: 4px; }
+.rr-col h4 { font-size: 13px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 14px; }
+.rr-col.rewards h4 { color: var(--green); }
+.rr-col.risks h4 { color: var(--red); }
+.rr-item { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 12px; font-size: 13px; color: var(--text-2); line-height: 1.5; }
+.rr-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; margin-top: 6px; }
+.rr-col.rewards .rr-dot { background: var(--green); }
+.rr-col.risks .rr-dot { background: var(--red); }
+.rr-item.bold-risk { color: var(--text-1); font-weight: 600; }
+.rr-item.bold-risk .rr-dot { background: var(--red); box-shadow: 0 0 0 3px rgba(232,93,93,0.2); }
+.stat-row { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 16px; }
+.stat-pill { background: var(--surface-2); border: 1px solid var(--border); border-radius: 10px; padding: 10px 16px; min-width: 130px; }
+.stat-pill-label { font-size: 11px; color: var(--text-3); margin-bottom: 3px; text-transform: uppercase; letter-spacing: 0.04em; }
+.stat-pill-value { font-size: 18px; font-weight: 800; color: var(--number); }
+.stat-pill-sub { font-size: 11px; color: var(--text-3); margin-top: 2px; }
+.div-row { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+.div-big { font-size: 52px; font-weight: 900; color: var(--amber); letter-spacing: -0.04em; line-height: 1; }
+.div-note { font-size: 13px; color: var(--text-2); max-width: 460px; line-height: 1.6; }
+.div-trend { margin-top: 20px; font-size: 12.5px; color: var(--text-3); }
+.footer { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border); font-size: 11px; color: var(--text-3); line-height: 1.7; text-align: center; }
+.growth-row { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+.growth-label { width: 170px; font-size: 13px; color: var(--text-2); flex-shrink: 0; }
+.growth-bar-track { flex: 1; height: 28px; background: var(--score-track); border-radius: 8px; overflow: hidden; position: relative; }
+.growth-bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; padding-left: 10px; font-size: 12px; font-weight: 700; color: rgba(255,255,255,0.9); white-space: nowrap; }
+.growth-value { width: 90px; text-align: right; font-size: 14px; font-weight: 700; color: var(--number); flex-shrink: 0; }
+.biz-summary { font-size: 14px; color: var(--text-1); line-height: 1.65; margin-bottom: 22px; }
+.biz-rev-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-3); font-weight: 700; margin-bottom: 6px; }
+.biz-row { display: flex; align-items: baseline; gap: 14px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+.biz-row:last-child { border-bottom: none; }
+.biz-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; align-self: center; }
+.biz-name { font-size: 13px; font-weight: 700; color: var(--text-1); width: 92px; flex-shrink: 0; }
+.biz-pct { font-size: 13px; font-weight: 800; color: var(--teal); width: 46px; flex-shrink: 0; text-align: right; }
+.biz-desc { font-size: 12.5px; color: var(--text-2); line-height: 1.5; }
+.note-box { background: var(--surface-2); border-left: 3px solid var(--teal); border-radius: 0 8px 8px 0; padding: 12px 16px; font-size: 12.5px; color: var(--text-2); margin-top: 16px; line-height: 1.6; }
+.note-box.orange { border-left-color: var(--orange); }
+.note-box.red { border-left-color: var(--red); }
+</style>
+</head>
+<body>
+<div class="page">
+  <nav class="sidenav"><a class="sidenav-logo" href="index.html"><div class="dot"></div><span>Smartmall</span></a><a class="nav-item nav-back" href="index.html"><span class="nav-num">&larr;</span><span class="nav-label">All Stock Cards</span></a><a class="nav-item active" href="#s1"><span class="nav-num">1</span><span class="nav-label">Overview</span></a><a class="nav-item" href="#s2"><span class="nav-num">2</span><span class="nav-label">Price History</span></a><a class="nav-item" href="#s3"><span class="nav-num">3</span><span class="nav-label">Snowflake Score</span></a><a class="nav-item" href="#s4"><span class="nav-num">4</span><span class="nav-label">Revenue &amp; Expenses</span></a><a class="nav-item" href="#s5"><span class="nav-num">5</span><span class="nav-label">Past Performance</span></a><a class="nav-item" href="#s6"><span class="nav-num">6</span><span class="nav-label">Future Growth</span></a><a class="nav-item" href="#s7"><span class="nav-num">7</span><span class="nav-label">Financial Health</span></a><a class="nav-item" href="#s8"><span class="nav-num">8</span><span class="nav-label">Dividend</span></a><a class="nav-item" href="#s9"><span class="nav-num">9</span><span class="nav-label">Rewards &amp; Risks</span></a><a class="nav-item" href="#s10"><span class="nav-num">10</span><span class="nav-label">Council Verdict</span></a></nav>
+  <main class="main">
+    
+    <div class="section" id="s1">
+      <div class="card">
+        <div class="header-top">
+          <div>
+            <div class="header-ticker">
+              <div class="ticker-logo">MCD</div>
+              <div class="ticker-name">
+                <h1>McDonald&#x27;s Corporation</h1>
+                <div class="exch">NYSE: MCD</div>
+              </div>
+            </div>
+          </div>
+          <div class="header-price">
+            <div class="price-big">US$238.32</div>
+            
+            <div class="price-sub">as of 2026-09-23</div>
+            <div class="hero-verdict"><span class="hv-stance" style="color:var(--green);border-color:var(--green);">WATCH · conviction Medium · 💰 CASH COW</span><span class="hv-score"><b>18</b>/30</span></div>
+          </div>
+        </div>
+        <div class="badges"><span class="badge badge-teal"><svg width="10" height="10" viewBox="0 0 10 10"><circle cx="5" cy="5" r="4" fill="currentColor" opacity="0.6"/></svg> NO THAI DR — offshore account only</span><span class="badge badge-teal">Buyable in THB</span><span class="badge badge-muted">cash-cow</span><span class="badge badge-muted">dividend-king</span><span class="badge badge-muted">large-cap</span><span class="badge badge-muted">no-dr</span><span class="badge badge-muted">low-beta</span><span class="badge badge-muted">Consumer Discretionary</span><span class="badge badge-muted">Restaurants (QSR) / franchisor + real estate</span><span class="badge badge-muted">United States</span></div>
+        
+        <div style="margin-bottom:6px;font-size:12px;font-weight:600;color:var(--text-3);text-transform:uppercase;letter-spacing:0.05em;">52-Week Range</div>
+        <div class="range-bar-wrap">
+          <div class="range-label"><span>234.04 &nbsp; 52W Low</span><span>52W High &nbsp; 341.75</span></div>
+          <div class="range-bar-track">
+            <div class="range-bar-fill" style="width:4.0%"></div>
+            <div class="range-bar-marker" style="left:4.0%"><div class="range-bar-label">238.32</div></div>
+          </div>
+          <div class="range-sublabels" style="margin-top:28px;">
+            <span>Current <span>US$238.32</span></span>
+            <span>Distance from low: <span>+2%</span></span>
+          </div>
+        </div>
+        <div class="stat-row" style="margin-top:28px;margin-bottom:0;"><div class="stat-pill"><div class="stat-pill-label">Market Cap</div><div class="stat-pill-value">~$168.6B</div></div><div class="stat-pill"><div class="stat-pill-label">Trailing P/E</div><div class="stat-pill-value">~19.4x</div><div class="stat-pill-sub">vs own 2021-25 band 24-25x</div></div><div class="stat-pill"><div class="stat-pill-label">Fwd P/E</div><div class="stat-pill-value">~17.8x FY27E</div></div><div class="stat-pill"><div class="stat-pill-label">Operating Margin</div><div class="stat-pill-value">46.2% TTM</div><div class="stat-pill-sub">YUM 32.8% · QSR 27.7%</div></div><div class="stat-pill"><div class="stat-pill-label">Net Margin</div><div class="stat-pill-value">~31.7%</div></div><div class="stat-pill"><div class="stat-pill-label">Net Debt/EBITDA</div><div class="stat-pill-value">2.6x ex-lease</div><div class="stat-pill-sub">3.5x incl. leases</div></div><div class="stat-pill"><div class="stat-pill-label">Div Yield</div><div class="stat-pill-value">3.24% fwd</div><div class="stat-pill-sub">2.3-2.8% net of US WHT</div></div><div class="stat-pill"><div class="stat-pill-label">FCF Yield</div><div class="stat-pill-value">4.6% TTM</div></div><div class="stat-pill"><div class="stat-pill-label">Beta</div><div class="stat-pill-value">0.41</div></div></div>
+      </div>
+    </div>
+    <div class="section" id="s2">
+      <div class="section-header"><div class="section-num">2</div><div class="section-title">Price History</div></div>
+      <div class="card chart-section">
+        <div class="chart-head">
+          <div><div class="chart-price">$250.35</div><div class="chart-sub">MCD · $ · snapshot 2026-09-24</div></div>
+          <div class="chart-tabs"><button class="chart-tab" data-range="1D">1D<span style="color:#f5736b;">-3.7%</span></button><button class="chart-tab" data-range="1W">1W<span style="color:#f5736b;">-4.8%</span></button><button class="chart-tab" data-range="1M">1M<span style="color:#f5736b;">-7.5%</span></button><button class="chart-tab active" data-range="1Y">1Y<span style="color:#f5736b;">-15.6%</span></button><button class="chart-tab" data-range="5Y">5Y<span style="color:#30d97b;">+8.7%</span></button></div>
+        </div>
+        
+        <div class="chart-pane" data-range="1D">
+          <svg class="chart-svg" viewBox="0 0 900 240" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="cg21D" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#f5736b" stop-opacity="0.22"/>
+              <stop offset="1" stop-color="#f5736b" stop-opacity="0"/></linearGradient></defs>
+            <path d="M0.0 18.0 L0.0 18.0 L11.7 83.5 L23.4 77.4 L35.1 108.3 L46.8 140.1 L58.4 150.6 L70.1 151.1 L81.8 144.9 L93.5 142.9 L105.2 132.4 L116.9 128.8 L128.6 126.7 L140.3 136.5 L151.9 142.9 L163.6 134.6 L175.3 138.2 L187.0 133.4 L198.7 138.6 L210.4 140.6 L222.1 152.1 L233.8 162.4 L245.5 172.3 L257.1 173.7 L268.8 171.0 L280.5 190.6 L292.2 175.1 L303.9 186.7 L315.6 189.5 L327.3 190.4 L339.0 195.3 L350.6 199.0 L362.3 199.3 L374.0 195.9 L385.7 193.0 L397.4 203.2 L409.1 207.0 L420.8 212.1 L432.5 210.5 L444.2 211.0 L455.8 208.7 L467.5 208.2 L479.2 208.1 L490.9 222.0 L502.6 212.1 L514.3 205.8 L526.0 198.2 L537.7 188.7 L549.4 186.7 L561.0 188.2 L572.7 185.1 L584.4 183.5 L596.1 180.5 L607.8 178.2 L619.5 167.6 L631.2 168.7 L642.9 179.8 L654.5 178.8 L666.2 177.7 L677.9 178.2 L689.6 168.5 L701.3 164.4 L713.0 165.8 L724.7 168.2 L736.4 171.9 L748.1 172.4 L759.7 173.9 L771.4 169.4 L783.1 169.9 L794.8 174.9 L806.5 172.2 L818.2 170.7 L829.9 172.0 L841.6 174.0 L853.2 173.3 L864.9 171.5 L876.6 167.3 L888.3 164.2 L900.0 158.4 L900.0 240.0 L0 240.0 Z" fill="url(#cg21D)"/>
+            <path d="M0.0 18.0 L11.7 83.5 L23.4 77.4 L35.1 108.3 L46.8 140.1 L58.4 150.6 L70.1 151.1 L81.8 144.9 L93.5 142.9 L105.2 132.4 L116.9 128.8 L128.6 126.7 L140.3 136.5 L151.9 142.9 L163.6 134.6 L175.3 138.2 L187.0 133.4 L198.7 138.6 L210.4 140.6 L222.1 152.1 L233.8 162.4 L245.5 172.3 L257.1 173.7 L268.8 171.0 L280.5 190.6 L292.2 175.1 L303.9 186.7 L315.6 189.5 L327.3 190.4 L339.0 195.3 L350.6 199.0 L362.3 199.3 L374.0 195.9 L385.7 193.0 L397.4 203.2 L409.1 207.0 L420.8 212.1 L432.5 210.5 L444.2 211.0 L455.8 208.7 L467.5 208.2 L479.2 208.1 L490.9 222.0 L502.6 212.1 L514.3 205.8 L526.0 198.2 L537.7 188.7 L549.4 186.7 L561.0 188.2 L572.7 185.1 L584.4 183.5 L596.1 180.5 L607.8 178.2 L619.5 167.6 L631.2 168.7 L642.9 179.8 L654.5 178.8 L666.2 177.7 L677.9 178.2 L689.6 168.5 L701.3 164.4 L713.0 165.8 L724.7 168.2 L736.4 171.9 L748.1 172.4 L759.7 173.9 L771.4 169.4 L783.1 169.9 L794.8 174.9 L806.5 172.2 L818.2 170.7 L829.9 172.0 L841.6 174.0 L853.2 173.3 L864.9 171.5 L876.6 167.3 L888.3 164.2 L900.0 158.4" fill="none" stroke="#f5736b" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="chart-pane" data-range="1W">
+          <svg class="chart-svg" viewBox="0 0 900 240" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="cg21W" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#f5736b" stop-opacity="0.22"/>
+              <stop offset="1" stop-color="#f5736b" stop-opacity="0"/></linearGradient></defs>
+            <path d="M0.0 34.5 L0.0 34.5 L14.1 42.8 L28.1 50.0 L42.2 46.0 L56.2 42.2 L70.3 47.1 L84.4 46.4 L98.4 41.7 L112.5 40.6 L126.6 43.8 L140.6 42.5 L154.7 52.1 L168.8 56.0 L182.8 63.8 L196.9 38.8 L210.9 35.5 L225.0 39.6 L239.1 37.5 L253.1 42.9 L267.2 40.8 L281.2 46.4 L295.3 45.2 L309.4 47.8 L323.4 42.0 L337.5 38.9 L351.6 57.5 L365.6 74.1 L379.7 70.8 L393.8 71.3 L407.8 62.3 L421.9 63.3 L435.9 56.7 L450.0 54.8 L464.1 58.8 L478.1 65.3 L492.2 69.7 L506.2 56.4 L520.3 54.4 L534.4 63.6 L548.4 35.4 L562.5 20.1 L576.6 23.7 L590.6 23.0 L604.7 25.9 L618.8 22.5 L632.8 18.0 L646.9 21.7 L660.9 28.8 L675.0 26.4 L689.1 30.3 L703.1 23.5 L717.2 33.0 L731.2 175.5 L745.3 156.1 L759.4 165.8 L773.4 192.0 L787.5 211.7 L801.6 221.1 L815.6 222.0 L829.7 204.7 L843.8 189.2 L857.8 190.0 L871.9 194.3 L885.9 192.8 L900.0 181.8 L900.0 240.0 L0 240.0 Z" fill="url(#cg21W)"/>
+            <path d="M0.0 34.5 L14.1 42.8 L28.1 50.0 L42.2 46.0 L56.2 42.2 L70.3 47.1 L84.4 46.4 L98.4 41.7 L112.5 40.6 L126.6 43.8 L140.6 42.5 L154.7 52.1 L168.8 56.0 L182.8 63.8 L196.9 38.8 L210.9 35.5 L225.0 39.6 L239.1 37.5 L253.1 42.9 L267.2 40.8 L281.2 46.4 L295.3 45.2 L309.4 47.8 L323.4 42.0 L337.5 38.9 L351.6 57.5 L365.6 74.1 L379.7 70.8 L393.8 71.3 L407.8 62.3 L421.9 63.3 L435.9 56.7 L450.0 54.8 L464.1 58.8 L478.1 65.3 L492.2 69.7 L506.2 56.4 L520.3 54.4 L534.4 63.6 L548.4 35.4 L562.5 20.1 L576.6 23.7 L590.6 23.0 L604.7 25.9 L618.8 22.5 L632.8 18.0 L646.9 21.7 L660.9 28.8 L675.0 26.4 L689.1 30.3 L703.1 23.5 L717.2 33.0 L731.2 175.5 L745.3 156.1 L759.4 165.8 L773.4 192.0 L787.5 211.7 L801.6 221.1 L815.6 222.0 L829.7 204.7 L843.8 189.2 L857.8 190.0 L871.9 194.3 L885.9 192.8 L900.0 181.8" fill="none" stroke="#f5736b" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="chart-pane" data-range="1M">
+          <svg class="chart-svg" viewBox="0 0 900 240" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="cg21M" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#f5736b" stop-opacity="0.22"/>
+              <stop offset="1" stop-color="#f5736b" stop-opacity="0"/></linearGradient></defs>
+            <path d="M0.0 18.0 L0.0 18.0 L45.0 57.6 L90.0 68.0 L135.0 129.2 L180.0 85.2 L225.0 98.2 L270.0 103.3 L315.0 104.7 L360.0 116.6 L405.0 151.9 L450.0 150.8 L495.0 171.8 L540.0 175.6 L585.0 180.3 L630.0 135.8 L675.0 178.0 L720.0 215.9 L765.0 216.6 L810.0 218.8 L855.0 222.0 L900.0 199.8 L900.0 240.0 L0 240.0 Z" fill="url(#cg21M)"/>
+            <path d="M0.0 18.0 L45.0 57.6 L90.0 68.0 L135.0 129.2 L180.0 85.2 L225.0 98.2 L270.0 103.3 L315.0 104.7 L360.0 116.6 L405.0 151.9 L450.0 150.8 L495.0 171.8 L540.0 175.6 L585.0 180.3 L630.0 135.8 L675.0 178.0 L720.0 215.9 L765.0 216.6 L810.0 218.8 L855.0 222.0 L900.0 199.8" fill="none" stroke="#f5736b" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="chart-pane active" data-range="1Y">
+          <svg class="chart-svg" viewBox="0 0 900 240" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="cg21Y" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#f5736b" stop-opacity="0.22"/>
+              <stop offset="1" stop-color="#f5736b" stop-opacity="0"/></linearGradient></defs>
+            <path d="M0.0 100.4 L0.0 100.4 L9.5 98.1 L18.9 110.1 L28.4 109.0 L37.9 125.8 L47.4 111.2 L56.8 98.0 L66.3 91.6 L75.8 85.6 L85.3 85.9 L94.7 105.2 L104.2 120.8 L113.7 115.5 L123.2 113.8 L132.6 92.1 L142.1 99.7 L151.6 100.8 L161.1 84.7 L170.5 81.2 L180.0 87.0 L189.5 81.7 L198.9 79.8 L208.4 58.7 L217.9 58.8 L227.4 65.1 L236.8 79.4 L246.3 86.2 L255.8 107.2 L265.3 96.2 L274.7 89.5 L284.2 84.7 L293.7 99.6 L303.2 83.1 L312.6 70.5 L322.1 68.3 L331.6 45.9 L341.1 37.0 L350.5 47.1 L360.0 35.9 L369.5 37.1 L378.9 21.8 L388.4 18.0 L397.9 19.3 L407.4 31.5 L416.8 30.2 L426.3 34.1 L435.8 34.5 L445.3 79.6 L454.7 72.3 L464.2 87.3 L473.7 83.7 L483.2 77.3 L492.6 77.8 L502.1 94.2 L511.6 84.5 L521.1 97.8 L530.5 96.0 L540.0 122.2 L549.5 137.1 L558.9 140.9 L568.4 165.3 L577.9 167.7 L587.4 163.6 L596.8 153.6 L606.3 148.4 L615.8 159.6 L625.3 164.4 L634.7 168.4 L644.2 143.5 L653.7 137.0 L663.2 128.7 L672.6 153.0 L682.1 165.3 L691.6 182.8 L701.1 176.9 L710.5 143.6 L720.0 158.5 L729.5 178.2 L738.9 181.4 L748.4 191.3 L757.9 189.1 L767.4 167.6 L776.8 173.8 L786.3 165.0 L795.8 163.8 L805.3 160.6 L814.7 168.1 L824.2 182.1 L833.7 168.8 L843.2 183.4 L852.6 192.3 L862.1 194.2 L871.6 207.7 L881.1 216.3 L890.5 215.6 L900.0 222.0 L900.0 240.0 L0 240.0 Z" fill="url(#cg21Y)"/>
+            <path d="M0.0 100.4 L9.5 98.1 L18.9 110.1 L28.4 109.0 L37.9 125.8 L47.4 111.2 L56.8 98.0 L66.3 91.6 L75.8 85.6 L85.3 85.9 L94.7 105.2 L104.2 120.8 L113.7 115.5 L123.2 113.8 L132.6 92.1 L142.1 99.7 L151.6 100.8 L161.1 84.7 L170.5 81.2 L180.0 87.0 L189.5 81.7 L198.9 79.8 L208.4 58.7 L217.9 58.8 L227.4 65.1 L236.8 79.4 L246.3 86.2 L255.8 107.2 L265.3 96.2 L274.7 89.5 L284.2 84.7 L293.7 99.6 L303.2 83.1 L312.6 70.5 L322.1 68.3 L331.6 45.9 L341.1 37.0 L350.5 47.1 L360.0 35.9 L369.5 37.1 L378.9 21.8 L388.4 18.0 L397.9 19.3 L407.4 31.5 L416.8 30.2 L426.3 34.1 L435.8 34.5 L445.3 79.6 L454.7 72.3 L464.2 87.3 L473.7 83.7 L483.2 77.3 L492.6 77.8 L502.1 94.2 L511.6 84.5 L521.1 97.8 L530.5 96.0 L540.0 122.2 L549.5 137.1 L558.9 140.9 L568.4 165.3 L577.9 167.7 L587.4 163.6 L596.8 153.6 L606.3 148.4 L615.8 159.6 L625.3 164.4 L634.7 168.4 L644.2 143.5 L653.7 137.0 L663.2 128.7 L672.6 153.0 L682.1 165.3 L691.6 182.8 L701.1 176.9 L710.5 143.6 L720.0 158.5 L729.5 178.2 L738.9 181.4 L748.4 191.3 L757.9 189.1 L767.4 167.6 L776.8 173.8 L786.3 165.0 L795.8 163.8 L805.3 160.6 L814.7 168.1 L824.2 182.1 L833.7 168.8 L843.2 183.4 L852.6 192.3 L862.1 194.2 L871.6 207.7 L881.1 216.3 L890.5 215.6 L900.0 222.0" fill="none" stroke="#f5736b" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="chart-pane" data-range="5Y">
+          <svg class="chart-svg" viewBox="0 0 900 240" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="cg25Y" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#30d97b" stop-opacity="0.22"/>
+              <stop offset="1" stop-color="#30d97b" stop-opacity="0"/></linearGradient></defs>
+            <path d="M0.0 198.3 L0.0 198.3 L9.5 196.5 L18.9 199.5 L28.4 190.6 L37.9 192.3 L47.4 169.0 L56.8 180.6 L66.3 177.3 L75.8 190.5 L85.3 222.0 L94.7 190.5 L104.2 189.2 L113.7 188.3 L123.2 186.8 L132.6 209.6 L142.1 183.3 L151.6 181.8 L161.1 170.2 L170.5 179.1 L180.0 178.5 L189.5 209.5 L198.9 150.6 L208.4 152.2 L217.9 150.0 L227.4 158.4 L236.8 156.5 L246.3 151.4 L255.8 154.9 L265.3 164.1 L274.7 138.8 L284.2 125.3 L293.7 114.3 L303.2 129.5 L312.6 116.3 L322.1 109.4 L331.6 113.5 L341.1 123.6 L350.5 129.5 L360.0 136.5 L369.5 180.2 L378.9 169.2 L388.4 151.7 L397.9 122.7 L407.4 114.3 L416.8 111.7 L426.3 113.5 L435.8 113.9 L445.3 110.7 L454.7 126.3 L464.2 147.7 L473.7 143.4 L483.2 161.4 L492.6 161.7 L502.1 163.8 L511.6 160.1 L521.1 144.4 L530.5 112.3 L540.0 99.4 L549.5 88.6 L558.9 105.2 L568.4 95.8 L577.9 100.2 L587.4 102.5 L596.8 99.4 L606.3 113.3 L615.8 78.7 L625.3 56.8 L634.7 80.7 L644.2 74.0 L653.7 70.9 L663.2 66.9 L672.6 75.2 L682.1 99.2 L691.6 90.8 L701.1 82.0 L710.5 65.0 L720.0 75.5 L729.5 82.3 L738.9 71.4 L748.4 84.3 L757.9 65.7 L767.4 56.7 L776.8 76.0 L786.3 66.8 L795.8 38.7 L805.3 18.0 L814.7 64.8 L824.2 69.7 L833.7 99.1 L843.2 114.9 L852.6 106.7 L862.1 122.3 L871.6 125.5 L881.1 121.0 L890.5 120.5 L900.0 168.6 L900.0 240.0 L0 240.0 Z" fill="url(#cg25Y)"/>
+            <path d="M0.0 198.3 L9.5 196.5 L18.9 199.5 L28.4 190.6 L37.9 192.3 L47.4 169.0 L56.8 180.6 L66.3 177.3 L75.8 190.5 L85.3 222.0 L94.7 190.5 L104.2 189.2 L113.7 188.3 L123.2 186.8 L132.6 209.6 L142.1 183.3 L151.6 181.8 L161.1 170.2 L170.5 179.1 L180.0 178.5 L189.5 209.5 L198.9 150.6 L208.4 152.2 L217.9 150.0 L227.4 158.4 L236.8 156.5 L246.3 151.4 L255.8 154.9 L265.3 164.1 L274.7 138.8 L284.2 125.3 L293.7 114.3 L303.2 129.5 L312.6 116.3 L322.1 109.4 L331.6 113.5 L341.1 123.6 L350.5 129.5 L360.0 136.5 L369.5 180.2 L378.9 169.2 L388.4 151.7 L397.9 122.7 L407.4 114.3 L416.8 111.7 L426.3 113.5 L435.8 113.9 L445.3 110.7 L454.7 126.3 L464.2 147.7 L473.7 143.4 L483.2 161.4 L492.6 161.7 L502.1 163.8 L511.6 160.1 L521.1 144.4 L530.5 112.3 L540.0 99.4 L549.5 88.6 L558.9 105.2 L568.4 95.8 L577.9 100.2 L587.4 102.5 L596.8 99.4 L606.3 113.3 L615.8 78.7 L625.3 56.8 L634.7 80.7 L644.2 74.0 L653.7 70.9 L663.2 66.9 L672.6 75.2 L682.1 99.2 L691.6 90.8 L701.1 82.0 L710.5 65.0 L720.0 75.5 L729.5 82.3 L738.9 71.4 L748.4 84.3 L757.9 65.7 L767.4 56.7 L776.8 76.0 L786.3 66.8 L795.8 38.7 L805.3 18.0 L814.7 64.8 L824.2 69.7 L833.7 99.1 L843.2 114.9 L852.6 106.7 L862.1 122.3 L871.6 125.5 L881.1 121.0 L890.5 120.5 L900.0 168.6" fill="none" stroke="#30d97b" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        
+        <div class="rsi-block">
+          <div class="rsi-head">
+            <div class="rsi-title">RSI (14)</div>
+            <div class="rsi-now" style="color:#9aa4b2;">37.5 · Neutral</div>
+          </div>
+          <div class="rsi-chartwrap">
+            <div class="rsi-axis"><span>70</span><span>50</span><span>30</span></div>
+            
+          <svg class="rsi-svg" viewBox="0 0 900 200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="0" y="8.0" width="900" height="55.2" fill="#f5736b" opacity="0.07"/>
+            <rect x="0" y="136.8" width="900" height="55.2" fill="#30d97b" opacity="0.07"/>
+            <line x1="0" y1="63.2" x2="900" y2="63.2" stroke="#f5736b" stroke-width="1" stroke-dasharray="6 5" opacity="0.5"/>
+            <line x1="0" y1="100.0" x2="900" y2="100.0" stroke="#9aa4b2" stroke-width="1" stroke-dasharray="2 6" opacity="0.4"/>
+            <line x1="0" y1="136.8" x2="900" y2="136.8" stroke="#30d97b" stroke-width="1" stroke-dasharray="6 5" opacity="0.5"/>
+            <path d="M0.0 99.3 L9.5 97.0 L18.9 89.7 L28.4 95.1 L37.9 86.1 L47.4 110.0 L56.8 124.9 L66.3 112.7 L75.8 110.7 L85.3 90.2 L94.7 98.0 L104.2 99.8 L113.7 99.0 L123.2 82.1 L132.6 107.7 L142.1 90.2 L151.6 86.6 L161.1 89.9 L170.5 84.4 L180.0 74.8 L189.5 99.6 L198.9 100.5 L208.4 112.4 L217.9 124.5 L227.4 98.4 L236.8 103.8 L246.3 100.1 L255.8 114.7 L265.3 104.7 L274.7 82.8 L284.2 80.7 L293.7 72.2 L303.2 64.7 L312.6 64.2 L322.1 59.5 L331.6 74.4 L341.1 72.6 L350.5 68.5 L360.0 54.9 L369.5 79.4 L378.9 92.5 L388.4 94.5 L397.9 98.2 L407.4 98.7 L416.8 135.4 L426.3 137.0 L435.8 133.7 L445.3 117.6 L454.7 116.1 L464.2 119.2 L473.7 119.7 L483.2 114.6 L492.6 99.6 L502.1 124.0 L511.6 122.8 L521.1 133.7 L530.5 133.6 L540.0 135.1 L549.5 145.6 L558.9 142.9 L568.4 138.4 L577.9 121.1 L587.4 114.4 L596.8 115.5 L606.3 124.3 L615.8 123.7 L625.3 107.9 L634.7 95.8 L644.2 86.9 L653.7 95.8 L663.2 121.5 L672.6 130.5 L682.1 114.0 L691.6 92.8 L701.1 90.2 L710.5 105.4 L720.0 115.9 L729.5 113.0 L738.9 119.0 L748.4 115.7 L757.9 96.9 L767.4 101.6 L776.8 105.3 L786.3 93.5 L795.8 94.3 L805.3 99.8 L814.7 110.9 L824.2 105.0 L833.7 107.5 L843.2 124.4 L852.6 114.8 L862.1 118.1 L871.6 130.6 L881.1 132.5 L890.5 131.9 L900.0 123.0" fill="none" stroke="#7c83ff" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>
+          </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="section" id="s3">
+      <div class="section-header"><div class="section-num">3</div><div class="section-title">Snowflake Score</div></div>
+      <div class="card">
+        <div class="snowflake-grid">
+          <div style="display:flex;flex-direction:column;align-items:center;">
+            <svg width="240" height="240" viewBox="-175 -125 350 250"><defs><style>.ring{fill:none;stroke:rgba(255,255,255,0.06);stroke-width:1;}.ring-bright{fill:none;stroke:rgba(255,255,255,0.12);stroke-width:1;}.axis-line{stroke:rgba(255,255,255,0.08);stroke-width:1;}.score-poly{fill:rgba(23,219,201,0.22);stroke:#17dbc9;stroke-width:2;}</style></defs><polygon class="ring" points="0.00,-15.00 14.27,-4.64 8.82,12.14 -8.82,12.14 -14.27,-4.64"/><polygon class="ring" points="0.00,-30.00 28.53,-9.27 17.63,24.27 -17.63,24.27 -28.53,-9.27"/><polygon class="ring" points="0.00,-45.00 42.80,-13.91 26.45,36.41 -26.45,36.41 -42.80,-13.91"/><polygon class="ring" points="0.00,-60.00 57.06,-18.54 35.27,48.54 -35.27,48.54 -57.06,-18.54"/><polygon class="ring ring-bright" points="0.00,-75.00 71.33,-23.18 44.08,60.68 -44.08,60.68 -71.33,-23.18"/><polygon class="ring ring-bright" points="0.00,-90.00 85.60,-27.81 52.90,72.81 -52.90,72.81 -85.60,-27.81"/><line class="axis-line" x1="0" y1="0" x2="0.00" y2="-90.00"/><line class="axis-line" x1="0" y1="0" x2="85.60" y2="-27.81"/><line class="axis-line" x1="0" y1="0" x2="52.90" y2="72.81"/><line class="axis-line" x1="0" y1="0" x2="-52.90" y2="72.81"/><line class="axis-line" x1="0" y1="0" x2="-85.60" y2="-27.81"/><polygon class="score-poly" points="0.00,-60.00 28.53,-9.27 35.27,48.54 -26.45,36.41 -71.33,-23.18"/><text x="0.0" y="-96.3" text-anchor="middle" font-size="8.5" fill="#8fa3bf">Valuation</text><text x="95.6" y="-29.8" text-anchor="start" font-size="8.5" fill="#8fa3bf">Future Growth</text><text x="60.6" y="83.9" text-anchor="start" font-size="8.5" fill="#8fa3bf">Past Perf.</text><text x="-60.6" y="83.9" text-anchor="end" font-size="8.5" fill="#8fa3bf">Fin. Health</text><text x="-95.6" y="-29.8" text-anchor="end" font-size="8.5" fill="#8fa3bf">Dividend</text><circle cx="0.00" cy="-60.00" r="4" fill="#17dbc9"/><circle cx="28.53" cy="-9.27" r="4" fill="#f0995e"/><circle cx="35.27" cy="48.54" r="4" fill="#17dbc9"/><circle cx="-26.45" cy="36.41" r="4" fill="#17dbc9"/><circle cx="-71.33" cy="-23.18" r="4" fill="#17dbc9"/></svg>
+            <div class="snowflake-total">
+              <div><span class="num">18</span><span class="denom" style="font-size:18px;color:var(--text-3);"> / 30</span></div>
+              <div class="label">Smartmall Score</div>
+            </div>
+          </div>
+          <div class="score-rows">
+            
+            <div class="score-row">
+              <div class="score-row-label" style="color:var(--teal)">Valuation</div>
+              <div>
+                <div class="score-bar-track"><div class="score-bar-fill" style="width:66.7%;background:var(--teal)"></div></div>
+                <div class="score-rationale">19.4x trailing / ~17.8x FY27E vs its own 2021-25 year-end P/E band of 23.9-28.9x — roughly 22% below its own norm. Forward yield 3.24% is the highest since ~2016 vs a 5-yr average of 2.24%. Consensus $315.39 (35 analysts); even the analysts who CUT after Investor Day sit 30%+ above spot (Citi $310, UBS $320). Score held to 4, not 5, because 2027 estimates likely get trimmed for the rent-relief give-back.</div>
+              </div>
+              <div class="score-num" style="color:var(--teal)">4/6</div>
+            </div>
+            <div class="score-row">
+              <div class="score-row-label" style="color:var(--orange)">Future Growth</div>
+              <div>
+                <div class="score-bar-track"><div class="score-bar-fill" style="width:33.3%;background:var(--orange)"></div></div>
+                <div class="score-rationale">Q2-26 global comps +1.3% vs +3.8% a year earlier — decelerating in EVERY segment (US +0.8%, IOM +1.5%, IDL +1.9%). US comps are price/mix only: the 10-Q says growth was &#x27;partly offset by negative comparable guest counts&#x27; — 2 straight years of falling traffic. The 2030 targets (op margin low-to-mid 50%, +250bps restaurant efficiency, +1.5pp chicken &amp; beverage share) are real but back-loaded and unproven.</div>
+              </div>
+              <div class="score-num" style="color:var(--orange)">2/6</div>
+            </div>
+            <div class="score-row">
+              <div class="score-row-label" style="color:var(--teal)">Past Performance</div>
+              <div>
+                <div class="score-bar-track"><div class="score-bar-fill" style="width:66.7%;background:var(--teal)"></div></div>
+                <div class="score-rationale">Revenue $19.2B (2020) → $26.9B (2025), 6.9% 5yr CAGR (3.7% off the 2021 base, ex-COVID distortion). Operating margin expanded 38.1% → 46.2%. Diluted EPS $10.04 (2021) → $11.95 (2025) → $12.31 TTM. Share count down 764.9M (2019) → 707.6M. Consistent, but the compounding rate has slowed to mid-single digits.</div>
+              </div>
+              <div class="score-num" style="color:var(--teal)">4/6</div>
+            </div>
+            <div class="score-row">
+              <div class="score-row-label" style="color:var(--teal)">Financial Health</div>
+              <div>
+                <div class="score-bar-track"><div class="score-bar-fill" style="width:50.0%;background:var(--teal)"></div></div>
+                <div class="score-rationale">Net financial debt $39.0B (2.6x EBITDA ex-lease, 3.5x incl. $14.0B lease liability), interest coverage 8.0x, FCF $7.76B covers the $5.46B forward dividend 1.42x. Negative book equity (−$1.0B) is cosmetic: retained earnings are +$72.0B and the deficit is entirely $80.5B of treasury stock at cost — and it is shrinking (−$7.8B in 2020 → −$1.0B in Jun-26). Real watch item: interest expense +5% YoY vs operating income +3% — debt cost is growing faster than profit.</div>
+              </div>
+              <div class="score-num" style="color:var(--teal)">3/6</div>
+            </div>
+            <div class="score-row">
+              <div class="score-row-label" style="color:var(--teal)">Dividend</div>
+              <div>
+                <div class="score-bar-track"><div class="score-bar-fill" style="width:83.3%;background:var(--teal)"></div></div>
+                <div class="score-rationale">Raised to $1.93/quarter ($7.72/yr) on 17 Sep 2026 — the 50th consecutive annual increase, making MCD an official Dividend King. Payout 60% of earnings / 70% of FCF. The one blemish: the raise rate is decelerating every year (+9.9% 2023 → +6.0% 2024 → +5.1% 2025 → +3.8% 2026) as cash is reserved for the $8.5B NEXT franchisee support. Buybacks — not the dividend — are the line being squeezed ($3.05B 2023 → $2.06B 2025).</div>
+              </div>
+              <div class="score-num" style="color:var(--teal)">5/6</div>
+            </div>
+            <div class="note-box" style="margin-top:16px;">
+              <strong>Transparent Smartmall scoring</strong> — not Simply Wall St's proprietary engine. Scores reflect our independent research and conviction framework.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="section" id="s4">
+      <div class="section-header"><div class="section-num">4</div><div class="section-title">Revenue &amp; Expenses Breakdown</div></div>
+      <div class="card">
+        <div style="font-size:12.5px;color:var(--text-3);margin-bottom:20px;">FY2025 (year ended 31 Dec 2025, audited 10-K, USD billions)</div>
+        <div class="sankey-wrap"><svg viewBox="0 -62.0 980 592.0" width="100%" style="font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;overflow:visible;"><defs><linearGradient id="gProfit" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#2fd6c0" stop-opacity="0.7"/><stop offset="100%" stop-color="#2fd6c0" stop-opacity="0.4"/></linearGradient><linearGradient id="gCost" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#8a7320" stop-opacity="0.85"/><stop offset="100%" stop-color="#8a7320" stop-opacity="0.55"/></linearGradient><linearGradient id="gExpense" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#d9a93a" stop-opacity="0.8"/><stop offset="100%" stop-color="#d9a93a" stop-opacity="0.5"/></linearGradient><linearGradient id="gNet" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#30d97b" stop-opacity="0.8"/><stop offset="100%" stop-color="#30d97b" stop-opacity="0.6"/></linearGradient></defs><polyline points="18.0,-48.6 143.0,-52.1 268.0,-52.1 393.0,-54.1 518.0,-54.4 643.0,-55.3 768.0,-56.0" fill="none" stroke="#2fd6c0" stroke-width="1.5" opacity="0.85"/><text x="18.0" y="-20.0" text-anchor="middle" font-size="9" fill="#526070">2020</text><text x="143.0" y="-20.0" text-anchor="middle" font-size="9" fill="#526070">2021</text><text x="268.0" y="-20.0" text-anchor="middle" font-size="9" fill="#526070">2022</text><text x="393.0" y="-20.0" text-anchor="middle" font-size="9" fill="#526070">2023</text><text x="518.0" y="-20.0" text-anchor="middle" font-size="9" fill="#526070">2024</text><text x="643.0" y="-20.0" text-anchor="middle" font-size="9" fill="#526070">2025</text><text x="768.0" y="-20.0" text-anchor="middle" font-size="9" fill="#526070">TTM</text><rect x="18" y="35.00" width="14" height="282.16" fill="#3b6fd4" rx="3"/><rect x="18" y="318.16" width="14" height="165.87" fill="#3360c2" rx="3"/><rect x="18" y="485.03" width="14" height="10.26" fill="#4a7ce0" rx="3"/><rect x="220" y="35.00" width="18" height="460.00" fill="#3b6fd4" rx="3"/><rect x="400" y="35.00" width="18" height="263.35" fill="#2fd6c0" rx="3"/><rect x="400" y="299.35" width="18" height="196.65" fill="#8a7320" rx="3"/><rect x="580" y="35.00" width="18" height="212.04" fill="#2fd6c0" rx="3"/><rect x="580" y="248.04" width="18" height="0.00" fill="#d9a93a" rx="3"/><rect x="580" y="249.04" width="18" height="51.30" fill="#d9a93a" rx="3"/><rect x="750" y="35.00" width="18" height="147.06" fill="#30d97b" rx="3"/><rect x="750" y="183.06" width="18" height="39.33" fill="#d9a93a" rx="3"/><path d="M32.00,35.00 C116.60,35.00 135.40,35.00 220.00,35.00 L220.00,317.16 C135.40,317.16 116.60,317.16 32.00,317.16 Z" fill="#3b6fd4" opacity="0.40"/><path d="M32.00,318.16 C116.60,318.16 135.40,317.16 220.00,317.16 L220.00,483.03 C135.40,483.03 116.60,484.03 32.00,484.03 Z" fill="#3360c2" opacity="0.40"/><path d="M32.00,485.03 C116.60,485.03 135.40,483.03 220.00,483.03 L220.00,493.29 C135.40,493.29 116.60,495.29 32.00,495.29 Z" fill="#4a7ce0" opacity="0.40"/><path d="M238.00,35.00 C310.90,35.00 327.10,35.00 400.00,35.00 L400.00,298.35 C327.10,298.35 310.90,298.35 238.00,298.35 Z" fill="url(#gProfit)" opacity="0.5"/><path d="M238.00,299.35 C310.90,299.35 327.10,299.35 400.00,299.35 L400.00,496.00 C327.10,496.00 310.90,496.00 238.00,496.00 Z" fill="url(#gCost)" opacity="0.55"/><path d="M418.00,35.00 C490.90,35.00 507.10,35.00 580.00,35.00 L580.00,247.04 C507.10,247.04 490.90,247.04 418.00,247.04 Z" fill="url(#gProfit)" opacity="0.5"/><path d="M418.00,247.04 C490.90,247.04 507.10,248.04 580.00,248.04 L580.00,248.04 C507.10,248.04 490.90,247.04 418.00,247.04 Z" fill="url(#gExpense)" opacity="0.55"/><path d="M418.00,247.04 C490.90,247.04 507.10,249.04 580.00,249.04 L580.00,300.35 C507.10,300.35 490.90,298.35 418.00,298.35 Z" fill="url(#gExpense)" opacity="0.5"/><path d="M598.00,35.00 C666.40,35.00 681.60,35.00 750.00,35.00 L750.00,182.06 C681.60,182.06 666.40,182.06 598.00,182.06 Z" fill="url(#gNet)" opacity="0.5"/><path d="M598.00,182.06 C666.40,182.06 681.60,183.06 750.00,183.06 L750.00,222.39 C681.60,222.39 666.40,221.39 598.00,221.39 Z" fill="url(#gExpense)" opacity="0.55"/><text x="38" y="35.0" dy="10" font-size="11" fill="#e8edf5" font-weight="600">Revenues from franchised restaurants (rent + royalties)</text><text x="38" y="35.0" dy="23" font-size="10.5" fill="#3b6fd4">$16.5B · 62%</text><text x="38" y="318.2" dy="10" font-size="11" fill="#e8edf5" font-weight="600">Sales by Company-owned restaurants</text><text x="38" y="318.2" dy="23" font-size="10.5" fill="#3360c2">$9.7B · 36%</text><text x="38" y="490.2" dy="3.5" font-size="9.5" fill="#8fa3bf">Other revenues (tech fees, brand licensing) $600M · 2%</text><text x="229" y="8" text-anchor="middle" font-size="9.5" fill="#8fa3bf">Income</text><text x="229" y="8" dy="11" text-anchor="middle" font-size="9.5" fill="#8fa3bf">Statement</text><rect x="197.1" y="247.5" width="63.7" height="19.0" rx="9.5" fill="#3b6fd4"/><text x="229.0" y="257.0" dy="3.8" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">Revenue</text><text x="229" y="277" text-anchor="middle" font-size="11" font-weight="700" fill="#e8edf5">$26.9B</text><text x="409" y="8" text-anchor="middle" font-size="9.5" fill="#8fa3bf">Gross</text><text x="409" y="8" dy="11" text-anchor="middle" font-size="9.5" fill="#8fa3bf">Profit</text><text x="409" y="167" text-anchor="middle" font-size="12" fill="#2fd6c0" font-weight="800" transform="rotate(-90 409 167)">$15.4B</text><text x="589" y="8" text-anchor="middle" font-size="9.5" fill="#8fa3bf">Operating</text><text x="589" y="8" dy="11" text-anchor="middle" font-size="9.5" fill="#8fa3bf">Income</text><text x="589" y="141" text-anchor="middle" font-size="12" fill="#2fd6c0" font-weight="800" transform="rotate(-90 589 141)">$12.4B</text><text x="759" y="8" text-anchor="middle" font-size="9.5" fill="#8fa3bf">Net</text><text x="759" y="8" dy="11" text-anchor="middle" font-size="9.5" fill="#8fa3bf">Income</text><rect x="720.0" y="91.5" width="78.0" height="18.0" rx="9.0" fill="#30d97b"/><text x="759.0" y="100.5" dy="3.5" text-anchor="middle" font-size="10" font-weight="700" fill="#0f1923">Net Income</text><text x="759" y="121" text-anchor="middle" font-size="11" font-weight="700" fill="#30d97b">$8.6B</text><text x="409" y="402" text-anchor="middle" font-size="9.5" fill="#d9a93a" font-weight="700">CoR $11.5B</text><text x="602" y="251" font-size="10" fill="#d9a93a" font-weight="600">R&amp;D $0B</text><text x="602" y="286" font-size="10" fill="#d9a93a">SG&amp;A $3B</text><text x="772" y="206" font-size="10" fill="#d9a93a">Tax $2.3B</text><text x="602" y="242" font-size="9.5" fill="#d9a93a" font-weight="700" opacity="0.85">Expenses</text><text x="665" y="2" text-anchor="middle" font-size="9.5" fill="#d9a93a" font-style="italic">+ Non-op $1.5B</text><text x="665" y="2" dy="12" text-anchor="middle" font-size="9.5" fill="#8fa3bf" font-style="italic">Pre-tax $13.9B</text><line x1="409" y1="496.0" x2="409" y2="518.0" stroke="#8a7320" stroke-width="2" stroke-dasharray="3,2" opacity="0.6"/><polygon points="409,523.0 405,516.0 413,516.0" fill="#8a7320" opacity="0.6"/><line x1="589" y1="300.3" x2="589" y2="322.3" stroke="#d9a93a" stroke-width="2" stroke-dasharray="3,2" opacity="0.6"/><polygon points="589,327.3 585,320.3 593,320.3" fill="#d9a93a" opacity="0.6"/><line x1="759" y1="222.4" x2="759" y2="244.4" stroke="#d9a93a" stroke-width="2" stroke-dasharray="3,2" opacity="0.6"/><polygon points="759,249.4 755,242.4 763,242.4" fill="#d9a93a" opacity="0.6"/><rect x="820" y="35" width="12" height="12" fill="#3b6fd4" rx="2" opacity="0.9"/><text x="836" y="45" font-size="10.5" fill="#8fa3bf">Revenue</text><rect x="820" y="54" width="12" height="12" fill="#d9a93a" rx="2" opacity="0.9"/><text x="836" y="64" font-size="10.5" fill="#8fa3bf">Cost / Expense</text><rect x="820" y="73" width="12" height="12" fill="#30d97b" rx="2" opacity="0.9"/><text x="836" y="83" font-size="10.5" fill="#8fa3bf">Net Income</text></svg></div>
+        <div class="sankey-caption">Net margin ~31.9% — for every $100 of revenue ~$31.90 becomes profit. The asymmetry is the whole thesis: franchised revenue $16.5B carries only $2.6B of occupancy cost (84.2% margin), while company-operated sales $9.7B carry $8.3B of food, payroll and occupancy cost (14.7% margin). 95% of the 46,028 restaurants are franchised — MCD is a landlord with a burger brand attached. Non-operating $1.5B = $1,582M interest expense less $87M nonoperating income.</div>
+      </div>
+    </div>
+    <div class="section" id="s5">
+      <div class="section-header"><div class="section-num">5</div><div class="section-title">Past Performance</div></div>
+      <div class="card">
+        <div style="font-size:12.5px;color:var(--text-3);margin-bottom:20px;">Revenue (US$B) · source: SEC XBRL 10-K</div>
+        <svg viewBox="0 0 720 240" width="100%" style="font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;overflow:visible;"><line x1="0" y1="220.0" x2="720" y2="220.0" stroke="rgba(255,255,255,0.08)" stroke-width="1"/><line x1="0" y1="148.8" x2="720" y2="148.8" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="4,4"/><line x1="0" y1="77.5" x2="720" y2="77.5" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="4,4"/><rect x="20.0" y="88.3" width="80.0" height="131.7" rx="5" fill="#f0995e" opacity="0.55"/><text x="60.0" y="83.3" font-size="11" font-weight="700" fill="#f0995e" text-anchor="middle">$19.2B</text><text x="60.0" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">2020</text><rect x="120.0" y="60.9" width="80.0" height="159.1" rx="5" fill="#17dbc9" opacity="0.62"/><text x="160.0" y="55.9" font-size="11" font-weight="700" fill="#17dbc9" text-anchor="middle">$23.2B</text><text x="160.0" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">2021</text><rect x="220.0" y="60.9" width="80.0" height="159.1" rx="5" fill="#17dbc9" opacity="0.69"/><text x="260.0" y="55.9" font-size="11" font-weight="700" fill="#17dbc9" text-anchor="middle">$23.2B</text><text x="260.0" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">2022</text><rect x="320.0" y="45.1" width="80.0" height="174.9" rx="5" fill="#17dbc9" opacity="0.76"/><text x="360.0" y="40.1" font-size="11" font-weight="700" fill="#17dbc9" text-anchor="middle">$25.5B</text><text x="360.0" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">2023</text><rect x="420.0" y="42.3" width="80.0" height="177.7" rx="5" fill="#17dbc9" opacity="0.83"/><text x="460.0" y="37.3" font-size="11" font-weight="700" fill="#17dbc9" text-anchor="middle">$25.9B</text><text x="460.0" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">2024</text><rect x="520.0" y="35.5" width="80.0" height="184.5" rx="5" fill="#17dbc9" opacity="0.90"/><text x="560.0" y="30.5" font-size="11" font-weight="700" fill="#17dbc9" text-anchor="middle">$26.9B</text><text x="560.0" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">2025</text><rect x="620.0" y="30.0" width="80.0" height="190.0" rx="5" fill="#17dbc9" opacity="1.00"/><rect x="620.0" y="30.0" width="80.0" height="190.0" rx="5" fill="none" stroke="#17dbc9" stroke-width="1.5" opacity="0.5"/><text x="660.0" y="25.0" font-size="11" font-weight="700" fill="#17dbc9" text-anchor="middle">$27.7B</text><text x="660.0" y="236.0" font-size="11" fill="#8fa3bf" text-anchor="middle">TTM</text></svg>
+        <div class="note-box" style="margin-top:16px;">5yr CAGR 6.9% off the COVID-depressed 2020 base; 3.7% from 2021. Operating income rose faster than revenue every year ($7.3B → $12.4B) as the franchising mix deepened — margin 38.1% → 46.1%. Free cash flow $4.6B (2020) → $7.2B (2025) → $7.8B TTM.</div>
+      </div>
+    </div>
+    <div class="section" id="s6">
+      <div class="section-header"><div class="section-num">6</div><div class="section-title">Future Growth</div></div>
+      <div class="card">
+        <div style="font-size:12.5px;color:var(--text-3);margin-bottom:24px;">Growth drivers — guided &amp; estimated</div>
+        
+        <div class="growth-row">
+          <div class="growth-label">Q2-26 global comps</div>
+          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:15%;background:linear-gradient(90deg,#17dbc9,#00c4b4);">+1.3% (vs +3.8% LY)</div></div>
+          <div class="growth-value" style="color:var(--teal);">+1.3% (vs +3.8% LY)</div>
+        </div>
+        <div class="growth-row">
+          <div class="growth-label">Q2-26 U.S. comps</div>
+          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:15%;background:linear-gradient(90deg,#17dbc9,#00c4b4);">+0.8% — guest counts NEGATIVE</div></div>
+          <div class="growth-value" style="color:var(--teal);">+0.8% — guest counts NEGATIVE</div>
+        </div>
+        <div class="growth-row">
+          <div class="growth-label">Q2-26 IOM comps</div>
+          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:15%;background:linear-gradient(90deg,#17dbc9,#00c4b4);">+1.5%</div></div>
+          <div class="growth-value" style="color:var(--teal);">+1.5%</div>
+        </div>
+        <div class="growth-row">
+          <div class="growth-label">Q2-26 IDL comps</div>
+          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:15%;background:linear-gradient(90deg,#17dbc9,#00c4b4);">+1.9% (China negative)</div></div>
+          <div class="growth-value" style="color:var(--teal);">+1.9% (China negative)</div>
+        </div>
+        <div class="growth-row">
+          <div class="growth-label">Loyalty systemwide sales TTM</div>
+          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:20%;background:linear-gradient(90deg,#17dbc9,#00c4b4);">+20% to $40B</div></div>
+          <div class="growth-value" style="color:var(--teal);">+20% to $40B</div>
+        </div>
+        <div class="growth-row">
+          <div class="growth-label">90-day active loyalty users</div>
+          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:15%;background:linear-gradient(90deg,#17dbc9,#00c4b4);">+13% to ~220M</div></div>
+          <div class="growth-value" style="color:var(--teal);">+13% to ~220M</div>
+        </div>
+        <div class="growth-row">
+          <div class="growth-label">2030 operating margin target</div>
+          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:50%;background:linear-gradient(90deg,#17dbc9,#00c4b4);">low-to-mid 50% (from 46.2%)</div></div>
+          <div class="growth-value" style="color:var(--teal);">low-to-mid 50% (from 46.2%)</div>
+        </div>
+        <div class="growth-row">
+          <div class="growth-label">2030 restaurant efficiency</div>
+          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:95%;background:linear-gradient(90deg,#17dbc9,#00c4b4);">+250 bps (~$100k/yr per US store)</div></div>
+          <div class="growth-value" style="color:var(--teal);">+250 bps (~$100k/yr per US store)</div>
+        </div>
+        <div class="growth-row">
+          <div class="growth-label">Unit growth contribution</div>
+          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:15%;background:linear-gradient(90deg,#17dbc9,#00c4b4);">~2.5% in 2027 → ~2% by 2030</div></div>
+          <div class="growth-value" style="color:var(--teal);">~2.5% in 2027 → ~2% by 2030</div>
+        </div>
+        <div class="growth-row">
+          <div class="growth-label">NEXT franchisee support</div>
+          <div class="growth-bar-track"><div class="growth-bar-fill" style="width:15%;background:linear-gradient(90deg,#17dbc9,#00c4b4);">$8.5B to 2036 ($5B by 2030)</div></div>
+          <div class="growth-value" style="color:var(--teal);">$8.5B to 2036 ($5B by 2030)</div>
+        </div>
+        <div class="note-box" style="margin-top:20px;">Investor Day 23 Sep 2026 launched &#x27;McDonald&#x27;s &gt; NEXT&#x27;, replacing Accelerating the Arches. The stock fell 4.8% the same day while WEN fell only 1% and YUM barely moved — a company-specific verdict, not a sector one. The market&#x27;s objection is the $8.5B of rent relief and capital support to franchisees: rent relief lands directly on the 84%-margin franchised occupancy line, and spending $8.5B to prop up franchisee economics is an implicit admission that store-level economics are strained. Underappreciated offset: MCD is building a retail media network on its digital drive-thru screens that management says could become a billion-dollar business — near-100% margin revenue nobody has in their model yet.</div>
+      </div>
+    </div>
+    <div class="section" id="s7">
+      <div class="section-header"><div class="section-num">7</div><div class="section-title">Financial Health</div></div>
+      <div class="card">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px;align-items:end;">
+          <div style="background:var(--teal-dim);border:1px solid rgba(23,219,201,0.3);border-radius:12px;padding:20px;">
+            <div style="font-size:11px;color:var(--teal);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;font-weight:700;">Cash &amp; Equivalents</div>
+            <div style="font-size:34px;font-weight:900;color:var(--teal);letter-spacing:-0.03em;">$800M</div>
+            <div class="health-bar-track" style="margin-top:12px;"><div class="health-bar-fill" style="width:1%;background:var(--teal);"></div></div>
+          </div>
+          <div style="background:rgba(240,153,94,0.08);border:1px solid rgba(240,153,94,0.2);border-radius:12px;padding:20px;">
+            <div style="font-size:11px;color:var(--orange);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;font-weight:700;">Total Debt</div>
+            <div style="font-size:34px;font-weight:900;color:var(--orange);letter-spacing:-0.03em;">$53.9B</div>
+            <div class="health-bar-track" style="margin-top:12px;"><div class="health-bar-fill" style="width:100%;background:var(--orange);"></div></div>
+          </div>
+        </div>
+        <div style="text-align:center;padding:24px;background:var(--surface-2);border-radius:12px;border:1px solid var(--border);margin-bottom:20px;">
+          <div style="font-size:11px;color:var(--text-3);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;">Net Position</div>
+          <div style="font-size:26px;font-weight:900;color:var(--teal);letter-spacing:-0.04em;line-height:1.1;">Net debt ~$53.1B incl. leases (2.6x EBITDA ex-lease / 3.5x incl.)</div>
+        </div>
+        
+        <div class="health-row">
+          <div class="health-label">Net debt / mkt cap</div>
+          <div class="health-bar-track"><div class="health-bar-fill" style="width:31%;background:var(--orange);"></div></div>
+          <div class="health-value">-31%</div>
+        </div>
+        <div class="health-row">
+          <div class="health-label">Interest coverage</div>
+          <div class="health-bar-track"><div class="health-bar-fill" style="width:50%;background:green;"></div></div>
+          <div class="health-value">8.0x</div>
+        </div>
+        <div class="health-row">
+          <div class="health-label">FCF / dividend</div>
+          <div class="health-bar-track"><div class="health-bar-fill" style="width:50%;background:green;"></div></div>
+          <div class="health-value">1.42x</div>
+        </div>
+        <div class="health-row">
+          <div class="health-label">Net debt / EBITDA (ex-lease)</div>
+          <div class="health-bar-track"><div class="health-bar-fill" style="width:50%;background:amber;"></div></div>
+          <div class="health-value">2.6x</div>
+        </div>
+        <div class="health-row">
+          <div class="health-label">Payout ratio (earnings)</div>
+          <div class="health-bar-track"><div class="health-bar-fill" style="width:50%;background:green;"></div></div>
+          <div class="health-value">60%</div>
+        </div>
+        <div class="health-row">
+          <div class="health-label">Payout ratio (FCF)</div>
+          <div class="health-bar-track"><div class="health-bar-fill" style="width:50%;background:amber;"></div></div>
+          <div class="health-value">70%</div>
+        </div>
+        <div class="note-box orange" style="margin-top:16px;">Long-term debt $39.86B + long-term lease liability $14.04B vs cash $0.82B (30 Jun 2026 balance sheet). Interest coverage 8.0x and FCF covers the dividend 1.42x, so the load is serviceable — but interest expense is growing +5% YoY against +3% operating income, and refinancing at higher rates is a permanent EPS headwind. Book equity is −$1.0B, which is an accounting artifact, not distress: retained earnings +$71.99B, offset by $80.53B of treasury stock carried at cost. The deficit has narrowed from −$7.83B (2020) to −$1.02B and should flip positive in 2027 as buybacks slow.</div>
+      </div>
+    </div>
+    <div class="section" id="s8">
+      <div class="section-header"><div class="section-num">8</div><div class="section-title">Dividend</div></div>
+      <div class="card">
+        <div class="div-row">
+          <div class="div-big">3.24% forward</div>
+          <div class="div-note">$1.93/quarter = $7.72/yr, declared 17 Sep 2026 (+4%), record 1 Dec 2026, payable 15 Dec 2026 — the 50th consecutive annual increase, making McDonald&#x27;s an official Dividend King (fewer than 60 US companies qualify). Coverage is comfortable at 60% of earnings and 70% of FCF. For a Thai investor the headline yield is misleading: US withholding is 30% by default, reduced to 15% under the US-Thailand treaty Article 10 only with a W-8BEN (which generally requires an ITIN) — net yield is therefore 2.27% or 2.75%, NOT 3.24%. Do not buy MCD for the yield; buy it for the quality and the diversification.</div>
+        </div>
+        <div class="div-trend">[{&#x27;year&#x27;: &#x27;2023&#x27;, &#x27;value&#x27;: 1.67}, {&#x27;year&#x27;: &#x27;2024&#x27;, &#x27;value&#x27;: 1.77}, {&#x27;year&#x27;: &#x27;2025&#x27;, &#x27;value&#x27;: 1.86}, {&#x27;year&#x27;: &#x27;2026&#x27;, &#x27;value&#x27;: 1.93}]</div>
+      </div>
+    </div>
+    <div class="section" id="s9">
+      <div class="section-header"><div class="section-num">9</div><div class="section-title">Rewards &amp; Risks</div></div>
+      <div class="card">
+        <div class="two-col">
+          <div class="rr-col rewards"><h4>Rewards</h4><div class="rr-item"><div class="rr-dot"></div><div>Cheapest MCD has been in a decade ex-COVID: 19.4x trailing vs its own 2021-25 band of 24-25x, and a 3.24% yield vs a 5-year average of 2.24%</div></div><div class="rr-item"><div class="rr-dot"></div><div>50 consecutive years of dividend increases — officially a Dividend King as of 17 Sep 2026 — covered 1.42x by $7.76B of free cash flow</div></div><div class="rr-item"><div class="rr-dot"></div><div>Operating margin 46.2% is 14pp above the next-best QSR (YUM 32.8%), yet the stock trades at a similar P/E — quality bought at an average-quality price</div></div><div class="rr-item"><div class="rr-dot"></div><div>95% franchised with MCD owning or long-leasing the land and buildings: this is a real-estate annuity with a 20-year contract life, not a burger P&amp;L</div></div><div class="rr-item"><div class="rr-dot"></div><div>Loyalty is the underrated asset: ~220M 90-day active members across 70 markets driving $40B of systemwide sales (+20% TTM) — the foundation for both personalisation and the new retail media network</div></div><div class="rr-item"><div class="rr-dot"></div><div>International Operated Markets now out-earn the US ($1,723M vs $1,573M of quarterly operating income) and are growing faster — the problem is one segment, not the whole company</div></div><div class="rr-item"><div class="rr-dot"></div><div>Beta 0.41 and USD earnings from 100+ countries — exactly the exposure a 100%-China, zero-cash portfolio does not have</div></div></div>
+          <div class="rr-col risks"><h4>Risks</h4><div class="rr-item bold-risk"><div class="rr-dot"></div><div><strong>U.S. comparable guest counts have been negative for two straight years and the 10-Q confirms Q2-26 comps of +0.8% came from &#x27;positive check growth... partly offset by negative comparable guest counts&#x27; — growth is pure price. You cannot price your way out of a traffic problem forever, and there is still no confirmed inflection.</strong></div></div><div class="rr-item bold-risk"><div class="rr-dot"></div><div><strong>The $8.5B NEXT partnering support (rent relief + capital, through 2036, ~$5B by 2030) is a margin give-back with an unknown endpoint — it lands on the 84%-margin franchised occupancy line and is an implicit admission franchisee economics are strained. Citi cut its target to $310 from $345 citing doubts about franchisee buy-in.</strong></div></div><div class="rr-item"><div class="rr-dot"></div><div>Interest expense is compounding faster than profit: +5% YoY in Q2-26 against +3% operating income, on $39.9B of long-term debt plus $14.0B of lease liability against $0.82B of cash. Every refinancing at a higher coupon is a permanent EPS drag.</div></div><div class="rr-item"><div class="rr-dot"></div><div>Dividend growth is decelerating every year (+9.9% → +6.0% → +5.1% → +3.8%). The dividend is safe; the growth rate is the tell that NEXT is consuming more cash than management is saying out loud. A sub-3% raise in Sep 2027 would be a red flag.</div></div><div class="rr-item"><div class="rr-dot"></div><div>Management transition in the worst place at the worst time: Joe Erlinger stepped down as President of McDonald&#x27;s USA on 4 Aug 2026 (8-K item 5.02), replaced by 26-year insider Skye Anderson — mid-crisis in the single largest market.</div></div><div class="rr-item"><div class="rr-dot"></div><div>IDL &amp; Corporate operating income collapsed to $42M from $70M (−40% YoY) with China comps negative. MCD holds a 48% equity-method stake in McDonald&#x27;s China (~5,500 stores) acquired from Carlyle in 2024.</div></div><div class="rr-item"><div class="rr-dot"></div><div>GLP-1 is a slow structural tax, not a bomb: households with a GLP-1 user cut QSR/coffee/limited-service spending ~8.6%, and regular users cut dinner visits 6% — but industry-wide that is only ~0.4% of dinner sales, and even a doubling of usage over five years would cost the industry under 1% of sales growth. MCD is responding by reformulating 17 menu items toward protein and targeting +1.5pp of chicken share by 2030.</div></div><div class="rr-item bold-risk"><div class="rr-dot"></div><div><strong>[position details omitted on the public site]</strong></div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="section" id="s10">
+      <div class="section-header"><div class="section-num">10</div><div class="section-title">Stock Council Verdict</div></div>
+      <div class="verdict-grid"></div>
+      
+      <div class="overall-verdict">
+        <div class="ov-stance">WATCH</div>
+        <div class="ov-detail">
+          <div class="ov-label">Smartmall Overall Stance</div>
+          <div class="ov-target"><strong>WATCH · conviction Medium · 💰 CASH COW (passes every test, but narrowly) — the business is Buy-quality at a Watch-quality moment for this investor. Not held, never held, not on the watchlist. If the offshore account and the cash existed today, this would be a Buy at ≤$240 with Medium conviction; it is a Watch because the entry route does not yet exist and the traffic inflection is not confirmed.</strong> · Fair value target <strong>$285 (base range $270-300) · bear $205-215 · bull $330</strong></div>
+          <div class="ov-add-zone">Add zone: <strong>$210-228 for tranche 1 (fwd yield ≥3.4%, ≤18x FY26E) — OR buy up to $260 if the Q3 print in early Nov shows U.S. guest counts turning ≥0</strong></div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">Generated by Smartmall · all financials from primary SEC sources: FY2025 10-K (filed 2026-02-24), Q2-2026 10-Q (filed 2026-08-07), 8-K exhibit 99.1 of 2026-09-23 (Investor Day) and 2026-08-04 (Q2 results), plus SEC XBRL companyfacts CIK 0000063908 · price as of the 23 Sep 2026 close · no Thai DR (check_dr.py verified) · not held · no council vote yet · not financial advice.</div>
+  </main>
+</div>
+<script>
+(function () {
+  var links = Array.prototype.slice.call(document.querySelectorAll('.nav-item'));
+  var map = {};
+  links.forEach(function (a) { var id = (a.getAttribute('href') || '').slice(1); if (id) map[id] = a; });
+  var sections = Object.keys(map).map(function (id) { return document.getElementById(id); }).filter(Boolean);
+  if (!('IntersectionObserver' in window) || !sections.length) return;
+  var obs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        links.forEach(function (l) { l.classList.remove('active'); });
+        var active = map[e.target.id];
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+  sections.forEach(function (s) { obs.observe(s); });
+})();
+(function () {
+  document.querySelectorAll('.chart-section').forEach(function (sec) {
+    var tabs = sec.querySelectorAll('.chart-tab');
+    var panes = sec.querySelectorAll('.chart-pane');
+    tabs.forEach(function (t) {
+      t.addEventListener('click', function () {
+        var r = t.getAttribute('data-range');
+        tabs.forEach(function (x) { x.classList.toggle('active', x === t); });
+        panes.forEach(function (p) { p.classList.toggle('active', p.getAttribute('data-range') === r); });
+      });
+    });
+  });
+})();
+</script>
+</body>
+</html>
