@@ -196,7 +196,7 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
             <span>Distance from low: <span>+63%</span></span>
           </div>
         </div>
-        <div class="stat-row" style="margin-top:28px;margin-bottom:0;"><div class="stat-pill"><div class="stat-pill-label">Market Cap</div><div class="stat-pill-value">~$650B</div></div><div class="stat-pill"><div class="stat-pill-label">Fwd P/E</div><div class="stat-pill-value">~37x (FY26e), ~29x (FY27e)</div></div><div class="stat-pill"><div class="stat-pill-label">Trailing P/E</div><div class="stat-pill-value">~53x</div></div><div class="stat-pill"><div class="stat-pill-label">Gross Margin</div><div class="stat-pill-value">54.0% (Q2 2026)</div></div><div class="stat-pill"><div class="stat-pill-label">Net Margin</div><div class="stat-pill-value">31.3% (Q2 2026)</div></div><div class="stat-pill"><div class="stat-pill-label">Net Cash</div><div class="stat-pill-value">~€3B (modest, pre Aug-5 dividend)</div></div><div class="stat-pill"><div class="stat-pill-label">Div Yield</div><div class="stat-pill-value">~0.4%</div></div></div>
+        <div class="stat-row" style="margin-top:28px;margin-bottom:0;"><div class="stat-pill"><div class="stat-pill-label">Market cap (filing shares)</div><div class="stat-pill-value">$605.8B (€ 540.7B)</div><div class="stat-pill-sub">1571.8 USD × USDEUR=X 0.8925 ÷ 1 sh/ADS × 0.385B sh = EUR 540.7B · shares: [filing] shares outstanding [filing 20-F FY2025, period→2025-12-31, filed 2026-02-25] · shown in USD at EURUSD=X 1.1204</div></div><div class="stat-pill"><div class="stat-pill-label">P/E (FY2025)</div><div class="stat-pill-value">56.77x</div><div class="stat-pill-sub">1,402.83 EUR/sh ÷ EPS 24.71 · [filing 20-F FY2025, period→2025-12-31, filed 2026-02-25]</div></div><div class="stat-pill"><div class="stat-pill-label">P/BV</div><div class="stat-pill-value">27.57x</div><div class="stat-pill-sub">mcap ÷ equity 19.6B · [filing 20-F FY2025, period→2025-12-31, filed 2026-02-25]</div></div><div class="stat-pill"><div class="stat-pill-label">P/S (FY2025)</div><div class="stat-pill-value">16.55x</div><div class="stat-pill-sub">mcap ÷ revenue 32.7B · [filing 20-F FY2025, period→2025-12-31, filed 2026-02-25]</div></div><div class="stat-pill"><div class="stat-pill-label">ROE</div><div class="stat-pill-value">49.0%</div><div class="stat-pill-sub">profit 9.61B ÷ equity 19.6B (period-end equity, not average)</div></div><div class="stat-pill"><div class="stat-pill-label">FCF yield</div><div class="stat-pill-value">2.1%</div><div class="stat-pill-sub">(OCF 12.66B − capex 1.57B) ÷ mcap · [filing 20-F FY2025, period→2025-12-31, filed 2026-02-25]</div></div><div class="stat-pill"><div class="stat-pill-label">Capex / revenue</div><div class="stat-pill-value">4.8%</div><div class="stat-pill-sub">capex 1.57B ÷ revenue · [filing 20-F FY2025, period→2025-12-31, filed 2026-02-25]</div></div><div class="stat-pill"><div class="stat-pill-label">Operating margin (FY2025)</div><div class="stat-pill-value">34.6%</div><div class="stat-pill-sub">operating profit € 11.3B ÷ revenue € 32.7B · [filing 20-F FY2025]</div></div><div class="stat-pill"><div class="stat-pill-label">Cash dividend yield</div><div class="stat-pill-value">n/a</div><div class="stat-pill-sub">dividends paid 0.00B (cash-flow statement, FY2025 (annual 20-F/10-K — FPIs have no quarterly XBRL)) ÷ mcap — excludes buybacks; special payouts included as paid</div></div><div class="stat-pill"><div class="stat-pill-label">Net cash</div><div class="stat-pill-value">$9.6B (€ 8.5B)</div><div class="stat-pill-sub">cash 12.9B + ST inv 0.0B − borrowings 4.4B · [computed from filing tags as of 2025-12-31: LongTermDebtNoncurrent 2.71B + LongTermDebtCurrent 1.68B] · borrowings = ST+LT loans + notes/bonds, excl. leases</div></div><div class="stat-pill"><div class="stat-pill-label">Key metrics for this stock</div><div class="stat-pill-value">P/E 56.77x · op. margin 34.6% · capex/revenue 4.8%</div><div class="stat-pill-sub">Capital-intensive cyclical: margin tells you where in the cycle you are, capex/revenue tells you whether the next downturn is being built now. P/E compresses at peaks.</div></div><div class="stat-pill"><div class="stat-pill-label">Fwd P/E</div><div class="stat-pill-value">~37x (FY26e), ~29x (FY27e)</div><div class="stat-pill-sub">source: results release / vendor — not re-checked against filing</div></div><div class="stat-pill"><div class="stat-pill-label">Gross Margin</div><div class="stat-pill-value">54.0% (Q2 2026)</div><div class="stat-pill-sub">source: results release / vendor — not re-checked against filing</div></div><div class="stat-pill"><div class="stat-pill-label">Net Margin</div><div class="stat-pill-value">31.3% (Q2 2026)</div><div class="stat-pill-sub">source: results release / vendor — not re-checked against filing</div></div></div>
       </div>
     </div>
     <div class="section" id="s2">
@@ -309,26 +309,41 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px;align-items:end;">
           <div style="background:var(--teal-dim);border:1px solid rgba(23,219,201,0.3);border-radius:12px;padding:20px;">
             <div style="font-size:11px;color:var(--teal);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;font-weight:700;">Cash &amp; Equivalents</div>
-            <div style="font-size:34px;font-weight:900;color:var(--teal);letter-spacing:-0.03em;">USD8.7B</div>
+            <div style="font-size:34px;font-weight:900;color:var(--teal);letter-spacing:-0.03em;">USD14.5B</div>
             <div class="health-bar-track" style="margin-top:12px;"><div class="health-bar-fill" style="width:100%;background:var(--teal);"></div></div>
           </div>
           <div style="background:rgba(240,153,94,0.08);border:1px solid rgba(240,153,94,0.2);border-radius:12px;padding:20px;">
             <div style="font-size:11px;color:var(--orange);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;font-weight:700;">Total Debt</div>
-            <div style="font-size:34px;font-weight:900;color:var(--orange);letter-spacing:-0.03em;">USD5.2B</div>
-            <div class="health-bar-track" style="margin-top:12px;"><div class="health-bar-fill" style="width:60%;background:var(--orange);"></div></div>
+            <div style="font-size:34px;font-weight:900;color:var(--orange);letter-spacing:-0.03em;">USD4.9B</div>
+            <div class="health-bar-track" style="margin-top:12px;"><div class="health-bar-fill" style="width:34%;background:var(--orange);"></div></div>
           </div>
         </div>
         <div style="text-align:center;padding:24px;background:var(--surface-2);border-radius:12px;border:1px solid var(--border);margin-bottom:20px;">
           <div style="font-size:11px;color:var(--text-3);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;">Net Position</div>
-          <div style="font-size:26px;font-weight:900;color:var(--teal);letter-spacing:-0.04em;line-height:1.1;">Net cash ~US$3.5B (~€3B, modest) as of Q2 2026 close</div>
+          <div style="font-size:34px;font-weight:900;color:var(--teal);letter-spacing:-0.04em;line-height:1.1;">Net cash $9.6B (€ 8.5B)</div>
         </div>
         
         <div class="health-row">
           <div class="health-label">Net cash / mkt cap</div>
-          <div class="health-bar-track"><div class="health-bar-fill" style="width:1%;background:green;"></div></div>
-          <div class="health-value">+1%</div>
+          <div class="health-bar-track"><div class="health-bar-fill" style="width:2%;background:green;"></div></div>
+          <div class="health-value">+2%</div>
         </div>
-        <div class="note-box orange" style="margin-top:16px;">Net-cash positive but modest — the strength is the FCF engine and monopoly pricing power, not a cash hoard. €1.88/share interim dividend paid 5 Aug 2026 (~€720M) and ongoing 2026-2028 buyback (€1.1B in Q2 alone) will trim this further by Q3.</div>
+        <div class="health-row">
+          <div class="health-label">Debt / equity</div>
+          <div class="health-bar-track"><div class="health-bar-fill" style="width:22%;background:var(--teal);"></div></div>
+          <div class="health-value">22%</div>
+        </div>
+        <div class="health-row">
+          <div class="health-label">OCF / revenue (FY2025)</div>
+          <div class="health-bar-track"><div class="health-bar-fill" style="width:39%;background:var(--teal);"></div></div>
+          <div class="health-value">39%</div>
+        </div>
+        <div class="health-row">
+          <div class="health-label">Capex / OCF (FY2025)</div>
+          <div class="health-bar-track"><div class="health-bar-fill" style="width:12%;background:var(--teal);"></div></div>
+          <div class="health-value">12%</div>
+        </div>
+        <div class="note-box orange" style="margin-top:16px;">Source: SEC EDGAR XBRL — revenue: [filing 20-F FY2025, period→2025-12-31, filed 2026-02-25]; net_income: [filing 20-F FY2025, period→2025-12-31, filed 2026-02-25]; cash: [filing 20-F FY2025, period→2025-12-31, filed 2026-02-25]; equity: [filing 20-F FY2025, period→2025-12-31, filed 2026-02-25]; debt: [computed from filing tags as of 2025-12-31: LongTermDebtNoncurrent 2.71B + LongTermDebtCurrent 1.68B]. Cash = cash &amp; equivalents + current term deposits / short-term investments (€ 12.9B); debt = our sum of ST+LT borrowings + notes/bonds, excl. lease liabilities (€ 4.4B). Converted EUR→USD at EURUSD=X 1.1204. Previous card: cash 8.7 / debt 5.2 / mcap 650 (USD, agent-sourced).</div>
       </div>
     </div>
     <div class="section" id="s7">
@@ -387,7 +402,7 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
         </div>
       </div>
     </div>
-    <div class="footer">Generated by Smartmall · price US$1,743.94 as of 2026-09-27 · income statement = Q2 2026 (quarter ended 30 Jun 2026, EUR) from ASML&#x27;s earnings release / Form 6-K (SEC EDGAR, filed 15 Jul 2026) — Q3 2026 reports 14 Oct 2026 · FY revenue bars in EUR · valuation &amp; market cap in US$ · Thai DR ASML01 ratio 1197 verified via price-math cross-check and scripts/check_dr.py (re-run 28 Sep 2026) · not financial advice.</div>
+    <div class="footer">Generated by Smartmall · price US$1,743.94 as of 2026-09-27 · income statement = Q2 2026 (quarter ended 30 Jun 2026, EUR) from ASML&#x27;s earnings release / Form 6-K (SEC EDGAR, filed 15 Jul 2026) — Q3 2026 reports 14 Oct 2026 · FY revenue bars in EUR · valuation &amp; market cap in US$ · Thai DR ASML01 ratio 1197 verified via price-math cross-check and scripts/check_dr.py (re-run 28 Sep 2026) · not financial advice. · Metric pills + Financial Health rebuilt 2026-10-24 from SEC EDGAR XBRL via ratios.py (underlying 1571.8 USD, FY2025); pills marked &#x27;release / vendor&#x27; were not re-checked.</div>
   </main>
 </div>
 <script>

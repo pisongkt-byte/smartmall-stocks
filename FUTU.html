@@ -196,7 +196,7 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
             <span>Distance from low: <span>+11%</span></span>
           </div>
         </div>
-        <div class="stat-row" style="margin-top:28px;margin-bottom:0;"><div class="stat-pill"><div class="stat-pill-label">Market Cap</div><div class="stat-pill-value">~$15.68B</div></div><div class="stat-pill"><div class="stat-pill-label">Fwd P/E</div><div class="stat-pill-value">~7.1x (FY26E)</div></div><div class="stat-pill"><div class="stat-pill-label">Trailing P/E</div><div class="stat-pill-value">~11.1x GAAP</div></div><div class="stat-pill"><div class="stat-pill-label">P/B</div><div class="stat-pill-value">~3.3x</div></div><div class="stat-pill"><div class="stat-pill-label">Net Margin</div><div class="stat-pill-value">~50% GAAP / ~51% non-GAAP (FY25); Q1-26 non-GAAP margin ~40% on penalty drag</div></div><div class="stat-pill"><div class="stat-pill-label">Net Cash</div><div class="stat-pill-value">Net-cash, large client float</div></div><div class="stat-pill"><div class="stat-pill-label">Div Yield</div><div class="stat-pill-value">~0% (no regular div)</div></div></div>
+        <div class="stat-row" style="margin-top:28px;margin-bottom:0;"><div class="stat-pill"><div class="stat-pill-label">Market cap (filing shares)</div><div class="stat-pill-value">$14.0B (HK$ 109.9B)</div><div class="stat-pill-sub">99.19 USD × USDHKD=X 7.8413 ÷ 8 sh/ADS × 1.131B sh = HKD 109.9B · shares: diluted weighted-average (no live basic count tag) [filing 20-F FY2025, period→2025-12-31, filed 2026-04-15] · shown in USD at HKDUSD=X 0.1275</div></div><div class="stat-pill"><div class="stat-pill-label">P/E (FY2025)</div><div class="stat-pill-value">75.37x</div><div class="stat-pill-sub">97.22 HKD/sh ÷ EPS 1.29 · [filing 20-F FY2025, period→2025-12-31, filed 2026-04-15]</div></div><div class="stat-pill"><div class="stat-pill-label">P/BV</div><div class="stat-pill-value">2.75x</div><div class="stat-pill-sub">mcap ÷ equity 40.0B · [filing 20-F FY2025, period→2025-12-31, filed 2026-04-15] · high weight</div></div><div class="stat-pill"><div class="stat-pill-label">ROE</div><div class="stat-pill-value">28.3%</div><div class="stat-pill-sub">profit 11.34B ÷ equity 40.0B (period-end equity, not average)</div></div><div class="stat-pill"><div class="stat-pill-label">Cash dividend yield</div><div class="stat-pill-value">1.96%</div><div class="stat-pill-sub">dividends paid 2.15B (cash-flow statement, FY2025 (annual 20-F/10-K — FPIs have no quarterly XBRL)) ÷ mcap — excludes buybacks; special payouts included as paid</div></div><div class="stat-pill"><div class="stat-pill-label">Key metrics for this stock</div><div class="stat-pill-value">P/BV 2.75x · ROE 28.3% · P/E 75.37x</div><div class="stat-pill-sub">Financial: client cash and funding sit on the balance sheet, so net cash and FCF mislead. Judge price vs book, return on that book, and the earnings multiple.</div></div><div class="stat-pill"><div class="stat-pill-label">Fwd P/E</div><div class="stat-pill-value">~7.1x (FY26E)</div><div class="stat-pill-sub">source: results release / vendor — not re-checked against filing</div></div><div class="stat-pill"><div class="stat-pill-label">Net Margin</div><div class="stat-pill-value">~50% GAAP / ~51% non-GAAP (FY25); Q1-26 non-GAAP margin ~40% on penalty drag</div><div class="stat-pill-sub">source: results release / vendor — not re-checked against filing</div></div></div>
       </div>
     </div>
     <div class="section" id="s2">
@@ -383,21 +383,36 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px;align-items:end;">
           <div style="background:var(--teal-dim);border:1px solid rgba(23,219,201,0.3);border-radius:12px;padding:20px;">
             <div style="font-size:11px;color:var(--teal);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;font-weight:700;">Cash &amp; Equivalents</div>
-            <div style="font-size:34px;font-weight:900;color:var(--teal);letter-spacing:-0.03em;">$0B</div>
-            <div class="health-bar-track" style="margin-top:12px;"><div class="health-bar-fill" style="width:0%;background:var(--teal);"></div></div>
+            <div style="font-size:34px;font-weight:900;color:var(--teal);letter-spacing:-0.03em;">$2.2B</div>
+            <div class="health-bar-track" style="margin-top:12px;"><div class="health-bar-fill" style="width:100%;background:var(--teal);"></div></div>
           </div>
           <div style="background:rgba(240,153,94,0.08);border:1px solid rgba(240,153,94,0.2);border-radius:12px;padding:20px;">
             <div style="font-size:11px;color:var(--orange);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;font-weight:700;">Total Debt</div>
-            <div style="font-size:34px;font-weight:900;color:var(--orange);letter-spacing:-0.03em;">$0B</div>
-            <div class="health-bar-track" style="margin-top:12px;"><div class="health-bar-fill" style="width:0%;background:var(--orange);"></div></div>
+            <div style="font-size:34px;font-weight:900;color:var(--orange);letter-spacing:-0.03em;">$1.5B</div>
+            <div class="health-bar-track" style="margin-top:12px;"><div class="health-bar-fill" style="width:68%;background:var(--orange);"></div></div>
           </div>
         </div>
         <div style="text-align:center;padding:24px;background:var(--surface-2);border-radius:12px;border:1px solid var(--border);margin-bottom:20px;">
           <div style="font-size:11px;color:var(--text-3);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;">Net Position</div>
-          <div style="font-size:34px;font-weight:900;color:var(--teal);letter-spacing:-0.04em;line-height:1.1;">Net-cash, no meaningful debt</div>
+          <div style="font-size:26px;font-weight:900;color:var(--teal);letter-spacing:-0.04em;line-height:1.1;">Financial — equity attributable $5.1B (HK$ 40.0B) · P/BV 2.75x</div>
         </div>
         
-        <div class="note-box orange" style="margin-top:16px;">Balance sheet is not the risk — Futu carries net cash and runs a buyback. The threat is regulatory (a RMB 1.85B / ~US$271M proposed China penalty), not solvency. Client assets are segregated float, not corporate cash.</div>
+        <div class="health-row">
+          <div class="health-label">ROE (TTM, period-end equity)</div>
+          <div class="health-bar-track"><div class="health-bar-fill" style="width:28%;background:var(--teal);"></div></div>
+          <div class="health-value">28.3%</div>
+        </div>
+        <div class="health-row">
+          <div class="health-label">P/BV</div>
+          <div class="health-bar-track"><div class="health-bar-fill" style="width:100%;background:var(--teal);"></div></div>
+          <div class="health-value">2.75x</div>
+        </div>
+        <div class="health-row">
+          <div class="health-label">Dividend payout (cash paid ÷ profit)</div>
+          <div class="health-bar-track"><div class="health-bar-fill" style="width:19%;background:var(--orange);"></div></div>
+          <div class="health-value">19%</div>
+        </div>
+        <div class="note-box orange" style="margin-top:16px;">Source: SEC EDGAR XBRL — revenue: [filing 20-F FY2025, period→2025-12-31, filed 2026-04-15]; net_income: [filing 20-F FY2025, period→2025-12-31, filed 2026-04-15]; cash: [filing 20-F FY2025, period→2025-12-31, filed 2026-04-15]; equity: [filing 20-F FY2025, period→2025-12-31, filed 2026-04-15]; debt: [computed from filing tags as of 2025-12-31: NotesAndLoansPayable 12.14B]. Cash is the cash-flow-statement balance; &#x27;debt&#x27; is bonds payable only; neither is a capital measure for a financial (client funds, deposits or policyholder reserves sit on the balance sheet by design), so net cash is NOT computed. Judge capital via regulatory solvency and book value. Converted HKD→USD at HKDUSD=X 0.1275. Previous card: cash 0 / debt 0 / mcap None ($, agent-sourced). ⚠ share count is diluted weighted-average, not basic outstanding — mcap/P-ratios ~5-10% high</div>
       </div>
     </div>
     <div class="section" id="s8">
@@ -456,7 +471,7 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
         </div>
       </div>
     </div>
-    <div class="footer">Generated by Smartmall · revenue series &amp; income statement from Futu primary PRs (FY2021/2022/2024/2025/Q2-2026 releases), HKD→USD at ~7.78 · revenue mix &amp; opex split approximate · transparent scoring, not a live feed · layout inspired by Simply Wall St · not financial advice. · council last voted 2026-08-03, due for re-poll</div>
+    <div class="footer">Generated by Smartmall · revenue series &amp; income statement from Futu primary PRs (FY2021/2022/2024/2025/Q2-2026 releases), HKD→USD at ~7.78 · revenue mix &amp; opex split approximate · transparent scoring, not a live feed · layout inspired by Simply Wall St · not financial advice. · council last voted 2026-08-03, due for re-poll · Metric pills + Financial Health rebuilt 2026-10-24 from SEC EDGAR XBRL via ratios.py (underlying 99.19 USD, FY2025); pills marked &#x27;release / vendor&#x27; were not re-checked.</div>
   </main>
 </div>
 <script>

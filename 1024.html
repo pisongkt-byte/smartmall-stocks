@@ -196,7 +196,7 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
             <span>Distance from low: <span>+0%</span></span>
           </div>
         </div>
-        <div class="stat-row" style="margin-top:28px;margin-bottom:0;"><div class="stat-pill"><div class="stat-pill-label">Market Cap</div><div class="stat-pill-value">HK$131.8B</div></div><div class="stat-pill"><div class="stat-pill-label">Trailing P/E</div><div class="stat-pill-value">7.33x</div></div><div class="stat-pill"><div class="stat-pill-label">Fwd P/E</div><div class="stat-pill-value">10.73x</div></div><div class="stat-pill"><div class="stat-pill-label">Dividend yield</div><div class="stat-pill-value">2.24%</div></div><div class="stat-pill"><div class="stat-pill-label">Net cash / mcap</div><div class="stat-pill-value">34.7%</div></div><div class="stat-pill"><div class="stat-pill-label">DAU / MAU (Q2&#x27;26)</div><div class="stat-pill-value">412.3M / 797.3M</div></div></div>
+        <div class="stat-row" style="margin-top:28px;margin-bottom:0;"><div class="stat-pill"><div class="stat-pill-label">Market cap (filing shares)</div><div class="stat-pill-value">HK$122.9B (RMB 104.6B)</div><div class="stat-pill-sub">27.9 HKD × HKDCNY=X 0.8491 × 4.416B sh = CNY 104.6B · shares: computed: TTM profit ÷ TTM diluted EPS (no share count on statement pages) · shown in HKD at CNYHKD=X 1.1744</div></div><div class="stat-pill"><div class="stat-pill-label">P/E (TTM Jun-26)</div><div class="stat-pill-value">6.64x</div><div class="stat-pill-sub">23.69 CNY/sh ÷ EPS 3.57 · TTM = FY2025 4.23 + H1 1.38 − H1 prior 2.04 [filing ANNUAL REPORT 2025 p.273; 2026 Interim Report p.58]</div></div><div class="stat-pill"><div class="stat-pill-label">P/BV</div><div class="stat-pill-value">1.27x</div><div class="stat-pill-sub">mcap ÷ equity 82.2B · [filing 2026 Interim Report p.61, as_at 2026-06-30] · low weight for an asset-light platform</div></div><div class="stat-pill"><div class="stat-pill-label">P/S (TTM Jun-26)</div><div class="stat-pill-value">0.72x</div><div class="stat-pill-sub">mcap ÷ revenue 144.4B · TTM = FY2025 143 + H1 69.3 − H1 prior 67.7 [filing ANNUAL REPORT 2025 p.273; 2026 Interim Report p.58]</div></div><div class="stat-pill"><div class="stat-pill-label">ROE</div><div class="stat-pill-value">19.2%</div><div class="stat-pill-sub">profit 15.77B ÷ equity 82.2B (period-end equity, not average)</div></div><div class="stat-pill"><div class="stat-pill-label">FCF yield</div><div class="stat-pill-value">-1.7%</div><div class="stat-pill-sub">(OCF 23.98B − capex 25.81B) ÷ mcap · TTM = FY2025 26.7 + H1 9.04 − H1 prior 11.8 [filing ANNUAL REPORT 2025 p.279; 2026 Interim Report p.64]</div></div><div class="stat-pill"><div class="stat-pill-label">Capex / revenue</div><div class="stat-pill-value">17.9%</div><div class="stat-pill-sub">capex 25.81B ÷ revenue · TTM = FY2025 -14.9 + H1 -17.9 − H1 prior -7.08 [filing ANNUAL REPORT 2025 p.279; 2026 Interim Report p.64]</div></div><div class="stat-pill"><div class="stat-pill-label">Operating margin (TTM Jun-26)</div><div class="stat-pill-value">12.8%</div><div class="stat-pill-sub">operating profit RMB 18.4B ÷ revenue RMB 144.4B · TTM to 2026-06-30 [ANNUAL REPORT 2025 p.273; 2026 Interim Report p.58]</div></div><div class="stat-pill"><div class="stat-pill-label">Cash dividend yield</div><div class="stat-pill-value">1.72%</div><div class="stat-pill-sub">dividends paid 1.80B (cash-flow statement, TTM to 2026-06-30) ÷ mcap — excludes buybacks; special payouts included as paid</div></div><div class="stat-pill"><div class="stat-pill-label">Net debt</div><div class="stat-pill-value">HK$3.9B (RMB 3.3B)</div><div class="stat-pill-sub">cash 11.7B + ST inv 12.4B − borrowings 27.4B · [filing 2026 Interim Report p.61, as_at 2026-06-30] · borrowings = ST+LT loans + notes/bonds, excl. leases</div></div><div class="stat-pill"><div class="stat-pill-label">Key metrics for this stock</div><div class="stat-pill-value">P/E 6.64x · FCF yield -1.7% · op. margin 12.8%</div><div class="stat-pill-sub">Asset-light platform: earnings multiple vs free-cash-flow yield (are profits turning into cash?) and operating margin (is scale showing up?). Book value carries little weight.</div></div><div class="stat-pill"><div class="stat-pill-label">Fwd P/E</div><div class="stat-pill-value">10.73x</div><div class="stat-pill-sub">source: results release / vendor — not re-checked against filing</div></div><div class="stat-pill"><div class="stat-pill-label">DAU / MAU (Q2&#x27;26)</div><div class="stat-pill-value">412.3M / 797.3M</div><div class="stat-pill-sub">source: results release / vendor — not re-checked against filing</div></div></div>
       </div>
     </div>
     <div class="section" id="s2">
@@ -388,36 +388,41 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px;align-items:end;">
           <div style="background:var(--teal-dim);border:1px solid rgba(23,219,201,0.3);border-radius:12px;padding:20px;">
             <div style="font-size:11px;color:var(--teal);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;font-weight:700;">Cash &amp; Equivalents</div>
-            <div style="font-size:34px;font-weight:900;color:var(--teal);letter-spacing:-0.03em;">HKD117.7B</div>
-            <div class="health-bar-track" style="margin-top:12px;"><div class="health-bar-fill" style="width:100%;background:var(--teal);"></div></div>
+            <div style="font-size:34px;font-weight:900;color:var(--teal);letter-spacing:-0.03em;">HKD28.2B</div>
+            <div class="health-bar-track" style="margin-top:12px;"><div class="health-bar-fill" style="width:88%;background:var(--teal);"></div></div>
           </div>
           <div style="background:rgba(240,153,94,0.08);border:1px solid rgba(240,153,94,0.2);border-radius:12px;padding:20px;">
             <div style="font-size:11px;color:var(--orange);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;font-weight:700;">Total Debt</div>
-            <div style="font-size:34px;font-weight:900;color:var(--orange);letter-spacing:-0.03em;">HKD5B</div>
-            <div class="health-bar-track" style="margin-top:12px;"><div class="health-bar-fill" style="width:4%;background:var(--orange);"></div></div>
+            <div style="font-size:34px;font-weight:900;color:var(--orange);letter-spacing:-0.03em;">HKD32.1B</div>
+            <div class="health-bar-track" style="margin-top:12px;"><div class="health-bar-fill" style="width:100%;background:var(--orange);"></div></div>
           </div>
         </div>
         <div style="text-align:center;padding:24px;background:var(--surface-2);border-radius:12px;border:1px solid var(--border);margin-bottom:20px;">
           <div style="font-size:11px;color:var(--text-3);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;">Net Position</div>
-          <div style="font-size:34px;font-weight:900;color:var(--teal);letter-spacing:-0.04em;line-height:1.1;">Net cash ~RMB 117.7B (~65% of mkt cap)</div>
+          <div style="font-size:34px;font-weight:900;color:var(--teal);letter-spacing:-0.04em;line-height:1.1;">Net debt HK$3.9B (RMB 3.3B)</div>
         </div>
         
         <div class="health-row">
-          <div class="health-label">Net cash / mkt cap</div>
-          <div class="health-bar-track"><div class="health-bar-fill" style="width:0%;background:green;"></div></div>
-          <div class="health-value">~65%</div>
+          <div class="health-label">Net debt / mkt cap</div>
+          <div class="health-bar-track"><div class="health-bar-fill" style="width:3%;background:var(--orange);"></div></div>
+          <div class="health-value">-3%</div>
         </div>
         <div class="health-row">
-          <div class="health-label">Gross margin (Q1&#x27;26)</div>
-          <div class="health-bar-track"><div class="health-bar-fill" style="width:0%;background:amber;"></div></div>
-          <div class="health-value">51.2%</div>
+          <div class="health-label">Debt / equity</div>
+          <div class="health-bar-track"><div class="health-bar-fill" style="width:33%;background:var(--teal);"></div></div>
+          <div class="health-value">33%</div>
         </div>
         <div class="health-row">
-          <div class="health-label">Net margin (Q1&#x27;26)</div>
-          <div class="health-bar-track"><div class="health-bar-fill" style="width:0%;background:amber;"></div></div>
-          <div class="health-value">10.0%</div>
+          <div class="health-label">OCF / revenue (TTM Jun-26)</div>
+          <div class="health-bar-track"><div class="health-bar-fill" style="width:17%;background:var(--teal);"></div></div>
+          <div class="health-value">17%</div>
         </div>
-        <div class="note-box orange" style="margin-top:16px;">Fortress balance sheet — ~USD 16B net cash against a ~USD 23.8B market cap at HK$43.28. Active buyback (RMB ~854M executed YTD; total authorization not disclosed). This net-cash floor is what limits downside and substitutes for the missing dividend.</div>
+        <div class="health-row">
+          <div class="health-label">Capex / OCF (TTM Jun-26)</div>
+          <div class="health-bar-track"><div class="health-bar-fill" style="width:100%;background:var(--orange);"></div></div>
+          <div class="health-value">108%</div>
+        </div>
+        <div class="note-box orange" style="margin-top:16px;">Source: HKEXnews annual + interim report PDFs — revenue: TTM = FY2025 143 + H1 69.3 − H1 prior 67.7 [filing ANNUAL REPORT 2025 p.273; 2026 Interim Report p.58]; net_income: TTM = FY2025 18.6 + H1 6.05 − H1 prior 8.9 [filing ANNUAL REPORT 2025 p.273; 2026 Interim Report p.58]; cash: [filing 2026 Interim Report p.60, as_at 2026-06-30]; debt: [filing 2026 Interim Report p.61, as_at 2026-06-30]; equity: [filing 2026 Interim Report p.61, as_at 2026-06-30]. Cash = cash &amp; equivalents + current term deposits / short-term investments (RMB 24.1B); debt = our sum of ST+LT borrowings + notes/bonds, excl. lease liabilities (RMB 27.4B). Converted CNY→HKD at CNYHKD=X 1.1744. Previous card: cash 117.7 / debt 5 / mcap 172 (HKD, agent-sourced).</div>
       </div>
     </div>
     <div class="section" id="s8">

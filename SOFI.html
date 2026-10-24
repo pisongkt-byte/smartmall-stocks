@@ -196,7 +196,7 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
             <span>Distance from low: <span>+3%</span></span>
           </div>
         </div>
-        <div class="stat-row" style="margin-top:28px;margin-bottom:0;"><div class="stat-pill"><div class="stat-pill-label">Market Cap</div><div class="stat-pill-value">~$19.7B</div></div><div class="stat-pill"><div class="stat-pill-label">Trailing P/E</div><div class="stat-pill-value">~31x (GAAP, TTM EPS ~$0.49)</div></div><div class="stat-pill"><div class="stat-pill-label">Fwd P/E</div><div class="stat-pill-value">~25x FY26 adj guide ($0.60)</div></div><div class="stat-pill"><div class="stat-pill-label">P/TBV</div><div class="stat-pill-value">~2.07x (TBV/sh $7.34, +56% YoY)</div></div><div class="stat-pill"><div class="stat-pill-label">Rev growth</div><div class="stat-pill-value">+43% Q2&#x27;26 · +32–35% FY26 guide</div></div><div class="stat-pill"><div class="stat-pill-label">All-in PL charge-off</div><div class="stat-pill-value">~3.7% (−70bp QoQ)</div></div><div class="stat-pill"><div class="stat-pill-label">Div Yield</div><div class="stat-pill-value">0%</div></div></div>
+        <div class="stat-row" style="margin-top:28px;margin-bottom:0;"><div class="stat-pill"><div class="stat-pill-label">Market cap (filing shares)</div><div class="stat-pill-value">$18.6B</div><div class="stat-pill-sub">14.615 USD × 1.275B sh = USD 18.6B · shares: [filing] shares outstanding [filing 10-K FY2025, period→2026-01-30, filed 2026-02-17]</div></div><div class="stat-pill"><div class="stat-pill-label">P/E (FY2025)</div><div class="stat-pill-value">37.47x</div><div class="stat-pill-sub">14.61 USD/sh ÷ EPS 0.39 · [filing 10-K FY2025, period→2025-12-31, filed 2026-02-17]</div></div><div class="stat-pill"><div class="stat-pill-label">P/BV</div><div class="stat-pill-value">1.78x</div><div class="stat-pill-sub">mcap ÷ equity 10.5B · [filing 10-K FY2025, period→2025-12-31, filed 2026-02-17] · high weight</div></div><div class="stat-pill"><div class="stat-pill-label">ROE</div><div class="stat-pill-value">4.6%</div><div class="stat-pill-sub">profit 0.48B ÷ equity 10.5B (period-end equity, not average)</div></div><div class="stat-pill"><div class="stat-pill-label">Cash dividend yield</div><div class="stat-pill-value">n/a</div><div class="stat-pill-sub">dividends paid 0.00B (cash-flow statement, FY2025 (annual 20-F/10-K — FPIs have no quarterly XBRL)) ÷ mcap — excludes buybacks; special payouts included as paid</div></div><div class="stat-pill"><div class="stat-pill-label">Key metrics for this stock</div><div class="stat-pill-value">P/BV 1.78x · ROE 4.6% · P/E 37.47x</div><div class="stat-pill-sub">Financial: client cash and funding sit on the balance sheet, so net cash and FCF mislead. Judge price vs book, return on that book, and the earnings multiple.</div></div><div class="stat-pill"><div class="stat-pill-label">Fwd P/E</div><div class="stat-pill-value">~25x FY26 adj guide ($0.60)</div><div class="stat-pill-sub">source: results release / vendor — not re-checked against filing</div></div><div class="stat-pill"><div class="stat-pill-label">P/TBV</div><div class="stat-pill-value">~2.07x (TBV/sh $7.34, +56% YoY)</div><div class="stat-pill-sub">source: results release / vendor — not re-checked against filing</div></div><div class="stat-pill"><div class="stat-pill-label">Rev growth</div><div class="stat-pill-value">+43% Q2&#x27;26 · +32–35% FY26 guide</div><div class="stat-pill-sub">source: results release / vendor — not re-checked against filing</div></div><div class="stat-pill"><div class="stat-pill-label">All-in PL charge-off</div><div class="stat-pill-value">~3.7% (−70bp QoQ)</div><div class="stat-pill-sub">source: results release / vendor — not re-checked against filing</div></div></div>
       </div>
     </div>
     <div class="section" id="s2">
@@ -378,26 +378,31 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px;align-items:end;">
           <div style="background:var(--teal-dim);border:1px solid rgba(23,219,201,0.3);border-radius:12px;padding:20px;">
             <div style="font-size:11px;color:var(--teal);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;font-weight:700;">Cash &amp; Equivalents</div>
-            <div style="font-size:34px;font-weight:900;color:var(--teal);letter-spacing:-0.03em;">$5.4B</div>
+            <div style="font-size:34px;font-weight:900;color:var(--teal);letter-spacing:-0.03em;">$4.9B</div>
             <div class="health-bar-track" style="margin-top:12px;"><div class="health-bar-fill" style="width:100%;background:var(--teal);"></div></div>
           </div>
           <div style="background:rgba(240,153,94,0.08);border:1px solid rgba(240,153,94,0.2);border-radius:12px;padding:20px;">
             <div style="font-size:11px;color:var(--orange);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;font-weight:700;">Total Debt</div>
-            <div style="font-size:34px;font-weight:900;color:var(--orange);letter-spacing:-0.03em;">$3.3B</div>
-            <div class="health-bar-track" style="margin-top:12px;"><div class="health-bar-fill" style="width:61%;background:var(--orange);"></div></div>
+            <div style="font-size:34px;font-weight:900;color:var(--orange);letter-spacing:-0.03em;">$1.8B</div>
+            <div class="health-bar-track" style="margin-top:12px;"><div class="health-bar-fill" style="width:37%;background:var(--orange);"></div></div>
           </div>
         </div>
         <div style="text-align:center;padding:24px;background:var(--surface-2);border-radius:12px;border:1px solid var(--border);margin-bottom:20px;">
           <div style="font-size:11px;color:var(--text-3);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;">Net Position</div>
-          <div style="font-size:26px;font-weight:900;color:var(--teal);letter-spacing:-0.04em;line-height:1.1;">Deposits $45.5B fund &gt;90% of liabilities; TBV $9.5B ($7.34/sh)</div>
+          <div style="font-size:26px;font-weight:900;color:var(--teal);letter-spacing:-0.04em;line-height:1.1;">Financial — equity attributable $10.5B · P/BV 1.78x</div>
         </div>
         
         <div class="health-row">
-          <div class="health-label">Net cash / mkt cap</div>
-          <div class="health-bar-track"><div class="health-bar-fill" style="width:11%;background:green;"></div></div>
-          <div class="health-value">+11%</div>
+          <div class="health-label">ROE (TTM, period-end equity)</div>
+          <div class="health-bar-track"><div class="health-bar-fill" style="width:5%;background:var(--teal);"></div></div>
+          <div class="health-value">4.6%</div>
         </div>
-        <div class="note-box orange" style="margin-top:16px;">Bank balance sheet — judge by funding mix and tangible book, not net cash. Deposits $37.5B → $45.5B in six months, priced 156bp below warehouse lines = ~$713M annualized interest savings, and NIM expanded to 5.98%. Total assets $60.9B, equity $11.1B. Credit improved this quarter on every line. The unresolved risk isn&#x27;t leverage mechanics or (this quarter) credit — it&#x27;s that a $26.1B personal-loan book is carried at management&#x27;s own fair-value model, which no outsider can audit.</div>
+        <div class="health-row">
+          <div class="health-label">P/BV</div>
+          <div class="health-bar-track"><div class="health-bar-fill" style="width:100%;background:var(--teal);"></div></div>
+          <div class="health-value">1.78x</div>
+        </div>
+        <div class="note-box orange" style="margin-top:16px;">Source: SEC EDGAR XBRL — revenue: [filing 10-K FY2025, period→2025-12-31, filed 2026-02-17]; net_income: [filing 10-K FY2025, period→2025-12-31, filed 2026-02-17]; cash: [filing 10-K FY2025, period→2025-12-31, filed 2026-02-17]; equity: [filing 10-K FY2025, period→2025-12-31, filed 2026-02-17]; debt: [filing tag DebtLongtermAndShorttermCombinedAmount 1.82B as of 2025-12-31]. Cash is the cash-flow-statement balance; &#x27;debt&#x27; is bonds payable only; neither is a capital measure for a financial (client funds, deposits or policyholder reserves sit on the balance sheet by design), so net cash is NOT computed. Judge capital via regulatory solvency and book value. Previous card: cash 5.4 / debt 3.3 / mcap 19.7 ($, agent-sourced).</div>
       </div>
     </div>
     <div class="section" id="s8">
@@ -456,7 +461,7 @@ body { background: var(--bg); color: var(--text-1); font-family: -apple-system, 
         </div>
       </div>
     </div>
-    <div class="footer">Generated by Smartmall · Q2-2026 (reported 2026-07-29) = latest quarter, parsed in full from the SEC 8-K EX-99.1 (acc. 0001818874-26-000050) · 5-yr financials via SEC EDGAR XBRL · price $15.23 intraday 2026-07-29 (−9.0%) ≈ ฿511 @ 33.55 · Thai DRx SOFI23 (InnovestX) ฿5.70 pre-print, ratio ~100:1 price-inferred and UNVERIFIED · council re-voted post-earnings 2026-07-29 23:20 Bangkok (3–1 Pass) · transparent independent scoring, not a live feed · layout inspired by Simply Wall St · not financial advice.</div>
+    <div class="footer">Generated by Smartmall · Q2-2026 (reported 2026-07-29) = latest quarter, parsed in full from the SEC 8-K EX-99.1 (acc. 0001818874-26-000050) · 5-yr financials via SEC EDGAR XBRL · price $15.23 intraday 2026-07-29 (−9.0%) ≈ ฿511 @ 33.55 · Thai DRx SOFI23 (InnovestX) ฿5.70 pre-print, ratio ~100:1 price-inferred and UNVERIFIED · council re-voted post-earnings 2026-07-29 23:20 Bangkok (3–1 Pass) · transparent independent scoring, not a live feed · layout inspired by Simply Wall St · not financial advice. · Metric pills + Financial Health rebuilt 2026-10-24 from SEC EDGAR XBRL via ratios.py (underlying 14.615 USD, FY2025); pills marked &#x27;release / vendor&#x27; were not re-checked.</div>
   </main>
 </div>
 <script>
